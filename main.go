@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/blacktop/go-vboxapi/vboxapi"
+	"github.com/9elements/go-vboxapi/vboxapi"
 )
 
 func main() {

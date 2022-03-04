@@ -1,6 +1,6 @@
 package vboxapi
 
-import "github.com/blacktop/go-vboxapi/vboxweb"
+import "github.com/9elements/go-vboxapi/vboxweb"
 
 type Session struct {
 	virtualbox      *VirtualBox

@@ -44,6 +44,16 @@ const (
 
 	SettingsVersionV110 SettingsVersion = "v110"
 
+	SettingsVersionV111 SettingsVersion = "v111"
+
+	SettingsVersionV112 SettingsVersion = "v112"
+
+	SettingsVersionV113 SettingsVersion = "v113"
+
+	SettingsVersionV114 SettingsVersion = "v114"
+
+	SettingsVersionV115 SettingsVersion = "v115"
+
 	SettingsVersionFuture SettingsVersion = "Future"
 )
 
@@ -90,15 +100,21 @@ const (
 
 	MachineStateTeleportingIn MachineState = "TeleportingIn"
 
+	MachineStateFaultTolerantSyncing MachineState = "FaultTolerantSyncing"
+
 	MachineStateDeletingSnapshotOnline MachineState = "DeletingSnapshotOnline"
 
 	MachineStateDeletingSnapshotPaused MachineState = "DeletingSnapshotPaused"
+
+	MachineStateOnlineSnapshotting MachineState = "OnlineSnapshotting"
 
 	MachineStateRestoringSnapshot MachineState = "RestoringSnapshot"
 
 	MachineStateDeletingSnapshot MachineState = "DeletingSnapshot"
 
 	MachineStateSettingUp MachineState = "SettingUp"
+
+	MachineStateSnapshotting MachineState = "Snapshotting"
 
 	MachineStateFirstOnline MachineState = "FirstOnline"
 
@@ -114,13 +130,13 @@ type SessionState string
 const (
 	SessionStateNull SessionState = "Null"
 
-	SessionStateClosed SessionState = "Closed"
+	SessionStateUnlocked SessionState = "Unlocked"
 
-	SessionStateOpen SessionState = "Open"
+	SessionStateLocked SessionState = "Locked"
 
 	SessionStateSpawning SessionState = "Spawning"
 
-	SessionStateClosing SessionState = "Closing"
+	SessionStateUnlocking SessionState = "Unlocking"
 )
 
 type CPUPropertyType string
@@ -130,7 +146,9 @@ const (
 
 	CPUPropertyTypePAE CPUPropertyType = "PAE"
 
-	CPUPropertyTypeSynthetic CPUPropertyType = "Synthetic"
+	CPUPropertyTypeLongMode CPUPropertyType = "LongMode"
+
+	CPUPropertyTypeTripleFaultReset CPUPropertyType = "TripleFaultReset"
 )
 
 type HWVirtExPropertyType string
@@ -140,15 +158,53 @@ const (
 
 	HWVirtExPropertyTypeEnabled HWVirtExPropertyType = "Enabled"
 
-	HWVirtExPropertyTypeExclusive HWVirtExPropertyType = "Exclusive"
-
 	HWVirtExPropertyTypeVPID HWVirtExPropertyType = "VPID"
 
 	HWVirtExPropertyTypeNestedPaging HWVirtExPropertyType = "NestedPaging"
 
+	HWVirtExPropertyTypeUnrestrictedExecution HWVirtExPropertyType = "UnrestrictedExecution"
+
 	HWVirtExPropertyTypeLargePages HWVirtExPropertyType = "LargePages"
 
 	HWVirtExPropertyTypeForce HWVirtExPropertyType = "Force"
+)
+
+type ParavirtProvider string
+
+const (
+	ParavirtProviderNone ParavirtProvider = "None"
+
+	ParavirtProviderDefault ParavirtProvider = "Default"
+
+	ParavirtProviderLegacy ParavirtProvider = "Legacy"
+
+	ParavirtProviderMinimal ParavirtProvider = "Minimal"
+
+	ParavirtProviderHyperV ParavirtProvider = "HyperV"
+
+	ParavirtProviderKVM ParavirtProvider = "KVM"
+)
+
+type FaultToleranceState string
+
+const (
+	FaultToleranceStateInactive FaultToleranceState = "Inactive"
+
+	FaultToleranceStateMaster FaultToleranceState = "Master"
+
+	FaultToleranceStateStandby FaultToleranceState = "Standby"
+)
+
+type LockType string
+
+const (
+	LockTypeNull LockType = "Null"
+
+	LockTypeShared LockType = "Shared"
+
+	LockTypeWrite LockType = "Write"
+
+	LockTypeVM LockType = "VM"
 )
 
 type SessionType string
@@ -156,11 +212,11 @@ type SessionType string
 const (
 	SessionTypeNull SessionType = "Null"
 
-	SessionTypeDirect SessionType = "Direct"
+	SessionTypeWriteLock SessionType = "WriteLock"
 
 	SessionTypeRemote SessionType = "Remote"
 
-	SessionTypeExisting SessionType = "Existing"
+	SessionTypeShared SessionType = "Shared"
 )
 
 type DeviceType string
@@ -179,6 +235,8 @@ const (
 	DeviceTypeUSB DeviceType = "USB"
 
 	DeviceTypeSharedFolder DeviceType = "SharedFolder"
+
+	DeviceTypeGraphics3D DeviceType = "Graphics3D"
 )
 
 type DeviceActivity string
@@ -203,6 +261,18 @@ const (
 	ClipboardModeGuestToHost ClipboardMode = "GuestToHost"
 
 	ClipboardModeBidirectional ClipboardMode = "Bidirectional"
+)
+
+type DnDMode string
+
+const (
+	DnDModeDisabled DnDMode = "Disabled"
+
+	DnDModeHostToGuest DnDMode = "HostToGuest"
+
+	DnDModeGuestToHost DnDMode = "GuestToHost"
+
+	DnDModeBidirectional DnDMode = "Bidirectional"
 )
 
 type Scope string
@@ -251,30 +321,188 @@ const (
 	FirmwareTypeEFIDUAL FirmwareType = "EFIDUAL"
 )
 
-type PointingHidType string
+type PointingHIDType string
 
 const (
-	PointingHidTypeNone PointingHidType = "None"
+	PointingHIDTypeNone PointingHIDType = "None"
 
-	PointingHidTypePS2Mouse PointingHidType = "PS2Mouse"
+	PointingHIDTypePS2Mouse PointingHIDType = "PS2Mouse"
 
-	PointingHidTypeUSBMouse PointingHidType = "USBMouse"
+	PointingHIDTypeUSBMouse PointingHIDType = "USBMouse"
 
-	PointingHidTypeUSBTablet PointingHidType = "USBTablet"
+	PointingHIDTypeUSBTablet PointingHIDType = "USBTablet"
 
-	PointingHidTypeComboMouse PointingHidType = "ComboMouse"
+	PointingHIDTypeComboMouse PointingHIDType = "ComboMouse"
+
+	PointingHIDTypeUSBMultiTouch PointingHIDType = "USBMultiTouch"
 )
 
-type KeyboardHidType string
+type KeyboardHIDType string
 
 const (
-	KeyboardHidTypeNone KeyboardHidType = "None"
+	KeyboardHIDTypeNone KeyboardHIDType = "None"
 
-	KeyboardHidTypePS2Keyboard KeyboardHidType = "PS2Keyboard"
+	KeyboardHIDTypePS2Keyboard KeyboardHIDType = "PS2Keyboard"
 
-	KeyboardHidTypeUSBKeyboard KeyboardHidType = "USBKeyboard"
+	KeyboardHIDTypeUSBKeyboard KeyboardHIDType = "USBKeyboard"
 
-	KeyboardHidTypeComboKeyboard KeyboardHidType = "ComboKeyboard"
+	KeyboardHIDTypeComboKeyboard KeyboardHIDType = "ComboKeyboard"
+)
+
+type BitmapFormat string
+
+const (
+	BitmapFormatOpaque BitmapFormat = "Opaque"
+
+	BitmapFormatBGR BitmapFormat = "BGR"
+
+	BitmapFormatBGR0 BitmapFormat = "BGR0"
+
+	BitmapFormatBGRA BitmapFormat = "BGRA"
+
+	BitmapFormatRGBA BitmapFormat = "RGBA"
+
+	BitmapFormatPNG BitmapFormat = "PNG"
+
+	BitmapFormatJPEG BitmapFormat = "JPEG"
+)
+
+type DhcpOpt string
+
+const (
+	DhcpOptSubnetMask DhcpOpt = "SubnetMask"
+
+	DhcpOptTimeOffset DhcpOpt = "TimeOffset"
+
+	DhcpOptRouter DhcpOpt = "Router"
+
+	DhcpOptTimeServer DhcpOpt = "TimeServer"
+
+	DhcpOptNameServer DhcpOpt = "NameServer"
+
+	DhcpOptDomainNameServer DhcpOpt = "DomainNameServer"
+
+	DhcpOptLogServer DhcpOpt = "LogServer"
+
+	DhcpOptCookie DhcpOpt = "Cookie"
+
+	DhcpOptLPRServer DhcpOpt = "LPRServer"
+
+	DhcpOptImpressServer DhcpOpt = "ImpressServer"
+
+	DhcpOptResourseLocationServer DhcpOpt = "ResourseLocationServer"
+
+	DhcpOptHostName DhcpOpt = "HostName"
+
+	DhcpOptBootFileSize DhcpOpt = "BootFileSize"
+
+	DhcpOptMeritDumpFile DhcpOpt = "MeritDumpFile"
+
+	DhcpOptDomainName DhcpOpt = "DomainName"
+
+	DhcpOptSwapServer DhcpOpt = "SwapServer"
+
+	DhcpOptRootPath DhcpOpt = "RootPath"
+
+	DhcpOptExtensionPath DhcpOpt = "ExtensionPath"
+
+	DhcpOptIPForwardingEnableDisable DhcpOpt = "IPForwardingEnableDisable"
+
+	DhcpOptNonLocalSourceRoutingEnableDisable DhcpOpt = "NonLocalSourceRoutingEnableDisable"
+
+	DhcpOptPolicyFilter DhcpOpt = "PolicyFilter"
+
+	DhcpOptMaximumDatagramReassemblySize DhcpOpt = "MaximumDatagramReassemblySize"
+
+	DhcpOptDefaultIPTime2Live DhcpOpt = "DefaultIPTime2Live"
+
+	DhcpOptPathMTUAgingTimeout DhcpOpt = "PathMTUAgingTimeout"
+
+	DhcpOptIPLayerParametersPerInterface DhcpOpt = "IPLayerParametersPerInterface"
+
+	DhcpOptInterfaceMTU DhcpOpt = "InterfaceMTU"
+
+	DhcpOptAllSubnetsAreLocal DhcpOpt = "AllSubnetsAreLocal"
+
+	DhcpOptBroadcastAddress DhcpOpt = "BroadcastAddress"
+
+	DhcpOptPerformMaskDiscovery DhcpOpt = "PerformMaskDiscovery"
+
+	DhcpOptMaskSupplier DhcpOpt = "MaskSupplier"
+
+	DhcpOptPerformRouteDiscovery DhcpOpt = "PerformRouteDiscovery"
+
+	DhcpOptRouterSolicitationAddress DhcpOpt = "RouterSolicitationAddress"
+
+	DhcpOptStaticRoute DhcpOpt = "StaticRoute"
+
+	DhcpOptTrailerEncapsulation DhcpOpt = "TrailerEncapsulation"
+
+	DhcpOptARPCacheTimeout DhcpOpt = "ARPCacheTimeout"
+
+	DhcpOptEthernetEncapsulation DhcpOpt = "EthernetEncapsulation"
+
+	DhcpOptTCPDefaultTTL DhcpOpt = "TCPDefaultTTL"
+
+	DhcpOptTCPKeepAliveInterval DhcpOpt = "TCPKeepAliveInterval"
+
+	DhcpOptTCPKeepAliveGarbage DhcpOpt = "TCPKeepAliveGarbage"
+
+	DhcpOptNetworkInformationServiceDomain DhcpOpt = "NetworkInformationServiceDomain"
+
+	DhcpOptNetworkInformationServiceServers DhcpOpt = "NetworkInformationServiceServers"
+
+	DhcpOptNetworkTimeProtocolServers DhcpOpt = "NetworkTimeProtocolServers"
+
+	DhcpOptVendorSpecificInformation DhcpOpt = "VendorSpecificInformation"
+
+	DhcpOptOption44 DhcpOpt = "Option44"
+
+	DhcpOptOption45 DhcpOpt = "Option45"
+
+	DhcpOptOption46 DhcpOpt = "Option46"
+
+	DhcpOptOption47 DhcpOpt = "Option47"
+
+	DhcpOptOption48 DhcpOpt = "Option48"
+
+	DhcpOptOption49 DhcpOpt = "Option49"
+
+	DhcpOptIPAddressLeaseTime DhcpOpt = "IPAddressLeaseTime"
+
+	DhcpOptOption64 DhcpOpt = "Option64"
+
+	DhcpOptOption65 DhcpOpt = "Option65"
+
+	DhcpOptTFTPServerName DhcpOpt = "TFTPServerName"
+
+	DhcpOptBootfileName DhcpOpt = "BootfileName"
+
+	DhcpOptOption68 DhcpOpt = "Option68"
+
+	DhcpOptOption69 DhcpOpt = "Option69"
+
+	DhcpOptOption70 DhcpOpt = "Option70"
+
+	DhcpOptOption71 DhcpOpt = "Option71"
+
+	DhcpOptOption72 DhcpOpt = "Option72"
+
+	DhcpOptOption73 DhcpOpt = "Option73"
+
+	DhcpOptOption74 DhcpOpt = "Option74"
+
+	DhcpOptOption75 DhcpOpt = "Option75"
+
+	DhcpOptOption119 DhcpOpt = "Option119"
+)
+
+type DhcpOptEncoding string
+
+const (
+	DhcpOptEncodingLegacy DhcpOptEncoding = "Legacy"
+
+	DhcpOptEncodingHex DhcpOptEncoding = "Hex"
 )
 
 type VFSType string
@@ -289,26 +517,26 @@ const (
 	VFSTypeWebDav VFSType = "WebDav"
 )
 
-type VFSFileType string
+type ImportOptions string
 
 const (
-	VFSFileTypeUnknown VFSFileType = "Unknown"
+	ImportOptionsKeepAllMACs ImportOptions = "KeepAllMACs"
 
-	VFSFileTypeFifo VFSFileType = "Fifo"
+	ImportOptionsKeepNATMACs ImportOptions = "KeepNATMACs"
 
-	VFSFileTypeDevChar VFSFileType = "DevChar"
+	ImportOptionsImportToVDI ImportOptions = "ImportToVDI"
+)
 
-	VFSFileTypeDirectory VFSFileType = "Directory"
+type ExportOptions string
 
-	VFSFileTypeDevBlock VFSFileType = "DevBlock"
+const (
+	ExportOptionsCreateManifest ExportOptions = "CreateManifest"
 
-	VFSFileTypeFile VFSFileType = "File"
+	ExportOptionsExportDVDImages ExportOptions = "ExportDVDImages"
 
-	VFSFileTypeSymLink VFSFileType = "SymLink"
+	ExportOptionsStripAllMACs ExportOptions = "StripAllMACs"
 
-	VFSFileTypeSocket VFSFileType = "Socket"
-
-	VFSFileTypeWhiteOut VFSFileType = "WhiteOut"
+	ExportOptionsStripAllNonNATMACs ExportOptions = "StripAllNonNATMACs"
 )
 
 type VirtualSystemDescriptionType string
@@ -359,6 +587,8 @@ const (
 	VirtualSystemDescriptionTypeUSBController VirtualSystemDescriptionType = "USBController"
 
 	VirtualSystemDescriptionTypeSoundCard VirtualSystemDescriptionType = "SoundCard"
+
+	VirtualSystemDescriptionTypeSettingsFile VirtualSystemDescriptionType = "SettingsFile"
 )
 
 type VirtualSystemDescriptionValueType string
@@ -371,6 +601,62 @@ const (
 	VirtualSystemDescriptionValueTypeAuto VirtualSystemDescriptionValueType = "Auto"
 
 	VirtualSystemDescriptionValueTypeExtraConfig VirtualSystemDescriptionValueType = "ExtraConfig"
+)
+
+type GraphicsControllerType string
+
+const (
+	GraphicsControllerTypeNull GraphicsControllerType = "Null"
+
+	GraphicsControllerTypeVBoxVGA GraphicsControllerType = "VBoxVGA"
+
+	GraphicsControllerTypeVMSVGA GraphicsControllerType = "VMSVGA"
+)
+
+type CleanupMode string
+
+const (
+	CleanupModeUnregisterOnly CleanupMode = "UnregisterOnly"
+
+	CleanupModeDetachAllReturnNone CleanupMode = "DetachAllReturnNone"
+
+	CleanupModeDetachAllReturnHardDisksOnly CleanupMode = "DetachAllReturnHardDisksOnly"
+
+	CleanupModeFull CleanupMode = "Full"
+)
+
+type CloneMode string
+
+const (
+	CloneModeMachineState CloneMode = "MachineState"
+
+	CloneModeMachineAndChildStates CloneMode = "MachineAndChildStates"
+
+	CloneModeAllStates CloneMode = "AllStates"
+)
+
+type CloneOptions string
+
+const (
+	CloneOptionsLink CloneOptions = "Link"
+
+	CloneOptionsKeepAllMACs CloneOptions = "KeepAllMACs"
+
+	CloneOptionsKeepNATMACs CloneOptions = "KeepNATMACs"
+
+	CloneOptionsKeepDiskNames CloneOptions = "KeepDiskNames"
+)
+
+type AutostopType string
+
+const (
+	AutostopTypeDisabled AutostopType = "Disabled"
+
+	AutostopTypeSaveState AutostopType = "SaveState"
+
+	AutostopTypePowerOff AutostopType = "PowerOff"
+
+	AutostopTypeAcpiShutdown AutostopType = "AcpiShutdown"
 )
 
 type HostNetworkInterfaceMediumType string
@@ -403,6 +689,512 @@ const (
 	HostNetworkInterfaceTypeHostOnly HostNetworkInterfaceType = "HostOnly"
 )
 
+type AdditionsFacilityType string
+
+const (
+	AdditionsFacilityTypeNone AdditionsFacilityType = "None"
+
+	AdditionsFacilityTypeVBoxGuestDriver AdditionsFacilityType = "VBoxGuestDriver"
+
+	AdditionsFacilityTypeAutoLogon AdditionsFacilityType = "AutoLogon"
+
+	AdditionsFacilityTypeVBoxService AdditionsFacilityType = "VBoxService"
+
+	AdditionsFacilityTypeVBoxTrayClient AdditionsFacilityType = "VBoxTrayClient"
+
+	AdditionsFacilityTypeSeamless AdditionsFacilityType = "Seamless"
+
+	AdditionsFacilityTypeGraphics AdditionsFacilityType = "Graphics"
+
+	AdditionsFacilityTypeAll AdditionsFacilityType = "All"
+)
+
+type AdditionsFacilityClass string
+
+const (
+	AdditionsFacilityClassNone AdditionsFacilityClass = "None"
+
+	AdditionsFacilityClassDriver AdditionsFacilityClass = "Driver"
+
+	AdditionsFacilityClassService AdditionsFacilityClass = "Service"
+
+	AdditionsFacilityClassProgram AdditionsFacilityClass = "Program"
+
+	AdditionsFacilityClassFeature AdditionsFacilityClass = "Feature"
+
+	AdditionsFacilityClassThirdParty AdditionsFacilityClass = "ThirdParty"
+
+	AdditionsFacilityClassAll AdditionsFacilityClass = "All"
+)
+
+type AdditionsFacilityStatus string
+
+const (
+	AdditionsFacilityStatusInactive AdditionsFacilityStatus = "Inactive"
+
+	AdditionsFacilityStatusPaused AdditionsFacilityStatus = "Paused"
+
+	AdditionsFacilityStatusPreInit AdditionsFacilityStatus = "PreInit"
+
+	AdditionsFacilityStatusInit AdditionsFacilityStatus = "Init"
+
+	AdditionsFacilityStatusActive AdditionsFacilityStatus = "Active"
+
+	AdditionsFacilityStatusTerminating AdditionsFacilityStatus = "Terminating"
+
+	AdditionsFacilityStatusTerminated AdditionsFacilityStatus = "Terminated"
+
+	AdditionsFacilityStatusFailed AdditionsFacilityStatus = "Failed"
+
+	AdditionsFacilityStatusUnknown AdditionsFacilityStatus = "Unknown"
+)
+
+type AdditionsRunLevelType string
+
+const (
+	AdditionsRunLevelTypeNone AdditionsRunLevelType = "None"
+
+	AdditionsRunLevelTypeSystem AdditionsRunLevelType = "System"
+
+	AdditionsRunLevelTypeUserland AdditionsRunLevelType = "Userland"
+
+	AdditionsRunLevelTypeDesktop AdditionsRunLevelType = "Desktop"
+)
+
+type AdditionsUpdateFlag string
+
+const (
+	AdditionsUpdateFlagNone AdditionsUpdateFlag = "None"
+
+	AdditionsUpdateFlagWaitForUpdateStartOnly AdditionsUpdateFlag = "WaitForUpdateStartOnly"
+)
+
+type GuestSessionStatus string
+
+const (
+	GuestSessionStatusUndefined GuestSessionStatus = "Undefined"
+
+	GuestSessionStatusStarting GuestSessionStatus = "Starting"
+
+	GuestSessionStatusStarted GuestSessionStatus = "Started"
+
+	GuestSessionStatusTerminating GuestSessionStatus = "Terminating"
+
+	GuestSessionStatusTerminated GuestSessionStatus = "Terminated"
+
+	GuestSessionStatusTimedOutKilled GuestSessionStatus = "TimedOutKilled"
+
+	GuestSessionStatusTimedOutAbnormally GuestSessionStatus = "TimedOutAbnormally"
+
+	GuestSessionStatusDown GuestSessionStatus = "Down"
+
+	GuestSessionStatusError GuestSessionStatus = "Error"
+)
+
+type GuestSessionWaitForFlag string
+
+const (
+	GuestSessionWaitForFlagNone GuestSessionWaitForFlag = "None"
+
+	GuestSessionWaitForFlagStart GuestSessionWaitForFlag = "Start"
+
+	GuestSessionWaitForFlagTerminate GuestSessionWaitForFlag = "Terminate"
+
+	GuestSessionWaitForFlagStatus GuestSessionWaitForFlag = "Status"
+)
+
+type GuestSessionWaitResult string
+
+const (
+	GuestSessionWaitResultNone GuestSessionWaitResult = "None"
+
+	GuestSessionWaitResultStart GuestSessionWaitResult = "Start"
+
+	GuestSessionWaitResultTerminate GuestSessionWaitResult = "Terminate"
+
+	GuestSessionWaitResultStatus GuestSessionWaitResult = "Status"
+
+	GuestSessionWaitResultError GuestSessionWaitResult = "Error"
+
+	GuestSessionWaitResultTimeout GuestSessionWaitResult = "Timeout"
+
+	GuestSessionWaitResultWaitFlagNotSupported GuestSessionWaitResult = "WaitFlagNotSupported"
+)
+
+type GuestUserState string
+
+const (
+	GuestUserStateUnknown GuestUserState = "Unknown"
+
+	GuestUserStateLoggedIn GuestUserState = "LoggedIn"
+
+	GuestUserStateLoggedOut GuestUserState = "LoggedOut"
+
+	GuestUserStateLocked GuestUserState = "Locked"
+
+	GuestUserStateUnlocked GuestUserState = "Unlocked"
+
+	GuestUserStateDisabled GuestUserState = "Disabled"
+
+	GuestUserStateIdle GuestUserState = "Idle"
+
+	GuestUserStateInUse GuestUserState = "InUse"
+
+	GuestUserStateCreated GuestUserState = "Created"
+
+	GuestUserStateDeleted GuestUserState = "Deleted"
+
+	GuestUserStateSessionChanged GuestUserState = "SessionChanged"
+
+	GuestUserStateCredentialsChanged GuestUserState = "CredentialsChanged"
+
+	GuestUserStateRoleChanged GuestUserState = "RoleChanged"
+
+	GuestUserStateGroupAdded GuestUserState = "GroupAdded"
+
+	GuestUserStateGroupRemoved GuestUserState = "GroupRemoved"
+
+	GuestUserStateElevated GuestUserState = "Elevated"
+)
+
+type FileSeekOrigin string
+
+const (
+	FileSeekOriginBegin FileSeekOrigin = "Begin"
+
+	FileSeekOriginCurrent FileSeekOrigin = "Current"
+
+	FileSeekOriginEnd FileSeekOrigin = "End"
+)
+
+type ProcessInputFlag string
+
+const (
+	ProcessInputFlagNone ProcessInputFlag = "None"
+
+	ProcessInputFlagEndOfFile ProcessInputFlag = "EndOfFile"
+)
+
+type ProcessOutputFlag string
+
+const (
+	ProcessOutputFlagNone ProcessOutputFlag = "None"
+
+	ProcessOutputFlagStdErr ProcessOutputFlag = "StdErr"
+)
+
+type ProcessWaitForFlag string
+
+const (
+	ProcessWaitForFlagNone ProcessWaitForFlag = "None"
+
+	ProcessWaitForFlagStart ProcessWaitForFlag = "Start"
+
+	ProcessWaitForFlagTerminate ProcessWaitForFlag = "Terminate"
+
+	ProcessWaitForFlagStdIn ProcessWaitForFlag = "StdIn"
+
+	ProcessWaitForFlagStdOut ProcessWaitForFlag = "StdOut"
+
+	ProcessWaitForFlagStdErr ProcessWaitForFlag = "StdErr"
+)
+
+type ProcessWaitResult string
+
+const (
+	ProcessWaitResultNone ProcessWaitResult = "None"
+
+	ProcessWaitResultStart ProcessWaitResult = "Start"
+
+	ProcessWaitResultTerminate ProcessWaitResult = "Terminate"
+
+	ProcessWaitResultStatus ProcessWaitResult = "Status"
+
+	ProcessWaitResultError ProcessWaitResult = "Error"
+
+	ProcessWaitResultTimeout ProcessWaitResult = "Timeout"
+
+	ProcessWaitResultStdIn ProcessWaitResult = "StdIn"
+
+	ProcessWaitResultStdOut ProcessWaitResult = "StdOut"
+
+	ProcessWaitResultStdErr ProcessWaitResult = "StdErr"
+
+	ProcessWaitResultWaitFlagNotSupported ProcessWaitResult = "WaitFlagNotSupported"
+)
+
+type FileCopyFlag string
+
+const (
+	FileCopyFlagNone FileCopyFlag = "None"
+
+	FileCopyFlagNoReplace FileCopyFlag = "NoReplace"
+
+	FileCopyFlagFollowLinks FileCopyFlag = "FollowLinks"
+
+	FileCopyFlagUpdate FileCopyFlag = "Update"
+)
+
+type FsObjMoveFlags string
+
+const (
+	FsObjMoveFlagsNone FsObjMoveFlags = "None"
+
+	FsObjMoveFlagsReplace FsObjMoveFlags = "Replace"
+
+	FsObjMoveFlagsFollowLinks FsObjMoveFlags = "FollowLinks"
+
+	FsObjMoveFlagsAllowDirectoryMoves FsObjMoveFlags = "AllowDirectoryMoves"
+)
+
+type DirectoryCreateFlag string
+
+const (
+	DirectoryCreateFlagNone DirectoryCreateFlag = "None"
+
+	DirectoryCreateFlagParents DirectoryCreateFlag = "Parents"
+)
+
+type DirectoryCopyFlags string
+
+const (
+	DirectoryCopyFlagsNone DirectoryCopyFlags = "None"
+
+	DirectoryCopyFlagsCopyIntoExisting DirectoryCopyFlags = "CopyIntoExisting"
+)
+
+type DirectoryRemoveRecFlag string
+
+const (
+	DirectoryRemoveRecFlagNone DirectoryRemoveRecFlag = "None"
+
+	DirectoryRemoveRecFlagContentAndDir DirectoryRemoveRecFlag = "ContentAndDir"
+
+	DirectoryRemoveRecFlagContentOnly DirectoryRemoveRecFlag = "ContentOnly"
+)
+
+type FsObjRenameFlag string
+
+const (
+	FsObjRenameFlagNoReplace FsObjRenameFlag = "NoReplace"
+
+	FsObjRenameFlagReplace FsObjRenameFlag = "Replace"
+)
+
+type ProcessCreateFlag string
+
+const (
+	ProcessCreateFlagNone ProcessCreateFlag = "None"
+
+	ProcessCreateFlagWaitForProcessStartOnly ProcessCreateFlag = "WaitForProcessStartOnly"
+
+	ProcessCreateFlagIgnoreOrphanedProcesses ProcessCreateFlag = "IgnoreOrphanedProcesses"
+
+	ProcessCreateFlagHidden ProcessCreateFlag = "Hidden"
+
+	ProcessCreateFlagNoProfile ProcessCreateFlag = "NoProfile"
+
+	ProcessCreateFlagWaitForStdOut ProcessCreateFlag = "WaitForStdOut"
+
+	ProcessCreateFlagWaitForStdErr ProcessCreateFlag = "WaitForStdErr"
+
+	ProcessCreateFlagExpandArguments ProcessCreateFlag = "ExpandArguments"
+
+	ProcessCreateFlagUnquotedArguments ProcessCreateFlag = "UnquotedArguments"
+)
+
+type ProcessPriority string
+
+const (
+	ProcessPriorityInvalid ProcessPriority = "Invalid"
+
+	ProcessPriorityDefault ProcessPriority = "Default"
+)
+
+type SymlinkType string
+
+const (
+	SymlinkTypeUnknown SymlinkType = "Unknown"
+
+	SymlinkTypeDirectory SymlinkType = "Directory"
+
+	SymlinkTypeFile SymlinkType = "File"
+)
+
+type SymlinkReadFlag string
+
+const (
+	SymlinkReadFlagNone SymlinkReadFlag = "None"
+
+	SymlinkReadFlagNoSymlinks SymlinkReadFlag = "NoSymlinks"
+)
+
+type ProcessStatus string
+
+const (
+	ProcessStatusUndefined ProcessStatus = "Undefined"
+
+	ProcessStatusStarting ProcessStatus = "Starting"
+
+	ProcessStatusStarted ProcessStatus = "Started"
+
+	ProcessStatusPaused ProcessStatus = "Paused"
+
+	ProcessStatusTerminating ProcessStatus = "Terminating"
+
+	ProcessStatusTerminatedNormally ProcessStatus = "TerminatedNormally"
+
+	ProcessStatusTerminatedSignal ProcessStatus = "TerminatedSignal"
+
+	ProcessStatusTerminatedAbnormally ProcessStatus = "TerminatedAbnormally"
+
+	ProcessStatusTimedOutKilled ProcessStatus = "TimedOutKilled"
+
+	ProcessStatusTimedOutAbnormally ProcessStatus = "TimedOutAbnormally"
+
+	ProcessStatusDown ProcessStatus = "Down"
+
+	ProcessStatusError ProcessStatus = "Error"
+)
+
+type ProcessInputStatus string
+
+const (
+	ProcessInputStatusUndefined ProcessInputStatus = "Undefined"
+
+	ProcessInputStatusBroken ProcessInputStatus = "Broken"
+
+	ProcessInputStatusAvailable ProcessInputStatus = "Available"
+
+	ProcessInputStatusWritten ProcessInputStatus = "Written"
+
+	ProcessInputStatusOverflow ProcessInputStatus = "Overflow"
+)
+
+type PathStyle string
+
+const (
+	PathStyleDOS PathStyle = "DOS"
+
+	PathStyleUNIX PathStyle = "UNIX"
+
+	PathStyleUnknown PathStyle = "Unknown"
+)
+
+type FileAccessMode string
+
+const (
+	FileAccessModeReadOnly FileAccessMode = "ReadOnly"
+
+	FileAccessModeWriteOnly FileAccessMode = "WriteOnly"
+
+	FileAccessModeReadWrite FileAccessMode = "ReadWrite"
+
+	FileAccessModeAppendOnly FileAccessMode = "AppendOnly"
+
+	FileAccessModeAppendRead FileAccessMode = "AppendRead"
+)
+
+type FileOpenAction string
+
+const (
+	FileOpenActionOpenExisting FileOpenAction = "OpenExisting"
+
+	FileOpenActionOpenOrCreate FileOpenAction = "OpenOrCreate"
+
+	FileOpenActionCreateNew FileOpenAction = "CreateNew"
+
+	FileOpenActionCreateOrReplace FileOpenAction = "CreateOrReplace"
+
+	FileOpenActionOpenExistingTruncated FileOpenAction = "OpenExistingTruncated"
+
+	FileOpenActionAppendOrCreate FileOpenAction = "AppendOrCreate"
+)
+
+type FileSharingMode string
+
+const (
+	FileSharingModeRead FileSharingMode = "Read"
+
+	FileSharingModeWrite FileSharingMode = "Write"
+
+	FileSharingModeReadWrite FileSharingMode = "ReadWrite"
+
+	FileSharingModeDelete FileSharingMode = "Delete"
+
+	FileSharingModeReadDelete FileSharingMode = "ReadDelete"
+
+	FileSharingModeWriteDelete FileSharingMode = "WriteDelete"
+
+	FileSharingModeAll FileSharingMode = "All"
+)
+
+type FileOpenExFlags string
+
+const (
+	FileOpenExFlagsNone FileOpenExFlags = "None"
+)
+
+type FileStatus string
+
+const (
+	FileStatusUndefined FileStatus = "Undefined"
+
+	FileStatusOpening FileStatus = "Opening"
+
+	FileStatusOpen FileStatus = "Open"
+
+	FileStatusClosing FileStatus = "Closing"
+
+	FileStatusClosed FileStatus = "Closed"
+
+	FileStatusDown FileStatus = "Down"
+
+	FileStatusError FileStatus = "Error"
+)
+
+type FsObjType string
+
+const (
+	FsObjTypeUnknown FsObjType = "Unknown"
+
+	FsObjTypeFifo FsObjType = "Fifo"
+
+	FsObjTypeDevChar FsObjType = "DevChar"
+
+	FsObjTypeDirectory FsObjType = "Directory"
+
+	FsObjTypeDevBlock FsObjType = "DevBlock"
+
+	FsObjTypeFile FsObjType = "File"
+
+	FsObjTypeSymlink FsObjType = "Symlink"
+
+	FsObjTypeSocket FsObjType = "Socket"
+
+	FsObjTypeWhiteOut FsObjType = "WhiteOut"
+)
+
+type DnDAction string
+
+const (
+	DnDActionIgnore DnDAction = "Ignore"
+
+	DnDActionCopy DnDAction = "Copy"
+
+	DnDActionMove DnDAction = "Move"
+
+	DnDActionLink DnDAction = "Link"
+)
+
+type DirectoryOpenFlag string
+
+const (
+	DirectoryOpenFlagNone DirectoryOpenFlag = "None"
+
+	DirectoryOpenFlagNoSymlinks DirectoryOpenFlag = "NoSymlinks"
+)
+
 type MediumState string
 
 const (
@@ -431,6 +1223,10 @@ const (
 	MediumTypeWritethrough MediumType = "Writethrough"
 
 	MediumTypeShareable MediumType = "Shareable"
+
+	MediumTypeReadonly MediumType = "Readonly"
+
+	MediumTypeMultiAttach MediumType = "MultiAttach"
 )
 
 type MediumVariant string
@@ -440,13 +1236,19 @@ const (
 
 	MediumVariantVmdkSplit2G MediumVariant = "VmdkSplit2G"
 
+	MediumVariantVmdkRawDisk MediumVariant = "VmdkRawDisk"
+
 	MediumVariantVmdkStreamOptimized MediumVariant = "VmdkStreamOptimized"
 
 	MediumVariantVmdkESX MediumVariant = "VmdkESX"
 
+	MediumVariantVdiZeroExpand MediumVariant = "VdiZeroExpand"
+
 	MediumVariantFixed MediumVariant = "Fixed"
 
 	MediumVariantDiff MediumVariant = "Diff"
+
+	MediumVariantNoCreateDir MediumVariant = "NoCreateDir"
 )
 
 type DataType string
@@ -492,7 +1294,21 @@ const (
 
 	MediumFormatCapabilitiesProperties MediumFormatCapabilities = "Properties"
 
+	MediumFormatCapabilitiesTcpNetworking MediumFormatCapabilities = "TcpNetworking"
+
+	MediumFormatCapabilitiesVFS MediumFormatCapabilities = "VFS"
+
 	MediumFormatCapabilitiesCapabilityMask MediumFormatCapabilities = "CapabilityMask"
+)
+
+type KeyboardLED string
+
+const (
+	KeyboardLEDNumLock KeyboardLED = "NumLock"
+
+	KeyboardLEDCapsLock KeyboardLED = "CapsLock"
+
+	KeyboardLEDScrollLock KeyboardLED = "ScrollLock"
 )
 
 type MouseButtonState string
@@ -515,12 +1331,34 @@ const (
 	MouseButtonStateMouseStateMask MouseButtonState = "MouseStateMask"
 )
 
-type FramebufferPixelFormat string
+type TouchContactState string
 
 const (
-	FramebufferPixelFormatOpaque FramebufferPixelFormat = "Opaque"
+	TouchContactStateNone TouchContactState = "None"
 
-	FramebufferPixelFormatFOURCCRGB FramebufferPixelFormat = "FOURCCRGB"
+	TouchContactStateInContact TouchContactState = "InContact"
+
+	TouchContactStateInRange TouchContactState = "InRange"
+
+	TouchContactStateContactStateMask TouchContactState = "ContactStateMask"
+)
+
+type FramebufferCapabilities string
+
+const (
+	FramebufferCapabilitiesUpdateImage FramebufferCapabilities = "UpdateImage"
+
+	FramebufferCapabilitiesVHWA FramebufferCapabilities = "VHWA"
+
+	FramebufferCapabilitiesVisibleRegion FramebufferCapabilities = "VisibleRegion"
+)
+
+type GuestMonitorStatus string
+
+const (
+	GuestMonitorStatusDisabled GuestMonitorStatus = "Disabled"
+
+	GuestMonitorStatusEnabled GuestMonitorStatus = "Enabled"
 )
 
 type NetworkAttachmentType string
@@ -536,7 +1374,9 @@ const (
 
 	NetworkAttachmentTypeHostOnly NetworkAttachmentType = "HostOnly"
 
-	NetworkAttachmentTypeVDE NetworkAttachmentType = "VDE"
+	NetworkAttachmentTypeGeneric NetworkAttachmentType = "Generic"
+
+	NetworkAttachmentTypeNATNetwork NetworkAttachmentType = "NATNetwork"
 )
 
 type NetworkAdapterType string
@@ -557,6 +1397,16 @@ const (
 	NetworkAdapterTypeVirtio NetworkAdapterType = "Virtio"
 )
 
+type NetworkAdapterPromiscModePolicy string
+
+const (
+	NetworkAdapterPromiscModePolicyDeny NetworkAdapterPromiscModePolicy = "Deny"
+
+	NetworkAdapterPromiscModePolicyAllowNetwork NetworkAdapterPromiscModePolicy = "AllowNetwork"
+
+	NetworkAdapterPromiscModePolicyAllowAll NetworkAdapterPromiscModePolicy = "AllowAll"
+)
+
 type PortMode string
 
 const (
@@ -567,6 +1417,38 @@ const (
 	PortModeHostDevice PortMode = "HostDevice"
 
 	PortModeRawFile PortMode = "RawFile"
+
+	PortModeTCP PortMode = "TCP"
+)
+
+type USBControllerType string
+
+const (
+	USBControllerTypeNull USBControllerType = "Null"
+
+	USBControllerTypeOHCI USBControllerType = "OHCI"
+
+	USBControllerTypeEHCI USBControllerType = "EHCI"
+
+	USBControllerTypeXHCI USBControllerType = "XHCI"
+
+	USBControllerTypeLast USBControllerType = "Last"
+)
+
+type USBConnectionSpeed string
+
+const (
+	USBConnectionSpeedNull USBConnectionSpeed = "Null"
+
+	USBConnectionSpeedLow USBConnectionSpeed = "Low"
+
+	USBConnectionSpeedFull USBConnectionSpeed = "Full"
+
+	USBConnectionSpeedHigh USBConnectionSpeed = "High"
+
+	USBConnectionSpeedSuper USBConnectionSpeed = "Super"
+
+	USBConnectionSpeedSuperPlus USBConnectionSpeed = "SuperPlus"
 )
 
 type USBDeviceState string
@@ -623,16 +1505,46 @@ const (
 	AudioControllerTypeAC97 AudioControllerType = "AC97"
 
 	AudioControllerTypeSB16 AudioControllerType = "SB16"
+
+	AudioControllerTypeHDA AudioControllerType = "HDA"
 )
 
-type VRDPAuthType string
+type AudioCodecType string
 
 const (
-	VRDPAuthTypeNull VRDPAuthType = "Null"
+	AudioCodecTypeNull AudioCodecType = "Null"
 
-	VRDPAuthTypeExternal VRDPAuthType = "External"
+	AudioCodecTypeSB16 AudioCodecType = "SB16"
 
-	VRDPAuthTypeGuest VRDPAuthType = "Guest"
+	AudioCodecTypeSTAC9700 AudioCodecType = "STAC9700"
+
+	AudioCodecTypeAD1980 AudioCodecType = "AD1980"
+
+	AudioCodecTypeSTAC9221 AudioCodecType = "STAC9221"
+)
+
+type AuthType string
+
+const (
+	AuthTypeNull AuthType = "Null"
+
+	AuthTypeExternal AuthType = "External"
+
+	AuthTypeGuest AuthType = "Guest"
+)
+
+type Reason string
+
+const (
+	ReasonUnspecified Reason = "Unspecified"
+
+	ReasonHostSuspend Reason = "HostSuspend"
+
+	ReasonHostResume Reason = "HostResume"
+
+	ReasonHostBatteryLow Reason = "HostBatteryLow"
+
+	ReasonSnapshot Reason = "Snapshot"
 )
 
 type StorageBus string
@@ -649,6 +1561,8 @@ const (
 	StorageBusFloppy StorageBus = "Floppy"
 
 	StorageBusSAS StorageBus = "SAS"
+
+	StorageBusUSB StorageBus = "USB"
 )
 
 type StorageControllerType string
@@ -671,6 +1585,18 @@ const (
 	StorageControllerTypeI82078 StorageControllerType = "I82078"
 
 	StorageControllerTypeLsiLogicSas StorageControllerType = "LsiLogicSas"
+
+	StorageControllerTypeUSB StorageControllerType = "USB"
+)
+
+type ChipsetType string
+
+const (
+	ChipsetTypeNull ChipsetType = "Null"
+
+	ChipsetTypePIIX3 ChipsetType = "PIIX3"
+
+	ChipsetTypeICH9 ChipsetType = "ICH9"
 )
 
 type NATAliasMode string
@@ -691,6 +1617,184 @@ const (
 	NATProtocolTCP NATProtocol = "TCP"
 )
 
+type BandwidthGroupType string
+
+const (
+	BandwidthGroupTypeNull BandwidthGroupType = "Null"
+
+	BandwidthGroupTypeDisk BandwidthGroupType = "Disk"
+
+	BandwidthGroupTypeNetwork BandwidthGroupType = "Network"
+)
+
+type VBoxEventType string
+
+const (
+	VBoxEventTypeInvalid VBoxEventType = "Invalid"
+
+	VBoxEventTypeAny VBoxEventType = "Any"
+
+	VBoxEventTypeVetoable VBoxEventType = "Vetoable"
+
+	VBoxEventTypeMachineEvent VBoxEventType = "MachineEvent"
+
+	VBoxEventTypeSnapshotEvent VBoxEventType = "SnapshotEvent"
+
+	VBoxEventTypeInputEvent VBoxEventType = "InputEvent"
+
+	VBoxEventTypeLastWildcard VBoxEventType = "LastWildcard"
+
+	VBoxEventTypeOnMachineStateChanged VBoxEventType = "OnMachineStateChanged"
+
+	VBoxEventTypeOnMachineDataChanged VBoxEventType = "OnMachineDataChanged"
+
+	VBoxEventTypeOnExtraDataChanged VBoxEventType = "OnExtraDataChanged"
+
+	VBoxEventTypeOnExtraDataCanChange VBoxEventType = "OnExtraDataCanChange"
+
+	VBoxEventTypeOnMediumRegistered VBoxEventType = "OnMediumRegistered"
+
+	VBoxEventTypeOnMachineRegistered VBoxEventType = "OnMachineRegistered"
+
+	VBoxEventTypeOnSessionStateChanged VBoxEventType = "OnSessionStateChanged"
+
+	VBoxEventTypeOnSnapshotTaken VBoxEventType = "OnSnapshotTaken"
+
+	VBoxEventTypeOnSnapshotDeleted VBoxEventType = "OnSnapshotDeleted"
+
+	VBoxEventTypeOnSnapshotChanged VBoxEventType = "OnSnapshotChanged"
+
+	VBoxEventTypeOnGuestPropertyChanged VBoxEventType = "OnGuestPropertyChanged"
+
+	VBoxEventTypeOnMousePointerShapeChanged VBoxEventType = "OnMousePointerShapeChanged"
+
+	VBoxEventTypeOnMouseCapabilityChanged VBoxEventType = "OnMouseCapabilityChanged"
+
+	VBoxEventTypeOnKeyboardLedsChanged VBoxEventType = "OnKeyboardLedsChanged"
+
+	VBoxEventTypeOnStateChanged VBoxEventType = "OnStateChanged"
+
+	VBoxEventTypeOnAdditionsStateChanged VBoxEventType = "OnAdditionsStateChanged"
+
+	VBoxEventTypeOnNetworkAdapterChanged VBoxEventType = "OnNetworkAdapterChanged"
+
+	VBoxEventTypeOnSerialPortChanged VBoxEventType = "OnSerialPortChanged"
+
+	VBoxEventTypeOnParallelPortChanged VBoxEventType = "OnParallelPortChanged"
+
+	VBoxEventTypeOnStorageControllerChanged VBoxEventType = "OnStorageControllerChanged"
+
+	VBoxEventTypeOnMediumChanged VBoxEventType = "OnMediumChanged"
+
+	VBoxEventTypeOnVRDEServerChanged VBoxEventType = "OnVRDEServerChanged"
+
+	VBoxEventTypeOnUSBControllerChanged VBoxEventType = "OnUSBControllerChanged"
+
+	VBoxEventTypeOnUSBDeviceStateChanged VBoxEventType = "OnUSBDeviceStateChanged"
+
+	VBoxEventTypeOnSharedFolderChanged VBoxEventType = "OnSharedFolderChanged"
+
+	VBoxEventTypeOnRuntimeError VBoxEventType = "OnRuntimeError"
+
+	VBoxEventTypeOnCanShowWindow VBoxEventType = "OnCanShowWindow"
+
+	VBoxEventTypeOnShowWindow VBoxEventType = "OnShowWindow"
+
+	VBoxEventTypeOnCPUChanged VBoxEventType = "OnCPUChanged"
+
+	VBoxEventTypeOnVRDEServerInfoChanged VBoxEventType = "OnVRDEServerInfoChanged"
+
+	VBoxEventTypeOnEventSourceChanged VBoxEventType = "OnEventSourceChanged"
+
+	VBoxEventTypeOnCPUExecutionCapChanged VBoxEventType = "OnCPUExecutionCapChanged"
+
+	VBoxEventTypeOnGuestKeyboard VBoxEventType = "OnGuestKeyboard"
+
+	VBoxEventTypeOnGuestMouse VBoxEventType = "OnGuestMouse"
+
+	VBoxEventTypeOnNATRedirect VBoxEventType = "OnNATRedirect"
+
+	VBoxEventTypeOnHostPCIDevicePlug VBoxEventType = "OnHostPCIDevicePlug"
+
+	VBoxEventTypeOnVBoxSVCAvailabilityChanged VBoxEventType = "OnVBoxSVCAvailabilityChanged"
+
+	VBoxEventTypeOnBandwidthGroupChanged VBoxEventType = "OnBandwidthGroupChanged"
+
+	VBoxEventTypeOnGuestMonitorChanged VBoxEventType = "OnGuestMonitorChanged"
+
+	VBoxEventTypeOnStorageDeviceChanged VBoxEventType = "OnStorageDeviceChanged"
+
+	VBoxEventTypeOnClipboardModeChanged VBoxEventType = "OnClipboardModeChanged"
+
+	VBoxEventTypeOnDnDModeChanged VBoxEventType = "OnDnDModeChanged"
+
+	VBoxEventTypeOnNATNetworkChanged VBoxEventType = "OnNATNetworkChanged"
+
+	VBoxEventTypeOnNATNetworkStartStop VBoxEventType = "OnNATNetworkStartStop"
+
+	VBoxEventTypeOnNATNetworkAlter VBoxEventType = "OnNATNetworkAlter"
+
+	VBoxEventTypeOnNATNetworkCreationDeletion VBoxEventType = "OnNATNetworkCreationDeletion"
+
+	VBoxEventTypeOnNATNetworkSetting VBoxEventType = "OnNATNetworkSetting"
+
+	VBoxEventTypeOnNATNetworkPortForward VBoxEventType = "OnNATNetworkPortForward"
+
+	VBoxEventTypeOnGuestSessionStateChanged VBoxEventType = "OnGuestSessionStateChanged"
+
+	VBoxEventTypeOnGuestSessionRegistered VBoxEventType = "OnGuestSessionRegistered"
+
+	VBoxEventTypeOnGuestProcessRegistered VBoxEventType = "OnGuestProcessRegistered"
+
+	VBoxEventTypeOnGuestProcessStateChanged VBoxEventType = "OnGuestProcessStateChanged"
+
+	VBoxEventTypeOnGuestProcessInputNotify VBoxEventType = "OnGuestProcessInputNotify"
+
+	VBoxEventTypeOnGuestProcessOutput VBoxEventType = "OnGuestProcessOutput"
+
+	VBoxEventTypeOnGuestFileRegistered VBoxEventType = "OnGuestFileRegistered"
+
+	VBoxEventTypeOnGuestFileStateChanged VBoxEventType = "OnGuestFileStateChanged"
+
+	VBoxEventTypeOnGuestFileOffsetChanged VBoxEventType = "OnGuestFileOffsetChanged"
+
+	VBoxEventTypeOnGuestFileRead VBoxEventType = "OnGuestFileRead"
+
+	VBoxEventTypeOnGuestFileWrite VBoxEventType = "OnGuestFileWrite"
+
+	VBoxEventTypeOnVideoCaptureChanged VBoxEventType = "OnVideoCaptureChanged"
+
+	VBoxEventTypeOnGuestUserStateChanged VBoxEventType = "OnGuestUserStateChanged"
+
+	VBoxEventTypeOnGuestMultiTouch VBoxEventType = "OnGuestMultiTouch"
+
+	VBoxEventTypeOnHostNameResolutionConfigurationChange VBoxEventType = "OnHostNameResolutionConfigurationChange"
+
+	VBoxEventTypeOnSnapshotRestored VBoxEventType = "OnSnapshotRestored"
+
+	VBoxEventTypeOnMediumConfigChanged VBoxEventType = "OnMediumConfigChanged"
+
+	VBoxEventTypeLast VBoxEventType = "Last"
+)
+
+type GuestMouseEventMode string
+
+const (
+	GuestMouseEventModeRelative GuestMouseEventMode = "Relative"
+
+	GuestMouseEventModeAbsolute GuestMouseEventMode = "Absolute"
+)
+
+type GuestMonitorChangedEventType string
+
+const (
+	GuestMonitorChangedEventTypeEnabled GuestMonitorChangedEventType = "Enabled"
+
+	GuestMonitorChangedEventTypeDisabled GuestMonitorChangedEventType = "Disabled"
+
+	GuestMonitorChangedEventTypeNewOrigin GuestMonitorChangedEventType = "NewOrigin"
+)
+
 type IVirtualBoxErrorInfogetResultCode struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBoxErrorInfo_getResultCode"`
 
@@ -699,6 +1803,18 @@ type IVirtualBoxErrorInfogetResultCode struct {
 
 type IVirtualBoxErrorInfogetResultCodeResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBoxErrorInfo_getResultCodeResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type IVirtualBoxErrorInfogetResultDetail struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBoxErrorInfo_getResultDetail"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVirtualBoxErrorInfogetResultDetailResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBoxErrorInfo_getResultDetailResponse"`
 
 	Returnval int32 `xml:"returnval,omitempty"`
 }
@@ -747,6 +1863,324 @@ type IVirtualBoxErrorInfogetNext struct {
 
 type IVirtualBoxErrorInfogetNextResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBoxErrorInfo_getNextResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATNetworkgetNetworkName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getNetworkName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetNetworkNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getNetworkNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATNetworksetNetworkName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setNetworkName"`
+
+	This        string `xml:"_this,omitempty"`
+	NetworkName string `xml:"networkName,omitempty"`
+}
+
+type INATNetworksetNetworkNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setNetworkNameResponse"`
+}
+
+type INATNetworkgetEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworksetEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setEnabled"`
+
+	This    string `xml:"_this,omitempty"`
+	Enabled bool   `xml:"enabled,omitempty"`
+}
+
+type INATNetworksetEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setEnabledResponse"`
+}
+
+type INATNetworkgetNetwork struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getNetwork"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetNetworkResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getNetworkResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATNetworksetNetwork struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setNetwork"`
+
+	This    string `xml:"_this,omitempty"`
+	Network string `xml:"network,omitempty"`
+}
+
+type INATNetworksetNetworkResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setNetworkResponse"`
+}
+
+type INATNetworkgetGateway struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getGateway"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetGatewayResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getGatewayResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATNetworkgetIPv6Enabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getIPv6Enabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetIPv6EnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getIPv6EnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworksetIPv6Enabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setIPv6Enabled"`
+
+	This        string `xml:"_this,omitempty"`
+	IPv6Enabled bool   `xml:"IPv6Enabled,omitempty"`
+}
+
+type INATNetworksetIPv6EnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setIPv6EnabledResponse"`
+}
+
+type INATNetworkgetIPv6Prefix struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getIPv6Prefix"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetIPv6PrefixResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getIPv6PrefixResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATNetworksetIPv6Prefix struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setIPv6Prefix"`
+
+	This       string `xml:"_this,omitempty"`
+	IPv6Prefix string `xml:"IPv6Prefix,omitempty"`
+}
+
+type INATNetworksetIPv6PrefixResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setIPv6PrefixResponse"`
+}
+
+type INATNetworkgetAdvertiseDefaultIPv6RouteEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getAdvertiseDefaultIPv6RouteEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetAdvertiseDefaultIPv6RouteEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getAdvertiseDefaultIPv6RouteEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworksetAdvertiseDefaultIPv6RouteEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setAdvertiseDefaultIPv6RouteEnabled"`
+
+	This                             string `xml:"_this,omitempty"`
+	AdvertiseDefaultIPv6RouteEnabled bool   `xml:"advertiseDefaultIPv6RouteEnabled,omitempty"`
+}
+
+type INATNetworksetAdvertiseDefaultIPv6RouteEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setAdvertiseDefaultIPv6RouteEnabledResponse"`
+}
+
+type INATNetworkgetNeedDhcpServer struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getNeedDhcpServer"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetNeedDhcpServerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getNeedDhcpServerResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworksetNeedDhcpServer struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setNeedDhcpServer"`
+
+	This           string `xml:"_this,omitempty"`
+	NeedDhcpServer bool   `xml:"needDhcpServer,omitempty"`
+}
+
+type INATNetworksetNeedDhcpServerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setNeedDhcpServerResponse"`
+}
+
+type INATNetworkgetEventSource struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getEventSource"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetEventSourceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getEventSourceResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATNetworkgetPortForwardRules4 struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getPortForwardRules4"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetPortForwardRules4Response struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getPortForwardRules4Response"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type INATNetworkgetLocalMappings struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getLocalMappings"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetLocalMappingsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getLocalMappingsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type INATNetworkgetLoopbackIp6 struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getLoopbackIp6"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetLoopbackIp6Response struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getLoopbackIp6Response"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type INATNetworksetLoopbackIp6 struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setLoopbackIp6"`
+
+	This        string `xml:"_this,omitempty"`
+	LoopbackIp6 int32  `xml:"loopbackIp6,omitempty"`
+}
+
+type INATNetworksetLoopbackIp6Response struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_setLoopbackIp6Response"`
+}
+
+type INATNetworkgetPortForwardRules6 struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getPortForwardRules6"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkgetPortForwardRules6Response struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_getPortForwardRules6Response"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type INATNetworkaddLocalMapping struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_addLocalMapping"`
+
+	This   string `xml:"_this,omitempty"`
+	Hostid string `xml:"hostid,omitempty"`
+	Offset int32  `xml:"offset,omitempty"`
+}
+
+type INATNetworkaddLocalMappingResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_addLocalMappingResponse"`
+}
+
+type INATNetworkaddPortForwardRule struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_addPortForwardRule"`
+
+	This      string       `xml:"_this,omitempty"`
+	IsIpv6    bool         `xml:"isIpv6,omitempty"`
+	RuleName  string       `xml:"ruleName,omitempty"`
+	Proto     *NATProtocol `xml:"proto,omitempty"`
+	HostIP    string       `xml:"hostIP,omitempty"`
+	HostPort  uint16       `xml:"hostPort,omitempty"`
+	GuestIP   string       `xml:"guestIP,omitempty"`
+	GuestPort uint16       `xml:"guestPort,omitempty"`
+}
+
+type INATNetworkaddPortForwardRuleResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_addPortForwardRuleResponse"`
+}
+
+type INATNetworkremovePortForwardRule struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_removePortForwardRule"`
+
+	This     string `xml:"_this,omitempty"`
+	ISipv6   bool   `xml:"iSipv6,omitempty"`
+	RuleName string `xml:"ruleName,omitempty"`
+}
+
+type INATNetworkremovePortForwardRuleResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_removePortForwardRuleResponse"`
+}
+
+type INATNetworkstart struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_start"`
+
+	This      string `xml:"_this,omitempty"`
+	TrunkType string `xml:"trunkType,omitempty"`
+}
+
+type INATNetworkstartResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_startResponse"`
+}
+
+type INATNetworkstop struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_stop"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkstopResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetwork_stopResponse"`
+}
+
+type IDHCPServergetEventSource struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_getEventSource"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IDHCPServergetEventSourceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_getEventSourceResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
@@ -834,6 +2268,95 @@ type IDHCPServergetUpperIPResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
+type IDHCPServergetGlobalOptions struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_getGlobalOptions"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IDHCPServergetGlobalOptionsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_getGlobalOptionsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IDHCPServergetVmConfigs struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_getVmConfigs"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IDHCPServergetVmConfigsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_getVmConfigsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IDHCPServeraddGlobalOption struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_addGlobalOption"`
+
+	This   string   `xml:"_this,omitempty"`
+	Option *DhcpOpt `xml:"option,omitempty"`
+	Value  string   `xml:"value,omitempty"`
+}
+
+type IDHCPServeraddGlobalOptionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_addGlobalOptionResponse"`
+}
+
+type IDHCPServeraddVmSlotOption struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_addVmSlotOption"`
+
+	This   string   `xml:"_this,omitempty"`
+	Vmname string   `xml:"vmname,omitempty"`
+	Slot   int32    `xml:"slot,omitempty"`
+	Option *DhcpOpt `xml:"option,omitempty"`
+	Value  string   `xml:"value,omitempty"`
+}
+
+type IDHCPServeraddVmSlotOptionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_addVmSlotOptionResponse"`
+}
+
+type IDHCPServerremoveVmSlotOptions struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_removeVmSlotOptions"`
+
+	This   string `xml:"_this,omitempty"`
+	Vmname string `xml:"vmname,omitempty"`
+	Slot   int32  `xml:"slot,omitempty"`
+}
+
+type IDHCPServerremoveVmSlotOptionsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_removeVmSlotOptionsResponse"`
+}
+
+type IDHCPServergetVmSlotOptions struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_getVmSlotOptions"`
+
+	This   string `xml:"_this,omitempty"`
+	Vmname string `xml:"vmname,omitempty"`
+	Slot   int32  `xml:"slot,omitempty"`
+}
+
+type IDHCPServergetVmSlotOptionsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_getVmSlotOptionsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IDHCPServergetMacOptions struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_getMacOptions"`
+
+	This string `xml:"_this,omitempty"`
+	Mac  string `xml:"mac,omitempty"`
+}
+
+type IDHCPServergetMacOptionsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_getMacOptionsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
 type IDHCPServersetConfiguration struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDHCPServer_setConfiguration"`
 
@@ -883,6 +2406,18 @@ type IVirtualBoxgetVersionResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
+type IVirtualBoxgetVersionNormalized struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getVersionNormalized"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVirtualBoxgetVersionNormalizedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getVersionNormalizedResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
 type IVirtualBoxgetRevision struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getRevision"`
 
@@ -905,6 +2440,30 @@ type IVirtualBoxgetPackageTypeResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getPackageTypeResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IVirtualBoxgetAPIVersion struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getAPIVersion"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVirtualBoxgetAPIVersionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getAPIVersionResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IVirtualBoxgetAPIRevision struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getAPIRevision"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVirtualBoxgetAPIRevisionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getAPIRevisionResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
 }
 
 type IVirtualBoxgetHomeFolder struct {
@@ -963,6 +2522,18 @@ type IVirtualBoxgetMachines struct {
 
 type IVirtualBoxgetMachinesResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getMachinesResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IVirtualBoxgetMachineGroups struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getMachineGroups"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVirtualBoxgetMachineGroupsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getMachineGroupsResponse"`
 
 	Returnval []string `xml:"returnval,omitempty"`
 }
@@ -1063,35 +2634,83 @@ type IVirtualBoxgetDHCPServersResponse struct {
 	Returnval []string `xml:"returnval,omitempty"`
 }
 
-type IVirtualBoxcreateMachine struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createMachine"`
+type IVirtualBoxgetNATNetworks struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getNATNetworks"`
 
-	This       string `xml:"_this,omitempty"`
-	Name       string `xml:"name,omitempty"`
-	OsTypeId   string `xml:"osTypeId,omitempty"`
-	BaseFolder string `xml:"baseFolder,omitempty"`
-	Id         string `xml:"id,omitempty"`
-	Override   bool   `xml:"override,omitempty"`
+	This string `xml:"_this,omitempty"`
 }
 
-type IVirtualBoxcreateMachineResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createMachineResponse"`
+type IVirtualBoxgetNATNetworksResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getNATNetworksResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IVirtualBoxgetEventSource struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getEventSource"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVirtualBoxgetEventSourceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getEventSourceResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IVirtualBoxcreateLegacyMachine struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createLegacyMachine"`
+type IVirtualBoxgetInternalNetworks struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getInternalNetworks"`
 
-	This         string `xml:"_this,omitempty"`
-	Name         string `xml:"name,omitempty"`
-	OsTypeId     string `xml:"osTypeId,omitempty"`
-	SettingsFile string `xml:"settingsFile,omitempty"`
-	Id           string `xml:"id,omitempty"`
+	This string `xml:"_this,omitempty"`
 }
 
-type IVirtualBoxcreateLegacyMachineResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createLegacyMachineResponse"`
+type IVirtualBoxgetInternalNetworksResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getInternalNetworksResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IVirtualBoxgetGenericNetworkDrivers struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getGenericNetworkDrivers"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVirtualBoxgetGenericNetworkDriversResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getGenericNetworkDriversResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IVirtualBoxcomposeMachineFilename struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_composeMachineFilename"`
+
+	This        string `xml:"_this,omitempty"`
+	Name        string `xml:"name,omitempty"`
+	Group       string `xml:"group,omitempty"`
+	CreateFlags string `xml:"createFlags,omitempty"`
+	BaseFolder  string `xml:"baseFolder,omitempty"`
+}
+
+type IVirtualBoxcomposeMachineFilenameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_composeMachineFilenameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IVirtualBoxcreateMachine struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createMachine"`
+
+	This         string   `xml:"_this,omitempty"`
+	SettingsFile string   `xml:"settingsFile,omitempty"`
+	Name         string   `xml:"name,omitempty"`
+	Groups       []string `xml:"groups,omitempty"`
+	OsTypeId     string   `xml:"osTypeId,omitempty"`
+	Flags        string   `xml:"flags,omitempty"`
+}
+
+type IVirtualBoxcreateMachineResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createMachineResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
@@ -1120,24 +2739,11 @@ type IVirtualBoxregisterMachineResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_registerMachineResponse"`
 }
 
-type IVirtualBoxgetMachine struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getMachine"`
-
-	This string `xml:"_this,omitempty"`
-	Id   string `xml:"id,omitempty"`
-}
-
-type IVirtualBoxgetMachineResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getMachineResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
 type IVirtualBoxfindMachine struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_findMachine"`
 
-	This string `xml:"_this,omitempty"`
-	Name string `xml:"name,omitempty"`
+	This     string `xml:"_this,omitempty"`
+	NameOrId string `xml:"nameOrId,omitempty"`
 }
 
 type IVirtualBoxfindMachineResponse struct {
@@ -1146,17 +2752,30 @@ type IVirtualBoxfindMachineResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IVirtualBoxunregisterMachine struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_unregisterMachine"`
+type IVirtualBoxgetMachinesByGroups struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getMachinesByGroups"`
 
-	This string `xml:"_this,omitempty"`
-	Id   string `xml:"id,omitempty"`
+	This   string   `xml:"_this,omitempty"`
+	Groups []string `xml:"groups,omitempty"`
 }
 
-type IVirtualBoxunregisterMachineResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_unregisterMachineResponse"`
+type IVirtualBoxgetMachinesByGroupsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getMachinesByGroupsResponse"`
 
-	Returnval string `xml:"returnval,omitempty"`
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IVirtualBoxgetMachineStates struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getMachineStates"`
+
+	This     string   `xml:"_this,omitempty"`
+	Machines []string `xml:"machines,omitempty"`
+}
+
+type IVirtualBoxgetMachineStatesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getMachineStatesResponse"`
+
+	Returnval []*MachineState `xml:"returnval,omitempty"`
 }
 
 type IVirtualBoxcreateAppliance struct {
@@ -1171,140 +2790,34 @@ type IVirtualBoxcreateApplianceResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IVirtualBoxcreateHardDisk struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createHardDisk"`
+type IVirtualBoxcreateMedium struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createMedium"`
 
-	This     string `xml:"_this,omitempty"`
-	Format   string `xml:"format,omitempty"`
-	Location string `xml:"location,omitempty"`
+	This            string      `xml:"_this,omitempty"`
+	Format          string      `xml:"format,omitempty"`
+	Location        string      `xml:"location,omitempty"`
+	AccessMode      *AccessMode `xml:"accessMode,omitempty"`
+	ADeviceTypeType *DeviceType `xml:"aDeviceTypeType,omitempty"`
 }
 
-type IVirtualBoxcreateHardDiskResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createHardDiskResponse"`
+type IVirtualBoxcreateMediumResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createMediumResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IVirtualBoxopenHardDisk struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openHardDisk"`
+type IVirtualBoxopenMedium struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openMedium"`
 
-	This        string      `xml:"_this,omitempty"`
-	Location    string      `xml:"location,omitempty"`
-	AccessMode  *AccessMode `xml:"accessMode,omitempty"`
-	SetImageId  bool        `xml:"setImageId,omitempty"`
-	ImageId     string      `xml:"imageId,omitempty"`
-	SetParentId bool        `xml:"setParentId,omitempty"`
-	ParentId    string      `xml:"parentId,omitempty"`
+	This         string      `xml:"_this,omitempty"`
+	Location     string      `xml:"location,omitempty"`
+	DeviceType   *DeviceType `xml:"deviceType,omitempty"`
+	AccessMode   *AccessMode `xml:"accessMode,omitempty"`
+	ForceNewUuid bool        `xml:"forceNewUuid,omitempty"`
 }
 
-type IVirtualBoxopenHardDiskResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openHardDiskResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IVirtualBoxgetHardDisk struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getHardDisk"`
-
-	This string `xml:"_this,omitempty"`
-	Id   string `xml:"id,omitempty"`
-}
-
-type IVirtualBoxgetHardDiskResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getHardDiskResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IVirtualBoxfindHardDisk struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_findHardDisk"`
-
-	This     string `xml:"_this,omitempty"`
-	Location string `xml:"location,omitempty"`
-}
-
-type IVirtualBoxfindHardDiskResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_findHardDiskResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IVirtualBoxopenDVDImage struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openDVDImage"`
-
-	This     string `xml:"_this,omitempty"`
-	Location string `xml:"location,omitempty"`
-	Id       string `xml:"id,omitempty"`
-}
-
-type IVirtualBoxopenDVDImageResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openDVDImageResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IVirtualBoxgetDVDImage struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getDVDImage"`
-
-	This string `xml:"_this,omitempty"`
-	Id   string `xml:"id,omitempty"`
-}
-
-type IVirtualBoxgetDVDImageResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getDVDImageResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IVirtualBoxfindDVDImage struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_findDVDImage"`
-
-	This     string `xml:"_this,omitempty"`
-	Location string `xml:"location,omitempty"`
-}
-
-type IVirtualBoxfindDVDImageResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_findDVDImageResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IVirtualBoxopenFloppyImage struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openFloppyImage"`
-
-	This     string `xml:"_this,omitempty"`
-	Location string `xml:"location,omitempty"`
-	Id       string `xml:"id,omitempty"`
-}
-
-type IVirtualBoxopenFloppyImageResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openFloppyImageResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IVirtualBoxgetFloppyImage struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getFloppyImage"`
-
-	This string `xml:"_this,omitempty"`
-	Id   string `xml:"id,omitempty"`
-}
-
-type IVirtualBoxgetFloppyImageResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_getFloppyImageResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IVirtualBoxfindFloppyImage struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_findFloppyImage"`
-
-	This     string `xml:"_this,omitempty"`
-	Location string `xml:"location,omitempty"`
-}
-
-type IVirtualBoxfindFloppyImageResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_findFloppyImageResponse"`
+type IVirtualBoxopenMediumResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openMediumResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
@@ -1325,10 +2838,11 @@ type IVirtualBoxgetGuestOSTypeResponse struct {
 type IVirtualBoxcreateSharedFolder struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createSharedFolder"`
 
-	This     string `xml:"_this,omitempty"`
-	Name     string `xml:"name,omitempty"`
-	HostPath string `xml:"hostPath,omitempty"`
-	Writable bool   `xml:"writable,omitempty"`
+	This      string `xml:"_this,omitempty"`
+	Name      string `xml:"name,omitempty"`
+	HostPath  string `xml:"hostPath,omitempty"`
+	Writable  bool   `xml:"writable,omitempty"`
+	Automount bool   `xml:"automount,omitempty"`
 }
 
 type IVirtualBoxcreateSharedFolderResponse struct {
@@ -1383,59 +2897,15 @@ type IVirtualBoxsetExtraDataResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_setExtraDataResponse"`
 }
 
-type IVirtualBoxopenSession struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openSession"`
+type IVirtualBoxsetSettingsSecret struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_setSettingsSecret"`
 
-	This      string `xml:"_this,omitempty"`
-	Session   string `xml:"session,omitempty"`
-	MachineId string `xml:"machineId,omitempty"`
+	This     string `xml:"_this,omitempty"`
+	Password string `xml:"password,omitempty"`
 }
 
-type IVirtualBoxopenSessionResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openSessionResponse"`
-}
-
-type IVirtualBoxopenRemoteSession struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openRemoteSession"`
-
-	This        string `xml:"_this,omitempty"`
-	Session     string `xml:"session,omitempty"`
-	MachineId   string `xml:"machineId,omitempty"`
-	Type_       string `xml:"type,omitempty"`
-	Environment string `xml:"environment,omitempty"`
-}
-
-type IVirtualBoxopenRemoteSessionResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openRemoteSessionResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IVirtualBoxopenExistingSession struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openExistingSession"`
-
-	This      string `xml:"_this,omitempty"`
-	Session   string `xml:"session,omitempty"`
-	MachineId string `xml:"machineId,omitempty"`
-}
-
-type IVirtualBoxopenExistingSessionResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_openExistingSessionResponse"`
-}
-
-type IVirtualBoxwaitForPropertyChange struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_waitForPropertyChange"`
-
-	This    string `xml:"_this,omitempty"`
-	What    string `xml:"what,omitempty"`
-	Timeout uint32 `xml:"timeout,omitempty"`
-}
-
-type IVirtualBoxwaitForPropertyChangeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_waitForPropertyChangeResponse"`
-
-	Changed string `xml:"changed,omitempty"`
-	Values  string `xml:"values,omitempty"`
+type IVirtualBoxsetSettingsSecretResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_setSettingsSecretResponse"`
 }
 
 type IVirtualBoxcreateDHCPServer struct {
@@ -1473,6 +2943,43 @@ type IVirtualBoxremoveDHCPServer struct {
 
 type IVirtualBoxremoveDHCPServerResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_removeDHCPServerResponse"`
+}
+
+type IVirtualBoxcreateNATNetwork struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createNATNetwork"`
+
+	This        string `xml:"_this,omitempty"`
+	NetworkName string `xml:"networkName,omitempty"`
+}
+
+type IVirtualBoxcreateNATNetworkResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_createNATNetworkResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IVirtualBoxfindNATNetworkByName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_findNATNetworkByName"`
+
+	This        string `xml:"_this,omitempty"`
+	NetworkName string `xml:"networkName,omitempty"`
+}
+
+type IVirtualBoxfindNATNetworkByNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_findNATNetworkByNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IVirtualBoxremoveNATNetwork struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_removeNATNetwork"`
+
+	This    string `xml:"_this,omitempty"`
+	Network string `xml:"network,omitempty"`
+}
+
+type IVirtualBoxremoveNATNetworkResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualBox_removeNATNetworkResponse"`
 }
 
 type IVirtualBoxcheckFirmwarePresent struct {
@@ -1531,7 +3038,7 @@ type IVFSExplorercd struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVFSExplorer_cd"`
 
 	This string `xml:"_this,omitempty"`
-	ADir string `xml:"aDir,omitempty"`
+	Dir  string `xml:"dir,omitempty"`
 }
 
 type IVFSExplorercdResponse struct {
@@ -1561,15 +3068,17 @@ type IVFSExplorerentryList struct {
 type IVFSExplorerentryListResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVFSExplorer_entryListResponse"`
 
-	ANames []string `xml:"aNames,omitempty"`
-	ATypes []uint32 `xml:"aTypes,omitempty"`
+	Names []string `xml:"names,omitempty"`
+	Types []uint32 `xml:"types,omitempty"`
+	Sizes []int64  `xml:"sizes,omitempty"`
+	Modes []uint32 `xml:"modes,omitempty"`
 }
 
 type IVFSExplorerexists struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVFSExplorer_exists"`
 
-	This   string   `xml:"_this,omitempty"`
-	ANames []string `xml:"aNames,omitempty"`
+	This  string   `xml:"_this,omitempty"`
+	Names []string `xml:"names,omitempty"`
 }
 
 type IVFSExplorerexistsResponse struct {
@@ -1581,8 +3090,8 @@ type IVFSExplorerexistsResponse struct {
 type IVFSExplorerremove struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVFSExplorer_remove"`
 
-	This   string   `xml:"_this,omitempty"`
-	ANames []string `xml:"aNames,omitempty"`
+	This  string   `xml:"_this,omitempty"`
+	Names []string `xml:"names,omitempty"`
 }
 
 type IVFSExplorerremoveResponse struct {
@@ -1627,6 +3136,18 @@ type IAppliancegetVirtualSystemDescriptionsResponse struct {
 	Returnval []string `xml:"returnval,omitempty"`
 }
 
+type IAppliancegetMachines struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_getMachines"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IAppliancegetMachinesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_getMachinesResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
 type IApplianceread struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_read"`
 
@@ -1653,7 +3174,8 @@ type IApplianceinterpretResponse struct {
 type IApplianceimportMachines struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_importMachines"`
 
-	This string `xml:"_this,omitempty"`
+	This    string           `xml:"_this,omitempty"`
+	Options []*ImportOptions `xml:"options,omitempty"`
 }
 
 type IApplianceimportMachinesResponse struct {
@@ -1666,7 +3188,7 @@ type IAppliancecreateVFSExplorer struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_createVFSExplorer"`
 
 	This string `xml:"_this,omitempty"`
-	AUri string `xml:"aUri,omitempty"`
+	URI  string `xml:"URI,omitempty"`
 }
 
 type IAppliancecreateVFSExplorerResponse struct {
@@ -1678,9 +3200,10 @@ type IAppliancecreateVFSExplorerResponse struct {
 type IAppliancewrite struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_write"`
 
-	This   string `xml:"_this,omitempty"`
-	Format string `xml:"format,omitempty"`
-	Path   string `xml:"path,omitempty"`
+	This    string           `xml:"_this,omitempty"`
+	Format  string           `xml:"format,omitempty"`
+	Options []*ExportOptions `xml:"options,omitempty"`
+	Path    string           `xml:"path,omitempty"`
 }
 
 type IAppliancewriteResponse struct {
@@ -1699,6 +3222,43 @@ type IAppliancegetWarningsResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_getWarningsResponse"`
 
 	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IAppliancegetPasswordIds struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_getPasswordIds"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IAppliancegetPasswordIdsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_getPasswordIdsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IAppliancegetMediumIdsForPasswordId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_getMediumIdsForPasswordId"`
+
+	This       string `xml:"_this,omitempty"`
+	PasswordId string `xml:"passwordId,omitempty"`
+}
+
+type IAppliancegetMediumIdsForPasswordIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_getMediumIdsForPasswordIdResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IApplianceaddPasswords struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_addPasswords"`
+
+	This        string   `xml:"_this,omitempty"`
+	Identifiers []string `xml:"identifiers,omitempty"`
+	Passwords   []string `xml:"passwords,omitempty"`
+}
+
+type IApplianceaddPasswordsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAppliance_addPasswordsResponse"`
 }
 
 type IVirtualSystemDescriptiongetCount struct {
@@ -1722,36 +3282,36 @@ type IVirtualSystemDescriptiongetDescription struct {
 type IVirtualSystemDescriptiongetDescriptionResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualSystemDescription_getDescriptionResponse"`
 
-	ATypes             []*VirtualSystemDescriptionType `xml:"aTypes,omitempty"`
-	ARefs              []string                        `xml:"aRefs,omitempty"`
-	AOvfValues         []string                        `xml:"aOvfValues,omitempty"`
-	AVBoxValues        []string                        `xml:"aVBoxValues,omitempty"`
-	AExtraConfigValues []string                        `xml:"aExtraConfigValues,omitempty"`
+	Types             []*VirtualSystemDescriptionType `xml:"types,omitempty"`
+	Refs              []string                        `xml:"refs,omitempty"`
+	OVFValues         []string                        `xml:"OVFValues,omitempty"`
+	VBoxValues        []string                        `xml:"VBoxValues,omitempty"`
+	ExtraConfigValues []string                        `xml:"extraConfigValues,omitempty"`
 }
 
 type IVirtualSystemDescriptiongetDescriptionByType struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualSystemDescription_getDescriptionByType"`
 
 	This  string                        `xml:"_this,omitempty"`
-	AType *VirtualSystemDescriptionType `xml:"aType,omitempty"`
+	Type_ *VirtualSystemDescriptionType `xml:"type,omitempty"`
 }
 
 type IVirtualSystemDescriptiongetDescriptionByTypeResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualSystemDescription_getDescriptionByTypeResponse"`
 
-	ATypes             []*VirtualSystemDescriptionType `xml:"aTypes,omitempty"`
-	ARefs              []string                        `xml:"aRefs,omitempty"`
-	AOvfValues         []string                        `xml:"aOvfValues,omitempty"`
-	AVBoxValues        []string                        `xml:"aVBoxValues,omitempty"`
-	AExtraConfigValues []string                        `xml:"aExtraConfigValues,omitempty"`
+	Types             []*VirtualSystemDescriptionType `xml:"types,omitempty"`
+	Refs              []string                        `xml:"refs,omitempty"`
+	OVFValues         []string                        `xml:"OVFValues,omitempty"`
+	VBoxValues        []string                        `xml:"VBoxValues,omitempty"`
+	ExtraConfigValues []string                        `xml:"extraConfigValues,omitempty"`
 }
 
 type IVirtualSystemDescriptiongetValuesByType struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualSystemDescription_getValuesByType"`
 
-	This   string                             `xml:"_this,omitempty"`
-	AType  *VirtualSystemDescriptionType      `xml:"aType,omitempty"`
-	AWhich *VirtualSystemDescriptionValueType `xml:"aWhich,omitempty"`
+	This  string                             `xml:"_this,omitempty"`
+	Type_ *VirtualSystemDescriptionType      `xml:"type,omitempty"`
+	Which *VirtualSystemDescriptionValueType `xml:"which,omitempty"`
 }
 
 type IVirtualSystemDescriptiongetValuesByTypeResponse struct {
@@ -1763,10 +3323,10 @@ type IVirtualSystemDescriptiongetValuesByTypeResponse struct {
 type IVirtualSystemDescriptionsetFinalValues struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualSystemDescription_setFinalValues"`
 
-	This               string   `xml:"_this,omitempty"`
-	AEnabled           []bool   `xml:"aEnabled,omitempty"`
-	AVBoxValues        []string `xml:"aVBoxValues,omitempty"`
-	AExtraConfigValues []string `xml:"aExtraConfigValues,omitempty"`
+	This              string   `xml:"_this,omitempty"`
+	Enabled           []bool   `xml:"enabled,omitempty"`
+	VBoxValues        []string `xml:"VBoxValues,omitempty"`
+	ExtraConfigValues []string `xml:"extraConfigValues,omitempty"`
 }
 
 type IVirtualSystemDescriptionsetFinalValuesResponse struct {
@@ -1776,10 +3336,10 @@ type IVirtualSystemDescriptionsetFinalValuesResponse struct {
 type IVirtualSystemDescriptionaddDescription struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVirtualSystemDescription_addDescription"`
 
-	This              string                        `xml:"_this,omitempty"`
-	AType             *VirtualSystemDescriptionType `xml:"aType,omitempty"`
-	AVBoxValue        string                        `xml:"aVBoxValue,omitempty"`
-	AExtraConfigValue string                        `xml:"aExtraConfigValue,omitempty"`
+	This             string                        `xml:"_this,omitempty"`
+	Type_            *VirtualSystemDescriptionType `xml:"type,omitempty"`
+	VBoxValue        string                        `xml:"VBoxValue,omitempty"`
+	ExtraConfigValue string                        `xml:"extraConfigValue,omitempty"`
 }
 
 type IVirtualSystemDescriptionaddDescriptionResponse struct {
@@ -1993,6 +3553,110 @@ type IBIOSSettingssetPXEDebugEnabledResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBIOSSettings_setPXEDebugEnabledResponse"`
 }
 
+type IBIOSSettingsgetNonVolatileStorageFile struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBIOSSettings_getNonVolatileStorageFile"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IBIOSSettingsgetNonVolatileStorageFileResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBIOSSettings_getNonVolatileStorageFileResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IPCIAddressgetBus struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_getBus"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IPCIAddressgetBusResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_getBusResponse"`
+
+	Returnval int16 `xml:"returnval,omitempty"`
+}
+
+type IPCIAddresssetBus struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_setBus"`
+
+	This string `xml:"_this,omitempty"`
+	Bus  int16  `xml:"bus,omitempty"`
+}
+
+type IPCIAddresssetBusResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_setBusResponse"`
+}
+
+type IPCIAddressgetDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_getDevice"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IPCIAddressgetDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_getDeviceResponse"`
+
+	Returnval int16 `xml:"returnval,omitempty"`
+}
+
+type IPCIAddresssetDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_setDevice"`
+
+	This   string `xml:"_this,omitempty"`
+	Device int16  `xml:"device,omitempty"`
+}
+
+type IPCIAddresssetDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_setDeviceResponse"`
+}
+
+type IPCIAddressgetDevFunction struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_getDevFunction"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IPCIAddressgetDevFunctionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_getDevFunctionResponse"`
+
+	Returnval int16 `xml:"returnval,omitempty"`
+}
+
+type IPCIAddresssetDevFunction struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_setDevFunction"`
+
+	This        string `xml:"_this,omitempty"`
+	DevFunction int16  `xml:"devFunction,omitempty"`
+}
+
+type IPCIAddresssetDevFunctionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_setDevFunctionResponse"`
+}
+
+type IPCIAddressasLong struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_asLong"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IPCIAddressasLongResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_asLongResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type IPCIAddressfromLong struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_fromLong"`
+
+	This   string `xml:"_this,omitempty"`
+	Number int32  `xml:"number,omitempty"`
+}
+
+type IPCIAddressfromLongResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIAddress_fromLongResponse"`
+}
+
 type IMachinegetParent struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getParent"`
 
@@ -2003,6 +3667,29 @@ type IMachinegetParentResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getParentResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinegetIcon struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getIcon"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetIconResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getIconResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinesetIcon struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setIcon"`
+
+	This string `xml:"_this,omitempty"`
+	Icon string `xml:"icon,omitempty"`
+}
+
+type IMachinesetIconResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setIconResponse"`
 }
 
 type IMachinegetAccessible struct {
@@ -2087,6 +3774,29 @@ type IMachinegetIdResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
+type IMachinegetGroups struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getGroups"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetGroupsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getGroupsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IMachinesetGroups struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setGroups"`
+
+	This   string   `xml:"_this,omitempty"`
+	Groups []string `xml:"groups,omitempty"`
+}
+
+type IMachinesetGroupsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setGroupsResponse"`
+}
+
 type IMachinegetOSTypeId struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getOSTypeId"`
 
@@ -2126,7 +3836,7 @@ type IMachinesetHardwareVersion struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setHardwareVersion"`
 
 	This            string `xml:"_this,omitempty"`
-	HardwareVersion string `xml:"HardwareVersion,omitempty"`
+	HardwareVersion string `xml:"hardwareVersion,omitempty"`
 }
 
 type IMachinesetHardwareVersionResponse struct {
@@ -2202,6 +3912,52 @@ type IMachinesetCPUHotPlugEnabledResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setCPUHotPlugEnabledResponse"`
 }
 
+type IMachinegetCPUExecutionCap struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getCPUExecutionCap"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetCPUExecutionCapResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getCPUExecutionCapResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMachinesetCPUExecutionCap struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setCPUExecutionCap"`
+
+	This            string `xml:"_this,omitempty"`
+	CPUExecutionCap uint32 `xml:"CPUExecutionCap,omitempty"`
+}
+
+type IMachinesetCPUExecutionCapResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setCPUExecutionCapResponse"`
+}
+
+type IMachinegetCPUIDPortabilityLevel struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getCPUIDPortabilityLevel"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetCPUIDPortabilityLevelResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getCPUIDPortabilityLevelResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMachinesetCPUIDPortabilityLevel struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setCPUIDPortabilityLevel"`
+
+	This                  string `xml:"_this,omitempty"`
+	CPUIDPortabilityLevel uint32 `xml:"CPUIDPortabilityLevel,omitempty"`
+}
+
+type IMachinesetCPUIDPortabilityLevelResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setCPUIDPortabilityLevelResponse"`
+}
+
 type IMachinegetMemorySize struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getMemorySize"`
 
@@ -2264,11 +4020,34 @@ type IMachinesetPageFusionEnabled struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setPageFusionEnabled"`
 
 	This              string `xml:"_this,omitempty"`
-	PageFusionEnabled bool   `xml:"PageFusionEnabled,omitempty"`
+	PageFusionEnabled bool   `xml:"pageFusionEnabled,omitempty"`
 }
 
 type IMachinesetPageFusionEnabledResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setPageFusionEnabledResponse"`
+}
+
+type IMachinegetGraphicsControllerType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getGraphicsControllerType"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetGraphicsControllerTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getGraphicsControllerTypeResponse"`
+
+	Returnval *GraphicsControllerType `xml:"returnval,omitempty"`
+}
+
+type IMachinesetGraphicsControllerType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setGraphicsControllerType"`
+
+	This                   string                  `xml:"_this,omitempty"`
+	GraphicsControllerType *GraphicsControllerType `xml:"graphicsControllerType,omitempty"`
+}
+
+type IMachinesetGraphicsControllerTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setGraphicsControllerTypeResponse"`
 }
 
 type IMachinegetVRAMSize struct {
@@ -2363,6 +4142,236 @@ type IMachinesetMonitorCountResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setMonitorCountResponse"`
 }
 
+type IMachinegetVideoCaptureEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetVideoCaptureEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachinesetVideoCaptureEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureEnabled"`
+
+	This                string `xml:"_this,omitempty"`
+	VideoCaptureEnabled bool   `xml:"videoCaptureEnabled,omitempty"`
+}
+
+type IMachinesetVideoCaptureEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureEnabledResponse"`
+}
+
+type IMachinegetVideoCaptureScreens struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureScreens"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetVideoCaptureScreensResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureScreensResponse"`
+
+	Returnval []bool `xml:"returnval,omitempty"`
+}
+
+type IMachinesetVideoCaptureScreens struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureScreens"`
+
+	This                string `xml:"_this,omitempty"`
+	VideoCaptureScreens []bool `xml:"videoCaptureScreens,omitempty"`
+}
+
+type IMachinesetVideoCaptureScreensResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureScreensResponse"`
+}
+
+type IMachinegetVideoCaptureFile struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureFile"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetVideoCaptureFileResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureFileResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinesetVideoCaptureFile struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureFile"`
+
+	This             string `xml:"_this,omitempty"`
+	VideoCaptureFile string `xml:"videoCaptureFile,omitempty"`
+}
+
+type IMachinesetVideoCaptureFileResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureFileResponse"`
+}
+
+type IMachinegetVideoCaptureWidth struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureWidth"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetVideoCaptureWidthResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureWidthResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMachinesetVideoCaptureWidth struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureWidth"`
+
+	This              string `xml:"_this,omitempty"`
+	VideoCaptureWidth uint32 `xml:"videoCaptureWidth,omitempty"`
+}
+
+type IMachinesetVideoCaptureWidthResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureWidthResponse"`
+}
+
+type IMachinegetVideoCaptureHeight struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureHeight"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetVideoCaptureHeightResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureHeightResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMachinesetVideoCaptureHeight struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureHeight"`
+
+	This               string `xml:"_this,omitempty"`
+	VideoCaptureHeight uint32 `xml:"videoCaptureHeight,omitempty"`
+}
+
+type IMachinesetVideoCaptureHeightResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureHeightResponse"`
+}
+
+type IMachinegetVideoCaptureRate struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureRate"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetVideoCaptureRateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureRateResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMachinesetVideoCaptureRate struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureRate"`
+
+	This             string `xml:"_this,omitempty"`
+	VideoCaptureRate uint32 `xml:"videoCaptureRate,omitempty"`
+}
+
+type IMachinesetVideoCaptureRateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureRateResponse"`
+}
+
+type IMachinegetVideoCaptureFPS struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureFPS"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetVideoCaptureFPSResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureFPSResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMachinesetVideoCaptureFPS struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureFPS"`
+
+	This            string `xml:"_this,omitempty"`
+	VideoCaptureFPS uint32 `xml:"videoCaptureFPS,omitempty"`
+}
+
+type IMachinesetVideoCaptureFPSResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureFPSResponse"`
+}
+
+type IMachinegetVideoCaptureMaxTime struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureMaxTime"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetVideoCaptureMaxTimeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureMaxTimeResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMachinesetVideoCaptureMaxTime struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureMaxTime"`
+
+	This                string `xml:"_this,omitempty"`
+	VideoCaptureMaxTime uint32 `xml:"videoCaptureMaxTime,omitempty"`
+}
+
+type IMachinesetVideoCaptureMaxTimeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureMaxTimeResponse"`
+}
+
+type IMachinegetVideoCaptureMaxFileSize struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureMaxFileSize"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetVideoCaptureMaxFileSizeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureMaxFileSizeResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMachinesetVideoCaptureMaxFileSize struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureMaxFileSize"`
+
+	This                    string `xml:"_this,omitempty"`
+	VideoCaptureMaxFileSize uint32 `xml:"videoCaptureMaxFileSize,omitempty"`
+}
+
+type IMachinesetVideoCaptureMaxFileSizeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureMaxFileSizeResponse"`
+}
+
+type IMachinegetVideoCaptureOptions struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureOptions"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetVideoCaptureOptionsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVideoCaptureOptionsResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinesetVideoCaptureOptions struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureOptions"`
+
+	This                string `xml:"_this,omitempty"`
+	VideoCaptureOptions string `xml:"videoCaptureOptions,omitempty"`
+}
+
+type IMachinesetVideoCaptureOptionsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVideoCaptureOptionsResponse"`
+}
+
 type IMachinegetBIOSSettings struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getBIOSSettings"`
 
@@ -2398,73 +4407,96 @@ type IMachinesetFirmwareTypeResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setFirmwareTypeResponse"`
 }
 
-type IMachinegetPointingHidType struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getPointingHidType"`
+type IMachinegetPointingHIDType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getPointingHIDType"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IMachinegetPointingHidTypeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getPointingHidTypeResponse"`
+type IMachinegetPointingHIDTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getPointingHIDTypeResponse"`
 
-	Returnval *PointingHidType `xml:"returnval,omitempty"`
+	Returnval *PointingHIDType `xml:"returnval,omitempty"`
 }
 
-type IMachinesetPointingHidType struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setPointingHidType"`
+type IMachinesetPointingHIDType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setPointingHIDType"`
 
 	This            string           `xml:"_this,omitempty"`
-	PointingHidType *PointingHidType `xml:"pointingHidType,omitempty"`
+	PointingHIDType *PointingHIDType `xml:"pointingHIDType,omitempty"`
 }
 
-type IMachinesetPointingHidTypeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setPointingHidTypeResponse"`
+type IMachinesetPointingHIDTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setPointingHIDTypeResponse"`
 }
 
-type IMachinegetKeyboardHidType struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getKeyboardHidType"`
+type IMachinegetKeyboardHIDType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getKeyboardHIDType"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IMachinegetKeyboardHidTypeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getKeyboardHidTypeResponse"`
+type IMachinegetKeyboardHIDTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getKeyboardHIDTypeResponse"`
 
-	Returnval *KeyboardHidType `xml:"returnval,omitempty"`
+	Returnval *KeyboardHIDType `xml:"returnval,omitempty"`
 }
 
-type IMachinesetKeyboardHidType struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setKeyboardHidType"`
+type IMachinesetKeyboardHIDType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setKeyboardHIDType"`
 
 	This            string           `xml:"_this,omitempty"`
-	KeyboardHidType *KeyboardHidType `xml:"keyboardHidType,omitempty"`
+	KeyboardHIDType *KeyboardHIDType `xml:"keyboardHIDType,omitempty"`
 }
 
-type IMachinesetKeyboardHidTypeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setKeyboardHidTypeResponse"`
+type IMachinesetKeyboardHIDTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setKeyboardHIDTypeResponse"`
 }
 
-type IMachinegetHpetEnabled struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getHpetEnabled"`
+type IMachinegetHPETEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getHPETEnabled"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IMachinegetHpetEnabledResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getHpetEnabledResponse"`
+type IMachinegetHPETEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getHPETEnabledResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
-type IMachinesetHpetEnabled struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setHpetEnabled"`
+type IMachinesetHPETEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setHPETEnabled"`
 
 	This        string `xml:"_this,omitempty"`
-	HpetEnabled bool   `xml:"hpetEnabled,omitempty"`
+	HPETEnabled bool   `xml:"HPETEnabled,omitempty"`
 }
 
-type IMachinesetHpetEnabledResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setHpetEnabledResponse"`
+type IMachinesetHPETEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setHPETEnabledResponse"`
+}
+
+type IMachinegetChipsetType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getChipsetType"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetChipsetTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getChipsetTypeResponse"`
+
+	Returnval *ChipsetType `xml:"returnval,omitempty"`
+}
+
+type IMachinesetChipsetType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setChipsetType"`
+
+	This        string       `xml:"_this,omitempty"`
+	ChipsetType *ChipsetType `xml:"chipsetType,omitempty"`
+}
+
+type IMachinesetChipsetTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setChipsetTypeResponse"`
 }
 
 type IMachinegetSnapshotFolder struct {
@@ -2490,16 +4522,39 @@ type IMachinesetSnapshotFolderResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setSnapshotFolderResponse"`
 }
 
-type IMachinegetVRDPServer struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVRDPServer"`
+type IMachinegetVRDEServer struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVRDEServer"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IMachinegetVRDPServerResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVRDPServerResponse"`
+type IMachinegetVRDEServerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVRDEServerResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinegetEmulatedUSBCardReaderEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getEmulatedUSBCardReaderEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetEmulatedUSBCardReaderEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getEmulatedUSBCardReaderEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachinesetEmulatedUSBCardReaderEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setEmulatedUSBCardReaderEnabled"`
+
+	This                         string `xml:"_this,omitempty"`
+	EmulatedUSBCardReaderEnabled bool   `xml:"emulatedUSBCardReaderEnabled,omitempty"`
+}
+
+type IMachinesetEmulatedUSBCardReaderEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setEmulatedUSBCardReaderEnabledResponse"`
 }
 
 type IMachinegetMediumAttachments struct {
@@ -2514,14 +4569,26 @@ type IMachinegetMediumAttachmentsResponse struct {
 	Returnval []*IMediumAttachment `xml:"returnval,omitempty"`
 }
 
-type IMachinegetUSBController struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getUSBController"`
+type IMachinegetUSBControllers struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getUSBControllers"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IMachinegetUSBControllerResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getUSBControllerResponse"`
+type IMachinegetUSBControllersResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getUSBControllersResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IMachinegetUSBDeviceFilters struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getUSBDeviceFilters"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetUSBDeviceFiltersResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getUSBDeviceFiltersResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
@@ -2586,26 +4653,26 @@ type IMachinegetSessionStateResponse struct {
 	Returnval *SessionState `xml:"returnval,omitempty"`
 }
 
-type IMachinegetSessionType struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getSessionType"`
+type IMachinegetSessionName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getSessionName"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IMachinegetSessionTypeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getSessionTypeResponse"`
+type IMachinegetSessionNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getSessionNameResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IMachinegetSessionPid struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getSessionPid"`
+type IMachinegetSessionPID struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getSessionPID"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IMachinegetSessionPidResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getSessionPidResponse"`
+type IMachinegetSessionPIDResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getSessionPIDResponse"`
 
 	Returnval uint32 `xml:"returnval,omitempty"`
 }
@@ -2729,27 +4796,27 @@ type IMachinesetClipboardModeResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setClipboardModeResponse"`
 }
 
-type IMachinegetGuestPropertyNotificationPatterns struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getGuestPropertyNotificationPatterns"`
+type IMachinegetDnDMode struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getDnDMode"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IMachinegetGuestPropertyNotificationPatternsResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getGuestPropertyNotificationPatternsResponse"`
+type IMachinegetDnDModeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getDnDModeResponse"`
 
-	Returnval string `xml:"returnval,omitempty"`
+	Returnval *DnDMode `xml:"returnval,omitempty"`
 }
 
-type IMachinesetGuestPropertyNotificationPatterns struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setGuestPropertyNotificationPatterns"`
+type IMachinesetDnDMode struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setDnDMode"`
 
-	This                              string `xml:"_this,omitempty"`
-	GuestPropertyNotificationPatterns string `xml:"guestPropertyNotificationPatterns,omitempty"`
+	This    string   `xml:"_this,omitempty"`
+	DnDMode *DnDMode `xml:"dnDMode,omitempty"`
 }
 
-type IMachinesetGuestPropertyNotificationPatternsResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setGuestPropertyNotificationPatternsResponse"`
+type IMachinesetDnDModeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setDnDModeResponse"`
 }
 
 type IMachinegetTeleporterEnabled struct {
@@ -2844,6 +4911,144 @@ type IMachinesetTeleporterPasswordResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setTeleporterPasswordResponse"`
 }
 
+type IMachinegetParavirtProvider struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getParavirtProvider"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetParavirtProviderResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getParavirtProviderResponse"`
+
+	Returnval *ParavirtProvider `xml:"returnval,omitempty"`
+}
+
+type IMachinesetParavirtProvider struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setParavirtProvider"`
+
+	This             string            `xml:"_this,omitempty"`
+	ParavirtProvider *ParavirtProvider `xml:"paravirtProvider,omitempty"`
+}
+
+type IMachinesetParavirtProviderResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setParavirtProviderResponse"`
+}
+
+type IMachinegetFaultToleranceState struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getFaultToleranceState"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetFaultToleranceStateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getFaultToleranceStateResponse"`
+
+	Returnval *FaultToleranceState `xml:"returnval,omitempty"`
+}
+
+type IMachinesetFaultToleranceState struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setFaultToleranceState"`
+
+	This                string               `xml:"_this,omitempty"`
+	FaultToleranceState *FaultToleranceState `xml:"faultToleranceState,omitempty"`
+}
+
+type IMachinesetFaultToleranceStateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setFaultToleranceStateResponse"`
+}
+
+type IMachinegetFaultTolerancePort struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getFaultTolerancePort"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetFaultTolerancePortResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getFaultTolerancePortResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMachinesetFaultTolerancePort struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setFaultTolerancePort"`
+
+	This               string `xml:"_this,omitempty"`
+	FaultTolerancePort uint32 `xml:"faultTolerancePort,omitempty"`
+}
+
+type IMachinesetFaultTolerancePortResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setFaultTolerancePortResponse"`
+}
+
+type IMachinegetFaultToleranceAddress struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getFaultToleranceAddress"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetFaultToleranceAddressResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getFaultToleranceAddressResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinesetFaultToleranceAddress struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setFaultToleranceAddress"`
+
+	This                  string `xml:"_this,omitempty"`
+	FaultToleranceAddress string `xml:"faultToleranceAddress,omitempty"`
+}
+
+type IMachinesetFaultToleranceAddressResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setFaultToleranceAddressResponse"`
+}
+
+type IMachinegetFaultTolerancePassword struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getFaultTolerancePassword"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetFaultTolerancePasswordResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getFaultTolerancePasswordResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinesetFaultTolerancePassword struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setFaultTolerancePassword"`
+
+	This                   string `xml:"_this,omitempty"`
+	FaultTolerancePassword string `xml:"faultTolerancePassword,omitempty"`
+}
+
+type IMachinesetFaultTolerancePasswordResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setFaultTolerancePasswordResponse"`
+}
+
+type IMachinegetFaultToleranceSyncInterval struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getFaultToleranceSyncInterval"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetFaultToleranceSyncIntervalResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getFaultToleranceSyncIntervalResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMachinesetFaultToleranceSyncInterval struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setFaultToleranceSyncInterval"`
+
+	This                       string `xml:"_this,omitempty"`
+	FaultToleranceSyncInterval uint32 `xml:"faultToleranceSyncInterval,omitempty"`
+}
+
+type IMachinesetFaultToleranceSyncIntervalResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setFaultToleranceSyncIntervalResponse"`
+}
+
 type IMachinegetRTCUseUTC struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getRTCUseUTC"`
 
@@ -2867,73 +5072,297 @@ type IMachinesetRTCUseUTCResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setRTCUseUTCResponse"`
 }
 
-type IMachinegetIoCacheEnabled struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getIoCacheEnabled"`
+type IMachinegetIOCacheEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getIOCacheEnabled"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IMachinegetIoCacheEnabledResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getIoCacheEnabledResponse"`
+type IMachinegetIOCacheEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getIOCacheEnabledResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
-type IMachinesetIoCacheEnabled struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setIoCacheEnabled"`
+type IMachinesetIOCacheEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setIOCacheEnabled"`
 
 	This           string `xml:"_this,omitempty"`
-	IoCacheEnabled bool   `xml:"ioCacheEnabled,omitempty"`
+	IOCacheEnabled bool   `xml:"IOCacheEnabled,omitempty"`
 }
 
-type IMachinesetIoCacheEnabledResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setIoCacheEnabledResponse"`
+type IMachinesetIOCacheEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setIOCacheEnabledResponse"`
 }
 
-type IMachinegetIoCacheSize struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getIoCacheSize"`
+type IMachinegetIOCacheSize struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getIOCacheSize"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IMachinegetIoCacheSizeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getIoCacheSizeResponse"`
+type IMachinegetIOCacheSizeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getIOCacheSizeResponse"`
 
 	Returnval uint32 `xml:"returnval,omitempty"`
 }
 
-type IMachinesetIoCacheSize struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setIoCacheSize"`
+type IMachinesetIOCacheSize struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setIOCacheSize"`
 
 	This        string `xml:"_this,omitempty"`
-	IoCacheSize uint32 `xml:"ioCacheSize,omitempty"`
+	IOCacheSize uint32 `xml:"IOCacheSize,omitempty"`
 }
 
-type IMachinesetIoCacheSizeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setIoCacheSizeResponse"`
+type IMachinesetIOCacheSizeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setIOCacheSizeResponse"`
 }
 
-type IMachinegetIoBandwidthMax struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getIoBandwidthMax"`
+type IMachinegetPCIDeviceAssignments struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getPCIDeviceAssignments"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IMachinegetIoBandwidthMaxResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getIoBandwidthMaxResponse"`
+type IMachinegetPCIDeviceAssignmentsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getPCIDeviceAssignmentsResponse"`
+
+	Returnval []*IPCIDeviceAttachment `xml:"returnval,omitempty"`
+}
+
+type IMachinegetBandwidthControl struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getBandwidthControl"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetBandwidthControlResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getBandwidthControlResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinegetTracingEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getTracingEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetTracingEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getTracingEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachinesetTracingEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setTracingEnabled"`
+
+	This           string `xml:"_this,omitempty"`
+	TracingEnabled bool   `xml:"tracingEnabled,omitempty"`
+}
+
+type IMachinesetTracingEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setTracingEnabledResponse"`
+}
+
+type IMachinegetTracingConfig struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getTracingConfig"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetTracingConfigResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getTracingConfigResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinesetTracingConfig struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setTracingConfig"`
+
+	This          string `xml:"_this,omitempty"`
+	TracingConfig string `xml:"tracingConfig,omitempty"`
+}
+
+type IMachinesetTracingConfigResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setTracingConfigResponse"`
+}
+
+type IMachinegetAllowTracingToAccessVM struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getAllowTracingToAccessVM"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetAllowTracingToAccessVMResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getAllowTracingToAccessVMResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachinesetAllowTracingToAccessVM struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setAllowTracingToAccessVM"`
+
+	This                   string `xml:"_this,omitempty"`
+	AllowTracingToAccessVM bool   `xml:"allowTracingToAccessVM,omitempty"`
+}
+
+type IMachinesetAllowTracingToAccessVMResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setAllowTracingToAccessVMResponse"`
+}
+
+type IMachinegetAutostartEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getAutostartEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetAutostartEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getAutostartEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachinesetAutostartEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setAutostartEnabled"`
+
+	This             string `xml:"_this,omitempty"`
+	AutostartEnabled bool   `xml:"autostartEnabled,omitempty"`
+}
+
+type IMachinesetAutostartEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setAutostartEnabledResponse"`
+}
+
+type IMachinegetAutostartDelay struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getAutostartDelay"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetAutostartDelayResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getAutostartDelayResponse"`
 
 	Returnval uint32 `xml:"returnval,omitempty"`
 }
 
-type IMachinesetIoBandwidthMax struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setIoBandwidthMax"`
+type IMachinesetAutostartDelay struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setAutostartDelay"`
 
 	This           string `xml:"_this,omitempty"`
-	IoBandwidthMax uint32 `xml:"ioBandwidthMax,omitempty"`
+	AutostartDelay uint32 `xml:"autostartDelay,omitempty"`
 }
 
-type IMachinesetIoBandwidthMaxResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setIoBandwidthMaxResponse"`
+type IMachinesetAutostartDelayResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setAutostartDelayResponse"`
+}
+
+type IMachinegetAutostopType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getAutostopType"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetAutostopTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getAutostopTypeResponse"`
+
+	Returnval *AutostopType `xml:"returnval,omitempty"`
+}
+
+type IMachinesetAutostopType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setAutostopType"`
+
+	This         string        `xml:"_this,omitempty"`
+	AutostopType *AutostopType `xml:"autostopType,omitempty"`
+}
+
+type IMachinesetAutostopTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setAutostopTypeResponse"`
+}
+
+type IMachinegetDefaultFrontend struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getDefaultFrontend"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetDefaultFrontendResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getDefaultFrontendResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinesetDefaultFrontend struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setDefaultFrontend"`
+
+	This            string `xml:"_this,omitempty"`
+	DefaultFrontend string `xml:"defaultFrontend,omitempty"`
+}
+
+type IMachinesetDefaultFrontendResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setDefaultFrontendResponse"`
+}
+
+type IMachinegetUSBProxyAvailable struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getUSBProxyAvailable"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetUSBProxyAvailableResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getUSBProxyAvailableResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachinegetVMProcessPriority struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVMProcessPriority"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetVMProcessPriorityResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getVMProcessPriorityResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinesetVMProcessPriority struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVMProcessPriority"`
+
+	This              string `xml:"_this,omitempty"`
+	VMProcessPriority string `xml:"VMProcessPriority,omitempty"`
+}
+
+type IMachinesetVMProcessPriorityResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setVMProcessPriorityResponse"`
+}
+
+type IMachinelockMachine struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_lockMachine"`
+
+	This     string    `xml:"_this,omitempty"`
+	Session  string    `xml:"session,omitempty"`
+	LockType *LockType `xml:"lockType,omitempty"`
+}
+
+type IMachinelockMachineResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_lockMachineResponse"`
+}
+
+type IMachinelaunchVMProcess struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_launchVMProcess"`
+
+	This        string `xml:"_this,omitempty"`
+	Session     string `xml:"session,omitempty"`
+	Name        string `xml:"name,omitempty"`
+	Environment string `xml:"environment,omitempty"`
+}
+
+type IMachinelaunchVMProcessResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_launchVMProcessResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IMachinesetBootOrder struct {
@@ -2969,11 +5398,25 @@ type IMachineattachDevice struct {
 	ControllerPort int32       `xml:"controllerPort,omitempty"`
 	Device         int32       `xml:"device,omitempty"`
 	Type_          *DeviceType `xml:"type,omitempty"`
-	Id             string      `xml:"id,omitempty"`
+	Medium         string      `xml:"medium,omitempty"`
 }
 
 type IMachineattachDeviceResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_attachDeviceResponse"`
+}
+
+type IMachineattachDeviceWithoutMedium struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_attachDeviceWithoutMedium"`
+
+	This           string      `xml:"_this,omitempty"`
+	Name           string      `xml:"name,omitempty"`
+	ControllerPort int32       `xml:"controllerPort,omitempty"`
+	Device         int32       `xml:"device,omitempty"`
+	Type_          *DeviceType `xml:"type,omitempty"`
+}
+
+type IMachineattachDeviceWithoutMediumResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_attachDeviceWithoutMediumResponse"`
 }
 
 type IMachinedetachDevice struct {
@@ -3001,6 +5444,103 @@ type IMachinepassthroughDevice struct {
 
 type IMachinepassthroughDeviceResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_passthroughDeviceResponse"`
+}
+
+type IMachinetemporaryEjectDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_temporaryEjectDevice"`
+
+	This           string `xml:"_this,omitempty"`
+	Name           string `xml:"name,omitempty"`
+	ControllerPort int32  `xml:"controllerPort,omitempty"`
+	Device         int32  `xml:"device,omitempty"`
+	TemporaryEject bool   `xml:"temporaryEject,omitempty"`
+}
+
+type IMachinetemporaryEjectDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_temporaryEjectDeviceResponse"`
+}
+
+type IMachinenonRotationalDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_nonRotationalDevice"`
+
+	This           string `xml:"_this,omitempty"`
+	Name           string `xml:"name,omitempty"`
+	ControllerPort int32  `xml:"controllerPort,omitempty"`
+	Device         int32  `xml:"device,omitempty"`
+	NonRotational  bool   `xml:"nonRotational,omitempty"`
+}
+
+type IMachinenonRotationalDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_nonRotationalDeviceResponse"`
+}
+
+type IMachinesetAutoDiscardForDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setAutoDiscardForDevice"`
+
+	This           string `xml:"_this,omitempty"`
+	Name           string `xml:"name,omitempty"`
+	ControllerPort int32  `xml:"controllerPort,omitempty"`
+	Device         int32  `xml:"device,omitempty"`
+	Discard        bool   `xml:"discard,omitempty"`
+}
+
+type IMachinesetAutoDiscardForDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setAutoDiscardForDeviceResponse"`
+}
+
+type IMachinesetHotPluggableForDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setHotPluggableForDevice"`
+
+	This           string `xml:"_this,omitempty"`
+	Name           string `xml:"name,omitempty"`
+	ControllerPort int32  `xml:"controllerPort,omitempty"`
+	Device         int32  `xml:"device,omitempty"`
+	HotPluggable   bool   `xml:"hotPluggable,omitempty"`
+}
+
+type IMachinesetHotPluggableForDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setHotPluggableForDeviceResponse"`
+}
+
+type IMachinesetBandwidthGroupForDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setBandwidthGroupForDevice"`
+
+	This           string `xml:"_this,omitempty"`
+	Name           string `xml:"name,omitempty"`
+	ControllerPort int32  `xml:"controllerPort,omitempty"`
+	Device         int32  `xml:"device,omitempty"`
+	BandwidthGroup string `xml:"bandwidthGroup,omitempty"`
+}
+
+type IMachinesetBandwidthGroupForDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setBandwidthGroupForDeviceResponse"`
+}
+
+type IMachinesetNoBandwidthGroupForDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setNoBandwidthGroupForDevice"`
+
+	This           string `xml:"_this,omitempty"`
+	Name           string `xml:"name,omitempty"`
+	ControllerPort int32  `xml:"controllerPort,omitempty"`
+	Device         int32  `xml:"device,omitempty"`
+}
+
+type IMachinesetNoBandwidthGroupForDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setNoBandwidthGroupForDeviceResponse"`
+}
+
+type IMachineunmountMedium struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_unmountMedium"`
+
+	This           string `xml:"_this,omitempty"`
+	Name           string `xml:"name,omitempty"`
+	ControllerPort int32  `xml:"controllerPort,omitempty"`
+	Device         int32  `xml:"device,omitempty"`
+	Force          bool   `xml:"force,omitempty"`
+}
+
+type IMachineunmountMediumResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_unmountMediumResponse"`
 }
 
 type IMachinemountMedium struct {
@@ -3061,6 +5601,30 @@ type IMachinegetMediumAttachmentResponse struct {
 	Returnval *IMediumAttachment `xml:"returnval,omitempty"`
 }
 
+type IMachineattachHostPCIDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_attachHostPCIDevice"`
+
+	This                string `xml:"_this,omitempty"`
+	HostAddress         int32  `xml:"hostAddress,omitempty"`
+	DesiredGuestAddress int32  `xml:"desiredGuestAddress,omitempty"`
+	TryToUnbind         bool   `xml:"tryToUnbind,omitempty"`
+}
+
+type IMachineattachHostPCIDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_attachHostPCIDeviceResponse"`
+}
+
+type IMachinedetachHostPCIDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_detachHostPCIDevice"`
+
+	This        string `xml:"_this,omitempty"`
+	HostAddress int32  `xml:"hostAddress,omitempty"`
+}
+
+type IMachinedetachHostPCIDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_detachHostPCIDeviceResponse"`
+}
+
 type IMachinegetNetworkAdapter struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getNetworkAdapter"`
 
@@ -3104,8 +5668,9 @@ type IMachinegetStorageControllerByNameResponse struct {
 type IMachinegetStorageControllerByInstance struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getStorageControllerByInstance"`
 
-	This     string `xml:"_this,omitempty"`
-	Instance uint32 `xml:"instance,omitempty"`
+	This           string      `xml:"_this,omitempty"`
+	ConnectionType *StorageBus `xml:"connectionType,omitempty"`
+	Instance       uint32      `xml:"instance,omitempty"`
 }
 
 type IMachinegetStorageControllerByInstanceResponse struct {
@@ -3123,6 +5688,69 @@ type IMachineremoveStorageController struct {
 
 type IMachineremoveStorageControllerResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_removeStorageControllerResponse"`
+}
+
+type IMachinesetStorageControllerBootable struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setStorageControllerBootable"`
+
+	This     string `xml:"_this,omitempty"`
+	Name     string `xml:"name,omitempty"`
+	Bootable bool   `xml:"bootable,omitempty"`
+}
+
+type IMachinesetStorageControllerBootableResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setStorageControllerBootableResponse"`
+}
+
+type IMachineaddUSBController struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_addUSBController"`
+
+	This  string             `xml:"_this,omitempty"`
+	Name  string             `xml:"name,omitempty"`
+	Type_ *USBControllerType `xml:"type,omitempty"`
+}
+
+type IMachineaddUSBControllerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_addUSBControllerResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineremoveUSBController struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_removeUSBController"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IMachineremoveUSBControllerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_removeUSBControllerResponse"`
+}
+
+type IMachinegetUSBControllerByName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getUSBControllerByName"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IMachinegetUSBControllerByNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getUSBControllerByNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinegetUSBControllerCountByType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getUSBControllerCountByType"`
+
+	This  string             `xml:"_this,omitempty"`
+	Type_ *USBControllerType `xml:"type,omitempty"`
+}
+
+type IMachinegetUSBControllerCountByTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getUSBControllerCountByTypeResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
 }
 
 type IMachinegetSerialPort struct {
@@ -3290,6 +5918,19 @@ type IMachinesetHWVirtExPropertyResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setHWVirtExPropertyResponse"`
 }
 
+type IMachinesetSettingsFilePath struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setSettingsFilePath"`
+
+	This             string `xml:"_this,omitempty"`
+	SettingsFilePath string `xml:"settingsFilePath,omitempty"`
+}
+
+type IMachinesetSettingsFilePathResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setSettingsFilePathResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
 type IMachinesaveSettings struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_saveSettings"`
 
@@ -3310,38 +5951,42 @@ type IMachinediscardSettingsResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_discardSettingsResponse"`
 }
 
-type IMachinedeleteSettings struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_deleteSettings"`
+type IMachineunregister struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_unregister"`
 
-	This string `xml:"_this,omitempty"`
+	This        string       `xml:"_this,omitempty"`
+	CleanupMode *CleanupMode `xml:"cleanupMode,omitempty"`
 }
 
-type IMachinedeleteSettingsResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_deleteSettingsResponse"`
+type IMachineunregisterResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_unregisterResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
 }
 
-type IMachineexport struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_export"`
+type IMachinedeleteConfig struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_deleteConfig"`
 
-	This       string `xml:"_this,omitempty"`
-	AAppliance string `xml:"aAppliance,omitempty"`
+	This  string   `xml:"_this,omitempty"`
+	Media []string `xml:"media,omitempty"`
 }
 
-type IMachineexportResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_exportResponse"`
+type IMachinedeleteConfigResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_deleteConfigResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IMachinegetSnapshot struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getSnapshot"`
+type IMachineexportTo struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_exportTo"`
 
-	This string `xml:"_this,omitempty"`
-	Id   string `xml:"id,omitempty"`
+	This      string `xml:"_this,omitempty"`
+	Appliance string `xml:"appliance,omitempty"`
+	Location  string `xml:"location,omitempty"`
 }
 
-type IMachinegetSnapshotResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getSnapshotResponse"`
+type IMachineexportToResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_exportToResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
@@ -3349,8 +5994,8 @@ type IMachinegetSnapshotResponse struct {
 type IMachinefindSnapshot struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_findSnapshot"`
 
-	This string `xml:"_this,omitempty"`
-	Name string `xml:"name,omitempty"`
+	This     string `xml:"_this,omitempty"`
+	NameOrId string `xml:"nameOrId,omitempty"`
 }
 
 type IMachinefindSnapshotResponse struct {
@@ -3359,24 +6004,14 @@ type IMachinefindSnapshotResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IMachinesetCurrentSnapshot struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setCurrentSnapshot"`
-
-	This string `xml:"_this,omitempty"`
-	Id   string `xml:"id,omitempty"`
-}
-
-type IMachinesetCurrentSnapshotResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setCurrentSnapshotResponse"`
-}
-
 type IMachinecreateSharedFolder struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_createSharedFolder"`
 
-	This     string `xml:"_this,omitempty"`
-	Name     string `xml:"name,omitempty"`
-	HostPath string `xml:"hostPath,omitempty"`
-	Writable bool   `xml:"writable,omitempty"`
+	This      string `xml:"_this,omitempty"`
+	Name      string `xml:"name,omitempty"`
+	HostPath  string `xml:"hostPath,omitempty"`
+	Writable  bool   `xml:"writable,omitempty"`
+	Automount bool   `xml:"automount,omitempty"`
 }
 
 type IMachinecreateSharedFolderResponse struct {
@@ -3415,7 +6050,7 @@ type IMachineshowConsoleWindow struct {
 type IMachineshowConsoleWindowResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_showConsoleWindowResponse"`
 
-	Returnval uint64 `xml:"returnval,omitempty"`
+	Returnval int64 `xml:"returnval,omitempty"`
 }
 
 type IMachinegetGuestProperty struct {
@@ -3429,7 +6064,7 @@ type IMachinegetGuestPropertyResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getGuestPropertyResponse"`
 
 	Value     string `xml:"value,omitempty"`
-	Timestamp uint64 `xml:"timestamp,omitempty"`
+	Timestamp int64  `xml:"timestamp,omitempty"`
 	Flags     string `xml:"flags,omitempty"`
 }
 
@@ -3456,7 +6091,7 @@ type IMachinegetGuestPropertyTimestamp struct {
 type IMachinegetGuestPropertyTimestampResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getGuestPropertyTimestampResponse"`
 
-	Returnval uint64 `xml:"returnval,omitempty"`
+	Returnval int64 `xml:"returnval,omitempty"`
 }
 
 type IMachinesetGuestProperty struct {
@@ -3484,6 +6119,17 @@ type IMachinesetGuestPropertyValueResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_setGuestPropertyValueResponse"`
 }
 
+type IMachinedeleteGuestProperty struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_deleteGuestProperty"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IMachinedeleteGuestPropertyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_deleteGuestPropertyResponse"`
+}
+
 type IMachineenumerateGuestProperties struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_enumerateGuestProperties"`
 
@@ -3494,33 +6140,35 @@ type IMachineenumerateGuestProperties struct {
 type IMachineenumerateGuestPropertiesResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_enumerateGuestPropertiesResponse"`
 
-	Name      []string `xml:"name,omitempty"`
-	Value     []string `xml:"value,omitempty"`
-	Timestamp []uint64 `xml:"timestamp,omitempty"`
-	Flags     []string `xml:"flags,omitempty"`
+	Names      []string `xml:"names,omitempty"`
+	Values     []string `xml:"values,omitempty"`
+	Timestamps []int64  `xml:"timestamps,omitempty"`
+	Flags      []string `xml:"flags,omitempty"`
 }
 
-type IMachinequerySavedThumbnailSize struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_querySavedThumbnailSize"`
+type IMachinequerySavedGuestScreenInfo struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_querySavedGuestScreenInfo"`
 
 	This     string `xml:"_this,omitempty"`
 	ScreenId uint32 `xml:"screenId,omitempty"`
 }
 
-type IMachinequerySavedThumbnailSizeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_querySavedThumbnailSizeResponse"`
+type IMachinequerySavedGuestScreenInfoResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_querySavedGuestScreenInfoResponse"`
 
-	Size   uint32 `xml:"size,omitempty"`
-	Width  uint32 `xml:"width,omitempty"`
-	Height uint32 `xml:"height,omitempty"`
+	OriginX uint32 `xml:"originX,omitempty"`
+	OriginY uint32 `xml:"originY,omitempty"`
+	Width   uint32 `xml:"width,omitempty"`
+	Height  uint32 `xml:"height,omitempty"`
+	Enabled bool   `xml:"enabled,omitempty"`
 }
 
 type IMachinereadSavedThumbnailToArray struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_readSavedThumbnailToArray"`
 
-	This     string `xml:"_this,omitempty"`
-	ScreenId uint32 `xml:"screenId,omitempty"`
-	BGR      bool   `xml:"BGR,omitempty"`
+	This         string        `xml:"_this,omitempty"`
+	ScreenId     uint32        `xml:"screenId,omitempty"`
+	BitmapFormat *BitmapFormat `xml:"bitmapFormat,omitempty"`
 }
 
 type IMachinereadSavedThumbnailToArrayResponse struct {
@@ -3528,37 +6176,38 @@ type IMachinereadSavedThumbnailToArrayResponse struct {
 
 	Width     uint32 `xml:"width,omitempty"`
 	Height    uint32 `xml:"height,omitempty"`
-	Returnval []byte `xml:"returnval,omitempty"`
+	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IMachinequerySavedScreenshotPNGSize struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_querySavedScreenshotPNGSize"`
+type IMachinequerySavedScreenshotInfo struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_querySavedScreenshotInfo"`
 
 	This     string `xml:"_this,omitempty"`
 	ScreenId uint32 `xml:"screenId,omitempty"`
 }
 
-type IMachinequerySavedScreenshotPNGSizeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_querySavedScreenshotPNGSizeResponse"`
+type IMachinequerySavedScreenshotInfoResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_querySavedScreenshotInfoResponse"`
 
-	Size   uint32 `xml:"size,omitempty"`
-	Width  uint32 `xml:"width,omitempty"`
-	Height uint32 `xml:"height,omitempty"`
+	Width     uint32          `xml:"width,omitempty"`
+	Height    uint32          `xml:"height,omitempty"`
+	Returnval []*BitmapFormat `xml:"returnval,omitempty"`
 }
 
-type IMachinereadSavedScreenshotPNGToArray struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_readSavedScreenshotPNGToArray"`
+type IMachinereadSavedScreenshotToArray struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_readSavedScreenshotToArray"`
 
-	This     string `xml:"_this,omitempty"`
-	ScreenId uint32 `xml:"screenId,omitempty"`
+	This         string        `xml:"_this,omitempty"`
+	ScreenId     uint32        `xml:"screenId,omitempty"`
+	BitmapFormat *BitmapFormat `xml:"bitmapFormat,omitempty"`
 }
 
-type IMachinereadSavedScreenshotPNGToArrayResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_readSavedScreenshotPNGToArrayResponse"`
+type IMachinereadSavedScreenshotToArrayResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_readSavedScreenshotToArrayResponse"`
 
 	Width     uint32 `xml:"width,omitempty"`
 	Height    uint32 `xml:"height,omitempty"`
-	Returnval []byte `xml:"returnval,omitempty"`
+	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IMachinehotPlugCPU struct {
@@ -3596,6 +6245,18 @@ type IMachinegetCPUStatusResponse struct {
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
+type IMachinegetEffectiveParavirtProvider struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getEffectiveParavirtProvider"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinegetEffectiveParavirtProviderResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_getEffectiveParavirtProviderResponse"`
+
+	Returnval *ParavirtProvider `xml:"returnval,omitempty"`
+}
+
 type IMachinequeryLogFilename struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_queryLogFilename"`
 
@@ -3614,14 +6275,178 @@ type IMachinereadLog struct {
 
 	This   string `xml:"_this,omitempty"`
 	Idx    uint32 `xml:"idx,omitempty"`
-	Offset uint64 `xml:"offset,omitempty"`
-	Size   uint64 `xml:"size,omitempty"`
+	Offset int64  `xml:"offset,omitempty"`
+	Size   int64  `xml:"size,omitempty"`
 }
 
 type IMachinereadLogResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_readLogResponse"`
 
-	Returnval []byte `xml:"returnval,omitempty"`
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinecloneTo struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_cloneTo"`
+
+	This    string          `xml:"_this,omitempty"`
+	Target  string          `xml:"target,omitempty"`
+	Mode    *CloneMode      `xml:"mode,omitempty"`
+	Options []*CloneOptions `xml:"options,omitempty"`
+}
+
+type IMachinecloneToResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_cloneToResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinesaveState struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_saveState"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachinesaveStateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_saveStateResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineadoptSavedState struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_adoptSavedState"`
+
+	This           string `xml:"_this,omitempty"`
+	SavedStateFile string `xml:"savedStateFile,omitempty"`
+}
+
+type IMachineadoptSavedStateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_adoptSavedStateResponse"`
+}
+
+type IMachinediscardSavedState struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_discardSavedState"`
+
+	This        string `xml:"_this,omitempty"`
+	FRemoveFile bool   `xml:"fRemoveFile,omitempty"`
+}
+
+type IMachinediscardSavedStateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_discardSavedStateResponse"`
+}
+
+type IMachinetakeSnapshot struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_takeSnapshot"`
+
+	This        string `xml:"_this,omitempty"`
+	Name        string `xml:"name,omitempty"`
+	Description string `xml:"description,omitempty"`
+	Pause       bool   `xml:"pause,omitempty"`
+}
+
+type IMachinetakeSnapshotResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_takeSnapshotResponse"`
+
+	Id        string `xml:"id,omitempty"`
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinedeleteSnapshot struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_deleteSnapshot"`
+
+	This string `xml:"_this,omitempty"`
+	Id   string `xml:"id,omitempty"`
+}
+
+type IMachinedeleteSnapshotResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_deleteSnapshotResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinedeleteSnapshotAndAllChildren struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_deleteSnapshotAndAllChildren"`
+
+	This string `xml:"_this,omitempty"`
+	Id   string `xml:"id,omitempty"`
+}
+
+type IMachinedeleteSnapshotAndAllChildrenResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_deleteSnapshotAndAllChildrenResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinedeleteSnapshotRange struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_deleteSnapshotRange"`
+
+	This    string `xml:"_this,omitempty"`
+	StartId string `xml:"startId,omitempty"`
+	EndId   string `xml:"endId,omitempty"`
+}
+
+type IMachinedeleteSnapshotRangeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_deleteSnapshotRangeResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachinerestoreSnapshot struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_restoreSnapshot"`
+
+	This     string `xml:"_this,omitempty"`
+	Snapshot string `xml:"snapshot,omitempty"`
+}
+
+type IMachinerestoreSnapshotResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_restoreSnapshotResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineapplyDefaults struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_applyDefaults"`
+
+	This  string `xml:"_this,omitempty"`
+	Flags string `xml:"flags,omitempty"`
+}
+
+type IMachineapplyDefaultsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachine_applyDefaultsResponse"`
+}
+
+type IEmulatedUSBgetWebcams struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEmulatedUSB_getWebcams"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IEmulatedUSBgetWebcamsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEmulatedUSB_getWebcamsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IEmulatedUSBwebcamAttach struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEmulatedUSB_webcamAttach"`
+
+	This     string `xml:"_this,omitempty"`
+	Path     string `xml:"path,omitempty"`
+	Settings string `xml:"settings,omitempty"`
+}
+
+type IEmulatedUSBwebcamAttachResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEmulatedUSB_webcamAttachResponse"`
+}
+
+type IEmulatedUSBwebcamDetach struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEmulatedUSB_webcamDetach"`
+
+	This string `xml:"_this,omitempty"`
+	Path string `xml:"path,omitempty"`
+}
+
+type IEmulatedUSBwebcamDetachResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEmulatedUSB_webcamDetachResponse"`
 }
 
 type IConsolegetMachine struct {
@@ -3696,6 +6521,18 @@ type IConsolegetDisplayResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
+type IConsolegetDebugger struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getDebugger"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IConsolegetDebuggerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getDebuggerResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
 type IConsolegetUSBDevices struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getUSBDevices"`
 
@@ -3732,16 +6569,75 @@ type IConsolegetSharedFoldersResponse struct {
 	Returnval []*ISharedFolder `xml:"returnval,omitempty"`
 }
 
-type IConsolegetRemoteDisplayInfo struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getRemoteDisplayInfo"`
+type IConsolegetVRDEServerInfo struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getVRDEServerInfo"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IConsolegetRemoteDisplayInfoResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getRemoteDisplayInfoResponse"`
+type IConsolegetVRDEServerInfoResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getVRDEServerInfoResponse"`
 
-	Returnval *IRemoteDisplayInfo `xml:"returnval,omitempty"`
+	Returnval *IVRDEServerInfo `xml:"returnval,omitempty"`
+}
+
+type IConsolegetEventSource struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getEventSource"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IConsolegetEventSourceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getEventSourceResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IConsolegetAttachedPCIDevices struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getAttachedPCIDevices"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IConsolegetAttachedPCIDevicesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getAttachedPCIDevicesResponse"`
+
+	Returnval []*IPCIDeviceAttachment `xml:"returnval,omitempty"`
+}
+
+type IConsolegetUseHostClipboard struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getUseHostClipboard"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IConsolegetUseHostClipboardResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getUseHostClipboardResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IConsolesetUseHostClipboard struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_setUseHostClipboard"`
+
+	This             string `xml:"_this,omitempty"`
+	UseHostClipboard bool   `xml:"useHostClipboard,omitempty"`
+}
+
+type IConsolesetUseHostClipboardResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_setUseHostClipboardResponse"`
+}
+
+type IConsolegetEmulatedUSB struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getEmulatedUSB"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IConsolegetEmulatedUSBResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getEmulatedUSBResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IConsolepowerUp struct {
@@ -3854,58 +6750,25 @@ type IConsolegetGuestEnteredACPIModeResponse struct {
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
-type IConsolesaveState struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_saveState"`
-
-	This string `xml:"_this,omitempty"`
-}
-
-type IConsolesaveStateResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_saveStateResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IConsoleadoptSavedState struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_adoptSavedState"`
-
-	This           string `xml:"_this,omitempty"`
-	SavedStateFile string `xml:"savedStateFile,omitempty"`
-}
-
-type IConsoleadoptSavedStateResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_adoptSavedStateResponse"`
-}
-
-type IConsoleforgetSavedState struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_forgetSavedState"`
-
-	This   string `xml:"_this,omitempty"`
-	Remove bool   `xml:"remove,omitempty"`
-}
-
-type IConsoleforgetSavedStateResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_forgetSavedStateResponse"`
-}
-
 type IConsolegetDeviceActivity struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getDeviceActivity"`
 
-	This  string      `xml:"_this,omitempty"`
-	Type_ *DeviceType `xml:"type,omitempty"`
+	This  string        `xml:"_this,omitempty"`
+	Type_ []*DeviceType `xml:"type,omitempty"`
 }
 
 type IConsolegetDeviceActivityResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_getDeviceActivityResponse"`
 
-	Returnval *DeviceActivity `xml:"returnval,omitempty"`
+	Returnval []*DeviceActivity `xml:"returnval,omitempty"`
 }
 
 type IConsoleattachUSBDevice struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_attachUSBDevice"`
 
-	This string `xml:"_this,omitempty"`
-	Id   string `xml:"id,omitempty"`
+	This            string `xml:"_this,omitempty"`
+	Id              string `xml:"id,omitempty"`
+	CaptureFilename string `xml:"captureFilename,omitempty"`
 }
 
 type IConsoleattachUSBDeviceResponse struct {
@@ -3954,10 +6817,11 @@ type IConsolefindUSBDeviceByIdResponse struct {
 type IConsolecreateSharedFolder struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_createSharedFolder"`
 
-	This     string `xml:"_this,omitempty"`
-	Name     string `xml:"name,omitempty"`
-	HostPath string `xml:"hostPath,omitempty"`
-	Writable bool   `xml:"writable,omitempty"`
+	This      string `xml:"_this,omitempty"`
+	Name      string `xml:"name,omitempty"`
+	HostPath  string `xml:"hostPath,omitempty"`
+	Writable  bool   `xml:"writable,omitempty"`
+	Automount bool   `xml:"automount,omitempty"`
 }
 
 type IConsolecreateSharedFolderResponse struct {
@@ -3973,46 +6837,6 @@ type IConsoleremoveSharedFolder struct {
 
 type IConsoleremoveSharedFolderResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_removeSharedFolderResponse"`
-}
-
-type IConsoletakeSnapshot struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_takeSnapshot"`
-
-	This        string `xml:"_this,omitempty"`
-	Name        string `xml:"name,omitempty"`
-	Description string `xml:"description,omitempty"`
-}
-
-type IConsoletakeSnapshotResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_takeSnapshotResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IConsoledeleteSnapshot struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_deleteSnapshot"`
-
-	This string `xml:"_this,omitempty"`
-	Id   string `xml:"id,omitempty"`
-}
-
-type IConsoledeleteSnapshotResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_deleteSnapshotResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IConsolerestoreSnapshot struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_restoreSnapshot"`
-
-	This     string `xml:"_this,omitempty"`
-	Snapshot string `xml:"snapshot,omitempty"`
-}
-
-type IConsolerestoreSnapshotResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_restoreSnapshotResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IConsoleteleport struct {
@@ -4031,6 +6855,53 @@ type IConsoleteleportResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
+type IConsoleaddDiskEncryptionPassword struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_addDiskEncryptionPassword"`
+
+	This           string `xml:"_this,omitempty"`
+	Id             string `xml:"id,omitempty"`
+	Password       string `xml:"password,omitempty"`
+	ClearOnSuspend bool   `xml:"clearOnSuspend,omitempty"`
+}
+
+type IConsoleaddDiskEncryptionPasswordResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_addDiskEncryptionPasswordResponse"`
+}
+
+type IConsoleaddDiskEncryptionPasswords struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_addDiskEncryptionPasswords"`
+
+	This           string   `xml:"_this,omitempty"`
+	Ids            []string `xml:"ids,omitempty"`
+	Passwords      []string `xml:"passwords,omitempty"`
+	ClearOnSuspend bool     `xml:"clearOnSuspend,omitempty"`
+}
+
+type IConsoleaddDiskEncryptionPasswordsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_addDiskEncryptionPasswordsResponse"`
+}
+
+type IConsoleremoveDiskEncryptionPassword struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_removeDiskEncryptionPassword"`
+
+	This string `xml:"_this,omitempty"`
+	Id   string `xml:"id,omitempty"`
+}
+
+type IConsoleremoveDiskEncryptionPasswordResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_removeDiskEncryptionPasswordResponse"`
+}
+
+type IConsoleclearAllDiskEncryptionPasswords struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_clearAllDiskEncryptionPasswords"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IConsoleclearAllDiskEncryptionPasswordsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IConsole_clearAllDiskEncryptionPasswordsResponse"`
+}
+
 type IHostNetworkInterfacegetName struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_getName"`
 
@@ -4039,6 +6910,18 @@ type IHostNetworkInterfacegetName struct {
 
 type IHostNetworkInterfacegetNameResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_getNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IHostNetworkInterfacegetShortName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_getShortName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostNetworkInterfacegetShortNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_getShortNameResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
@@ -4067,14 +6950,14 @@ type IHostNetworkInterfacegetNetworkNameResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IHostNetworkInterfacegetDhcpEnabled struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_getDhcpEnabled"`
+type IHostNetworkInterfacegetDHCPEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_getDHCPEnabled"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IHostNetworkInterfacegetDhcpEnabledResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_getDhcpEnabledResponse"`
+type IHostNetworkInterfacegetDHCPEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_getDHCPEnabledResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
 }
@@ -4187,48 +7070,84 @@ type IHostNetworkInterfacegetInterfaceTypeResponse struct {
 	Returnval *HostNetworkInterfaceType `xml:"returnval,omitempty"`
 }
 
-type IHostNetworkInterfaceenableStaticIpConfig struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_enableStaticIpConfig"`
+type IHostNetworkInterfaceenableStaticIPConfig struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_enableStaticIPConfig"`
 
 	This        string `xml:"_this,omitempty"`
 	IPAddress   string `xml:"IPAddress,omitempty"`
 	NetworkMask string `xml:"networkMask,omitempty"`
 }
 
-type IHostNetworkInterfaceenableStaticIpConfigResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_enableStaticIpConfigResponse"`
+type IHostNetworkInterfaceenableStaticIPConfigResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_enableStaticIPConfigResponse"`
 }
 
-type IHostNetworkInterfaceenableStaticIpConfigV6 struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_enableStaticIpConfigV6"`
+type IHostNetworkInterfaceenableStaticIPConfigV6 struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_enableStaticIPConfigV6"`
 
 	This                        string `xml:"_this,omitempty"`
 	IPV6Address                 string `xml:"IPV6Address,omitempty"`
 	IPV6NetworkMaskPrefixLength uint32 `xml:"IPV6NetworkMaskPrefixLength,omitempty"`
 }
 
-type IHostNetworkInterfaceenableStaticIpConfigV6Response struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_enableStaticIpConfigV6Response"`
+type IHostNetworkInterfaceenableStaticIPConfigV6Response struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_enableStaticIPConfigV6Response"`
 }
 
-type IHostNetworkInterfaceenableDynamicIpConfig struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_enableDynamicIpConfig"`
+type IHostNetworkInterfaceenableDynamicIPConfig struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_enableDynamicIPConfig"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IHostNetworkInterfaceenableDynamicIpConfigResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_enableDynamicIpConfigResponse"`
+type IHostNetworkInterfaceenableDynamicIPConfigResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_enableDynamicIPConfigResponse"`
 }
 
-type IHostNetworkInterfacedhcpRediscover struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_dhcpRediscover"`
+type IHostNetworkInterfaceDHCPRediscover struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_DHCPRediscover"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IHostNetworkInterfacedhcpRediscoverResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_dhcpRediscoverResponse"`
+type IHostNetworkInterfaceDHCPRediscoverResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNetworkInterface_DHCPRediscoverResponse"`
+}
+
+type IHostVideoInputDevicegetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostVideoInputDevice_getName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostVideoInputDevicegetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostVideoInputDevice_getNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IHostVideoInputDevicegetPath struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostVideoInputDevice_getPath"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostVideoInputDevicegetPathResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostVideoInputDevice_getPathResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IHostVideoInputDevicegetAlias struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostVideoInputDevice_getAlias"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostVideoInputDevicegetAliasResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostVideoInputDevice_getAliasResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IHostgetDVDDrives struct {
@@ -4291,6 +7210,42 @@ type IHostgetNetworkInterfacesResponse struct {
 	Returnval []string `xml:"returnval,omitempty"`
 }
 
+type IHostgetNameServers struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getNameServers"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostgetNameServersResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getNameServersResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IHostgetDomainName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getDomainName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostgetDomainNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getDomainNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IHostgetSearchStrings struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getSearchStrings"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostgetSearchStringsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getSearchStringsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
 type IHostgetProcessorCount struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getProcessorCount"`
 
@@ -4323,6 +7278,18 @@ type IHostgetProcessorCoreCount struct {
 
 type IHostgetProcessorCoreCountResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getProcessorCoreCountResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IHostgetProcessorOnlineCoreCount struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getProcessorOnlineCoreCount"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostgetProcessorOnlineCoreCountResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getProcessorOnlineCoreCountResponse"`
 
 	Returnval uint32 `xml:"returnval,omitempty"`
 }
@@ -4397,6 +7364,18 @@ type IHostgetAcceleration3DAvailableResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getAcceleration3DAvailableResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IHostgetVideoInputDevices struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getVideoInputDevices"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostgetVideoInputDevicesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_getVideoInputDevicesResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
 }
 
 type IHostgetProcessorSpeed struct {
@@ -4609,6 +7588,18 @@ type IHostfindUSBDeviceByAddressResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
+type IHostgenerateMACAddress struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_generateMACAddress"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostgenerateMACAddressResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHost_generateMACAddressResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
 type ISystemPropertiesgetMinGuestRAM struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getMinGuestRAM"`
 
@@ -4693,28 +7684,16 @@ type ISystemPropertiesgetMaxGuestMonitorsResponse struct {
 	Returnval uint32 `xml:"returnval,omitempty"`
 }
 
-type ISystemPropertiesgetMaxVDISize struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getMaxVDISize"`
+type ISystemPropertiesgetInfoVDSize struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getInfoVDSize"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type ISystemPropertiesgetMaxVDISizeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getMaxVDISizeResponse"`
+type ISystemPropertiesgetInfoVDSizeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getInfoVDSizeResponse"`
 
-	Returnval uint64 `xml:"returnval,omitempty"`
-}
-
-type ISystemPropertiesgetNetworkAdapterCount struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getNetworkAdapterCount"`
-
-	This string `xml:"_this,omitempty"`
-}
-
-type ISystemPropertiesgetNetworkAdapterCountResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getNetworkAdapterCountResponse"`
-
-	Returnval uint32 `xml:"returnval,omitempty"`
+	Returnval int64 `xml:"returnval,omitempty"`
 }
 
 type ISystemPropertiesgetSerialPortCount struct {
@@ -4753,6 +7732,41 @@ type ISystemPropertiesgetMaxBootPositionResponse struct {
 	Returnval uint32 `xml:"returnval,omitempty"`
 }
 
+type ISystemPropertiesgetRawModeSupported struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getRawModeSupported"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISystemPropertiesgetRawModeSupportedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getRawModeSupportedResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type ISystemPropertiesgetExclusiveHwVirt struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getExclusiveHwVirt"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISystemPropertiesgetExclusiveHwVirtResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getExclusiveHwVirtResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type ISystemPropertiessetExclusiveHwVirt struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setExclusiveHwVirt"`
+
+	This            string `xml:"_this,omitempty"`
+	ExclusiveHwVirt bool   `xml:"exclusiveHwVirt,omitempty"`
+}
+
+type ISystemPropertiessetExclusiveHwVirtResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setExclusiveHwVirtResponse"`
+}
+
 type ISystemPropertiesgetDefaultMachineFolder struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getDefaultMachineFolder"`
 
@@ -4776,27 +7790,27 @@ type ISystemPropertiessetDefaultMachineFolderResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setDefaultMachineFolderResponse"`
 }
 
-type ISystemPropertiesgetDefaultHardDiskFolder struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getDefaultHardDiskFolder"`
+type ISystemPropertiesgetLoggingLevel struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getLoggingLevel"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type ISystemPropertiesgetDefaultHardDiskFolderResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getDefaultHardDiskFolderResponse"`
+type ISystemPropertiesgetLoggingLevelResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getLoggingLevelResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type ISystemPropertiessetDefaultHardDiskFolder struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setDefaultHardDiskFolder"`
+type ISystemPropertiessetLoggingLevel struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setLoggingLevel"`
 
-	This                  string `xml:"_this,omitempty"`
-	DefaultHardDiskFolder string `xml:"defaultHardDiskFolder,omitempty"`
+	This         string `xml:"_this,omitempty"`
+	LoggingLevel string `xml:"loggingLevel,omitempty"`
 }
 
-type ISystemPropertiessetDefaultHardDiskFolderResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setDefaultHardDiskFolderResponse"`
+type ISystemPropertiessetLoggingLevelResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setLoggingLevelResponse"`
 }
 
 type ISystemPropertiesgetMediumFormats struct {
@@ -4843,14 +7857,14 @@ type ISystemPropertiesgetFreeDiskSpaceWarning struct {
 type ISystemPropertiesgetFreeDiskSpaceWarningResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getFreeDiskSpaceWarningResponse"`
 
-	Returnval uint64 `xml:"returnval,omitempty"`
+	Returnval int64 `xml:"returnval,omitempty"`
 }
 
 type ISystemPropertiessetFreeDiskSpaceWarning struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setFreeDiskSpaceWarning"`
 
 	This                 string `xml:"_this,omitempty"`
-	FreeDiskSpaceWarning uint64 `xml:"freeDiskSpaceWarning,omitempty"`
+	FreeDiskSpaceWarning int64  `xml:"freeDiskSpaceWarning,omitempty"`
 }
 
 type ISystemPropertiessetFreeDiskSpaceWarningResponse struct {
@@ -4889,14 +7903,14 @@ type ISystemPropertiesgetFreeDiskSpaceError struct {
 type ISystemPropertiesgetFreeDiskSpaceErrorResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getFreeDiskSpaceErrorResponse"`
 
-	Returnval uint64 `xml:"returnval,omitempty"`
+	Returnval int64 `xml:"returnval,omitempty"`
 }
 
 type ISystemPropertiessetFreeDiskSpaceError struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setFreeDiskSpaceError"`
 
 	This               string `xml:"_this,omitempty"`
-	FreeDiskSpaceError uint64 `xml:"freeDiskSpaceError,omitempty"`
+	FreeDiskSpaceError int64  `xml:"freeDiskSpaceError,omitempty"`
 }
 
 type ISystemPropertiessetFreeDiskSpaceErrorResponse struct {
@@ -4926,27 +7940,27 @@ type ISystemPropertiessetFreeDiskSpacePercentErrorResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setFreeDiskSpacePercentErrorResponse"`
 }
 
-type ISystemPropertiesgetRemoteDisplayAuthLibrary struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getRemoteDisplayAuthLibrary"`
+type ISystemPropertiesgetVRDEAuthLibrary struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getVRDEAuthLibrary"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type ISystemPropertiesgetRemoteDisplayAuthLibraryResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getRemoteDisplayAuthLibraryResponse"`
+type ISystemPropertiesgetVRDEAuthLibraryResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getVRDEAuthLibraryResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type ISystemPropertiessetRemoteDisplayAuthLibrary struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setRemoteDisplayAuthLibrary"`
+type ISystemPropertiessetVRDEAuthLibrary struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setVRDEAuthLibrary"`
 
-	This                     string `xml:"_this,omitempty"`
-	RemoteDisplayAuthLibrary string `xml:"remoteDisplayAuthLibrary,omitempty"`
+	This            string `xml:"_this,omitempty"`
+	VRDEAuthLibrary string `xml:"VRDEAuthLibrary,omitempty"`
 }
 
-type ISystemPropertiessetRemoteDisplayAuthLibraryResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setRemoteDisplayAuthLibraryResponse"`
+type ISystemPropertiessetVRDEAuthLibraryResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setVRDEAuthLibraryResponse"`
 }
 
 type ISystemPropertiesgetWebServiceAuthLibrary struct {
@@ -4972,6 +7986,29 @@ type ISystemPropertiessetWebServiceAuthLibraryResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setWebServiceAuthLibraryResponse"`
 }
 
+type ISystemPropertiesgetDefaultVRDEExtPack struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getDefaultVRDEExtPack"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISystemPropertiesgetDefaultVRDEExtPackResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getDefaultVRDEExtPackResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type ISystemPropertiessetDefaultVRDEExtPack struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setDefaultVRDEExtPack"`
+
+	This               string `xml:"_this,omitempty"`
+	DefaultVRDEExtPack string `xml:"defaultVRDEExtPack,omitempty"`
+}
+
+type ISystemPropertiessetDefaultVRDEExtPackResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setDefaultVRDEExtPackResponse"`
+}
+
 type ISystemPropertiesgetLogHistoryCount struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getLogHistoryCount"`
 
@@ -4988,7 +8025,7 @@ type ISystemPropertiessetLogHistoryCount struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setLogHistoryCount"`
 
 	This            string `xml:"_this,omitempty"`
-	LogHistoryCount uint32 `xml:"LogHistoryCount,omitempty"`
+	LogHistoryCount uint32 `xml:"logHistoryCount,omitempty"`
 }
 
 type ISystemPropertiessetLogHistoryCountResponse struct {
@@ -5005,6 +8042,114 @@ type ISystemPropertiesgetDefaultAudioDriverResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getDefaultAudioDriverResponse"`
 
 	Returnval *AudioDriverType `xml:"returnval,omitempty"`
+}
+
+type ISystemPropertiesgetAutostartDatabasePath struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getAutostartDatabasePath"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISystemPropertiesgetAutostartDatabasePathResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getAutostartDatabasePathResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type ISystemPropertiessetAutostartDatabasePath struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setAutostartDatabasePath"`
+
+	This                  string `xml:"_this,omitempty"`
+	AutostartDatabasePath string `xml:"autostartDatabasePath,omitempty"`
+}
+
+type ISystemPropertiessetAutostartDatabasePathResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setAutostartDatabasePathResponse"`
+}
+
+type ISystemPropertiesgetDefaultAdditionsISO struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getDefaultAdditionsISO"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISystemPropertiesgetDefaultAdditionsISOResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getDefaultAdditionsISOResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type ISystemPropertiessetDefaultAdditionsISO struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setDefaultAdditionsISO"`
+
+	This                string `xml:"_this,omitempty"`
+	DefaultAdditionsISO string `xml:"defaultAdditionsISO,omitempty"`
+}
+
+type ISystemPropertiessetDefaultAdditionsISOResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setDefaultAdditionsISOResponse"`
+}
+
+type ISystemPropertiesgetDefaultFrontend struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getDefaultFrontend"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISystemPropertiesgetDefaultFrontendResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getDefaultFrontendResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type ISystemPropertiessetDefaultFrontend struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setDefaultFrontend"`
+
+	This            string `xml:"_this,omitempty"`
+	DefaultFrontend string `xml:"defaultFrontend,omitempty"`
+}
+
+type ISystemPropertiessetDefaultFrontendResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_setDefaultFrontendResponse"`
+}
+
+type ISystemPropertiesgetScreenShotFormats struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getScreenShotFormats"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISystemPropertiesgetScreenShotFormatsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getScreenShotFormatsResponse"`
+
+	Returnval []*BitmapFormat `xml:"returnval,omitempty"`
+}
+
+type ISystemPropertiesgetMaxNetworkAdapters struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getMaxNetworkAdapters"`
+
+	This    string       `xml:"_this,omitempty"`
+	Chipset *ChipsetType `xml:"chipset,omitempty"`
+}
+
+type ISystemPropertiesgetMaxNetworkAdaptersResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getMaxNetworkAdaptersResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type ISystemPropertiesgetMaxNetworkAdaptersOfType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getMaxNetworkAdaptersOfType"`
+
+	This    string                 `xml:"_this,omitempty"`
+	Chipset *ChipsetType           `xml:"chipset,omitempty"`
+	Type_   *NetworkAttachmentType `xml:"type,omitempty"`
+}
+
+type ISystemPropertiesgetMaxNetworkAdaptersOfTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getMaxNetworkAdaptersOfTypeResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
 }
 
 type ISystemPropertiesgetMaxDevicesPerPortForStorageBus struct {
@@ -5049,8 +8194,9 @@ type ISystemPropertiesgetMaxPortCountForStorageBusResponse struct {
 type ISystemPropertiesgetMaxInstancesOfStorageBus struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getMaxInstancesOfStorageBus"`
 
-	This string      `xml:"_this,omitempty"`
-	Bus  *StorageBus `xml:"bus,omitempty"`
+	This    string       `xml:"_this,omitempty"`
+	Chipset *ChipsetType `xml:"chipset,omitempty"`
+	Bus     *StorageBus  `xml:"bus,omitempty"`
 }
 
 type ISystemPropertiesgetMaxInstancesOfStorageBusResponse struct {
@@ -5072,6 +8218,1724 @@ type ISystemPropertiesgetDeviceTypesForStorageBusResponse struct {
 	Returnval []*DeviceType `xml:"returnval,omitempty"`
 }
 
+type ISystemPropertiesgetDefaultIoCacheSettingForStorageController struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getDefaultIoCacheSettingForStorageController"`
+
+	This           string                 `xml:"_this,omitempty"`
+	ControllerType *StorageControllerType `xml:"controllerType,omitempty"`
+}
+
+type ISystemPropertiesgetDefaultIoCacheSettingForStorageControllerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getDefaultIoCacheSettingForStorageControllerResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type ISystemPropertiesgetStorageControllerHotplugCapable struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getStorageControllerHotplugCapable"`
+
+	This           string                 `xml:"_this,omitempty"`
+	ControllerType *StorageControllerType `xml:"controllerType,omitempty"`
+}
+
+type ISystemPropertiesgetStorageControllerHotplugCapableResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getStorageControllerHotplugCapableResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type ISystemPropertiesgetMaxInstancesOfUSBControllerType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getMaxInstancesOfUSBControllerType"`
+
+	This    string             `xml:"_this,omitempty"`
+	Chipset *ChipsetType       `xml:"chipset,omitempty"`
+	Type_   *USBControllerType `xml:"type,omitempty"`
+}
+
+type ISystemPropertiesgetMaxInstancesOfUSBControllerTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISystemProperties_getMaxInstancesOfUSBControllerTypeResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IDnDBasegetFormats struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDBase_getFormats"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IDnDBasegetFormatsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDBase_getFormatsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IDnDBasegetProtocolVersion struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDBase_getProtocolVersion"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IDnDBasegetProtocolVersionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDBase_getProtocolVersionResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IDnDBaseisFormatSupported struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDBase_isFormatSupported"`
+
+	This   string `xml:"_this,omitempty"`
+	Format string `xml:"format,omitempty"`
+}
+
+type IDnDBaseisFormatSupportedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDBase_isFormatSupportedResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IDnDBaseaddFormats struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDBase_addFormats"`
+
+	This    string   `xml:"_this,omitempty"`
+	Formats []string `xml:"formats,omitempty"`
+}
+
+type IDnDBaseaddFormatsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDBase_addFormatsResponse"`
+}
+
+type IDnDBaseremoveFormats struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDBase_removeFormats"`
+
+	This    string   `xml:"_this,omitempty"`
+	Formats []string `xml:"formats,omitempty"`
+}
+
+type IDnDBaseremoveFormatsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDBase_removeFormatsResponse"`
+}
+
+type IDnDSourcedragIsPending struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDSource_dragIsPending"`
+
+	This     string `xml:"_this,omitempty"`
+	ScreenId uint32 `xml:"screenId,omitempty"`
+}
+
+type IDnDSourcedragIsPendingResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDSource_dragIsPendingResponse"`
+
+	Formats        []string     `xml:"formats,omitempty"`
+	AllowedActions []*DnDAction `xml:"allowedActions,omitempty"`
+	Returnval      *DnDAction   `xml:"returnval,omitempty"`
+}
+
+type IDnDSourcedrop struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDSource_drop"`
+
+	This   string     `xml:"_this,omitempty"`
+	Format string     `xml:"format,omitempty"`
+	Action *DnDAction `xml:"action,omitempty"`
+}
+
+type IDnDSourcedropResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDSource_dropResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IDnDSourcereceiveData struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDSource_receiveData"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IDnDSourcereceiveDataResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDSource_receiveDataResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestDnDSourcegetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestDnDSource_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestDnDSourcegetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestDnDSource_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IDnDTargetenter struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDTarget_enter"`
+
+	This           string       `xml:"_this,omitempty"`
+	ScreenId       uint32       `xml:"screenId,omitempty"`
+	Y              uint32       `xml:"y,omitempty"`
+	X              uint32       `xml:"x,omitempty"`
+	DefaultAction  *DnDAction   `xml:"defaultAction,omitempty"`
+	AllowedActions []*DnDAction `xml:"allowedActions,omitempty"`
+	Formats        []string     `xml:"formats,omitempty"`
+}
+
+type IDnDTargetenterResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDTarget_enterResponse"`
+
+	Returnval *DnDAction `xml:"returnval,omitempty"`
+}
+
+type IDnDTargetmove struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDTarget_move"`
+
+	This           string       `xml:"_this,omitempty"`
+	ScreenId       uint32       `xml:"screenId,omitempty"`
+	X              uint32       `xml:"x,omitempty"`
+	Y              uint32       `xml:"y,omitempty"`
+	DefaultAction  *DnDAction   `xml:"defaultAction,omitempty"`
+	AllowedActions []*DnDAction `xml:"allowedActions,omitempty"`
+	Formats        []string     `xml:"formats,omitempty"`
+}
+
+type IDnDTargetmoveResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDTarget_moveResponse"`
+
+	Returnval *DnDAction `xml:"returnval,omitempty"`
+}
+
+type IDnDTargetleave struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDTarget_leave"`
+
+	This     string `xml:"_this,omitempty"`
+	ScreenId uint32 `xml:"screenId,omitempty"`
+}
+
+type IDnDTargetleaveResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDTarget_leaveResponse"`
+}
+
+type IDnDTargetdrop struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDTarget_drop"`
+
+	This           string       `xml:"_this,omitempty"`
+	ScreenId       uint32       `xml:"screenId,omitempty"`
+	X              uint32       `xml:"x,omitempty"`
+	Y              uint32       `xml:"y,omitempty"`
+	DefaultAction  *DnDAction   `xml:"defaultAction,omitempty"`
+	AllowedActions []*DnDAction `xml:"allowedActions,omitempty"`
+	Formats        []string     `xml:"formats,omitempty"`
+}
+
+type IDnDTargetdropResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDTarget_dropResponse"`
+
+	Format    string     `xml:"format,omitempty"`
+	Returnval *DnDAction `xml:"returnval,omitempty"`
+}
+
+type IDnDTargetsendData struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDTarget_sendData"`
+
+	This     string `xml:"_this,omitempty"`
+	ScreenId uint32 `xml:"screenId,omitempty"`
+	Format   string `xml:"format,omitempty"`
+	Data     string `xml:"data,omitempty"`
+}
+
+type IDnDTargetsendDataResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDTarget_sendDataResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IDnDTargetcancel struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDTarget_cancel"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IDnDTargetcancelResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDTarget_cancelResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IGuestDnDTargetgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestDnDTarget_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestDnDTargetgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestDnDTarget_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiongetUser struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getUser"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetUserResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getUserResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiongetDomain struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getDomain"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetDomainResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getDomainResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiongetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiongetId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getIdResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiongetTimeout struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getTimeout"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetTimeoutResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getTimeoutResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionsetTimeout struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_setTimeout"`
+
+	This    string `xml:"_this,omitempty"`
+	Timeout uint32 `xml:"timeout,omitempty"`
+}
+
+type IGuestSessionsetTimeoutResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_setTimeoutResponse"`
+}
+
+type IGuestSessiongetProtocolVersion struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getProtocolVersion"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetProtocolVersionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getProtocolVersionResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiongetStatus struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getStatus"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetStatusResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getStatusResponse"`
+
+	Returnval *GuestSessionStatus `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiongetEnvironmentChanges struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getEnvironmentChanges"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetEnvironmentChangesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getEnvironmentChangesResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionsetEnvironmentChanges struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_setEnvironmentChanges"`
+
+	This               string   `xml:"_this,omitempty"`
+	EnvironmentChanges []string `xml:"environmentChanges,omitempty"`
+}
+
+type IGuestSessionsetEnvironmentChangesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_setEnvironmentChangesResponse"`
+}
+
+type IGuestSessiongetEnvironmentBase struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getEnvironmentBase"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetEnvironmentBaseResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getEnvironmentBaseResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiongetProcesses struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getProcesses"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetProcessesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getProcessesResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiongetPathStyle struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getPathStyle"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetPathStyleResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getPathStyleResponse"`
+
+	Returnval *PathStyle `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiongetCurrentDirectory struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getCurrentDirectory"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetCurrentDirectoryResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getCurrentDirectoryResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionsetCurrentDirectory struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_setCurrentDirectory"`
+
+	This             string `xml:"_this,omitempty"`
+	CurrentDirectory string `xml:"currentDirectory,omitempty"`
+}
+
+type IGuestSessionsetCurrentDirectoryResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_setCurrentDirectoryResponse"`
+}
+
+type IGuestSessiongetDirectories struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getDirectories"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetDirectoriesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getDirectoriesResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiongetFiles struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getFiles"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetFilesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getFilesResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiongetEventSource struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getEventSource"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessiongetEventSourceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_getEventSourceResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionclose struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_close"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessioncloseResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_closeResponse"`
+}
+
+type IGuestSessiondirectoryCopy struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryCopy"`
+
+	This        string                `xml:"_this,omitempty"`
+	Source      string                `xml:"source,omitempty"`
+	Destination string                `xml:"destination,omitempty"`
+	Flags       []*DirectoryCopyFlags `xml:"flags,omitempty"`
+}
+
+type IGuestSessiondirectoryCopyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryCopyResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiondirectoryCopyFromGuest struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryCopyFromGuest"`
+
+	This        string                `xml:"_this,omitempty"`
+	Source      string                `xml:"source,omitempty"`
+	Destination string                `xml:"destination,omitempty"`
+	Flags       []*DirectoryCopyFlags `xml:"flags,omitempty"`
+}
+
+type IGuestSessiondirectoryCopyFromGuestResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryCopyFromGuestResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiondirectoryCopyToGuest struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryCopyToGuest"`
+
+	This        string                `xml:"_this,omitempty"`
+	Source      string                `xml:"source,omitempty"`
+	Destination string                `xml:"destination,omitempty"`
+	Flags       []*DirectoryCopyFlags `xml:"flags,omitempty"`
+}
+
+type IGuestSessiondirectoryCopyToGuestResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryCopyToGuestResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiondirectoryCreate struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryCreate"`
+
+	This  string                 `xml:"_this,omitempty"`
+	Path  string                 `xml:"path,omitempty"`
+	Mode  uint32                 `xml:"mode,omitempty"`
+	Flags []*DirectoryCreateFlag `xml:"flags,omitempty"`
+}
+
+type IGuestSessiondirectoryCreateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryCreateResponse"`
+}
+
+type IGuestSessiondirectoryCreateTemp struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryCreateTemp"`
+
+	This         string `xml:"_this,omitempty"`
+	TemplateName string `xml:"templateName,omitempty"`
+	Mode         uint32 `xml:"mode,omitempty"`
+	Path         string `xml:"path,omitempty"`
+	Secure       bool   `xml:"secure,omitempty"`
+}
+
+type IGuestSessiondirectoryCreateTempResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryCreateTempResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiondirectoryExists struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryExists"`
+
+	This           string `xml:"_this,omitempty"`
+	Path           string `xml:"path,omitempty"`
+	FollowSymlinks bool   `xml:"followSymlinks,omitempty"`
+}
+
+type IGuestSessiondirectoryExistsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryExistsResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiondirectoryOpen struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryOpen"`
+
+	This   string               `xml:"_this,omitempty"`
+	Path   string               `xml:"path,omitempty"`
+	Filter string               `xml:"filter,omitempty"`
+	Flags  []*DirectoryOpenFlag `xml:"flags,omitempty"`
+}
+
+type IGuestSessiondirectoryOpenResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryOpenResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessiondirectoryRemove struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryRemove"`
+
+	This string `xml:"_this,omitempty"`
+	Path string `xml:"path,omitempty"`
+}
+
+type IGuestSessiondirectoryRemoveResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryRemoveResponse"`
+}
+
+type IGuestSessiondirectoryRemoveRecursive struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryRemoveRecursive"`
+
+	This  string                    `xml:"_this,omitempty"`
+	Path  string                    `xml:"path,omitempty"`
+	Flags []*DirectoryRemoveRecFlag `xml:"flags,omitempty"`
+}
+
+type IGuestSessiondirectoryRemoveRecursiveResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_directoryRemoveRecursiveResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionenvironmentScheduleSet struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_environmentScheduleSet"`
+
+	This  string `xml:"_this,omitempty"`
+	Name  string `xml:"name,omitempty"`
+	Value string `xml:"value,omitempty"`
+}
+
+type IGuestSessionenvironmentScheduleSetResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_environmentScheduleSetResponse"`
+}
+
+type IGuestSessionenvironmentScheduleUnset struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_environmentScheduleUnset"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IGuestSessionenvironmentScheduleUnsetResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_environmentScheduleUnsetResponse"`
+}
+
+type IGuestSessionenvironmentGetBaseVariable struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_environmentGetBaseVariable"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IGuestSessionenvironmentGetBaseVariableResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_environmentGetBaseVariableResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionenvironmentDoesBaseVariableExist struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_environmentDoesBaseVariableExist"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IGuestSessionenvironmentDoesBaseVariableExistResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_environmentDoesBaseVariableExistResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionfileCopy struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileCopy"`
+
+	This        string          `xml:"_this,omitempty"`
+	Source      string          `xml:"source,omitempty"`
+	Destination string          `xml:"destination,omitempty"`
+	Flags       []*FileCopyFlag `xml:"flags,omitempty"`
+}
+
+type IGuestSessionfileCopyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileCopyResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionfileCopyFromGuest struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileCopyFromGuest"`
+
+	This        string          `xml:"_this,omitempty"`
+	Source      string          `xml:"source,omitempty"`
+	Destination string          `xml:"destination,omitempty"`
+	Flags       []*FileCopyFlag `xml:"flags,omitempty"`
+}
+
+type IGuestSessionfileCopyFromGuestResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileCopyFromGuestResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionfileCopyToGuest struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileCopyToGuest"`
+
+	This        string          `xml:"_this,omitempty"`
+	Source      string          `xml:"source,omitempty"`
+	Destination string          `xml:"destination,omitempty"`
+	Flags       []*FileCopyFlag `xml:"flags,omitempty"`
+}
+
+type IGuestSessionfileCopyToGuestResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileCopyToGuestResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionfileCreateTemp struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileCreateTemp"`
+
+	This         string `xml:"_this,omitempty"`
+	TemplateName string `xml:"templateName,omitempty"`
+	Mode         uint32 `xml:"mode,omitempty"`
+	Path         string `xml:"path,omitempty"`
+	Secure       bool   `xml:"secure,omitempty"`
+}
+
+type IGuestSessionfileCreateTempResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileCreateTempResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionfileExists struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileExists"`
+
+	This           string `xml:"_this,omitempty"`
+	Path           string `xml:"path,omitempty"`
+	FollowSymlinks bool   `xml:"followSymlinks,omitempty"`
+}
+
+type IGuestSessionfileExistsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileExistsResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionfileOpen struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileOpen"`
+
+	This         string          `xml:"_this,omitempty"`
+	Path         string          `xml:"path,omitempty"`
+	AccessMode   *FileAccessMode `xml:"accessMode,omitempty"`
+	OpenAction   *FileOpenAction `xml:"openAction,omitempty"`
+	CreationMode uint32          `xml:"creationMode,omitempty"`
+}
+
+type IGuestSessionfileOpenResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileOpenResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionfileOpenEx struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileOpenEx"`
+
+	This         string             `xml:"_this,omitempty"`
+	Path         string             `xml:"path,omitempty"`
+	AccessMode   *FileAccessMode    `xml:"accessMode,omitempty"`
+	OpenAction   *FileOpenAction    `xml:"openAction,omitempty"`
+	SharingMode  *FileSharingMode   `xml:"sharingMode,omitempty"`
+	CreationMode uint32             `xml:"creationMode,omitempty"`
+	Flags        []*FileOpenExFlags `xml:"flags,omitempty"`
+}
+
+type IGuestSessionfileOpenExResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileOpenExResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionfileQuerySize struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileQuerySize"`
+
+	This           string `xml:"_this,omitempty"`
+	Path           string `xml:"path,omitempty"`
+	FollowSymlinks bool   `xml:"followSymlinks,omitempty"`
+}
+
+type IGuestSessionfileQuerySizeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fileQuerySizeResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionfsObjExists struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fsObjExists"`
+
+	This           string `xml:"_this,omitempty"`
+	Path           string `xml:"path,omitempty"`
+	FollowSymlinks bool   `xml:"followSymlinks,omitempty"`
+}
+
+type IGuestSessionfsObjExistsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fsObjExistsResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionfsObjQueryInfo struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fsObjQueryInfo"`
+
+	This           string `xml:"_this,omitempty"`
+	Path           string `xml:"path,omitempty"`
+	FollowSymlinks bool   `xml:"followSymlinks,omitempty"`
+}
+
+type IGuestSessionfsObjQueryInfoResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fsObjQueryInfoResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionfsObjRemove struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fsObjRemove"`
+
+	This string `xml:"_this,omitempty"`
+	Path string `xml:"path,omitempty"`
+}
+
+type IGuestSessionfsObjRemoveResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fsObjRemoveResponse"`
+}
+
+type IGuestSessionfsObjRename struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fsObjRename"`
+
+	This    string             `xml:"_this,omitempty"`
+	OldPath string             `xml:"oldPath,omitempty"`
+	NewPath string             `xml:"newPath,omitempty"`
+	Flags   []*FsObjRenameFlag `xml:"flags,omitempty"`
+}
+
+type IGuestSessionfsObjRenameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fsObjRenameResponse"`
+}
+
+type IGuestSessionfsObjMove struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fsObjMove"`
+
+	This        string            `xml:"_this,omitempty"`
+	Source      string            `xml:"source,omitempty"`
+	Destination string            `xml:"destination,omitempty"`
+	Flags       []*FsObjMoveFlags `xml:"flags,omitempty"`
+}
+
+type IGuestSessionfsObjMoveResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fsObjMoveResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionfsObjSetACL struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fsObjSetACL"`
+
+	This           string `xml:"_this,omitempty"`
+	Path           string `xml:"path,omitempty"`
+	FollowSymlinks bool   `xml:"followSymlinks,omitempty"`
+	Acl            string `xml:"acl,omitempty"`
+	Mode           uint32 `xml:"mode,omitempty"`
+}
+
+type IGuestSessionfsObjSetACLResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_fsObjSetACLResponse"`
+}
+
+type IGuestSessionprocessCreate struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_processCreate"`
+
+	This               string               `xml:"_this,omitempty"`
+	Executable         string               `xml:"executable,omitempty"`
+	Arguments          []string             `xml:"arguments,omitempty"`
+	EnvironmentChanges []string             `xml:"environmentChanges,omitempty"`
+	Flags              []*ProcessCreateFlag `xml:"flags,omitempty"`
+	TimeoutMS          uint32               `xml:"timeoutMS,omitempty"`
+}
+
+type IGuestSessionprocessCreateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_processCreateResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionprocessCreateEx struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_processCreateEx"`
+
+	This               string               `xml:"_this,omitempty"`
+	Executable         string               `xml:"executable,omitempty"`
+	Arguments          []string             `xml:"arguments,omitempty"`
+	EnvironmentChanges []string             `xml:"environmentChanges,omitempty"`
+	Flags              []*ProcessCreateFlag `xml:"flags,omitempty"`
+	TimeoutMS          uint32               `xml:"timeoutMS,omitempty"`
+	Priority           *ProcessPriority     `xml:"priority,omitempty"`
+	Affinity           []int32              `xml:"affinity,omitempty"`
+}
+
+type IGuestSessionprocessCreateExResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_processCreateExResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionprocessGet struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_processGet"`
+
+	This string `xml:"_this,omitempty"`
+	Pid  uint32 `xml:"pid,omitempty"`
+}
+
+type IGuestSessionprocessGetResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_processGetResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionsymlinkCreate struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_symlinkCreate"`
+
+	This    string       `xml:"_this,omitempty"`
+	Symlink string       `xml:"symlink,omitempty"`
+	Target  string       `xml:"target,omitempty"`
+	Type_   *SymlinkType `xml:"type,omitempty"`
+}
+
+type IGuestSessionsymlinkCreateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_symlinkCreateResponse"`
+}
+
+type IGuestSessionsymlinkExists struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_symlinkExists"`
+
+	This    string `xml:"_this,omitempty"`
+	Symlink string `xml:"symlink,omitempty"`
+}
+
+type IGuestSessionsymlinkExistsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_symlinkExistsResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionsymlinkRead struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_symlinkRead"`
+
+	This    string             `xml:"_this,omitempty"`
+	Symlink string             `xml:"symlink,omitempty"`
+	Flags   []*SymlinkReadFlag `xml:"flags,omitempty"`
+}
+
+type IGuestSessionsymlinkReadResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_symlinkReadResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionwaitFor struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_waitFor"`
+
+	This      string `xml:"_this,omitempty"`
+	WaitFor   uint32 `xml:"waitFor,omitempty"`
+	TimeoutMS uint32 `xml:"timeoutMS,omitempty"`
+}
+
+type IGuestSessionwaitForResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_waitForResponse"`
+
+	Returnval *GuestSessionWaitResult `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionwaitForArray struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_waitForArray"`
+
+	This      string                     `xml:"_this,omitempty"`
+	WaitFor   []*GuestSessionWaitForFlag `xml:"waitFor,omitempty"`
+	TimeoutMS uint32                     `xml:"timeoutMS,omitempty"`
+}
+
+type IGuestSessionwaitForArrayResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSession_waitForArrayResponse"`
+
+	Returnval *GuestSessionWaitResult `xml:"returnval,omitempty"`
+}
+
+type IProcessgetArguments struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getArguments"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IProcessgetArgumentsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getArgumentsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IProcessgetEnvironment struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getEnvironment"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IProcessgetEnvironmentResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getEnvironmentResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IProcessgetEventSource struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getEventSource"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IProcessgetEventSourceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getEventSourceResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IProcessgetExecutablePath struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getExecutablePath"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IProcessgetExecutablePathResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getExecutablePathResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IProcessgetExitCode struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getExitCode"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IProcessgetExitCodeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getExitCodeResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type IProcessgetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IProcessgetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IProcessgetPID struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getPID"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IProcessgetPIDResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getPIDResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IProcessgetStatus struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getStatus"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IProcessgetStatusResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_getStatusResponse"`
+
+	Returnval *ProcessStatus `xml:"returnval,omitempty"`
+}
+
+type IProcesswaitFor struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_waitFor"`
+
+	This      string `xml:"_this,omitempty"`
+	WaitFor   uint32 `xml:"waitFor,omitempty"`
+	TimeoutMS uint32 `xml:"timeoutMS,omitempty"`
+}
+
+type IProcesswaitForResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_waitForResponse"`
+
+	Returnval *ProcessWaitResult `xml:"returnval,omitempty"`
+}
+
+type IProcesswaitForArray struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_waitForArray"`
+
+	This      string                `xml:"_this,omitempty"`
+	WaitFor   []*ProcessWaitForFlag `xml:"waitFor,omitempty"`
+	TimeoutMS uint32                `xml:"timeoutMS,omitempty"`
+}
+
+type IProcesswaitForArrayResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_waitForArrayResponse"`
+
+	Returnval *ProcessWaitResult `xml:"returnval,omitempty"`
+}
+
+type IProcessread struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_read"`
+
+	This      string `xml:"_this,omitempty"`
+	Handle    uint32 `xml:"handle,omitempty"`
+	ToRead    uint32 `xml:"toRead,omitempty"`
+	TimeoutMS uint32 `xml:"timeoutMS,omitempty"`
+}
+
+type IProcessreadResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_readResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IProcesswrite struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_write"`
+
+	This      string `xml:"_this,omitempty"`
+	Handle    uint32 `xml:"handle,omitempty"`
+	Flags     uint32 `xml:"flags,omitempty"`
+	Data      string `xml:"data,omitempty"`
+	TimeoutMS uint32 `xml:"timeoutMS,omitempty"`
+}
+
+type IProcesswriteResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_writeResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IProcesswriteArray struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_writeArray"`
+
+	This      string              `xml:"_this,omitempty"`
+	Handle    uint32              `xml:"handle,omitempty"`
+	Flags     []*ProcessInputFlag `xml:"flags,omitempty"`
+	Data      string              `xml:"data,omitempty"`
+	TimeoutMS uint32              `xml:"timeoutMS,omitempty"`
+}
+
+type IProcesswriteArrayResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_writeArrayResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IProcessterminate struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_terminate"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IProcessterminateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProcess_terminateResponse"`
+}
+
+type IGuestProcessgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcess_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestProcessgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcess_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IDirectorygetDirectoryName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDirectory_getDirectoryName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IDirectorygetDirectoryNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDirectory_getDirectoryNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IDirectorygetFilter struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDirectory_getFilter"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IDirectorygetFilterResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDirectory_getFilterResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IDirectoryclose struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDirectory_close"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IDirectorycloseResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDirectory_closeResponse"`
+}
+
+type IDirectoryread struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDirectory_read"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IDirectoryreadResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDirectory_readResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestDirectorygetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestDirectory_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestDirectorygetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestDirectory_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IFilegetEventSource struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getEventSource"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFilegetEventSourceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getEventSourceResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IFilegetId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFilegetIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getIdResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFilegetInitialSize struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getInitialSize"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFilegetInitialSizeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getInitialSizeResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IFilegetOffset struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getOffset"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFilegetOffsetResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getOffsetResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IFilegetStatus struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getStatus"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFilegetStatusResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getStatusResponse"`
+
+	Returnval *FileStatus `xml:"returnval,omitempty"`
+}
+
+type IFilegetFileName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getFileName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFilegetFileNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getFileNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IFilegetCreationMode struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getCreationMode"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFilegetCreationModeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getCreationModeResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFilegetOpenAction struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getOpenAction"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFilegetOpenActionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getOpenActionResponse"`
+
+	Returnval *FileOpenAction `xml:"returnval,omitempty"`
+}
+
+type IFilegetAccessMode struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getAccessMode"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFilegetAccessModeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_getAccessModeResponse"`
+
+	Returnval *FileAccessMode `xml:"returnval,omitempty"`
+}
+
+type IFileclose struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_close"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFilecloseResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_closeResponse"`
+}
+
+type IFilequeryInfo struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_queryInfo"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFilequeryInfoResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_queryInfoResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IFilequerySize struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_querySize"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFilequerySizeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_querySizeResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IFileread struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_read"`
+
+	This      string `xml:"_this,omitempty"`
+	ToRead    uint32 `xml:"toRead,omitempty"`
+	TimeoutMS uint32 `xml:"timeoutMS,omitempty"`
+}
+
+type IFilereadResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_readResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IFilereadAt struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_readAt"`
+
+	This      string `xml:"_this,omitempty"`
+	Offset    int64  `xml:"offset,omitempty"`
+	ToRead    uint32 `xml:"toRead,omitempty"`
+	TimeoutMS uint32 `xml:"timeoutMS,omitempty"`
+}
+
+type IFilereadAtResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_readAtResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IFileseek struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_seek"`
+
+	This   string          `xml:"_this,omitempty"`
+	Offset int64           `xml:"offset,omitempty"`
+	Whence *FileSeekOrigin `xml:"whence,omitempty"`
+}
+
+type IFileseekResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_seekResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IFilesetACL struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_setACL"`
+
+	This string `xml:"_this,omitempty"`
+	Acl  string `xml:"acl,omitempty"`
+	Mode uint32 `xml:"mode,omitempty"`
+}
+
+type IFilesetACLResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_setACLResponse"`
+}
+
+type IFilesetSize struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_setSize"`
+
+	This string `xml:"_this,omitempty"`
+	Size int64  `xml:"size,omitempty"`
+}
+
+type IFilesetSizeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_setSizeResponse"`
+}
+
+type IFilewrite struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_write"`
+
+	This      string `xml:"_this,omitempty"`
+	Data      string `xml:"data,omitempty"`
+	TimeoutMS uint32 `xml:"timeoutMS,omitempty"`
+}
+
+type IFilewriteResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_writeResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFilewriteAt struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_writeAt"`
+
+	This      string `xml:"_this,omitempty"`
+	Offset    int64  `xml:"offset,omitempty"`
+	Data      string `xml:"data,omitempty"`
+	TimeoutMS uint32 `xml:"timeoutMS,omitempty"`
+}
+
+type IFilewriteAtResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFile_writeAtResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestFilegetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFile_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestFilegetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFile_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetAccessTime struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getAccessTime"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetAccessTimeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getAccessTimeResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetAllocatedSize struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getAllocatedSize"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetAllocatedSizeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getAllocatedSizeResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetBirthTime struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getBirthTime"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetBirthTimeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getBirthTimeResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetChangeTime struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getChangeTime"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetChangeTimeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getChangeTimeResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetDeviceNumber struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getDeviceNumber"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetDeviceNumberResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getDeviceNumberResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetFileAttributes struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getFileAttributes"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetFileAttributesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getFileAttributesResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetGenerationId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getGenerationId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetGenerationIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getGenerationIdResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetGID struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getGID"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetGIDResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getGIDResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetGroupName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getGroupName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetGroupNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getGroupNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetHardLinks struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getHardLinks"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetHardLinksResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getHardLinksResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetModificationTime struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getModificationTime"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetModificationTimeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getModificationTimeResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetNodeId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getNodeId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetNodeIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getNodeIdResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetNodeIdDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getNodeIdDevice"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetNodeIdDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getNodeIdDeviceResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetObjectSize struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getObjectSize"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetObjectSizeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getObjectSizeResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getType"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getTypeResponse"`
+
+	Returnval *FsObjType `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetUID struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getUID"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetUIDResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getUIDResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetUserFlags struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getUserFlags"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetUserFlagsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getUserFlagsResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFsObjInfogetUserName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getUserName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFsObjInfogetUserNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFsObjInfo_getUserNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestFsObjInfogetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFsObjInfo_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestFsObjInfogetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFsObjInfo_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
 type IGuestgetOSTypeId struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getOSTypeId"`
 
@@ -5084,16 +9948,16 @@ type IGuestgetOSTypeIdResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IGuestgetAdditionsActive struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getAdditionsActive"`
+type IGuestgetAdditionsRunLevel struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getAdditionsRunLevel"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IGuestgetAdditionsActiveResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getAdditionsActiveResponse"`
+type IGuestgetAdditionsRunLevelResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getAdditionsRunLevelResponse"`
 
-	Returnval bool `xml:"returnval,omitempty"`
+	Returnval *AdditionsRunLevelType `xml:"returnval,omitempty"`
 }
 
 type IGuestgetAdditionsVersion struct {
@@ -5108,28 +9972,76 @@ type IGuestgetAdditionsVersionResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IGuestgetSupportsSeamless struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getSupportsSeamless"`
+type IGuestgetAdditionsRevision struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getAdditionsRevision"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IGuestgetSupportsSeamlessResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getSupportsSeamlessResponse"`
+type IGuestgetAdditionsRevisionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getAdditionsRevisionResponse"`
 
-	Returnval bool `xml:"returnval,omitempty"`
+	Returnval uint32 `xml:"returnval,omitempty"`
 }
 
-type IGuestgetSupportsGraphics struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getSupportsGraphics"`
+type IGuestgetDnDSource struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getDnDSource"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IGuestgetSupportsGraphicsResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getSupportsGraphicsResponse"`
+type IGuestgetDnDSourceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getDnDSourceResponse"`
 
-	Returnval bool `xml:"returnval,omitempty"`
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestgetDnDTarget struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getDnDTarget"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestgetDnDTargetResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getDnDTargetResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestgetEventSource struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getEventSource"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestgetEventSourceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getEventSourceResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestgetFacilities struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getFacilities"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestgetFacilitiesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getFacilitiesResponse"`
+
+	Returnval []*IAdditionsFacility `xml:"returnval,omitempty"`
+}
+
+type IGuestgetSessions struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getSessions"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestgetSessionsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getSessionsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
 }
 
 type IGuestgetMemoryBalloonSize struct {
@@ -5153,29 +10065,6 @@ type IGuestsetMemoryBalloonSize struct {
 
 type IGuestsetMemoryBalloonSizeResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_setMemoryBalloonSizeResponse"`
-}
-
-type IGuestgetPageFusionEnabled struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getPageFusionEnabled"`
-
-	This string `xml:"_this,omitempty"`
-}
-
-type IGuestgetPageFusionEnabledResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getPageFusionEnabledResponse"`
-
-	Returnval bool `xml:"returnval,omitempty"`
-}
-
-type IGuestsetPageFusionEnabled struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_setPageFusionEnabled"`
-
-	This              string `xml:"_this,omitempty"`
-	PageFusionEnabled bool   `xml:"pageFusionEnabled,omitempty"`
-}
-
-type IGuestsetPageFusionEnabledResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_setPageFusionEnabledResponse"`
 }
 
 type IGuestgetStatisticsUpdateInterval struct {
@@ -5225,6 +10114,33 @@ type IGuestinternalGetStatisticsResponse struct {
 	MemSharedTotal  uint32 `xml:"memSharedTotal,omitempty"`
 }
 
+type IGuestgetFacilityStatus struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getFacilityStatus"`
+
+	This     string                 `xml:"_this,omitempty"`
+	Facility *AdditionsFacilityType `xml:"facility,omitempty"`
+}
+
+type IGuestgetFacilityStatusResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getFacilityStatusResponse"`
+
+	Timestamp int64                    `xml:"timestamp,omitempty"`
+	Returnval *AdditionsFacilityStatus `xml:"returnval,omitempty"`
+}
+
+type IGuestgetAdditionsStatus struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getAdditionsStatus"`
+
+	This  string                 `xml:"_this,omitempty"`
+	Level *AdditionsRunLevelType `xml:"level,omitempty"`
+}
+
+type IGuestgetAdditionsStatusResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getAdditionsStatusResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
 type IGuestsetCredentials struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_setCredentials"`
 
@@ -5239,55 +10155,48 @@ type IGuestsetCredentialsResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_setCredentialsResponse"`
 }
 
-type IGuestexecuteProcess struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_executeProcess"`
+type IGuestcreateSession struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_createSession"`
 
-	This        string   `xml:"_this,omitempty"`
-	ExecName    string   `xml:"execName,omitempty"`
-	Flags       uint32   `xml:"flags,omitempty"`
-	Arguments   []string `xml:"arguments,omitempty"`
-	Environment []string `xml:"environment,omitempty"`
-	UserName    string   `xml:"userName,omitempty"`
-	Password    string   `xml:"password,omitempty"`
-	TimeoutMS   uint32   `xml:"timeoutMS,omitempty"`
+	This        string `xml:"_this,omitempty"`
+	User        string `xml:"user,omitempty"`
+	Password    string `xml:"password,omitempty"`
+	Domain      string `xml:"domain,omitempty"`
+	SessionName string `xml:"sessionName,omitempty"`
 }
 
-type IGuestexecuteProcessResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_executeProcessResponse"`
+type IGuestcreateSessionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_createSessionResponse"`
 
-	Pid       uint32 `xml:"pid,omitempty"`
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IGuestgetProcessOutput struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getProcessOutput"`
+type IGuestfindSession struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_findSession"`
 
-	This      string `xml:"_this,omitempty"`
-	Pid       uint32 `xml:"pid,omitempty"`
-	Flags     uint32 `xml:"flags,omitempty"`
-	TimeoutMS uint32 `xml:"timeoutMS,omitempty"`
-	Size      uint64 `xml:"size,omitempty"`
+	This        string `xml:"_this,omitempty"`
+	SessionName string `xml:"sessionName,omitempty"`
 }
 
-type IGuestgetProcessOutputResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getProcessOutputResponse"`
+type IGuestfindSessionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_findSessionResponse"`
 
-	Returnval []byte `xml:"returnval,omitempty"`
+	Returnval []string `xml:"returnval,omitempty"`
 }
 
-type IGuestgetProcessStatus struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getProcessStatus"`
+type IGuestupdateGuestAdditions struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_updateGuestAdditions"`
 
-	This string `xml:"_this,omitempty"`
-	Pid  uint32 `xml:"pid,omitempty"`
+	This      string                 `xml:"_this,omitempty"`
+	Source    string                 `xml:"source,omitempty"`
+	Arguments []string               `xml:"arguments,omitempty"`
+	Flags     []*AdditionsUpdateFlag `xml:"flags,omitempty"`
 }
 
-type IGuestgetProcessStatusResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_getProcessStatusResponse"`
+type IGuestupdateGuestAdditionsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuest_updateGuestAdditionsResponse"`
 
-	Exitcode  uint32 `xml:"exitcode,omitempty"`
-	Flags     uint32 `xml:"flags,omitempty"`
-	Returnval uint32 `xml:"returnval,omitempty"`
+	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IProgressgetId struct {
@@ -5458,6 +10367,18 @@ type IProgressgetOperationPercentResponse struct {
 	Returnval uint32 `xml:"returnval,omitempty"`
 }
 
+type IProgressgetOperationWeight struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProgress_getOperationWeight"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IProgressgetOperationWeightResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProgress_getOperationWeightResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
 type IProgressgetTimeout struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProgress_getTimeout"`
 
@@ -5525,6 +10446,17 @@ type IProgresswaitForOperationCompletion struct {
 
 type IProgresswaitForOperationCompletionResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProgress_waitForOperationCompletionResponse"`
+}
+
+type IProgresswaitForAsyncProgressCompletion struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProgress_waitForAsyncProgressCompletion"`
+
+	This           string `xml:"_this,omitempty"`
+	PProgressAsync string `xml:"pProgressAsync,omitempty"`
+}
+
+type IProgresswaitForAsyncProgressCompletionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IProgress_waitForAsyncProgressCompletionResponse"`
 }
 
 type IProgresscancel struct {
@@ -5655,6 +10587,18 @@ type ISnapshotgetChildrenResponse struct {
 	Returnval []string `xml:"returnval,omitempty"`
 }
 
+type ISnapshotgetChildrenCount struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISnapshot_getChildrenCount"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISnapshotgetChildrenCountResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISnapshot_getChildrenCountResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
 type IMediumgetId struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_getId"`
 
@@ -5702,6 +10646,18 @@ type IMediumgetStateResponse struct {
 	Returnval *MediumState `xml:"returnval,omitempty"`
 }
 
+type IMediumgetVariant struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_getVariant"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMediumgetVariantResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_getVariantResponse"`
+
+	Returnval []*MediumVariant `xml:"returnval,omitempty"`
+}
+
 type IMediumgetLocation struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_getLocation"`
 
@@ -5712,17 +10668,6 @@ type IMediumgetLocationResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_getLocationResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IMediumsetLocation struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_setLocation"`
-
-	This     string `xml:"_this,omitempty"`
-	Location string `xml:"location,omitempty"`
-}
-
-type IMediumsetLocationResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_setLocationResponse"`
 }
 
 type IMediumgetName struct {
@@ -5770,7 +10715,7 @@ type IMediumgetSize struct {
 type IMediumgetSizeResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_getSizeResponse"`
 
-	Returnval uint64 `xml:"returnval,omitempty"`
+	Returnval int64 `xml:"returnval,omitempty"`
 }
 
 type IMediumgetFormat struct {
@@ -5818,6 +10763,18 @@ type IMediumsetType struct {
 
 type IMediumsetTypeResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_setTypeResponse"`
+}
+
+type IMediumgetAllowedTypes struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_getAllowedTypes"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMediumgetAllowedTypesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_getAllowedTypesResponse"`
+
+	Returnval []*MediumType `xml:"returnval,omitempty"`
 }
 
 type IMediumgetParent struct {
@@ -5877,7 +10834,7 @@ type IMediumgetLogicalSize struct {
 type IMediumgetLogicalSizeResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_getLogicalSizeResponse"`
 
-	Returnval uint64 `xml:"returnval,omitempty"`
+	Returnval int64 `xml:"returnval,omitempty"`
 }
 
 type IMediumgetAutoReset struct {
@@ -5927,6 +10884,20 @@ type IMediumgetMachineIdsResponse struct {
 	Returnval []string `xml:"returnval,omitempty"`
 }
 
+type IMediumsetIds struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_setIds"`
+
+	This        string `xml:"_this,omitempty"`
+	SetImageId  bool   `xml:"setImageId,omitempty"`
+	ImageId     string `xml:"imageId,omitempty"`
+	SetParentId bool   `xml:"setParentId,omitempty"`
+	ParentId    string `xml:"parentId,omitempty"`
+}
+
+type IMediumsetIdsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_setIdsResponse"`
+}
+
 type IMediumrefreshState struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_refreshState"`
 
@@ -5961,19 +10932,7 @@ type IMediumlockRead struct {
 type IMediumlockReadResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_lockReadResponse"`
 
-	Returnval *MediumState `xml:"returnval,omitempty"`
-}
-
-type IMediumunlockRead struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_unlockRead"`
-
-	This string `xml:"_this,omitempty"`
-}
-
-type IMediumunlockReadResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_unlockReadResponse"`
-
-	Returnval *MediumState `xml:"returnval,omitempty"`
+	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IMediumlockWrite struct {
@@ -5985,19 +10944,7 @@ type IMediumlockWrite struct {
 type IMediumlockWriteResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_lockWriteResponse"`
 
-	Returnval *MediumState `xml:"returnval,omitempty"`
-}
-
-type IMediumunlockWrite struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_unlockWrite"`
-
-	This string `xml:"_this,omitempty"`
-}
-
-type IMediumunlockWriteResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_unlockWriteResponse"`
-
-	Returnval *MediumState `xml:"returnval,omitempty"`
+	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IMediumclose struct {
@@ -6064,9 +11011,9 @@ type IMediumsetPropertiesResponse struct {
 type IMediumcreateBaseStorage struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_createBaseStorage"`
 
-	This        string         `xml:"_this,omitempty"`
-	LogicalSize uint64         `xml:"logicalSize,omitempty"`
-	Variant     *MediumVariant `xml:"variant,omitempty"`
+	This        string           `xml:"_this,omitempty"`
+	LogicalSize int64            `xml:"logicalSize,omitempty"`
+	Variant     []*MediumVariant `xml:"variant,omitempty"`
 }
 
 type IMediumcreateBaseStorageResponse struct {
@@ -6090,9 +11037,9 @@ type IMediumdeleteStorageResponse struct {
 type IMediumcreateDiffStorage struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_createDiffStorage"`
 
-	This    string         `xml:"_this,omitempty"`
-	Target  string         `xml:"target,omitempty"`
-	Variant *MediumVariant `xml:"variant,omitempty"`
+	This    string           `xml:"_this,omitempty"`
+	Target  string           `xml:"target,omitempty"`
+	Variant []*MediumVariant `xml:"variant,omitempty"`
 }
 
 type IMediumcreateDiffStorageResponse struct {
@@ -6117,14 +11064,41 @@ type IMediummergeToResponse struct {
 type IMediumcloneTo struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_cloneTo"`
 
-	This    string         `xml:"_this,omitempty"`
-	Target  string         `xml:"target,omitempty"`
-	Variant *MediumVariant `xml:"variant,omitempty"`
-	Parent  string         `xml:"parent,omitempty"`
+	This    string           `xml:"_this,omitempty"`
+	Target  string           `xml:"target,omitempty"`
+	Variant []*MediumVariant `xml:"variant,omitempty"`
+	Parent  string           `xml:"parent,omitempty"`
 }
 
 type IMediumcloneToResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_cloneToResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMediumcloneToBase struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_cloneToBase"`
+
+	This    string           `xml:"_this,omitempty"`
+	Target  string           `xml:"target,omitempty"`
+	Variant []*MediumVariant `xml:"variant,omitempty"`
+}
+
+type IMediumcloneToBaseResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_cloneToBaseResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMediumsetLocation struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_setLocation"`
+
+	This     string `xml:"_this,omitempty"`
+	Location string `xml:"location,omitempty"`
+}
+
+type IMediumsetLocationResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_setLocationResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
@@ -6145,7 +11119,7 @@ type IMediumresize struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_resize"`
 
 	This        string `xml:"_this,omitempty"`
-	LogicalSize uint64 `xml:"logicalSize,omitempty"`
+	LogicalSize int64  `xml:"logicalSize,omitempty"`
 }
 
 type IMediumresizeResponse struct {
@@ -6164,6 +11138,46 @@ type IMediumresetResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_resetResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMediumchangeEncryption struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_changeEncryption"`
+
+	This            string `xml:"_this,omitempty"`
+	CurrentPassword string `xml:"currentPassword,omitempty"`
+	Cipher          string `xml:"cipher,omitempty"`
+	NewPassword     string `xml:"newPassword,omitempty"`
+	NewPasswordId   string `xml:"newPasswordId,omitempty"`
+}
+
+type IMediumchangeEncryptionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_changeEncryptionResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMediumgetEncryptionSettings struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_getEncryptionSettings"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMediumgetEncryptionSettingsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_getEncryptionSettingsResponse"`
+
+	Cipher    string `xml:"cipher,omitempty"`
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMediumcheckEncryptionPassword struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_checkEncryptionPassword"`
+
+	This     string `xml:"_this,omitempty"`
+	Password string `xml:"password,omitempty"`
+}
+
+type IMediumcheckEncryptionPasswordResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMedium_checkEncryptionPasswordResponse"`
 }
 
 type IMediumFormatgetId struct {
@@ -6190,18 +11204,6 @@ type IMediumFormatgetNameResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IMediumFormatgetFileExtensions struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumFormat_getFileExtensions"`
-
-	This string `xml:"_this,omitempty"`
-}
-
-type IMediumFormatgetFileExtensionsResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumFormat_getFileExtensionsResponse"`
-
-	Returnval []string `xml:"returnval,omitempty"`
-}
-
 type IMediumFormatgetCapabilities struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumFormat_getCapabilities"`
 
@@ -6211,7 +11213,20 @@ type IMediumFormatgetCapabilities struct {
 type IMediumFormatgetCapabilitiesResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumFormat_getCapabilitiesResponse"`
 
-	Returnval uint32 `xml:"returnval,omitempty"`
+	Returnval []*MediumFormatCapabilities `xml:"returnval,omitempty"`
+}
+
+type IMediumFormatdescribeFileExtensions struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumFormat_describeFileExtensions"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMediumFormatdescribeFileExtensionsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumFormat_describeFileExtensionsResponse"`
+
+	Extensions []string      `xml:"extensions,omitempty"`
+	Types      []*DeviceType `xml:"types,omitempty"`
 }
 
 type IMediumFormatdescribeProperties struct {
@@ -6223,11 +11238,55 @@ type IMediumFormatdescribeProperties struct {
 type IMediumFormatdescribePropertiesResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumFormat_describePropertiesResponse"`
 
-	Names       []string    `xml:"names,omitempty"`
-	Description []string    `xml:"description,omitempty"`
-	Types       []*DataType `xml:"types,omitempty"`
-	Flags       []uint32    `xml:"flags,omitempty"`
-	Defaults    []string    `xml:"defaults,omitempty"`
+	Names        []string    `xml:"names,omitempty"`
+	Descriptions []string    `xml:"descriptions,omitempty"`
+	Types        []*DataType `xml:"types,omitempty"`
+	Flags        []uint32    `xml:"flags,omitempty"`
+	Defaults     []string    `xml:"defaults,omitempty"`
+}
+
+type ITokenabandon struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IToken_abandon"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ITokenabandonResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IToken_abandonResponse"`
+}
+
+type ITokendummy struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IToken_dummy"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ITokendummyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IToken_dummyResponse"`
+}
+
+type IKeyboardgetKeyboardLEDs struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboard_getKeyboardLEDs"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IKeyboardgetKeyboardLEDsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboard_getKeyboardLEDsResponse"`
+
+	Returnval []*KeyboardLED `xml:"returnval,omitempty"`
+}
+
+type IKeyboardgetEventSource struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboard_getEventSource"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IKeyboardgetEventSourceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboard_getEventSourceResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IKeyboardputScancode struct {
@@ -6264,6 +11323,100 @@ type IKeyboardputCADResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboard_putCADResponse"`
 }
 
+type IKeyboardreleaseKeys struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboard_releaseKeys"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IKeyboardreleaseKeysResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboard_releaseKeysResponse"`
+}
+
+type IMousePointerShapegetVisible struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getVisible"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapegetVisibleResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getVisibleResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapegetAlpha struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getAlpha"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapegetAlphaResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getAlphaResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapegetHotX struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getHotX"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapegetHotXResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getHotXResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapegetHotY struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getHotY"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapegetHotYResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getHotYResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapegetWidth struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getWidth"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapegetWidthResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getWidthResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapegetHeight struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getHeight"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapegetHeightResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getHeightResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapegetShape struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getShape"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapegetShapeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShape_getShapeResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
 type IMousegetAbsoluteSupported struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_getAbsoluteSupported"`
 
@@ -6288,6 +11441,18 @@ type IMousegetRelativeSupportedResponse struct {
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
+type IMousegetMultiTouchSupported struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_getMultiTouchSupported"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousegetMultiTouchSupportedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_getMultiTouchSupportedResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
 type IMousegetNeedsHostCursor struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_getNeedsHostCursor"`
 
@@ -6298,6 +11463,30 @@ type IMousegetNeedsHostCursorResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_getNeedsHostCursorResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMousegetPointerShape struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_getPointerShape"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousegetPointerShapeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_getPointerShapeResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMousegetEventSource struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_getEventSource"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousegetEventSourceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_getEventSourceResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IMouseputMouseEvent struct {
@@ -6330,6 +11519,281 @@ type IMouseputMouseEventAbsoluteResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_putMouseEventAbsoluteResponse"`
 }
 
+type IMouseputEventMultiTouch struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_putEventMultiTouch"`
+
+	This     string  `xml:"_this,omitempty"`
+	Count    int32   `xml:"count,omitempty"`
+	Contacts []int64 `xml:"contacts,omitempty"`
+	ScanTime uint32  `xml:"scanTime,omitempty"`
+}
+
+type IMouseputEventMultiTouchResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_putEventMultiTouchResponse"`
+}
+
+type IMouseputEventMultiTouchString struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_putEventMultiTouchString"`
+
+	This     string `xml:"_this,omitempty"`
+	Count    int32  `xml:"count,omitempty"`
+	Contacts string `xml:"contacts,omitempty"`
+	ScanTime uint32 `xml:"scanTime,omitempty"`
+}
+
+type IMouseputEventMultiTouchStringResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouse_putEventMultiTouchStringResponse"`
+}
+
+type IFramebuffergetWidth struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getWidth"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFramebuffergetWidthResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getWidthResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFramebuffergetHeight struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getHeight"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFramebuffergetHeightResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getHeightResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFramebuffergetBitsPerPixel struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getBitsPerPixel"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFramebuffergetBitsPerPixelResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getBitsPerPixelResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFramebuffergetBytesPerLine struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getBytesPerLine"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFramebuffergetBytesPerLineResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getBytesPerLineResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFramebuffergetPixelFormat struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getPixelFormat"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFramebuffergetPixelFormatResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getPixelFormatResponse"`
+
+	Returnval *BitmapFormat `xml:"returnval,omitempty"`
+}
+
+type IFramebuffergetHeightReduction struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getHeightReduction"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFramebuffergetHeightReductionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getHeightReductionResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFramebuffergetOverlay struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getOverlay"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFramebuffergetOverlayResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getOverlayResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IFramebuffergetCapabilities struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getCapabilities"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFramebuffergetCapabilitiesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_getCapabilitiesResponse"`
+
+	Returnval []*FramebufferCapabilities `xml:"returnval,omitempty"`
+}
+
+type IFramebuffernotifyUpdate struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_notifyUpdate"`
+
+	This   string `xml:"_this,omitempty"`
+	X      uint32 `xml:"x,omitempty"`
+	Y      uint32 `xml:"y,omitempty"`
+	Width  uint32 `xml:"width,omitempty"`
+	Height uint32 `xml:"height,omitempty"`
+}
+
+type IFramebuffernotifyUpdateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_notifyUpdateResponse"`
+}
+
+type IFramebuffernotifyUpdateImage struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_notifyUpdateImage"`
+
+	This   string `xml:"_this,omitempty"`
+	X      uint32 `xml:"x,omitempty"`
+	Y      uint32 `xml:"y,omitempty"`
+	Width  uint32 `xml:"width,omitempty"`
+	Height uint32 `xml:"height,omitempty"`
+	Image  string `xml:"image,omitempty"`
+}
+
+type IFramebuffernotifyUpdateImageResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_notifyUpdateImageResponse"`
+}
+
+type IFramebuffernotifyChange struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_notifyChange"`
+
+	This     string `xml:"_this,omitempty"`
+	ScreenId uint32 `xml:"screenId,omitempty"`
+	XOrigin  uint32 `xml:"xOrigin,omitempty"`
+	YOrigin  uint32 `xml:"yOrigin,omitempty"`
+	Width    uint32 `xml:"width,omitempty"`
+	Height   uint32 `xml:"height,omitempty"`
+}
+
+type IFramebuffernotifyChangeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_notifyChangeResponse"`
+}
+
+type IFramebuffervideoModeSupported struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_videoModeSupported"`
+
+	This   string `xml:"_this,omitempty"`
+	Width  uint32 `xml:"width,omitempty"`
+	Height uint32 `xml:"height,omitempty"`
+	Bpp    uint32 `xml:"bpp,omitempty"`
+}
+
+type IFramebuffervideoModeSupportedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_videoModeSupportedResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IFramebuffernotify3DEvent struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_notify3DEvent"`
+
+	This  string `xml:"_this,omitempty"`
+	Type_ uint32 `xml:"type,omitempty"`
+	Data  string `xml:"data,omitempty"`
+}
+
+type IFramebuffernotify3DEventResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebuffer_notify3DEventResponse"`
+}
+
+type IFramebufferOverlaygetX struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_getX"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFramebufferOverlaygetXResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_getXResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFramebufferOverlaygetY struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_getY"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFramebufferOverlaygetYResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_getYResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFramebufferOverlaygetVisible struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_getVisible"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFramebufferOverlaygetVisibleResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_getVisibleResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IFramebufferOverlaysetVisible struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_setVisible"`
+
+	This    string `xml:"_this,omitempty"`
+	Visible bool   `xml:"visible,omitempty"`
+}
+
+type IFramebufferOverlaysetVisibleResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_setVisibleResponse"`
+}
+
+type IFramebufferOverlaygetAlpha struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_getAlpha"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IFramebufferOverlaygetAlphaResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_getAlphaResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IFramebufferOverlaysetAlpha struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_setAlpha"`
+
+	This  string `xml:"_this,omitempty"`
+	Alpha uint32 `xml:"alpha,omitempty"`
+}
+
+type IFramebufferOverlaysetAlphaResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_setAlphaResponse"`
+}
+
+type IFramebufferOverlaymove struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_move"`
+
+	This string `xml:"_this,omitempty"`
+	X    uint32 `xml:"x,omitempty"`
+	Y    uint32 `xml:"y,omitempty"`
+}
+
+type IFramebufferOverlaymoveResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IFramebufferOverlay_moveResponse"`
+}
+
 type IDisplaygetScreenResolution struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_getScreenResolution"`
 
@@ -6340,19 +11804,65 @@ type IDisplaygetScreenResolution struct {
 type IDisplaygetScreenResolutionResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_getScreenResolutionResponse"`
 
-	Width        uint32 `xml:"width,omitempty"`
-	Height       uint32 `xml:"height,omitempty"`
-	BitsPerPixel uint32 `xml:"bitsPerPixel,omitempty"`
+	Width              uint32              `xml:"width,omitempty"`
+	Height             uint32              `xml:"height,omitempty"`
+	BitsPerPixel       uint32              `xml:"bitsPerPixel,omitempty"`
+	XOrigin            int32               `xml:"xOrigin,omitempty"`
+	YOrigin            int32               `xml:"yOrigin,omitempty"`
+	GuestMonitorStatus *GuestMonitorStatus `xml:"guestMonitorStatus,omitempty"`
+}
+
+type IDisplayattachFramebuffer struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_attachFramebuffer"`
+
+	This        string `xml:"_this,omitempty"`
+	ScreenId    uint32 `xml:"screenId,omitempty"`
+	Framebuffer string `xml:"framebuffer,omitempty"`
+}
+
+type IDisplayattachFramebufferResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_attachFramebufferResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IDisplaydetachFramebuffer struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_detachFramebuffer"`
+
+	This     string `xml:"_this,omitempty"`
+	ScreenId uint32 `xml:"screenId,omitempty"`
+	Id       string `xml:"id,omitempty"`
+}
+
+type IDisplaydetachFramebufferResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_detachFramebufferResponse"`
+}
+
+type IDisplayqueryFramebuffer struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_queryFramebuffer"`
+
+	This     string `xml:"_this,omitempty"`
+	ScreenId uint32 `xml:"screenId,omitempty"`
+}
+
+type IDisplayqueryFramebufferResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_queryFramebufferResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IDisplaysetVideoModeHint struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_setVideoModeHint"`
 
 	This         string `xml:"_this,omitempty"`
+	Display      uint32 `xml:"display,omitempty"`
+	Enabled      bool   `xml:"enabled,omitempty"`
+	ChangeOrigin bool   `xml:"changeOrigin,omitempty"`
+	OriginX      int32  `xml:"originX,omitempty"`
+	OriginY      int32  `xml:"originY,omitempty"`
 	Width        uint32 `xml:"width,omitempty"`
 	Height       uint32 `xml:"height,omitempty"`
 	BitsPerPixel uint32 `xml:"bitsPerPixel,omitempty"`
-	Display      uint32 `xml:"display,omitempty"`
 }
 
 type IDisplaysetVideoModeHintResponse struct {
@@ -6373,16 +11883,17 @@ type IDisplaysetSeamlessModeResponse struct {
 type IDisplaytakeScreenShotToArray struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_takeScreenShotToArray"`
 
-	This     string `xml:"_this,omitempty"`
-	ScreenId uint32 `xml:"screenId,omitempty"`
-	Width    uint32 `xml:"width,omitempty"`
-	Height   uint32 `xml:"height,omitempty"`
+	This         string        `xml:"_this,omitempty"`
+	ScreenId     uint32        `xml:"screenId,omitempty"`
+	Width        uint32        `xml:"width,omitempty"`
+	Height       uint32        `xml:"height,omitempty"`
+	BitmapFormat *BitmapFormat `xml:"bitmapFormat,omitempty"`
 }
 
 type IDisplaytakeScreenShotToArrayResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_takeScreenShotToArrayResponse"`
 
-	Returnval []byte `xml:"returnval,omitempty"`
+	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IDisplayinvalidateAndUpdate struct {
@@ -6395,15 +11906,54 @@ type IDisplayinvalidateAndUpdateResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_invalidateAndUpdateResponse"`
 }
 
-type IDisplayresizeCompleted struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_resizeCompleted"`
+type IDisplayinvalidateAndUpdateScreen struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_invalidateAndUpdateScreen"`
 
 	This     string `xml:"_this,omitempty"`
 	ScreenId uint32 `xml:"screenId,omitempty"`
 }
 
-type IDisplayresizeCompletedResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_resizeCompletedResponse"`
+type IDisplayinvalidateAndUpdateScreenResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_invalidateAndUpdateScreenResponse"`
+}
+
+type IDisplayviewportChanged struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_viewportChanged"`
+
+	This     string `xml:"_this,omitempty"`
+	ScreenId uint32 `xml:"screenId,omitempty"`
+	X        uint32 `xml:"x,omitempty"`
+	Y        uint32 `xml:"y,omitempty"`
+	Width    uint32 `xml:"width,omitempty"`
+	Height   uint32 `xml:"height,omitempty"`
+}
+
+type IDisplayviewportChangedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_viewportChangedResponse"`
+}
+
+type IDisplaynotifyScaleFactorChange struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_notifyScaleFactorChange"`
+
+	This                      string `xml:"_this,omitempty"`
+	ScreenId                  uint32 `xml:"screenId,omitempty"`
+	U32ScaleFactorWMultiplied uint32 `xml:"u32ScaleFactorWMultiplied,omitempty"`
+	U32ScaleFactorHMultiplied uint32 `xml:"u32ScaleFactorHMultiplied,omitempty"`
+}
+
+type IDisplaynotifyScaleFactorChangeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_notifyScaleFactorChangeResponse"`
+}
+
+type IDisplaynotifyHiDPIOutputPolicyChange struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_notifyHiDPIOutputPolicyChange"`
+
+	This           string `xml:"_this,omitempty"`
+	FUnscaledHiDPI bool   `xml:"fUnscaledHiDPI,omitempty"`
+}
+
+type IDisplaynotifyHiDPIOutputPolicyChangeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDisplay_notifyHiDPIOutputPolicyChangeResponse"`
 }
 
 type INetworkAdaptergetAdapterType struct {
@@ -6499,27 +12049,61 @@ type INetworkAdaptergetAttachmentTypeResponse struct {
 	Returnval *NetworkAttachmentType `xml:"returnval,omitempty"`
 }
 
-type INetworkAdaptergetHostInterface struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getHostInterface"`
+type INetworkAdaptersetAttachmentType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setAttachmentType"`
+
+	This           string                 `xml:"_this,omitempty"`
+	AttachmentType *NetworkAttachmentType `xml:"attachmentType,omitempty"`
+}
+
+type INetworkAdaptersetAttachmentTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setAttachmentTypeResponse"`
+}
+
+type INetworkAdaptergetBridgedInterface struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getBridgedInterface"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type INetworkAdaptergetHostInterfaceResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getHostInterfaceResponse"`
+type INetworkAdaptergetBridgedInterfaceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getBridgedInterfaceResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type INetworkAdaptersetHostInterface struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setHostInterface"`
+type INetworkAdaptersetBridgedInterface struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setBridgedInterface"`
 
-	This          string `xml:"_this,omitempty"`
-	HostInterface string `xml:"hostInterface,omitempty"`
+	This             string `xml:"_this,omitempty"`
+	BridgedInterface string `xml:"bridgedInterface,omitempty"`
 }
 
-type INetworkAdaptersetHostInterfaceResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setHostInterfaceResponse"`
+type INetworkAdaptersetBridgedInterfaceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setBridgedInterfaceResponse"`
+}
+
+type INetworkAdaptergetHostOnlyInterface struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getHostOnlyInterface"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INetworkAdaptergetHostOnlyInterfaceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getHostOnlyInterfaceResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INetworkAdaptersetHostOnlyInterface struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setHostOnlyInterface"`
+
+	This              string `xml:"_this,omitempty"`
+	HostOnlyInterface string `xml:"hostOnlyInterface,omitempty"`
+}
+
+type INetworkAdaptersetHostOnlyInterfaceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setHostOnlyInterfaceResponse"`
 }
 
 type INetworkAdaptergetInternalNetwork struct {
@@ -6568,27 +12152,27 @@ type INetworkAdaptersetNATNetworkResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setNATNetworkResponse"`
 }
 
-type INetworkAdaptergetVDENetwork struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getVDENetwork"`
+type INetworkAdaptergetGenericDriver struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getGenericDriver"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type INetworkAdaptergetVDENetworkResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getVDENetworkResponse"`
+type INetworkAdaptergetGenericDriverResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getGenericDriverResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type INetworkAdaptersetVDENetwork struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setVDENetwork"`
+type INetworkAdaptersetGenericDriver struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setGenericDriver"`
 
-	This       string `xml:"_this,omitempty"`
-	VDENetwork string `xml:"VDENetwork,omitempty"`
+	This          string `xml:"_this,omitempty"`
+	GenericDriver string `xml:"genericDriver,omitempty"`
 }
 
-type INetworkAdaptersetVDENetworkResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setVDENetworkResponse"`
+type INetworkAdaptersetGenericDriverResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setGenericDriverResponse"`
 }
 
 type INetworkAdaptergetCableConnected struct {
@@ -6637,6 +12221,29 @@ type INetworkAdaptersetLineSpeedResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setLineSpeedResponse"`
 }
 
+type INetworkAdaptergetPromiscModePolicy struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getPromiscModePolicy"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INetworkAdaptergetPromiscModePolicyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getPromiscModePolicyResponse"`
+
+	Returnval *NetworkAdapterPromiscModePolicy `xml:"returnval,omitempty"`
+}
+
+type INetworkAdaptersetPromiscModePolicy struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setPromiscModePolicy"`
+
+	This              string                           `xml:"_this,omitempty"`
+	PromiscModePolicy *NetworkAdapterPromiscModePolicy `xml:"promiscModePolicy,omitempty"`
+}
+
+type INetworkAdaptersetPromiscModePolicyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setPromiscModePolicyResponse"`
+}
+
 type INetworkAdaptergetTraceEnabled struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getTraceEnabled"`
 
@@ -6683,14 +12290,14 @@ type INetworkAdaptersetTraceFileResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setTraceFileResponse"`
 }
 
-type INetworkAdaptergetNatDriver struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getNatDriver"`
+type INetworkAdaptergetNATEngine struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getNATEngine"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type INetworkAdaptergetNatDriverResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getNatDriverResponse"`
+type INetworkAdaptergetNATEngineResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getNATEngineResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
@@ -6718,64 +12325,66 @@ type INetworkAdaptersetBootPriorityResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setBootPriorityResponse"`
 }
 
-type INetworkAdapterattachToNAT struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_attachToNAT"`
+type INetworkAdaptergetBandwidthGroup struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getBandwidthGroup"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type INetworkAdapterattachToNATResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_attachToNATResponse"`
+type INetworkAdaptergetBandwidthGroupResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getBandwidthGroupResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
 }
 
-type INetworkAdapterattachToBridgedInterface struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_attachToBridgedInterface"`
+type INetworkAdaptersetBandwidthGroup struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setBandwidthGroup"`
+
+	This           string `xml:"_this,omitempty"`
+	BandwidthGroup string `xml:"bandwidthGroup,omitempty"`
+}
+
+type INetworkAdaptersetBandwidthGroupResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setBandwidthGroupResponse"`
+}
+
+type INetworkAdaptergetProperty struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getProperty"`
 
 	This string `xml:"_this,omitempty"`
+	Key  string `xml:"key,omitempty"`
 }
 
-type INetworkAdapterattachToBridgedInterfaceResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_attachToBridgedInterfaceResponse"`
+type INetworkAdaptergetPropertyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getPropertyResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
 }
 
-type INetworkAdapterattachToInternalNetwork struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_attachToInternalNetwork"`
+type INetworkAdaptersetProperty struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setProperty"`
 
-	This string `xml:"_this,omitempty"`
+	This  string `xml:"_this,omitempty"`
+	Key   string `xml:"key,omitempty"`
+	Value string `xml:"value,omitempty"`
 }
 
-type INetworkAdapterattachToInternalNetworkResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_attachToInternalNetworkResponse"`
+type INetworkAdaptersetPropertyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_setPropertyResponse"`
 }
 
-type INetworkAdapterattachToHostOnlyInterface struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_attachToHostOnlyInterface"`
+type INetworkAdaptergetProperties struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getProperties"`
 
-	This string `xml:"_this,omitempty"`
+	This  string `xml:"_this,omitempty"`
+	Names string `xml:"names,omitempty"`
 }
 
-type INetworkAdapterattachToHostOnlyInterfaceResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_attachToHostOnlyInterfaceResponse"`
-}
+type INetworkAdaptergetPropertiesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_getPropertiesResponse"`
 
-type INetworkAdapterattachToVDE struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_attachToVDE"`
-
-	This string `xml:"_this,omitempty"`
-}
-
-type INetworkAdapterattachToVDEResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_attachToVDEResponse"`
-}
-
-type INetworkAdapterdetach struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_detach"`
-
-	This string `xml:"_this,omitempty"`
-}
-
-type INetworkAdapterdetachResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapter_detachResponse"`
+	ReturnNames []string `xml:"returnNames,omitempty"`
+	Returnval   []string `xml:"returnval,omitempty"`
 }
 
 type ISerialPortgetSlot struct {
@@ -7032,62 +12641,729 @@ type IParallelPortsetPathResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IParallelPort_setPathResponse"`
 }
 
-type IUSBControllergetEnabled struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getEnabled"`
+type IMachineDebuggergetSingleStep struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getSingleStep"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IUSBControllergetEnabledResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getEnabledResponse"`
+type IMachineDebuggergetSingleStepResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getSingleStepResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
-type IUSBControllersetEnabled struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_setEnabled"`
+type IMachineDebuggersetSingleStep struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setSingleStep"`
 
-	This    string `xml:"_this,omitempty"`
-	Enabled bool   `xml:"enabled,omitempty"`
+	This       string `xml:"_this,omitempty"`
+	SingleStep bool   `xml:"singleStep,omitempty"`
 }
 
-type IUSBControllersetEnabledResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_setEnabledResponse"`
+type IMachineDebuggersetSingleStepResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setSingleStepResponse"`
 }
 
-type IUSBControllergetEnabledEhci struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getEnabledEhci"`
+type IMachineDebuggergetRecompileUser struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getRecompileUser"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IUSBControllergetEnabledEhciResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getEnabledEhciResponse"`
+type IMachineDebuggergetRecompileUserResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getRecompileUserResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
-type IUSBControllersetEnabledEhci struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_setEnabledEhci"`
+type IMachineDebuggersetRecompileUser struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setRecompileUser"`
+
+	This          string `xml:"_this,omitempty"`
+	RecompileUser bool   `xml:"recompileUser,omitempty"`
+}
+
+type IMachineDebuggersetRecompileUserResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setRecompileUserResponse"`
+}
+
+type IMachineDebuggergetRecompileSupervisor struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getRecompileSupervisor"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetRecompileSupervisorResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getRecompileSupervisorResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggersetRecompileSupervisor struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setRecompileSupervisor"`
+
+	This                string `xml:"_this,omitempty"`
+	RecompileSupervisor bool   `xml:"recompileSupervisor,omitempty"`
+}
+
+type IMachineDebuggersetRecompileSupervisorResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setRecompileSupervisorResponse"`
+}
+
+type IMachineDebuggergetExecuteAllInIEM struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getExecuteAllInIEM"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetExecuteAllInIEMResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getExecuteAllInIEMResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggersetExecuteAllInIEM struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setExecuteAllInIEM"`
+
+	This            string `xml:"_this,omitempty"`
+	ExecuteAllInIEM bool   `xml:"executeAllInIEM,omitempty"`
+}
+
+type IMachineDebuggersetExecuteAllInIEMResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setExecuteAllInIEMResponse"`
+}
+
+type IMachineDebuggergetPATMEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getPATMEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetPATMEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getPATMEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggersetPATMEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setPATMEnabled"`
 
 	This        string `xml:"_this,omitempty"`
-	EnabledEhci bool   `xml:"enabledEhci,omitempty"`
+	PATMEnabled bool   `xml:"PATMEnabled,omitempty"`
 }
 
-type IUSBControllersetEnabledEhciResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_setEnabledEhciResponse"`
+type IMachineDebuggersetPATMEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setPATMEnabledResponse"`
 }
 
-type IUSBControllergetProxyAvailable struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getProxyAvailable"`
+type IMachineDebuggergetCSAMEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getCSAMEnabled"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IUSBControllergetProxyAvailableResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getProxyAvailableResponse"`
+type IMachineDebuggergetCSAMEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getCSAMEnabledResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggersetCSAMEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setCSAMEnabled"`
+
+	This        string `xml:"_this,omitempty"`
+	CSAMEnabled bool   `xml:"CSAMEnabled,omitempty"`
+}
+
+type IMachineDebuggersetCSAMEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setCSAMEnabledResponse"`
+}
+
+type IMachineDebuggergetLogEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetLogEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggersetLogEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setLogEnabled"`
+
+	This       string `xml:"_this,omitempty"`
+	LogEnabled bool   `xml:"logEnabled,omitempty"`
+}
+
+type IMachineDebuggersetLogEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setLogEnabledResponse"`
+}
+
+type IMachineDebuggergetLogDbgFlags struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogDbgFlags"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetLogDbgFlagsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogDbgFlagsResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetLogDbgGroups struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogDbgGroups"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetLogDbgGroupsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogDbgGroupsResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetLogDbgDestinations struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogDbgDestinations"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetLogDbgDestinationsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogDbgDestinationsResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetLogRelFlags struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogRelFlags"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetLogRelFlagsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogRelFlagsResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetLogRelGroups struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogRelGroups"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetLogRelGroupsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogRelGroupsResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetLogRelDestinations struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogRelDestinations"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetLogRelDestinationsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getLogRelDestinationsResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetHWVirtExEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getHWVirtExEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetHWVirtExEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getHWVirtExEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetHWVirtExNestedPagingEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getHWVirtExNestedPagingEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetHWVirtExNestedPagingEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getHWVirtExNestedPagingEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetHWVirtExVPIDEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getHWVirtExVPIDEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetHWVirtExVPIDEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getHWVirtExVPIDEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetHWVirtExUXEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getHWVirtExUXEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetHWVirtExUXEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getHWVirtExUXEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetOSName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getOSName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetOSNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getOSNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetOSVersion struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getOSVersion"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetOSVersionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getOSVersionResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetPAEEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getPAEEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetPAEEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getPAEEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetVirtualTimeRate struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getVirtualTimeRate"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggergetVirtualTimeRateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getVirtualTimeRateResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggersetVirtualTimeRate struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setVirtualTimeRate"`
+
+	This            string `xml:"_this,omitempty"`
+	VirtualTimeRate uint32 `xml:"virtualTimeRate,omitempty"`
+}
+
+type IMachineDebuggersetVirtualTimeRateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setVirtualTimeRateResponse"`
+}
+
+type IMachineDebuggerdumpGuestCore struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_dumpGuestCore"`
+
+	This        string `xml:"_this,omitempty"`
+	Filename    string `xml:"filename,omitempty"`
+	Compression string `xml:"compression,omitempty"`
+}
+
+type IMachineDebuggerdumpGuestCoreResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_dumpGuestCoreResponse"`
+}
+
+type IMachineDebuggerdumpHostProcessCore struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_dumpHostProcessCore"`
+
+	This        string `xml:"_this,omitempty"`
+	Filename    string `xml:"filename,omitempty"`
+	Compression string `xml:"compression,omitempty"`
+}
+
+type IMachineDebuggerdumpHostProcessCoreResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_dumpHostProcessCoreResponse"`
+}
+
+type IMachineDebuggerinfo struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_info"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+	Args string `xml:"args,omitempty"`
+}
+
+type IMachineDebuggerinfoResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_infoResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggerinjectNMI struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_injectNMI"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggerinjectNMIResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_injectNMIResponse"`
+}
+
+type IMachineDebuggermodifyLogGroups struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_modifyLogGroups"`
+
+	This     string `xml:"_this,omitempty"`
+	Settings string `xml:"settings,omitempty"`
+}
+
+type IMachineDebuggermodifyLogGroupsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_modifyLogGroupsResponse"`
+}
+
+type IMachineDebuggermodifyLogFlags struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_modifyLogFlags"`
+
+	This     string `xml:"_this,omitempty"`
+	Settings string `xml:"settings,omitempty"`
+}
+
+type IMachineDebuggermodifyLogFlagsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_modifyLogFlagsResponse"`
+}
+
+type IMachineDebuggermodifyLogDestinations struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_modifyLogDestinations"`
+
+	This     string `xml:"_this,omitempty"`
+	Settings string `xml:"settings,omitempty"`
+}
+
+type IMachineDebuggermodifyLogDestinationsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_modifyLogDestinationsResponse"`
+}
+
+type IMachineDebuggerreadPhysicalMemory struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_readPhysicalMemory"`
+
+	This    string `xml:"_this,omitempty"`
+	Address int64  `xml:"address,omitempty"`
+	Size    uint32 `xml:"size,omitempty"`
+}
+
+type IMachineDebuggerreadPhysicalMemoryResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_readPhysicalMemoryResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggerwritePhysicalMemory struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_writePhysicalMemory"`
+
+	This    string `xml:"_this,omitempty"`
+	Address int64  `xml:"address,omitempty"`
+	Size    uint32 `xml:"size,omitempty"`
+	Bytes   string `xml:"bytes,omitempty"`
+}
+
+type IMachineDebuggerwritePhysicalMemoryResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_writePhysicalMemoryResponse"`
+}
+
+type IMachineDebuggerreadVirtualMemory struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_readVirtualMemory"`
+
+	This    string `xml:"_this,omitempty"`
+	CpuId   uint32 `xml:"cpuId,omitempty"`
+	Address int64  `xml:"address,omitempty"`
+	Size    uint32 `xml:"size,omitempty"`
+}
+
+type IMachineDebuggerreadVirtualMemoryResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_readVirtualMemoryResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggerwriteVirtualMemory struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_writeVirtualMemory"`
+
+	This    string `xml:"_this,omitempty"`
+	CpuId   uint32 `xml:"cpuId,omitempty"`
+	Address int64  `xml:"address,omitempty"`
+	Size    uint32 `xml:"size,omitempty"`
+	Bytes   string `xml:"bytes,omitempty"`
+}
+
+type IMachineDebuggerwriteVirtualMemoryResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_writeVirtualMemoryResponse"`
+}
+
+type IMachineDebuggerloadPlugIn struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_loadPlugIn"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IMachineDebuggerloadPlugInResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_loadPlugInResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggerunloadPlugIn struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_unloadPlugIn"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IMachineDebuggerunloadPlugInResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_unloadPlugInResponse"`
+}
+
+type IMachineDebuggerdetectOS struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_detectOS"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDebuggerdetectOSResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_detectOSResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggerqueryOSKernelLog struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_queryOSKernelLog"`
+
+	This        string `xml:"_this,omitempty"`
+	MaxMessages uint32 `xml:"maxMessages,omitempty"`
+}
+
+type IMachineDebuggerqueryOSKernelLogResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_queryOSKernelLogResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetRegister struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getRegister"`
+
+	This  string `xml:"_this,omitempty"`
+	CpuId uint32 `xml:"cpuId,omitempty"`
+	Name  string `xml:"name,omitempty"`
+}
+
+type IMachineDebuggergetRegisterResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getRegisterResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggergetRegisters struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getRegisters"`
+
+	This  string `xml:"_this,omitempty"`
+	CpuId uint32 `xml:"cpuId,omitempty"`
+}
+
+type IMachineDebuggergetRegistersResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getRegistersResponse"`
+
+	Names  []string `xml:"names,omitempty"`
+	Values []string `xml:"values,omitempty"`
+}
+
+type IMachineDebuggersetRegister struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setRegister"`
+
+	This  string `xml:"_this,omitempty"`
+	CpuId uint32 `xml:"cpuId,omitempty"`
+	Name  string `xml:"name,omitempty"`
+	Value string `xml:"value,omitempty"`
+}
+
+type IMachineDebuggersetRegisterResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setRegisterResponse"`
+}
+
+type IMachineDebuggersetRegisters struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setRegisters"`
+
+	This   string   `xml:"_this,omitempty"`
+	CpuId  uint32   `xml:"cpuId,omitempty"`
+	Names  []string `xml:"names,omitempty"`
+	Values []string `xml:"values,omitempty"`
+}
+
+type IMachineDebuggersetRegistersResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_setRegistersResponse"`
+}
+
+type IMachineDebuggerdumpGuestStack struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_dumpGuestStack"`
+
+	This  string `xml:"_this,omitempty"`
+	CpuId uint32 `xml:"cpuId,omitempty"`
+}
+
+type IMachineDebuggerdumpGuestStackResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_dumpGuestStackResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineDebuggerresetStats struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_resetStats"`
+
+	This    string `xml:"_this,omitempty"`
+	Pattern string `xml:"pattern,omitempty"`
+}
+
+type IMachineDebuggerresetStatsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_resetStatsResponse"`
+}
+
+type IMachineDebuggerdumpStats struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_dumpStats"`
+
+	This    string `xml:"_this,omitempty"`
+	Pattern string `xml:"pattern,omitempty"`
+}
+
+type IMachineDebuggerdumpStatsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_dumpStatsResponse"`
+}
+
+type IMachineDebuggergetStats struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getStats"`
+
+	This             string `xml:"_this,omitempty"`
+	Pattern          string `xml:"pattern,omitempty"`
+	WithDescriptions bool   `xml:"withDescriptions,omitempty"`
+}
+
+type IMachineDebuggergetStatsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDebugger_getStatsResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IUSBDeviceFiltersgetDeviceFilters struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceFilters_getDeviceFilters"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IUSBDeviceFiltersgetDeviceFiltersResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceFilters_getDeviceFiltersResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IUSBDeviceFilterscreateDeviceFilter struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceFilters_createDeviceFilter"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IUSBDeviceFilterscreateDeviceFilterResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceFilters_createDeviceFilterResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IUSBDeviceFiltersinsertDeviceFilter struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceFilters_insertDeviceFilter"`
+
+	This     string `xml:"_this,omitempty"`
+	Position uint32 `xml:"position,omitempty"`
+	Filter   string `xml:"filter,omitempty"`
+}
+
+type IUSBDeviceFiltersinsertDeviceFilterResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceFilters_insertDeviceFilterResponse"`
+}
+
+type IUSBDeviceFiltersremoveDeviceFilter struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceFilters_removeDeviceFilter"`
+
+	This     string `xml:"_this,omitempty"`
+	Position uint32 `xml:"position,omitempty"`
+}
+
+type IUSBDeviceFiltersremoveDeviceFilterResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceFilters_removeDeviceFilterResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IUSBControllergetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IUSBControllergetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IUSBControllersetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_setName"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IUSBControllersetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_setNameResponse"`
+}
+
+type IUSBControllergetType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getType"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IUSBControllergetTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getTypeResponse"`
+
+	Returnval *USBControllerType `xml:"returnval,omitempty"`
+}
+
+type IUSBControllersetType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_setType"`
+
+	This  string             `xml:"_this,omitempty"`
+	Type_ *USBControllerType `xml:"type,omitempty"`
+}
+
+type IUSBControllersetTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_setTypeResponse"`
 }
 
 type IUSBControllergetUSBStandard struct {
@@ -7100,56 +13376,6 @@ type IUSBControllergetUSBStandardResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getUSBStandardResponse"`
 
 	Returnval uint16 `xml:"returnval,omitempty"`
-}
-
-type IUSBControllergetDeviceFilters struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getDeviceFilters"`
-
-	This string `xml:"_this,omitempty"`
-}
-
-type IUSBControllergetDeviceFiltersResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_getDeviceFiltersResponse"`
-
-	Returnval []string `xml:"returnval,omitempty"`
-}
-
-type IUSBControllercreateDeviceFilter struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_createDeviceFilter"`
-
-	This string `xml:"_this,omitempty"`
-	Name string `xml:"name,omitempty"`
-}
-
-type IUSBControllercreateDeviceFilterResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_createDeviceFilterResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IUSBControllerinsertDeviceFilter struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_insertDeviceFilter"`
-
-	This     string `xml:"_this,omitempty"`
-	Position uint32 `xml:"position,omitempty"`
-	Filter   string `xml:"filter,omitempty"`
-}
-
-type IUSBControllerinsertDeviceFilterResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_insertDeviceFilterResponse"`
-}
-
-type IUSBControllerremoveDeviceFilter struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_removeDeviceFilter"`
-
-	This     string `xml:"_this,omitempty"`
-	Position uint32 `xml:"position,omitempty"`
-}
-
-type IUSBControllerremoveDeviceFilterResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBController_removeDeviceFilterResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
 }
 
 type IUSBDevicegetId struct {
@@ -7282,6 +13508,18 @@ type IUSBDevicegetPortVersionResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDevice_getPortVersionResponse"`
 
 	Returnval uint16 `xml:"returnval,omitempty"`
+}
+
+type IUSBDevicegetSpeed struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDevice_getSpeed"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IUSBDevicegetSpeedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDevice_getSpeedResponse"`
+
+	Returnval *USBConnectionSpeed `xml:"returnval,omitempty"`
 }
 
 type IUSBDevicegetRemote struct {
@@ -7607,6 +13845,52 @@ type IAudioAdaptersetEnabledResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_setEnabledResponse"`
 }
 
+type IAudioAdaptergetEnabledIn struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_getEnabledIn"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IAudioAdaptergetEnabledInResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_getEnabledInResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IAudioAdaptersetEnabledIn struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_setEnabledIn"`
+
+	This      string `xml:"_this,omitempty"`
+	EnabledIn bool   `xml:"enabledIn,omitempty"`
+}
+
+type IAudioAdaptersetEnabledInResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_setEnabledInResponse"`
+}
+
+type IAudioAdaptergetEnabledOut struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_getEnabledOut"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IAudioAdaptergetEnabledOutResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_getEnabledOutResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IAudioAdaptersetEnabledOut struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_setEnabledOut"`
+
+	This       string `xml:"_this,omitempty"`
+	EnabledOut bool   `xml:"enabledOut,omitempty"`
+}
+
+type IAudioAdaptersetEnabledOutResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_setEnabledOutResponse"`
+}
+
 type IAudioAdaptergetAudioController struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_getAudioController"`
 
@@ -7628,6 +13912,29 @@ type IAudioAdaptersetAudioController struct {
 
 type IAudioAdaptersetAudioControllerResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_setAudioControllerResponse"`
+}
+
+type IAudioAdaptergetAudioCodec struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_getAudioCodec"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IAudioAdaptergetAudioCodecResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_getAudioCodecResponse"`
+
+	Returnval *AudioCodecType `xml:"returnval,omitempty"`
+}
+
+type IAudioAdaptersetAudioCodec struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_setAudioCodec"`
+
+	This       string          `xml:"_this,omitempty"`
+	AudioCodec *AudioCodecType `xml:"audioCodec,omitempty"`
+}
+
+type IAudioAdaptersetAudioCodecResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_setAudioCodecResponse"`
 }
 
 type IAudioAdaptergetAudioDriver struct {
@@ -7653,211 +13960,239 @@ type IAudioAdaptersetAudioDriverResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_setAudioDriverResponse"`
 }
 
-type IVRDPServergetEnabled struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getEnabled"`
+type IAudioAdaptergetPropertiesList struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_getPropertiesList"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IVRDPServergetEnabledResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getEnabledResponse"`
+type IAudioAdaptergetPropertiesListResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_getPropertiesListResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IAudioAdaptersetProperty struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_setProperty"`
+
+	This  string `xml:"_this,omitempty"`
+	Key   string `xml:"key,omitempty"`
+	Value string `xml:"value,omitempty"`
+}
+
+type IAudioAdaptersetPropertyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_setPropertyResponse"`
+}
+
+type IAudioAdaptergetProperty struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_getProperty"`
+
+	This string `xml:"_this,omitempty"`
+	Key  string `xml:"key,omitempty"`
+}
+
+type IAudioAdaptergetPropertyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAudioAdapter_getPropertyResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IVRDEServergetEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVRDEServergetEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getEnabledResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
-type IVRDPServersetEnabled struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setEnabled"`
+type IVRDEServersetEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setEnabled"`
 
 	This    string `xml:"_this,omitempty"`
 	Enabled bool   `xml:"enabled,omitempty"`
 }
 
-type IVRDPServersetEnabledResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setEnabledResponse"`
+type IVRDEServersetEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setEnabledResponse"`
 }
 
-type IVRDPServergetPorts struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getPorts"`
+type IVRDEServergetAuthType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getAuthType"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IVRDPServergetPortsResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getPortsResponse"`
+type IVRDEServergetAuthTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getAuthTypeResponse"`
 
-	Returnval string `xml:"returnval,omitempty"`
+	Returnval *AuthType `xml:"returnval,omitempty"`
 }
 
-type IVRDPServersetPorts struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setPorts"`
+type IVRDEServersetAuthType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setAuthType"`
 
-	This  string `xml:"_this,omitempty"`
-	Ports string `xml:"ports,omitempty"`
+	This     string    `xml:"_this,omitempty"`
+	AuthType *AuthType `xml:"authType,omitempty"`
 }
 
-type IVRDPServersetPortsResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setPortsResponse"`
+type IVRDEServersetAuthTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setAuthTypeResponse"`
 }
 
-type IVRDPServergetNetAddress struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getNetAddress"`
+type IVRDEServergetAuthTimeout struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getAuthTimeout"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IVRDPServergetNetAddressResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getNetAddressResponse"`
-
-	Returnval string `xml:"returnval,omitempty"`
-}
-
-type IVRDPServersetNetAddress struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setNetAddress"`
-
-	This       string `xml:"_this,omitempty"`
-	NetAddress string `xml:"netAddress,omitempty"`
-}
-
-type IVRDPServersetNetAddressResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setNetAddressResponse"`
-}
-
-type IVRDPServergetAuthType struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getAuthType"`
-
-	This string `xml:"_this,omitempty"`
-}
-
-type IVRDPServergetAuthTypeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getAuthTypeResponse"`
-
-	Returnval *VRDPAuthType `xml:"returnval,omitempty"`
-}
-
-type IVRDPServersetAuthType struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setAuthType"`
-
-	This     string        `xml:"_this,omitempty"`
-	AuthType *VRDPAuthType `xml:"authType,omitempty"`
-}
-
-type IVRDPServersetAuthTypeResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setAuthTypeResponse"`
-}
-
-type IVRDPServergetAuthTimeout struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getAuthTimeout"`
-
-	This string `xml:"_this,omitempty"`
-}
-
-type IVRDPServergetAuthTimeoutResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getAuthTimeoutResponse"`
+type IVRDEServergetAuthTimeoutResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getAuthTimeoutResponse"`
 
 	Returnval uint32 `xml:"returnval,omitempty"`
 }
 
-type IVRDPServersetAuthTimeout struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setAuthTimeout"`
+type IVRDEServersetAuthTimeout struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setAuthTimeout"`
 
 	This        string `xml:"_this,omitempty"`
 	AuthTimeout uint32 `xml:"authTimeout,omitempty"`
 }
 
-type IVRDPServersetAuthTimeoutResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setAuthTimeoutResponse"`
+type IVRDEServersetAuthTimeoutResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setAuthTimeoutResponse"`
 }
 
-type IVRDPServergetAllowMultiConnection struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getAllowMultiConnection"`
+type IVRDEServergetAllowMultiConnection struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getAllowMultiConnection"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IVRDPServergetAllowMultiConnectionResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getAllowMultiConnectionResponse"`
+type IVRDEServergetAllowMultiConnectionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getAllowMultiConnectionResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
-type IVRDPServersetAllowMultiConnection struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setAllowMultiConnection"`
+type IVRDEServersetAllowMultiConnection struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setAllowMultiConnection"`
 
 	This                 string `xml:"_this,omitempty"`
 	AllowMultiConnection bool   `xml:"allowMultiConnection,omitempty"`
 }
 
-type IVRDPServersetAllowMultiConnectionResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setAllowMultiConnectionResponse"`
+type IVRDEServersetAllowMultiConnectionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setAllowMultiConnectionResponse"`
 }
 
-type IVRDPServergetReuseSingleConnection struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getReuseSingleConnection"`
+type IVRDEServergetReuseSingleConnection struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getReuseSingleConnection"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IVRDPServergetReuseSingleConnectionResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getReuseSingleConnectionResponse"`
+type IVRDEServergetReuseSingleConnectionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getReuseSingleConnectionResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
-type IVRDPServersetReuseSingleConnection struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setReuseSingleConnection"`
+type IVRDEServersetReuseSingleConnection struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setReuseSingleConnection"`
 
 	This                  string `xml:"_this,omitempty"`
 	ReuseSingleConnection bool   `xml:"reuseSingleConnection,omitempty"`
 }
 
-type IVRDPServersetReuseSingleConnectionResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setReuseSingleConnectionResponse"`
+type IVRDEServersetReuseSingleConnectionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setReuseSingleConnectionResponse"`
 }
 
-type IVRDPServergetVideoChannel struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getVideoChannel"`
+type IVRDEServergetVRDEExtPack struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getVRDEExtPack"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IVRDPServergetVideoChannelResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getVideoChannelResponse"`
+type IVRDEServergetVRDEExtPackResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getVRDEExtPackResponse"`
 
-	Returnval bool `xml:"returnval,omitempty"`
+	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IVRDPServersetVideoChannel struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setVideoChannel"`
+type IVRDEServersetVRDEExtPack struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setVRDEExtPack"`
 
-	This         string `xml:"_this,omitempty"`
-	VideoChannel bool   `xml:"videoChannel,omitempty"`
+	This        string `xml:"_this,omitempty"`
+	VRDEExtPack string `xml:"VRDEExtPack,omitempty"`
 }
 
-type IVRDPServersetVideoChannelResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setVideoChannelResponse"`
+type IVRDEServersetVRDEExtPackResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setVRDEExtPackResponse"`
 }
 
-type IVRDPServergetVideoChannelQuality struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getVideoChannelQuality"`
+type IVRDEServergetAuthLibrary struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getAuthLibrary"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type IVRDPServergetVideoChannelQualityResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_getVideoChannelQualityResponse"`
+type IVRDEServergetAuthLibraryResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getAuthLibraryResponse"`
 
-	Returnval uint32 `xml:"returnval,omitempty"`
+	Returnval string `xml:"returnval,omitempty"`
 }
 
-type IVRDPServersetVideoChannelQuality struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setVideoChannelQuality"`
+type IVRDEServersetAuthLibrary struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setAuthLibrary"`
 
-	This                string `xml:"_this,omitempty"`
-	VideoChannelQuality uint32 `xml:"videoChannelQuality,omitempty"`
+	This        string `xml:"_this,omitempty"`
+	AuthLibrary string `xml:"authLibrary,omitempty"`
 }
 
-type IVRDPServersetVideoChannelQualityResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDPServer_setVideoChannelQualityResponse"`
+type IVRDEServersetAuthLibraryResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setAuthLibraryResponse"`
+}
+
+type IVRDEServergetVRDEProperties struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getVRDEProperties"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVRDEServergetVRDEPropertiesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getVRDEPropertiesResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IVRDEServersetVRDEProperty struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setVRDEProperty"`
+
+	This  string `xml:"_this,omitempty"`
+	Key   string `xml:"key,omitempty"`
+	Value string `xml:"value,omitempty"`
+}
+
+type IVRDEServersetVRDEPropertyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_setVRDEPropertyResponse"`
+}
+
+type IVRDEServergetVRDEProperty struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getVRDEProperty"`
+
+	This string `xml:"_this,omitempty"`
+	Key  string `xml:"key,omitempty"`
+}
+
+type IVRDEServergetVRDEPropertyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServer_getVRDEPropertyResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
 }
 
 type ISessiongetState struct {
@@ -7884,6 +14219,29 @@ type ISessiongetTypeResponse struct {
 	Returnval *SessionType `xml:"returnval,omitempty"`
 }
 
+type ISessiongetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISession_getName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISessiongetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISession_getNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type ISessionsetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISession_setName"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type ISessionsetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISession_setNameResponse"`
+}
+
 type ISessiongetMachine struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISession_getMachine"`
 
@@ -7908,14 +14266,14 @@ type ISessiongetConsoleResponse struct {
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type ISessionclose struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISession_close"`
+type ISessionunlockMachine struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISession_unlockMachine"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type ISessioncloseResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISession_closeResponse"`
+type ISessionunlockMachineResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISession_unlockMachineResponse"`
 }
 
 type IStorageControllergetName struct {
@@ -7928,6 +14286,17 @@ type IStorageControllergetNameResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageController_getNameResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IStorageControllersetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageController_setName"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IStorageControllersetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageController_setNameResponse"`
 }
 
 type IStorageControllergetMaxDevicesPerPortCount struct {
@@ -8070,29 +14439,16 @@ type IStorageControllersetUseHostIOCacheResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageController_setUseHostIOCacheResponse"`
 }
 
-type IStorageControllergetIDEEmulationPort struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageController_getIDEEmulationPort"`
+type IStorageControllergetBootable struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageController_getBootable"`
 
-	This           string `xml:"_this,omitempty"`
-	DevicePosition int32  `xml:"devicePosition,omitempty"`
+	This string `xml:"_this,omitempty"`
 }
 
-type IStorageControllergetIDEEmulationPortResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageController_getIDEEmulationPortResponse"`
+type IStorageControllergetBootableResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageController_getBootableResponse"`
 
-	Returnval int32 `xml:"returnval,omitempty"`
-}
-
-type IStorageControllersetIDEEmulationPort struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageController_setIDEEmulationPort"`
-
-	This           string `xml:"_this,omitempty"`
-	DevicePosition int32  `xml:"devicePosition,omitempty"`
-	PortNumber     int32  `xml:"portNumber,omitempty"`
-}
-
-type IStorageControllersetIDEEmulationPortResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageController_setIDEEmulationPortResponse"`
+	Returnval bool `xml:"returnval,omitempty"`
 }
 
 type IManagedObjectRefgetInterfaceName struct {
@@ -8385,73 +14741,73 @@ type INATEnginesetHostIPResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setHostIPResponse"`
 }
 
-type INATEnginegetTftpPrefix struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getTftpPrefix"`
+type INATEnginegetTFTPPrefix struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getTFTPPrefix"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type INATEnginegetTftpPrefixResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getTftpPrefixResponse"`
+type INATEnginegetTFTPPrefixResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getTFTPPrefixResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type INATEnginesetTftpPrefix struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setTftpPrefix"`
+type INATEnginesetTFTPPrefix struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setTFTPPrefix"`
 
 	This       string `xml:"_this,omitempty"`
-	TftpPrefix string `xml:"tftpPrefix,omitempty"`
+	TFTPPrefix string `xml:"TFTPPrefix,omitempty"`
 }
 
-type INATEnginesetTftpPrefixResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setTftpPrefixResponse"`
+type INATEnginesetTFTPPrefixResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setTFTPPrefixResponse"`
 }
 
-type INATEnginegetTftpBootFile struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getTftpBootFile"`
+type INATEnginegetTFTPBootFile struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getTFTPBootFile"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type INATEnginegetTftpBootFileResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getTftpBootFileResponse"`
+type INATEnginegetTFTPBootFileResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getTFTPBootFileResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type INATEnginesetTftpBootFile struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setTftpBootFile"`
+type INATEnginesetTFTPBootFile struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setTFTPBootFile"`
 
 	This         string `xml:"_this,omitempty"`
-	TftpBootFile string `xml:"tftpBootFile,omitempty"`
+	TFTPBootFile string `xml:"TFTPBootFile,omitempty"`
 }
 
-type INATEnginesetTftpBootFileResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setTftpBootFileResponse"`
+type INATEnginesetTFTPBootFileResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setTFTPBootFileResponse"`
 }
 
-type INATEnginegetTftpNextServer struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getTftpNextServer"`
+type INATEnginegetTFTPNextServer struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getTFTPNextServer"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type INATEnginegetTftpNextServerResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getTftpNextServerResponse"`
+type INATEnginegetTFTPNextServerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getTFTPNextServerResponse"`
 
 	Returnval string `xml:"returnval,omitempty"`
 }
 
-type INATEnginesetTftpNextServer struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setTftpNextServer"`
+type INATEnginesetTFTPNextServer struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setTFTPNextServer"`
 
 	This           string `xml:"_this,omitempty"`
-	TftpNextServer string `xml:"tftpNextServer,omitempty"`
+	TFTPNextServer string `xml:"TFTPNextServer,omitempty"`
 }
 
-type INATEnginesetTftpNextServerResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setTftpNextServerResponse"`
+type INATEnginesetTFTPNextServerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setTFTPNextServerResponse"`
 }
 
 type INATEnginegetAliasMode struct {
@@ -8477,73 +14833,73 @@ type INATEnginesetAliasModeResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setAliasModeResponse"`
 }
 
-type INATEnginegetDnsPassDomain struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getDnsPassDomain"`
+type INATEnginegetDNSPassDomain struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getDNSPassDomain"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type INATEnginegetDnsPassDomainResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getDnsPassDomainResponse"`
+type INATEnginegetDNSPassDomainResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getDNSPassDomainResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
-type INATEnginesetDnsPassDomain struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setDnsPassDomain"`
+type INATEnginesetDNSPassDomain struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setDNSPassDomain"`
 
 	This          string `xml:"_this,omitempty"`
-	DnsPassDomain bool   `xml:"dnsPassDomain,omitempty"`
+	DNSPassDomain bool   `xml:"DNSPassDomain,omitempty"`
 }
 
-type INATEnginesetDnsPassDomainResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setDnsPassDomainResponse"`
+type INATEnginesetDNSPassDomainResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setDNSPassDomainResponse"`
 }
 
-type INATEnginegetDnsProxy struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getDnsProxy"`
+type INATEnginegetDNSProxy struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getDNSProxy"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type INATEnginegetDnsProxyResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getDnsProxyResponse"`
+type INATEnginegetDNSProxyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getDNSProxyResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
-type INATEnginesetDnsProxy struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setDnsProxy"`
+type INATEnginesetDNSProxy struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setDNSProxy"`
 
 	This     string `xml:"_this,omitempty"`
-	DnsProxy bool   `xml:"dnsProxy,omitempty"`
+	DNSProxy bool   `xml:"DNSProxy,omitempty"`
 }
 
-type INATEnginesetDnsProxyResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setDnsProxyResponse"`
+type INATEnginesetDNSProxyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setDNSProxyResponse"`
 }
 
-type INATEnginegetDnsUseHostResolver struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getDnsUseHostResolver"`
+type INATEnginegetDNSUseHostResolver struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getDNSUseHostResolver"`
 
 	This string `xml:"_this,omitempty"`
 }
 
-type INATEnginegetDnsUseHostResolverResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getDnsUseHostResolverResponse"`
+type INATEnginegetDNSUseHostResolverResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_getDNSUseHostResolverResponse"`
 
 	Returnval bool `xml:"returnval,omitempty"`
 }
 
-type INATEnginesetDnsUseHostResolver struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setDnsUseHostResolver"`
+type INATEnginesetDNSUseHostResolver struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setDNSUseHostResolver"`
 
 	This               string `xml:"_this,omitempty"`
-	DnsUseHostResolver bool   `xml:"dnsUseHostResolver,omitempty"`
+	DNSUseHostResolver bool   `xml:"DNSUseHostResolver,omitempty"`
 }
 
-type INATEnginesetDnsUseHostResolverResponse struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setDnsUseHostResolverResponse"`
+type INATEnginesetDNSUseHostResolverResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_setDNSUseHostResolverResponse"`
 }
 
 type INATEnginegetRedirects struct {
@@ -8595,9 +14951,9 @@ type INATEngineaddRedirect struct {
 	This      string       `xml:"_this,omitempty"`
 	Name      string       `xml:"name,omitempty"`
 	Proto     *NATProtocol `xml:"proto,omitempty"`
-	HostIp    string       `xml:"hostIp,omitempty"`
+	HostIP    string       `xml:"hostIP,omitempty"`
 	HostPort  uint16       `xml:"hostPort,omitempty"`
-	GuestIp   string       `xml:"guestIp,omitempty"`
+	GuestIP   string       `xml:"guestIP,omitempty"`
 	GuestPort uint16       `xml:"guestPort,omitempty"`
 }
 
@@ -8616,6 +14972,2128 @@ type INATEngineremoveRedirectResponse struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATEngine_removeRedirectResponse"`
 }
 
+type IBandwidthGroupgetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthGroup_getName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IBandwidthGroupgetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthGroup_getNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IBandwidthGroupgetType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthGroup_getType"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IBandwidthGroupgetTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthGroup_getTypeResponse"`
+
+	Returnval *BandwidthGroupType `xml:"returnval,omitempty"`
+}
+
+type IBandwidthGroupgetReference struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthGroup_getReference"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IBandwidthGroupgetReferenceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthGroup_getReferenceResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IBandwidthGroupgetMaxBytesPerSec struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthGroup_getMaxBytesPerSec"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IBandwidthGroupgetMaxBytesPerSecResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthGroup_getMaxBytesPerSecResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IBandwidthGroupsetMaxBytesPerSec struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthGroup_setMaxBytesPerSec"`
+
+	This           string `xml:"_this,omitempty"`
+	MaxBytesPerSec int64  `xml:"maxBytesPerSec,omitempty"`
+}
+
+type IBandwidthGroupsetMaxBytesPerSecResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthGroup_setMaxBytesPerSecResponse"`
+}
+
+type IBandwidthControlgetNumGroups struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthControl_getNumGroups"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IBandwidthControlgetNumGroupsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthControl_getNumGroupsResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IBandwidthControlcreateBandwidthGroup struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthControl_createBandwidthGroup"`
+
+	This           string              `xml:"_this,omitempty"`
+	Name           string              `xml:"name,omitempty"`
+	Type_          *BandwidthGroupType `xml:"type,omitempty"`
+	MaxBytesPerSec int64               `xml:"maxBytesPerSec,omitempty"`
+}
+
+type IBandwidthControlcreateBandwidthGroupResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthControl_createBandwidthGroupResponse"`
+}
+
+type IBandwidthControldeleteBandwidthGroup struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthControl_deleteBandwidthGroup"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IBandwidthControldeleteBandwidthGroupResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthControl_deleteBandwidthGroupResponse"`
+}
+
+type IBandwidthControlgetBandwidthGroup struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthControl_getBandwidthGroup"`
+
+	This string `xml:"_this,omitempty"`
+	Name string `xml:"name,omitempty"`
+}
+
+type IBandwidthControlgetBandwidthGroupResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthControl_getBandwidthGroupResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IBandwidthControlgetAllBandwidthGroups struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthControl_getAllBandwidthGroups"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IBandwidthControlgetAllBandwidthGroupsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthControl_getAllBandwidthGroupsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IEventSourcecreateListener struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_createListener"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IEventSourcecreateListenerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_createListenerResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IEventSourcecreateAggregator struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_createAggregator"`
+
+	This         string   `xml:"_this,omitempty"`
+	Subordinates []string `xml:"subordinates,omitempty"`
+}
+
+type IEventSourcecreateAggregatorResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_createAggregatorResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IEventSourceregisterListener struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_registerListener"`
+
+	This        string           `xml:"_this,omitempty"`
+	Listener    string           `xml:"listener,omitempty"`
+	Interesting []*VBoxEventType `xml:"interesting,omitempty"`
+	Active      bool             `xml:"active,omitempty"`
+}
+
+type IEventSourceregisterListenerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_registerListenerResponse"`
+}
+
+type IEventSourceunregisterListener struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_unregisterListener"`
+
+	This     string `xml:"_this,omitempty"`
+	Listener string `xml:"listener,omitempty"`
+}
+
+type IEventSourceunregisterListenerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_unregisterListenerResponse"`
+}
+
+type IEventSourcefireEvent struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_fireEvent"`
+
+	This    string `xml:"_this,omitempty"`
+	Event   string `xml:"event,omitempty"`
+	Timeout int32  `xml:"timeout,omitempty"`
+}
+
+type IEventSourcefireEventResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_fireEventResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IEventSourcegetEvent struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_getEvent"`
+
+	This     string `xml:"_this,omitempty"`
+	Listener string `xml:"listener,omitempty"`
+	Timeout  int32  `xml:"timeout,omitempty"`
+}
+
+type IEventSourcegetEventResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_getEventResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IEventSourceeventProcessed struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_eventProcessed"`
+
+	This     string `xml:"_this,omitempty"`
+	Listener string `xml:"listener,omitempty"`
+	Event    string `xml:"event,omitempty"`
+}
+
+type IEventSourceeventProcessedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSource_eventProcessedResponse"`
+}
+
+type IEventListenerhandleEvent struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventListener_handleEvent"`
+
+	This  string `xml:"_this,omitempty"`
+	Event string `xml:"event,omitempty"`
+}
+
+type IEventListenerhandleEventResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventListener_handleEventResponse"`
+}
+
+type IEventgetType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEvent_getType"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IEventgetTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEvent_getTypeResponse"`
+
+	Returnval *VBoxEventType `xml:"returnval,omitempty"`
+}
+
+type IEventgetSource struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEvent_getSource"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IEventgetSourceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEvent_getSourceResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IEventgetWaitable struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEvent_getWaitable"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IEventgetWaitableResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEvent_getWaitableResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IEventsetProcessed struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEvent_setProcessed"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IEventsetProcessedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEvent_setProcessedResponse"`
+}
+
+type IEventwaitProcessed struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEvent_waitProcessed"`
+
+	This    string `xml:"_this,omitempty"`
+	Timeout int32  `xml:"timeout,omitempty"`
+}
+
+type IEventwaitProcessedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEvent_waitProcessedResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IReusableEventgetGeneration struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IReusableEvent_getGeneration"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IReusableEventgetGenerationResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IReusableEvent_getGenerationResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IReusableEventreuse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IReusableEvent_reuse"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IReusableEventreuseResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IReusableEvent_reuseResponse"`
+}
+
+type IMachineEventgetMachineId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineEvent_getMachineId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineEventgetMachineIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineEvent_getMachineIdResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineStateChangedEventgetState struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineStateChangedEvent_getState"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineStateChangedEventgetStateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineStateChangedEvent_getStateResponse"`
+
+	Returnval *MachineState `xml:"returnval,omitempty"`
+}
+
+type IMachineDataChangedEventgetTemporary struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDataChangedEvent_getTemporary"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineDataChangedEventgetTemporaryResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineDataChangedEvent_getTemporaryResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMediumRegisteredEventgetMediumId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumRegisteredEvent_getMediumId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMediumRegisteredEventgetMediumIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumRegisteredEvent_getMediumIdResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMediumRegisteredEventgetMediumType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumRegisteredEvent_getMediumType"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMediumRegisteredEventgetMediumTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumRegisteredEvent_getMediumTypeResponse"`
+
+	Returnval *DeviceType `xml:"returnval,omitempty"`
+}
+
+type IMediumRegisteredEventgetRegistered struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumRegisteredEvent_getRegistered"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMediumRegisteredEventgetRegisteredResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumRegisteredEvent_getRegisteredResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMediumConfigChangedEventgetMedium struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumConfigChangedEvent_getMedium"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMediumConfigChangedEventgetMediumResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumConfigChangedEvent_getMediumResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMachineRegisteredEventgetRegistered struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineRegisteredEvent_getRegistered"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMachineRegisteredEventgetRegisteredResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMachineRegisteredEvent_getRegisteredResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type ISessionStateChangedEventgetState struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISessionStateChangedEvent_getState"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISessionStateChangedEventgetStateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISessionStateChangedEvent_getStateResponse"`
+
+	Returnval *SessionState `xml:"returnval,omitempty"`
+}
+
+type IGuestPropertyChangedEventgetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestPropertyChangedEvent_getName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestPropertyChangedEventgetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestPropertyChangedEvent_getNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestPropertyChangedEventgetValue struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestPropertyChangedEvent_getValue"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestPropertyChangedEventgetValueResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestPropertyChangedEvent_getValueResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestPropertyChangedEventgetFlags struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestPropertyChangedEvent_getFlags"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestPropertyChangedEventgetFlagsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestPropertyChangedEvent_getFlagsResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type ISnapshotEventgetSnapshotId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISnapshotEvent_getSnapshotId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISnapshotEventgetSnapshotIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISnapshotEvent_getSnapshotIdResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type ISnapshotTakenEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISnapshotTakenEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISnapshotTakenEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISnapshotTakenEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type ISnapshotDeletedEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISnapshotDeletedEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISnapshotDeletedEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISnapshotDeletedEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type ISnapshotRestoredEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISnapshotRestoredEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISnapshotRestoredEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISnapshotRestoredEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type ISnapshotChangedEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISnapshotChangedEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISnapshotChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISnapshotChangedEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetVisible struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getVisible"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetVisibleResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getVisibleResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetAlpha struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getAlpha"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetAlphaResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getAlphaResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetXhot struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getXhot"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetXhotResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getXhotResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetYhot struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getYhot"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetYhotResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getYhotResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetWidth struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getWidth"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetWidthResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getWidthResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetHeight struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getHeight"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetHeightResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getHeightResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetShape struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getShape"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMousePointerShapeChangedEventgetShapeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMousePointerShapeChangedEvent_getShapeResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IMouseCapabilityChangedEventgetSupportsAbsolute struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouseCapabilityChangedEvent_getSupportsAbsolute"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMouseCapabilityChangedEventgetSupportsAbsoluteResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouseCapabilityChangedEvent_getSupportsAbsoluteResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMouseCapabilityChangedEventgetSupportsRelative struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouseCapabilityChangedEvent_getSupportsRelative"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMouseCapabilityChangedEventgetSupportsRelativeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouseCapabilityChangedEvent_getSupportsRelativeResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMouseCapabilityChangedEventgetSupportsMultiTouch struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouseCapabilityChangedEvent_getSupportsMultiTouch"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMouseCapabilityChangedEventgetSupportsMultiTouchResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouseCapabilityChangedEvent_getSupportsMultiTouchResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMouseCapabilityChangedEventgetNeedsHostCursor struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouseCapabilityChangedEvent_getNeedsHostCursor"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMouseCapabilityChangedEventgetNeedsHostCursorResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMouseCapabilityChangedEvent_getNeedsHostCursorResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IKeyboardLedsChangedEventgetNumLock struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboardLedsChangedEvent_getNumLock"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IKeyboardLedsChangedEventgetNumLockResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboardLedsChangedEvent_getNumLockResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IKeyboardLedsChangedEventgetCapsLock struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboardLedsChangedEvent_getCapsLock"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IKeyboardLedsChangedEventgetCapsLockResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboardLedsChangedEvent_getCapsLockResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IKeyboardLedsChangedEventgetScrollLock struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboardLedsChangedEvent_getScrollLock"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IKeyboardLedsChangedEventgetScrollLockResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IKeyboardLedsChangedEvent_getScrollLockResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IStateChangedEventgetState struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStateChangedEvent_getState"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IStateChangedEventgetStateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStateChangedEvent_getStateResponse"`
+
+	Returnval *MachineState `xml:"returnval,omitempty"`
+}
+
+type IAdditionsStateChangedEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAdditionsStateChangedEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IAdditionsStateChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAdditionsStateChangedEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INetworkAdapterChangedEventgetNetworkAdapter struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapterChangedEvent_getNetworkAdapter"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INetworkAdapterChangedEventgetNetworkAdapterResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INetworkAdapterChangedEvent_getNetworkAdapterResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type ISerialPortChangedEventgetSerialPort struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISerialPortChangedEvent_getSerialPort"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISerialPortChangedEventgetSerialPortResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISerialPortChangedEvent_getSerialPortResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IParallelPortChangedEventgetParallelPort struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IParallelPortChangedEvent_getParallelPort"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IParallelPortChangedEventgetParallelPortResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IParallelPortChangedEvent_getParallelPortResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IStorageControllerChangedEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageControllerChangedEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IStorageControllerChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageControllerChangedEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IMediumChangedEventgetMediumAttachment struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumChangedEvent_getMediumAttachment"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IMediumChangedEventgetMediumAttachmentResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumChangedEvent_getMediumAttachmentResponse"`
+
+	Returnval *IMediumAttachment `xml:"returnval,omitempty"`
+}
+
+type IClipboardModeChangedEventgetClipboardMode struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IClipboardModeChangedEvent_getClipboardMode"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IClipboardModeChangedEventgetClipboardModeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IClipboardModeChangedEvent_getClipboardModeResponse"`
+
+	Returnval *ClipboardMode `xml:"returnval,omitempty"`
+}
+
+type IDnDModeChangedEventgetDndMode struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDModeChangedEvent_getDndMode"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IDnDModeChangedEventgetDndModeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IDnDModeChangedEvent_getDndModeResponse"`
+
+	Returnval *DnDMode `xml:"returnval,omitempty"`
+}
+
+type ICPUChangedEventgetCPU struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ICPUChangedEvent_getCPU"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ICPUChangedEventgetCPUResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ICPUChangedEvent_getCPUResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type ICPUChangedEventgetAdd struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ICPUChangedEvent_getAdd"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ICPUChangedEventgetAddResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ICPUChangedEvent_getAddResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type ICPUExecutionCapChangedEventgetExecutionCap struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ICPUExecutionCapChangedEvent_getExecutionCap"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ICPUExecutionCapChangedEventgetExecutionCapResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ICPUExecutionCapChangedEvent_getExecutionCapResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestKeyboardEventgetScancodes struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestKeyboardEvent_getScancodes"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestKeyboardEventgetScancodesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestKeyboardEvent_getScancodesResponse"`
+
+	Returnval []int32 `xml:"returnval,omitempty"`
+}
+
+type IGuestMouseEventgetMode struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMouseEvent_getMode"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMouseEventgetModeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMouseEvent_getModeResponse"`
+
+	Returnval *GuestMouseEventMode `xml:"returnval,omitempty"`
+}
+
+type IGuestMouseEventgetX struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMouseEvent_getX"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMouseEventgetXResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMouseEvent_getXResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type IGuestMouseEventgetY struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMouseEvent_getY"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMouseEventgetYResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMouseEvent_getYResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type IGuestMouseEventgetZ struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMouseEvent_getZ"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMouseEventgetZResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMouseEvent_getZResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type IGuestMouseEventgetW struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMouseEvent_getW"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMouseEventgetWResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMouseEvent_getWResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type IGuestMouseEventgetButtons struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMouseEvent_getButtons"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMouseEventgetButtonsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMouseEvent_getButtonsResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type IGuestMultiTouchEventgetContactCount struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMultiTouchEvent_getContactCount"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMultiTouchEventgetContactCountResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMultiTouchEvent_getContactCountResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type IGuestMultiTouchEventgetXPositions struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMultiTouchEvent_getXPositions"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMultiTouchEventgetXPositionsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMultiTouchEvent_getXPositionsResponse"`
+
+	Returnval []int16 `xml:"returnval,omitempty"`
+}
+
+type IGuestMultiTouchEventgetYPositions struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMultiTouchEvent_getYPositions"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMultiTouchEventgetYPositionsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMultiTouchEvent_getYPositionsResponse"`
+
+	Returnval []int16 `xml:"returnval,omitempty"`
+}
+
+type IGuestMultiTouchEventgetContactIds struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMultiTouchEvent_getContactIds"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMultiTouchEventgetContactIdsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMultiTouchEvent_getContactIdsResponse"`
+
+	Returnval []uint16 `xml:"returnval,omitempty"`
+}
+
+type IGuestMultiTouchEventgetContactFlags struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMultiTouchEvent_getContactFlags"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMultiTouchEventgetContactFlagsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMultiTouchEvent_getContactFlagsResponse"`
+
+	Returnval []uint16 `xml:"returnval,omitempty"`
+}
+
+type IGuestMultiTouchEventgetScanTime struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMultiTouchEvent_getScanTime"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMultiTouchEventgetScanTimeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMultiTouchEvent_getScanTimeResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionEventgetSession struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSessionEvent_getSession"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessionEventgetSessionResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSessionEvent_getSessionResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionStateChangedEventgetId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSessionStateChangedEvent_getId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessionStateChangedEventgetIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSessionStateChangedEvent_getIdResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionStateChangedEventgetStatus struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSessionStateChangedEvent_getStatus"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessionStateChangedEventgetStatusResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSessionStateChangedEvent_getStatusResponse"`
+
+	Returnval *GuestSessionStatus `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionStateChangedEventgetError struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSessionStateChangedEvent_getError"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessionStateChangedEventgetErrorResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSessionStateChangedEvent_getErrorResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestSessionRegisteredEventgetRegistered struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSessionRegisteredEvent_getRegistered"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestSessionRegisteredEventgetRegisteredResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestSessionRegisteredEvent_getRegisteredResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IGuestProcessEventgetProcess struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessEvent_getProcess"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestProcessEventgetProcessResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessEvent_getProcessResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestProcessEventgetPid struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessEvent_getPid"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestProcessEventgetPidResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessEvent_getPidResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestProcessRegisteredEventgetRegistered struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessRegisteredEvent_getRegistered"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestProcessRegisteredEventgetRegisteredResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessRegisteredEvent_getRegisteredResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IGuestProcessStateChangedEventgetStatus struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessStateChangedEvent_getStatus"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestProcessStateChangedEventgetStatusResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessStateChangedEvent_getStatusResponse"`
+
+	Returnval *ProcessStatus `xml:"returnval,omitempty"`
+}
+
+type IGuestProcessStateChangedEventgetError struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessStateChangedEvent_getError"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestProcessStateChangedEventgetErrorResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessStateChangedEvent_getErrorResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestProcessIOEventgetHandle struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessIOEvent_getHandle"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestProcessIOEventgetHandleResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessIOEvent_getHandleResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestProcessIOEventgetProcessed struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessIOEvent_getProcessed"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestProcessIOEventgetProcessedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessIOEvent_getProcessedResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestProcessInputNotifyEventgetStatus struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessInputNotifyEvent_getStatus"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestProcessInputNotifyEventgetStatusResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessInputNotifyEvent_getStatusResponse"`
+
+	Returnval *ProcessInputStatus `xml:"returnval,omitempty"`
+}
+
+type IGuestProcessOutputEventgetData struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessOutputEvent_getData"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestProcessOutputEventgetDataResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestProcessOutputEvent_getDataResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestFileEventgetFile struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileEvent_getFile"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestFileEventgetFileResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileEvent_getFileResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestFileRegisteredEventgetRegistered struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileRegisteredEvent_getRegistered"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestFileRegisteredEventgetRegisteredResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileRegisteredEvent_getRegisteredResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IGuestFileStateChangedEventgetStatus struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileStateChangedEvent_getStatus"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestFileStateChangedEventgetStatusResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileStateChangedEvent_getStatusResponse"`
+
+	Returnval *FileStatus `xml:"returnval,omitempty"`
+}
+
+type IGuestFileStateChangedEventgetError struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileStateChangedEvent_getError"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestFileStateChangedEventgetErrorResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileStateChangedEvent_getErrorResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestFileIOEventgetOffset struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileIOEvent_getOffset"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestFileIOEventgetOffsetResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileIOEvent_getOffsetResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IGuestFileIOEventgetProcessed struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileIOEvent_getProcessed"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestFileIOEventgetProcessedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileIOEvent_getProcessedResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestFileOffsetChangedEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileOffsetChangedEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestFileOffsetChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileOffsetChangedEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IGuestFileReadEventgetData struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileReadEvent_getData"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestFileReadEventgetDataResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileReadEvent_getDataResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestFileWriteEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileWriteEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestFileWriteEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestFileWriteEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IVRDEServerChangedEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServerChangedEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVRDEServerChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServerChangedEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IVRDEServerInfoChangedEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServerInfoChangedEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVRDEServerInfoChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServerInfoChangedEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IVideoCaptureChangedEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVideoCaptureChangedEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVideoCaptureChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVideoCaptureChangedEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IUSBControllerChangedEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBControllerChangedEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IUSBControllerChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBControllerChangedEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IUSBDeviceStateChangedEventgetDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceStateChangedEvent_getDevice"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IUSBDeviceStateChangedEventgetDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceStateChangedEvent_getDeviceResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IUSBDeviceStateChangedEventgetAttached struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceStateChangedEvent_getAttached"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IUSBDeviceStateChangedEventgetAttachedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceStateChangedEvent_getAttachedResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IUSBDeviceStateChangedEventgetError struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceStateChangedEvent_getError"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IUSBDeviceStateChangedEventgetErrorResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IUSBDeviceStateChangedEvent_getErrorResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type ISharedFolderChangedEventgetScope struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISharedFolderChangedEvent_getScope"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ISharedFolderChangedEventgetScopeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ISharedFolderChangedEvent_getScopeResponse"`
+
+	Returnval *Scope `xml:"returnval,omitempty"`
+}
+
+type IRuntimeErrorEventgetFatal struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IRuntimeErrorEvent_getFatal"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IRuntimeErrorEventgetFatalResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IRuntimeErrorEvent_getFatalResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IRuntimeErrorEventgetId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IRuntimeErrorEvent_getId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IRuntimeErrorEventgetIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IRuntimeErrorEvent_getIdResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IRuntimeErrorEventgetMessage struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IRuntimeErrorEvent_getMessage"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IRuntimeErrorEventgetMessageResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IRuntimeErrorEvent_getMessageResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IEventSourceChangedEventgetListener struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSourceChangedEvent_getListener"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IEventSourceChangedEventgetListenerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSourceChangedEvent_getListenerResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IEventSourceChangedEventgetAdd struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSourceChangedEvent_getAdd"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IEventSourceChangedEventgetAddResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IEventSourceChangedEvent_getAddResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IExtraDataChangedEventgetMachineId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IExtraDataChangedEvent_getMachineId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IExtraDataChangedEventgetMachineIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IExtraDataChangedEvent_getMachineIdResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IExtraDataChangedEventgetKey struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IExtraDataChangedEvent_getKey"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IExtraDataChangedEventgetKeyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IExtraDataChangedEvent_getKeyResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IExtraDataChangedEventgetValue struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IExtraDataChangedEvent_getValue"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IExtraDataChangedEventgetValueResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IExtraDataChangedEvent_getValueResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IVetoEventaddVeto struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVetoEvent_addVeto"`
+
+	This   string `xml:"_this,omitempty"`
+	Reason string `xml:"reason,omitempty"`
+}
+
+type IVetoEventaddVetoResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVetoEvent_addVetoResponse"`
+}
+
+type IVetoEventisVetoed struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVetoEvent_isVetoed"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVetoEventisVetoedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVetoEvent_isVetoedResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IVetoEventgetVetos struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVetoEvent_getVetos"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVetoEventgetVetosResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVetoEvent_getVetosResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IVetoEventaddApproval struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVetoEvent_addApproval"`
+
+	This   string `xml:"_this,omitempty"`
+	Reason string `xml:"reason,omitempty"`
+}
+
+type IVetoEventaddApprovalResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVetoEvent_addApprovalResponse"`
+}
+
+type IVetoEventisApproved struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVetoEvent_isApproved"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVetoEventisApprovedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVetoEvent_isApprovedResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IVetoEventgetApprovals struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVetoEvent_getApprovals"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVetoEventgetApprovalsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVetoEvent_getApprovalsResponse"`
+
+	Returnval []string `xml:"returnval,omitempty"`
+}
+
+type IExtraDataCanChangeEventgetMachineId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IExtraDataCanChangeEvent_getMachineId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IExtraDataCanChangeEventgetMachineIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IExtraDataCanChangeEvent_getMachineIdResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IExtraDataCanChangeEventgetKey struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IExtraDataCanChangeEvent_getKey"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IExtraDataCanChangeEventgetKeyResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IExtraDataCanChangeEvent_getKeyResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IExtraDataCanChangeEventgetValue struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IExtraDataCanChangeEvent_getValue"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IExtraDataCanChangeEventgetValueResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IExtraDataCanChangeEvent_getValueResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type ICanShowWindowEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ICanShowWindowEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type ICanShowWindowEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ ICanShowWindowEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IShowWindowEventgetWinId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IShowWindowEvent_getWinId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IShowWindowEventgetWinIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IShowWindowEvent_getWinIdResponse"`
+
+	Returnval int64 `xml:"returnval,omitempty"`
+}
+
+type IShowWindowEventsetWinId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IShowWindowEvent_setWinId"`
+
+	This  string `xml:"_this,omitempty"`
+	WinId int64  `xml:"winId,omitempty"`
+}
+
+type IShowWindowEventsetWinIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IShowWindowEvent_setWinIdResponse"`
+}
+
+type INATRedirectEventgetSlot struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getSlot"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATRedirectEventgetSlotResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getSlotResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type INATRedirectEventgetRemove struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getRemove"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATRedirectEventgetRemoveResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getRemoveResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATRedirectEventgetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATRedirectEventgetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATRedirectEventgetProto struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getProto"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATRedirectEventgetProtoResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getProtoResponse"`
+
+	Returnval *NATProtocol `xml:"returnval,omitempty"`
+}
+
+type INATRedirectEventgetHostIP struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getHostIP"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATRedirectEventgetHostIPResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getHostIPResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATRedirectEventgetHostPort struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getHostPort"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATRedirectEventgetHostPortResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getHostPortResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type INATRedirectEventgetGuestIP struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getGuestIP"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATRedirectEventgetGuestIPResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getGuestIPResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATRedirectEventgetGuestPort struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getGuestPort"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATRedirectEventgetGuestPortResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATRedirectEvent_getGuestPortResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type IHostPCIDevicePlugEventgetPlugged struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostPCIDevicePlugEvent_getPlugged"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostPCIDevicePlugEventgetPluggedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostPCIDevicePlugEvent_getPluggedResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IHostPCIDevicePlugEventgetSuccess struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostPCIDevicePlugEvent_getSuccess"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostPCIDevicePlugEventgetSuccessResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostPCIDevicePlugEvent_getSuccessResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IHostPCIDevicePlugEventgetAttachment struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostPCIDevicePlugEvent_getAttachment"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostPCIDevicePlugEventgetAttachmentResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostPCIDevicePlugEvent_getAttachmentResponse"`
+
+	Returnval *IPCIDeviceAttachment `xml:"returnval,omitempty"`
+}
+
+type IHostPCIDevicePlugEventgetMessage struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostPCIDevicePlugEvent_getMessage"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostPCIDevicePlugEventgetMessageResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostPCIDevicePlugEvent_getMessageResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IVBoxSVCAvailabilityChangedEventgetAvailable struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVBoxSVCAvailabilityChangedEvent_getAvailable"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IVBoxSVCAvailabilityChangedEventgetAvailableResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVBoxSVCAvailabilityChangedEvent_getAvailableResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IBandwidthGroupChangedEventgetBandwidthGroup struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthGroupChangedEvent_getBandwidthGroup"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IBandwidthGroupChangedEventgetBandwidthGroupResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IBandwidthGroupChangedEvent_getBandwidthGroupResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestMonitorChangedEventgetChangeType struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMonitorChangedEvent_getChangeType"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMonitorChangedEventgetChangeTypeResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMonitorChangedEvent_getChangeTypeResponse"`
+
+	Returnval *GuestMonitorChangedEventType `xml:"returnval,omitempty"`
+}
+
+type IGuestMonitorChangedEventgetScreenId struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMonitorChangedEvent_getScreenId"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMonitorChangedEventgetScreenIdResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMonitorChangedEvent_getScreenIdResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestMonitorChangedEventgetOriginX struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMonitorChangedEvent_getOriginX"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMonitorChangedEventgetOriginXResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMonitorChangedEvent_getOriginXResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestMonitorChangedEventgetOriginY struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMonitorChangedEvent_getOriginY"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMonitorChangedEventgetOriginYResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMonitorChangedEvent_getOriginYResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestMonitorChangedEventgetWidth struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMonitorChangedEvent_getWidth"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMonitorChangedEventgetWidthResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMonitorChangedEvent_getWidthResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestMonitorChangedEventgetHeight struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMonitorChangedEvent_getHeight"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestMonitorChangedEventgetHeightResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestMonitorChangedEvent_getHeightResponse"`
+
+	Returnval uint32 `xml:"returnval,omitempty"`
+}
+
+type IGuestUserStateChangedEventgetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestUserStateChangedEvent_getName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestUserStateChangedEventgetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestUserStateChangedEvent_getNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestUserStateChangedEventgetDomain struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestUserStateChangedEvent_getDomain"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestUserStateChangedEventgetDomainResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestUserStateChangedEvent_getDomainResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IGuestUserStateChangedEventgetState struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestUserStateChangedEvent_getState"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestUserStateChangedEventgetStateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestUserStateChangedEvent_getStateResponse"`
+
+	Returnval *GuestUserState `xml:"returnval,omitempty"`
+}
+
+type IGuestUserStateChangedEventgetStateDetails struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestUserStateChangedEvent_getStateDetails"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IGuestUserStateChangedEventgetStateDetailsResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IGuestUserStateChangedEvent_getStateDetailsResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type IStorageDeviceChangedEventgetStorageDevice struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageDeviceChangedEvent_getStorageDevice"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IStorageDeviceChangedEventgetStorageDeviceResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageDeviceChangedEvent_getStorageDeviceResponse"`
+
+	Returnval *IMediumAttachment `xml:"returnval,omitempty"`
+}
+
+type IStorageDeviceChangedEventgetRemoved struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageDeviceChangedEvent_getRemoved"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IStorageDeviceChangedEventgetRemovedResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageDeviceChangedEvent_getRemovedResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type IStorageDeviceChangedEventgetSilent struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageDeviceChangedEvent_getSilent"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IStorageDeviceChangedEventgetSilentResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IStorageDeviceChangedEvent_getSilentResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworkChangedEventgetNetworkName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkChangedEvent_getNetworkName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkChangedEventgetNetworkNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkChangedEvent_getNetworkNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATNetworkStartStopEventgetStartEvent struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkStartStopEvent_getStartEvent"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkStartStopEventgetStartEventResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkStartStopEvent_getStartEventResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworkAlterEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkAlterEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkAlterEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkAlterEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworkCreationDeletionEventgetCreationEvent struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkCreationDeletionEvent_getCreationEvent"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkCreationDeletionEventgetCreationEventResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkCreationDeletionEvent_getCreationEventResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworkSettingEventgetEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkSettingEvent_getEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkSettingEventgetEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkSettingEvent_getEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworkSettingEventgetNetwork struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkSettingEvent_getNetwork"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkSettingEventgetNetworkResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkSettingEvent_getNetworkResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATNetworkSettingEventgetGateway struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkSettingEvent_getGateway"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkSettingEventgetGatewayResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkSettingEvent_getGatewayResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATNetworkSettingEventgetAdvertiseDefaultIPv6RouteEnabled struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabled"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkSettingEventgetAdvertiseDefaultIPv6RouteEnabledResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkSettingEvent_getAdvertiseDefaultIPv6RouteEnabledResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworkSettingEventgetNeedDhcpServer struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkSettingEvent_getNeedDhcpServer"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkSettingEventgetNeedDhcpServerResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkSettingEvent_getNeedDhcpServerResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetCreate struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getCreate"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetCreateResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getCreateResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetIpv6 struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getIpv6"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetIpv6Response struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getIpv6Response"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetName struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getName"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetNameResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getNameResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetProto struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getProto"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetProtoResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getProtoResponse"`
+
+	Returnval *NATProtocol `xml:"returnval,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetHostIp struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getHostIp"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetHostIpResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getHostIpResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetHostPort struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getHostPort"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetHostPortResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getHostPortResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetGuestIp struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getGuestIp"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetGuestIpResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getGuestIpResponse"`
+
+	Returnval string `xml:"returnval,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetGuestPort struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getGuestPort"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type INATNetworkPortForwardEventgetGuestPortResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ INATNetworkPortForwardEvent_getGuestPortResponse"`
+
+	Returnval int32 `xml:"returnval,omitempty"`
+}
+
+type IHostNameResolutionConfigurationChangeEventgetMidlDoesNotLikeEmptyInterfaces struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNameResolutionConfigurationChangeEvent_getMidlDoesNotLikeEmptyInterfaces"`
+
+	This string `xml:"_this,omitempty"`
+}
+
+type IHostNameResolutionConfigurationChangeEventgetMidlDoesNotLikeEmptyInterfacesResponse struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IHostNameResolutionConfigurationChangeEvent_getMidlDoesNotLikeEmptyInterfacesResponse"`
+
+	Returnval bool `xml:"returnval,omitempty"`
+}
+
 type InvalidObjectFault struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ InvalidObjectFault"`
 
@@ -8625,24 +17103,31 @@ type InvalidObjectFault struct {
 type RuntimeFault struct {
 	XMLName xml.Name `xml:"http://www.virtualbox.org/ RuntimeFault"`
 
-	ResultCode  int32  `xml:"resultCode,omitempty"`
-	InterfaceID string `xml:"interfaceID,omitempty"`
-	Component   string `xml:"component,omitempty"`
-	Text        string `xml:"text,omitempty"`
+	ResultCode int32  `xml:"resultCode,omitempty"`
+	Returnval  string `xml:"returnval,omitempty"`
 }
 
-type IRemoteDisplayInfo struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IRemoteDisplayInfo"`
+type IPCIDeviceAttachment struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IPCIDeviceAttachment"`
+
+	Name             string `xml:"name,omitempty"`
+	IsPhysicalDevice bool   `xml:"isPhysicalDevice,omitempty"`
+	HostAddress      int32  `xml:"hostAddress,omitempty"`
+	GuestAddress     int32  `xml:"guestAddress,omitempty"`
+}
+
+type IVRDEServerInfo struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IVRDEServerInfo"`
 
 	Active             bool   `xml:"active,omitempty"`
 	Port               int32  `xml:"port,omitempty"`
 	NumberOfClients    uint32 `xml:"numberOfClients,omitempty"`
 	BeginTime          int64  `xml:"beginTime,omitempty"`
 	EndTime            int64  `xml:"endTime,omitempty"`
-	BytesSent          uint64 `xml:"bytesSent,omitempty"`
-	BytesSentTotal     uint64 `xml:"bytesSentTotal,omitempty"`
-	BytesReceived      uint64 `xml:"bytesReceived,omitempty"`
-	BytesReceivedTotal uint64 `xml:"bytesReceivedTotal,omitempty"`
+	BytesSent          int64  `xml:"bytesSent,omitempty"`
+	BytesSentTotal     int64  `xml:"bytesSentTotal,omitempty"`
+	BytesReceived      int64  `xml:"bytesReceived,omitempty"`
+	BytesReceivedTotal int64  `xml:"bytesReceivedTotal,omitempty"`
 	User               string `xml:"user,omitempty"`
 	Domain             string `xml:"domain,omitempty"`
 	ClientName         string `xml:"clientName,omitempty"`
@@ -8663,29 +17148,53 @@ type IGuestOSType struct {
 	RecommendedVirtEx               bool                   `xml:"recommendedVirtEx,omitempty"`
 	RecommendedRAM                  uint32                 `xml:"recommendedRAM,omitempty"`
 	RecommendedVRAM                 uint32                 `xml:"recommendedVRAM,omitempty"`
-	RecommendedHDD                  uint32                 `xml:"recommendedHDD,omitempty"`
+	Recommended2DVideoAcceleration  bool                   `xml:"recommended2DVideoAcceleration,omitempty"`
+	Recommended3DAcceleration       bool                   `xml:"recommended3DAcceleration,omitempty"`
+	RecommendedHDD                  int64                  `xml:"recommendedHDD,omitempty"`
 	AdapterType                     *NetworkAdapterType    `xml:"adapterType,omitempty"`
-	RecommendedPae                  bool                   `xml:"recommendedPae,omitempty"`
-	RecommendedDvdStorageController *StorageControllerType `xml:"recommendedDvdStorageController,omitempty"`
-	RecommendedDvdStorageBus        *StorageBus            `xml:"recommendedDvdStorageBus,omitempty"`
-	RecommendedHdStorageController  *StorageControllerType `xml:"recommendedHdStorageController,omitempty"`
-	RecommendedHdStorageBus         *StorageBus            `xml:"recommendedHdStorageBus,omitempty"`
+	RecommendedPAE                  bool                   `xml:"recommendedPAE,omitempty"`
+	RecommendedDVDStorageController *StorageControllerType `xml:"recommendedDVDStorageController,omitempty"`
+	RecommendedDVDStorageBus        *StorageBus            `xml:"recommendedDVDStorageBus,omitempty"`
+	RecommendedHDStorageController  *StorageControllerType `xml:"recommendedHDStorageController,omitempty"`
+	RecommendedHDStorageBus         *StorageBus            `xml:"recommendedHDStorageBus,omitempty"`
 	RecommendedFirmware             *FirmwareType          `xml:"recommendedFirmware,omitempty"`
-	RecommendedUsbHid               bool                   `xml:"recommendedUsbHid,omitempty"`
-	RecommendedHpet                 bool                   `xml:"recommendedHpet,omitempty"`
-	RecommendedUsbTablet            bool                   `xml:"recommendedUsbTablet,omitempty"`
-	RecommendedRtcUseUtc            bool                   `xml:"recommendedRtcUseUtc,omitempty"`
+	RecommendedUSBHID               bool                   `xml:"recommendedUSBHID,omitempty"`
+	RecommendedHPET                 bool                   `xml:"recommendedHPET,omitempty"`
+	RecommendedUSBTablet            bool                   `xml:"recommendedUSBTablet,omitempty"`
+	RecommendedRTCUseUTC            bool                   `xml:"recommendedRTCUseUTC,omitempty"`
+	RecommendedChipset              *ChipsetType           `xml:"recommendedChipset,omitempty"`
+	RecommendedAudioController      *AudioControllerType   `xml:"recommendedAudioController,omitempty"`
+	RecommendedAudioCodec           *AudioCodecType        `xml:"recommendedAudioCodec,omitempty"`
+	RecommendedFloppy               bool                   `xml:"recommendedFloppy,omitempty"`
+	RecommendedUSB                  bool                   `xml:"recommendedUSB,omitempty"`
+	RecommendedTFReset              bool                   `xml:"recommendedTFReset,omitempty"`
+}
+
+type IAdditionsFacility struct {
+	XMLName xml.Name `xml:"http://www.virtualbox.org/ IAdditionsFacility"`
+
+	ClassType   *AdditionsFacilityClass  `xml:"classType,omitempty"`
+	LastUpdated int64                    `xml:"lastUpdated,omitempty"`
+	Name        string                   `xml:"name,omitempty"`
+	Status      *AdditionsFacilityStatus `xml:"status,omitempty"`
+	Type_       *AdditionsFacilityType   `xml:"type,omitempty"`
 }
 
 type IMediumAttachment struct {
-	XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumAttachment"`
+	// XMLName xml.Name `xml:"http://www.virtualbox.org/ IMediumAttachment"`
 
-	Medium      string      `xml:"medium,omitempty"`
-	Controller  string      `xml:"controller,omitempty"`
-	Port        int32       `xml:"port,omitempty"`
-	Device      int32       `xml:"device,omitempty"`
-	Type_       *DeviceType `xml:"type,omitempty"`
-	Passthrough bool        `xml:"passthrough,omitempty"`
+	Medium         string      `xml:"medium,omitempty"`
+	Controller     string      `xml:"controller,omitempty"`
+	Port           int32       `xml:"port,omitempty"`
+	Device         int32       `xml:"device,omitempty"`
+	Type_          *DeviceType `xml:"type,omitempty"`
+	Passthrough    bool        `xml:"passthrough,omitempty"`
+	TemporaryEject bool        `xml:"temporaryEject,omitempty"`
+	IsEjected      bool        `xml:"isEjected,omitempty"`
+	NonRotational  bool        `xml:"nonRotational,omitempty"`
+	Discard        bool        `xml:"discard,omitempty"`
+	HotPluggable   bool        `xml:"hotPluggable,omitempty"`
+	BandwidthGroup string      `xml:"bandwidthGroup,omitempty"`
 }
 
 type ISharedFolder struct {
@@ -8695,6 +17204,7 @@ type ISharedFolder struct {
 	HostPath        string `xml:"hostPath,omitempty"`
 	Accessible      bool   `xml:"accessible,omitempty"`
 	Writable        bool   `xml:"writable,omitempty"`
+	AutoMount       bool   `xml:"autoMount,omitempty"`
 	LastAccessError string `xml:"lastAccessError,omitempty"`
 }
 
@@ -8720,6 +17230,21 @@ func NewVboxPortType(url string, tls bool, auth *BasicAuth) *VboxPortType {
 
 func (service *VboxPortType) IVirtualBoxErrorInfogetResultCode(request *IVirtualBoxErrorInfogetResultCode) (*IVirtualBoxErrorInfogetResultCodeResponse, error) {
 	response := new(IVirtualBoxErrorInfogetResultCodeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVirtualBoxErrorInfogetResultDetail(request *IVirtualBoxErrorInfogetResultDetail) (*IVirtualBoxErrorInfogetResultDetailResponse, error) {
+	response := new(IVirtualBoxErrorInfogetResultDetailResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -8780,6 +17305,411 @@ func (service *VboxPortType) IVirtualBoxErrorInfogetText(request *IVirtualBoxErr
 
 func (service *VboxPortType) IVirtualBoxErrorInfogetNext(request *IVirtualBoxErrorInfogetNext) (*IVirtualBoxErrorInfogetNextResponse, error) {
 	response := new(IVirtualBoxErrorInfogetNextResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetNetworkName(request *INATNetworkgetNetworkName) (*INATNetworkgetNetworkNameResponse, error) {
+	response := new(INATNetworkgetNetworkNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworksetNetworkName(request *INATNetworksetNetworkName) (*INATNetworksetNetworkNameResponse, error) {
+	response := new(INATNetworksetNetworkNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetEnabled(request *INATNetworkgetEnabled) (*INATNetworkgetEnabledResponse, error) {
+	response := new(INATNetworkgetEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworksetEnabled(request *INATNetworksetEnabled) (*INATNetworksetEnabledResponse, error) {
+	response := new(INATNetworksetEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetNetwork(request *INATNetworkgetNetwork) (*INATNetworkgetNetworkResponse, error) {
+	response := new(INATNetworkgetNetworkResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworksetNetwork(request *INATNetworksetNetwork) (*INATNetworksetNetworkResponse, error) {
+	response := new(INATNetworksetNetworkResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetGateway(request *INATNetworkgetGateway) (*INATNetworkgetGatewayResponse, error) {
+	response := new(INATNetworkgetGatewayResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetIPv6Enabled(request *INATNetworkgetIPv6Enabled) (*INATNetworkgetIPv6EnabledResponse, error) {
+	response := new(INATNetworkgetIPv6EnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworksetIPv6Enabled(request *INATNetworksetIPv6Enabled) (*INATNetworksetIPv6EnabledResponse, error) {
+	response := new(INATNetworksetIPv6EnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetIPv6Prefix(request *INATNetworkgetIPv6Prefix) (*INATNetworkgetIPv6PrefixResponse, error) {
+	response := new(INATNetworkgetIPv6PrefixResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworksetIPv6Prefix(request *INATNetworksetIPv6Prefix) (*INATNetworksetIPv6PrefixResponse, error) {
+	response := new(INATNetworksetIPv6PrefixResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetAdvertiseDefaultIPv6RouteEnabled(request *INATNetworkgetAdvertiseDefaultIPv6RouteEnabled) (*INATNetworkgetAdvertiseDefaultIPv6RouteEnabledResponse, error) {
+	response := new(INATNetworkgetAdvertiseDefaultIPv6RouteEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworksetAdvertiseDefaultIPv6RouteEnabled(request *INATNetworksetAdvertiseDefaultIPv6RouteEnabled) (*INATNetworksetAdvertiseDefaultIPv6RouteEnabledResponse, error) {
+	response := new(INATNetworksetAdvertiseDefaultIPv6RouteEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetNeedDhcpServer(request *INATNetworkgetNeedDhcpServer) (*INATNetworkgetNeedDhcpServerResponse, error) {
+	response := new(INATNetworkgetNeedDhcpServerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworksetNeedDhcpServer(request *INATNetworksetNeedDhcpServer) (*INATNetworksetNeedDhcpServerResponse, error) {
+	response := new(INATNetworksetNeedDhcpServerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetEventSource(request *INATNetworkgetEventSource) (*INATNetworkgetEventSourceResponse, error) {
+	response := new(INATNetworkgetEventSourceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetPortForwardRules4(request *INATNetworkgetPortForwardRules4) (*INATNetworkgetPortForwardRules4Response, error) {
+	response := new(INATNetworkgetPortForwardRules4Response)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetLocalMappings(request *INATNetworkgetLocalMappings) (*INATNetworkgetLocalMappingsResponse, error) {
+	response := new(INATNetworkgetLocalMappingsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetLoopbackIp6(request *INATNetworkgetLoopbackIp6) (*INATNetworkgetLoopbackIp6Response, error) {
+	response := new(INATNetworkgetLoopbackIp6Response)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworksetLoopbackIp6(request *INATNetworksetLoopbackIp6) (*INATNetworksetLoopbackIp6Response, error) {
+	response := new(INATNetworksetLoopbackIp6Response)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkgetPortForwardRules6(request *INATNetworkgetPortForwardRules6) (*INATNetworkgetPortForwardRules6Response, error) {
+	response := new(INATNetworkgetPortForwardRules6Response)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkaddLocalMapping(request *INATNetworkaddLocalMapping) (*INATNetworkaddLocalMappingResponse, error) {
+	response := new(INATNetworkaddLocalMappingResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkaddPortForwardRule(request *INATNetworkaddPortForwardRule) (*INATNetworkaddPortForwardRuleResponse, error) {
+	response := new(INATNetworkaddPortForwardRuleResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkremovePortForwardRule(request *INATNetworkremovePortForwardRule) (*INATNetworkremovePortForwardRuleResponse, error) {
+	response := new(INATNetworkremovePortForwardRuleResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkstart(request *INATNetworkstart) (*INATNetworkstartResponse, error) {
+	response := new(INATNetworkstartResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkstop(request *INATNetworkstop) (*INATNetworkstopResponse, error) {
+	response := new(INATNetworkstopResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDHCPServergetEventSource(request *IDHCPServergetEventSource) (*IDHCPServergetEventSourceResponse, error) {
+	response := new(IDHCPServergetEventSourceResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -8898,6 +17828,111 @@ func (service *VboxPortType) IDHCPServergetUpperIP(request *IDHCPServergetUpperI
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IDHCPServergetGlobalOptions(request *IDHCPServergetGlobalOptions) (*IDHCPServergetGlobalOptionsResponse, error) {
+	response := new(IDHCPServergetGlobalOptionsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDHCPServergetVmConfigs(request *IDHCPServergetVmConfigs) (*IDHCPServergetVmConfigsResponse, error) {
+	response := new(IDHCPServergetVmConfigsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDHCPServeraddGlobalOption(request *IDHCPServeraddGlobalOption) (*IDHCPServeraddGlobalOptionResponse, error) {
+	response := new(IDHCPServeraddGlobalOptionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDHCPServeraddVmSlotOption(request *IDHCPServeraddVmSlotOption) (*IDHCPServeraddVmSlotOptionResponse, error) {
+	response := new(IDHCPServeraddVmSlotOptionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDHCPServerremoveVmSlotOptions(request *IDHCPServerremoveVmSlotOptions) (*IDHCPServerremoveVmSlotOptionsResponse, error) {
+	response := new(IDHCPServerremoveVmSlotOptionsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDHCPServergetVmSlotOptions(request *IDHCPServergetVmSlotOptions) (*IDHCPServergetVmSlotOptionsResponse, error) {
+	response := new(IDHCPServergetVmSlotOptionsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDHCPServergetMacOptions(request *IDHCPServergetMacOptions) (*IDHCPServergetMacOptionsResponse, error) {
+	response := new(IDHCPServergetMacOptionsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IDHCPServersetConfiguration(request *IDHCPServersetConfiguration) (*IDHCPServersetConfigurationResponse, error) {
 	response := new(IDHCPServersetConfigurationResponse)
 	err := service.client.Call("", request, response)
@@ -8958,6 +17993,21 @@ func (service *VboxPortType) IVirtualBoxgetVersion(request *IVirtualBoxgetVersio
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IVirtualBoxgetVersionNormalized(request *IVirtualBoxgetVersionNormalized) (*IVirtualBoxgetVersionNormalizedResponse, error) {
+	response := new(IVirtualBoxgetVersionNormalizedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IVirtualBoxgetRevision(request *IVirtualBoxgetRevision) (*IVirtualBoxgetRevisionResponse, error) {
 	response := new(IVirtualBoxgetRevisionResponse)
 	err := service.client.Call("", request, response)
@@ -8975,6 +18025,36 @@ func (service *VboxPortType) IVirtualBoxgetRevision(request *IVirtualBoxgetRevis
 
 func (service *VboxPortType) IVirtualBoxgetPackageType(request *IVirtualBoxgetPackageType) (*IVirtualBoxgetPackageTypeResponse, error) {
 	response := new(IVirtualBoxgetPackageTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVirtualBoxgetAPIVersion(request *IVirtualBoxgetAPIVersion) (*IVirtualBoxgetAPIVersionResponse, error) {
+	response := new(IVirtualBoxgetAPIVersionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVirtualBoxgetAPIRevision(request *IVirtualBoxgetAPIRevision) (*IVirtualBoxgetAPIRevisionResponse, error) {
+	response := new(IVirtualBoxgetAPIRevisionResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -9050,6 +18130,21 @@ func (service *VboxPortType) IVirtualBoxgetSystemProperties(request *IVirtualBox
 
 func (service *VboxPortType) IVirtualBoxgetMachines(request *IVirtualBoxgetMachines) (*IVirtualBoxgetMachinesResponse, error) {
 	response := new(IVirtualBoxgetMachinesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVirtualBoxgetMachineGroups(request *IVirtualBoxgetMachineGroups) (*IVirtualBoxgetMachineGroupsResponse, error) {
+	response := new(IVirtualBoxgetMachineGroupsResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -9183,8 +18278,8 @@ func (service *VboxPortType) IVirtualBoxgetDHCPServers(request *IVirtualBoxgetDH
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVirtualBoxcreateMachine(request *IVirtualBoxcreateMachine) (*IVirtualBoxcreateMachineResponse, error) {
-	response := new(IVirtualBoxcreateMachineResponse)
+func (service *VboxPortType) IVirtualBoxgetNATNetworks(request *IVirtualBoxgetNATNetworks) (*IVirtualBoxgetNATNetworksResponse, error) {
+	response := new(IVirtualBoxgetNATNetworksResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -9198,8 +18293,68 @@ func (service *VboxPortType) IVirtualBoxcreateMachine(request *IVirtualBoxcreate
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVirtualBoxcreateLegacyMachine(request *IVirtualBoxcreateLegacyMachine) (*IVirtualBoxcreateLegacyMachineResponse, error) {
-	response := new(IVirtualBoxcreateLegacyMachineResponse)
+func (service *VboxPortType) IVirtualBoxgetEventSource(request *IVirtualBoxgetEventSource) (*IVirtualBoxgetEventSourceResponse, error) {
+	response := new(IVirtualBoxgetEventSourceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVirtualBoxgetInternalNetworks(request *IVirtualBoxgetInternalNetworks) (*IVirtualBoxgetInternalNetworksResponse, error) {
+	response := new(IVirtualBoxgetInternalNetworksResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVirtualBoxgetGenericNetworkDrivers(request *IVirtualBoxgetGenericNetworkDrivers) (*IVirtualBoxgetGenericNetworkDriversResponse, error) {
+	response := new(IVirtualBoxgetGenericNetworkDriversResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVirtualBoxcomposeMachineFilename(request *IVirtualBoxcomposeMachineFilename) (*IVirtualBoxcomposeMachineFilenameResponse, error) {
+	response := new(IVirtualBoxcomposeMachineFilenameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVirtualBoxcreateMachine(request *IVirtualBoxcreateMachine) (*IVirtualBoxcreateMachineResponse, error) {
+	response := new(IVirtualBoxcreateMachineResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -9243,21 +18398,6 @@ func (service *VboxPortType) IVirtualBoxregisterMachine(request *IVirtualBoxregi
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVirtualBoxgetMachine(request *IVirtualBoxgetMachine) (*IVirtualBoxgetMachineResponse, error) {
-	response := new(IVirtualBoxgetMachineResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
 func (service *VboxPortType) IVirtualBoxfindMachine(request *IVirtualBoxfindMachine) (*IVirtualBoxfindMachineResponse, error) {
 	response := new(IVirtualBoxfindMachineResponse)
 	err := service.client.Call("", request, response)
@@ -9273,8 +18413,23 @@ func (service *VboxPortType) IVirtualBoxfindMachine(request *IVirtualBoxfindMach
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVirtualBoxunregisterMachine(request *IVirtualBoxunregisterMachine) (*IVirtualBoxunregisterMachineResponse, error) {
-	response := new(IVirtualBoxunregisterMachineResponse)
+func (service *VboxPortType) IVirtualBoxgetMachinesByGroups(request *IVirtualBoxgetMachinesByGroups) (*IVirtualBoxgetMachinesByGroupsResponse, error) {
+	response := new(IVirtualBoxgetMachinesByGroupsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVirtualBoxgetMachineStates(request *IVirtualBoxgetMachineStates) (*IVirtualBoxgetMachineStatesResponse, error) {
+	response := new(IVirtualBoxgetMachineStatesResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -9303,8 +18458,8 @@ func (service *VboxPortType) IVirtualBoxcreateAppliance(request *IVirtualBoxcrea
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVirtualBoxcreateHardDisk(request *IVirtualBoxcreateHardDisk) (*IVirtualBoxcreateHardDiskResponse, error) {
-	response := new(IVirtualBoxcreateHardDiskResponse)
+func (service *VboxPortType) IVirtualBoxcreateMedium(request *IVirtualBoxcreateMedium) (*IVirtualBoxcreateMediumResponse, error) {
+	response := new(IVirtualBoxcreateMediumResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -9318,128 +18473,8 @@ func (service *VboxPortType) IVirtualBoxcreateHardDisk(request *IVirtualBoxcreat
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVirtualBoxopenHardDisk(request *IVirtualBoxopenHardDisk) (*IVirtualBoxopenHardDiskResponse, error) {
-	response := new(IVirtualBoxopenHardDiskResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IVirtualBoxgetHardDisk(request *IVirtualBoxgetHardDisk) (*IVirtualBoxgetHardDiskResponse, error) {
-	response := new(IVirtualBoxgetHardDiskResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IVirtualBoxfindHardDisk(request *IVirtualBoxfindHardDisk) (*IVirtualBoxfindHardDiskResponse, error) {
-	response := new(IVirtualBoxfindHardDiskResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IVirtualBoxopenDVDImage(request *IVirtualBoxopenDVDImage) (*IVirtualBoxopenDVDImageResponse, error) {
-	response := new(IVirtualBoxopenDVDImageResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IVirtualBoxgetDVDImage(request *IVirtualBoxgetDVDImage) (*IVirtualBoxgetDVDImageResponse, error) {
-	response := new(IVirtualBoxgetDVDImageResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IVirtualBoxfindDVDImage(request *IVirtualBoxfindDVDImage) (*IVirtualBoxfindDVDImageResponse, error) {
-	response := new(IVirtualBoxfindDVDImageResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IVirtualBoxopenFloppyImage(request *IVirtualBoxopenFloppyImage) (*IVirtualBoxopenFloppyImageResponse, error) {
-	response := new(IVirtualBoxopenFloppyImageResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IVirtualBoxgetFloppyImage(request *IVirtualBoxgetFloppyImage) (*IVirtualBoxgetFloppyImageResponse, error) {
-	response := new(IVirtualBoxgetFloppyImageResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IVirtualBoxfindFloppyImage(request *IVirtualBoxfindFloppyImage) (*IVirtualBoxfindFloppyImageResponse, error) {
-	response := new(IVirtualBoxfindFloppyImageResponse)
+func (service *VboxPortType) IVirtualBoxopenMedium(request *IVirtualBoxopenMedium) (*IVirtualBoxopenMediumResponse, error) {
+	response := new(IVirtualBoxopenMediumResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -9543,53 +18578,8 @@ func (service *VboxPortType) IVirtualBoxsetExtraData(request *IVirtualBoxsetExtr
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVirtualBoxopenSession(request *IVirtualBoxopenSession) (*IVirtualBoxopenSessionResponse, error) {
-	response := new(IVirtualBoxopenSessionResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IVirtualBoxopenRemoteSession(request *IVirtualBoxopenRemoteSession) (*IVirtualBoxopenRemoteSessionResponse, error) {
-	response := new(IVirtualBoxopenRemoteSessionResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IVirtualBoxopenExistingSession(request *IVirtualBoxopenExistingSession) (*IVirtualBoxopenExistingSessionResponse, error) {
-	response := new(IVirtualBoxopenExistingSessionResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IVirtualBoxwaitForPropertyChange(request *IVirtualBoxwaitForPropertyChange) (*IVirtualBoxwaitForPropertyChangeResponse, error) {
-	response := new(IVirtualBoxwaitForPropertyChangeResponse)
+func (service *VboxPortType) IVirtualBoxsetSettingsSecret(request *IVirtualBoxsetSettingsSecret) (*IVirtualBoxsetSettingsSecretResponse, error) {
+	response := new(IVirtualBoxsetSettingsSecretResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -9635,6 +18625,51 @@ func (service *VboxPortType) IVirtualBoxfindDHCPServerByNetworkName(request *IVi
 
 func (service *VboxPortType) IVirtualBoxremoveDHCPServer(request *IVirtualBoxremoveDHCPServer) (*IVirtualBoxremoveDHCPServerResponse, error) {
 	response := new(IVirtualBoxremoveDHCPServerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVirtualBoxcreateNATNetwork(request *IVirtualBoxcreateNATNetwork) (*IVirtualBoxcreateNATNetworkResponse, error) {
+	response := new(IVirtualBoxcreateNATNetworkResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVirtualBoxfindNATNetworkByName(request *IVirtualBoxfindNATNetworkByName) (*IVirtualBoxfindNATNetworkByNameResponse, error) {
+	response := new(IVirtualBoxfindNATNetworkByNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVirtualBoxremoveNATNetwork(request *IVirtualBoxremoveNATNetwork) (*IVirtualBoxremoveNATNetworkResponse, error) {
+	response := new(IVirtualBoxremoveNATNetworkResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -9828,6 +18863,21 @@ func (service *VboxPortType) IAppliancegetVirtualSystemDescriptions(request *IAp
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IAppliancegetMachines(request *IAppliancegetMachines) (*IAppliancegetMachinesResponse, error) {
+	response := new(IAppliancegetMachinesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IApplianceread(request *IApplianceread) (*IAppliancereadResponse, error) {
 	response := new(IAppliancereadResponse)
 	err := service.client.Call("", request, response)
@@ -9905,6 +18955,51 @@ func (service *VboxPortType) IAppliancewrite(request *IAppliancewrite) (*IApplia
 
 func (service *VboxPortType) IAppliancegetWarnings(request *IAppliancegetWarnings) (*IAppliancegetWarningsResponse, error) {
 	response := new(IAppliancegetWarningsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IAppliancegetPasswordIds(request *IAppliancegetPasswordIds) (*IAppliancegetPasswordIdsResponse, error) {
+	response := new(IAppliancegetPasswordIdsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IAppliancegetMediumIdsForPasswordId(request *IAppliancegetMediumIdsForPasswordId) (*IAppliancegetMediumIdsForPasswordIdResponse, error) {
+	response := new(IAppliancegetMediumIdsForPasswordIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IApplianceaddPasswords(request *IApplianceaddPasswords) (*IApplianceaddPasswordsResponse, error) {
+	response := new(IApplianceaddPasswordsResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -10278,8 +19373,173 @@ func (service *VboxPortType) IBIOSSettingssetPXEDebugEnabled(request *IBIOSSetti
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IBIOSSettingsgetNonVolatileStorageFile(request *IBIOSSettingsgetNonVolatileStorageFile) (*IBIOSSettingsgetNonVolatileStorageFileResponse, error) {
+	response := new(IBIOSSettingsgetNonVolatileStorageFileResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IPCIAddressgetBus(request *IPCIAddressgetBus) (*IPCIAddressgetBusResponse, error) {
+	response := new(IPCIAddressgetBusResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IPCIAddresssetBus(request *IPCIAddresssetBus) (*IPCIAddresssetBusResponse, error) {
+	response := new(IPCIAddresssetBusResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IPCIAddressgetDevice(request *IPCIAddressgetDevice) (*IPCIAddressgetDeviceResponse, error) {
+	response := new(IPCIAddressgetDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IPCIAddresssetDevice(request *IPCIAddresssetDevice) (*IPCIAddresssetDeviceResponse, error) {
+	response := new(IPCIAddresssetDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IPCIAddressgetDevFunction(request *IPCIAddressgetDevFunction) (*IPCIAddressgetDevFunctionResponse, error) {
+	response := new(IPCIAddressgetDevFunctionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IPCIAddresssetDevFunction(request *IPCIAddresssetDevFunction) (*IPCIAddresssetDevFunctionResponse, error) {
+	response := new(IPCIAddresssetDevFunctionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IPCIAddressasLong(request *IPCIAddressasLong) (*IPCIAddressasLongResponse, error) {
+	response := new(IPCIAddressasLongResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IPCIAddressfromLong(request *IPCIAddressfromLong) (*IPCIAddressfromLongResponse, error) {
+	response := new(IPCIAddressfromLongResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMachinegetParent(request *IMachinegetParent) (*IMachinegetParentResponse, error) {
 	response := new(IMachinegetParentResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetIcon(request *IMachinegetIcon) (*IMachinegetIconResponse, error) {
+	response := new(IMachinegetIconResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetIcon(request *IMachinesetIcon) (*IMachinesetIconResponse, error) {
+	response := new(IMachinesetIconResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -10385,6 +19645,36 @@ func (service *VboxPortType) IMachinesetDescription(request *IMachinesetDescript
 
 func (service *VboxPortType) IMachinegetId(request *IMachinegetId) (*IMachinegetIdResponse, error) {
 	response := new(IMachinegetIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetGroups(request *IMachinegetGroups) (*IMachinegetGroupsResponse, error) {
+	response := new(IMachinegetGroupsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetGroups(request *IMachinesetGroups) (*IMachinesetGroupsResponse, error) {
+	response := new(IMachinesetGroupsResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -10548,6 +19838,66 @@ func (service *VboxPortType) IMachinesetCPUHotPlugEnabled(request *IMachinesetCP
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMachinegetCPUExecutionCap(request *IMachinegetCPUExecutionCap) (*IMachinegetCPUExecutionCapResponse, error) {
+	response := new(IMachinegetCPUExecutionCapResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetCPUExecutionCap(request *IMachinesetCPUExecutionCap) (*IMachinesetCPUExecutionCapResponse, error) {
+	response := new(IMachinesetCPUExecutionCapResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetCPUIDPortabilityLevel(request *IMachinegetCPUIDPortabilityLevel) (*IMachinegetCPUIDPortabilityLevelResponse, error) {
+	response := new(IMachinegetCPUIDPortabilityLevelResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetCPUIDPortabilityLevel(request *IMachinesetCPUIDPortabilityLevel) (*IMachinesetCPUIDPortabilityLevelResponse, error) {
+	response := new(IMachinesetCPUIDPortabilityLevelResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMachinegetMemorySize(request *IMachinegetMemorySize) (*IMachinegetMemorySizeResponse, error) {
 	response := new(IMachinegetMemorySizeResponse)
 	err := service.client.Call("", request, response)
@@ -10625,6 +19975,36 @@ func (service *VboxPortType) IMachinegetPageFusionEnabled(request *IMachinegetPa
 
 func (service *VboxPortType) IMachinesetPageFusionEnabled(request *IMachinesetPageFusionEnabled) (*IMachinesetPageFusionEnabledResponse, error) {
 	response := new(IMachinesetPageFusionEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetGraphicsControllerType(request *IMachinegetGraphicsControllerType) (*IMachinegetGraphicsControllerTypeResponse, error) {
+	response := new(IMachinegetGraphicsControllerTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetGraphicsControllerType(request *IMachinesetGraphicsControllerType) (*IMachinesetGraphicsControllerTypeResponse, error) {
+	response := new(IMachinesetGraphicsControllerTypeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -10758,6 +20138,306 @@ func (service *VboxPortType) IMachinesetMonitorCount(request *IMachinesetMonitor
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMachinegetVideoCaptureEnabled(request *IMachinegetVideoCaptureEnabled) (*IMachinegetVideoCaptureEnabledResponse, error) {
+	response := new(IMachinegetVideoCaptureEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetVideoCaptureEnabled(request *IMachinesetVideoCaptureEnabled) (*IMachinesetVideoCaptureEnabledResponse, error) {
+	response := new(IMachinesetVideoCaptureEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetVideoCaptureScreens(request *IMachinegetVideoCaptureScreens) (*IMachinegetVideoCaptureScreensResponse, error) {
+	response := new(IMachinegetVideoCaptureScreensResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetVideoCaptureScreens(request *IMachinesetVideoCaptureScreens) (*IMachinesetVideoCaptureScreensResponse, error) {
+	response := new(IMachinesetVideoCaptureScreensResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetVideoCaptureFile(request *IMachinegetVideoCaptureFile) (*IMachinegetVideoCaptureFileResponse, error) {
+	response := new(IMachinegetVideoCaptureFileResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetVideoCaptureFile(request *IMachinesetVideoCaptureFile) (*IMachinesetVideoCaptureFileResponse, error) {
+	response := new(IMachinesetVideoCaptureFileResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetVideoCaptureWidth(request *IMachinegetVideoCaptureWidth) (*IMachinegetVideoCaptureWidthResponse, error) {
+	response := new(IMachinegetVideoCaptureWidthResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetVideoCaptureWidth(request *IMachinesetVideoCaptureWidth) (*IMachinesetVideoCaptureWidthResponse, error) {
+	response := new(IMachinesetVideoCaptureWidthResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetVideoCaptureHeight(request *IMachinegetVideoCaptureHeight) (*IMachinegetVideoCaptureHeightResponse, error) {
+	response := new(IMachinegetVideoCaptureHeightResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetVideoCaptureHeight(request *IMachinesetVideoCaptureHeight) (*IMachinesetVideoCaptureHeightResponse, error) {
+	response := new(IMachinesetVideoCaptureHeightResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetVideoCaptureRate(request *IMachinegetVideoCaptureRate) (*IMachinegetVideoCaptureRateResponse, error) {
+	response := new(IMachinegetVideoCaptureRateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetVideoCaptureRate(request *IMachinesetVideoCaptureRate) (*IMachinesetVideoCaptureRateResponse, error) {
+	response := new(IMachinesetVideoCaptureRateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetVideoCaptureFPS(request *IMachinegetVideoCaptureFPS) (*IMachinegetVideoCaptureFPSResponse, error) {
+	response := new(IMachinegetVideoCaptureFPSResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetVideoCaptureFPS(request *IMachinesetVideoCaptureFPS) (*IMachinesetVideoCaptureFPSResponse, error) {
+	response := new(IMachinesetVideoCaptureFPSResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetVideoCaptureMaxTime(request *IMachinegetVideoCaptureMaxTime) (*IMachinegetVideoCaptureMaxTimeResponse, error) {
+	response := new(IMachinegetVideoCaptureMaxTimeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetVideoCaptureMaxTime(request *IMachinesetVideoCaptureMaxTime) (*IMachinesetVideoCaptureMaxTimeResponse, error) {
+	response := new(IMachinesetVideoCaptureMaxTimeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetVideoCaptureMaxFileSize(request *IMachinegetVideoCaptureMaxFileSize) (*IMachinegetVideoCaptureMaxFileSizeResponse, error) {
+	response := new(IMachinegetVideoCaptureMaxFileSizeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetVideoCaptureMaxFileSize(request *IMachinesetVideoCaptureMaxFileSize) (*IMachinesetVideoCaptureMaxFileSizeResponse, error) {
+	response := new(IMachinesetVideoCaptureMaxFileSizeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetVideoCaptureOptions(request *IMachinegetVideoCaptureOptions) (*IMachinegetVideoCaptureOptionsResponse, error) {
+	response := new(IMachinegetVideoCaptureOptionsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetVideoCaptureOptions(request *IMachinesetVideoCaptureOptions) (*IMachinesetVideoCaptureOptionsResponse, error) {
+	response := new(IMachinesetVideoCaptureOptionsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMachinegetBIOSSettings(request *IMachinegetBIOSSettings) (*IMachinegetBIOSSettingsResponse, error) {
 	response := new(IMachinegetBIOSSettingsResponse)
 	err := service.client.Call("", request, response)
@@ -10803,8 +20483,8 @@ func (service *VboxPortType) IMachinesetFirmwareType(request *IMachinesetFirmwar
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinegetPointingHidType(request *IMachinegetPointingHidType) (*IMachinegetPointingHidTypeResponse, error) {
-	response := new(IMachinegetPointingHidTypeResponse)
+func (service *VboxPortType) IMachinegetPointingHIDType(request *IMachinegetPointingHIDType) (*IMachinegetPointingHIDTypeResponse, error) {
+	response := new(IMachinegetPointingHIDTypeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -10818,8 +20498,8 @@ func (service *VboxPortType) IMachinegetPointingHidType(request *IMachinegetPoin
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinesetPointingHidType(request *IMachinesetPointingHidType) (*IMachinesetPointingHidTypeResponse, error) {
-	response := new(IMachinesetPointingHidTypeResponse)
+func (service *VboxPortType) IMachinesetPointingHIDType(request *IMachinesetPointingHIDType) (*IMachinesetPointingHIDTypeResponse, error) {
+	response := new(IMachinesetPointingHIDTypeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -10833,8 +20513,8 @@ func (service *VboxPortType) IMachinesetPointingHidType(request *IMachinesetPoin
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinegetKeyboardHidType(request *IMachinegetKeyboardHidType) (*IMachinegetKeyboardHidTypeResponse, error) {
-	response := new(IMachinegetKeyboardHidTypeResponse)
+func (service *VboxPortType) IMachinegetKeyboardHIDType(request *IMachinegetKeyboardHIDType) (*IMachinegetKeyboardHIDTypeResponse, error) {
+	response := new(IMachinegetKeyboardHIDTypeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -10848,8 +20528,8 @@ func (service *VboxPortType) IMachinegetKeyboardHidType(request *IMachinegetKeyb
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinesetKeyboardHidType(request *IMachinesetKeyboardHidType) (*IMachinesetKeyboardHidTypeResponse, error) {
-	response := new(IMachinesetKeyboardHidTypeResponse)
+func (service *VboxPortType) IMachinesetKeyboardHIDType(request *IMachinesetKeyboardHIDType) (*IMachinesetKeyboardHIDTypeResponse, error) {
+	response := new(IMachinesetKeyboardHIDTypeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -10863,8 +20543,8 @@ func (service *VboxPortType) IMachinesetKeyboardHidType(request *IMachinesetKeyb
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinegetHpetEnabled(request *IMachinegetHpetEnabled) (*IMachinegetHpetEnabledResponse, error) {
-	response := new(IMachinegetHpetEnabledResponse)
+func (service *VboxPortType) IMachinegetHPETEnabled(request *IMachinegetHPETEnabled) (*IMachinegetHPETEnabledResponse, error) {
+	response := new(IMachinegetHPETEnabledResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -10878,8 +20558,38 @@ func (service *VboxPortType) IMachinegetHpetEnabled(request *IMachinegetHpetEnab
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinesetHpetEnabled(request *IMachinesetHpetEnabled) (*IMachinesetHpetEnabledResponse, error) {
-	response := new(IMachinesetHpetEnabledResponse)
+func (service *VboxPortType) IMachinesetHPETEnabled(request *IMachinesetHPETEnabled) (*IMachinesetHPETEnabledResponse, error) {
+	response := new(IMachinesetHPETEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetChipsetType(request *IMachinegetChipsetType) (*IMachinegetChipsetTypeResponse, error) {
+	response := new(IMachinegetChipsetTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetChipsetType(request *IMachinesetChipsetType) (*IMachinesetChipsetTypeResponse, error) {
+	response := new(IMachinesetChipsetTypeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -10923,8 +20633,38 @@ func (service *VboxPortType) IMachinesetSnapshotFolder(request *IMachinesetSnaps
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinegetVRDPServer(request *IMachinegetVRDPServer) (*IMachinegetVRDPServerResponse, error) {
-	response := new(IMachinegetVRDPServerResponse)
+func (service *VboxPortType) IMachinegetVRDEServer(request *IMachinegetVRDEServer) (*IMachinegetVRDEServerResponse, error) {
+	response := new(IMachinegetVRDEServerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetEmulatedUSBCardReaderEnabled(request *IMachinegetEmulatedUSBCardReaderEnabled) (*IMachinegetEmulatedUSBCardReaderEnabledResponse, error) {
+	response := new(IMachinegetEmulatedUSBCardReaderEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetEmulatedUSBCardReaderEnabled(request *IMachinesetEmulatedUSBCardReaderEnabled) (*IMachinesetEmulatedUSBCardReaderEnabledResponse, error) {
+	response := new(IMachinesetEmulatedUSBCardReaderEnabledResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -10953,8 +20693,23 @@ func (service *VboxPortType) IMachinegetMediumAttachments(request *IMachinegetMe
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinegetUSBController(request *IMachinegetUSBController) (*IMachinegetUSBControllerResponse, error) {
-	response := new(IMachinegetUSBControllerResponse)
+func (service *VboxPortType) IMachinegetUSBControllers(request *IMachinegetUSBControllers) (*IMachinegetUSBControllersResponse, error) {
+	response := new(IMachinegetUSBControllersResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetUSBDeviceFilters(request *IMachinegetUSBDeviceFilters) (*IMachinegetUSBDeviceFiltersResponse, error) {
+	response := new(IMachinegetUSBDeviceFiltersResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11043,8 +20798,8 @@ func (service *VboxPortType) IMachinegetSessionState(request *IMachinegetSession
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinegetSessionType(request *IMachinegetSessionType) (*IMachinegetSessionTypeResponse, error) {
-	response := new(IMachinegetSessionTypeResponse)
+func (service *VboxPortType) IMachinegetSessionName(request *IMachinegetSessionName) (*IMachinegetSessionNameResponse, error) {
+	response := new(IMachinegetSessionNameResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11058,8 +20813,8 @@ func (service *VboxPortType) IMachinegetSessionType(request *IMachinegetSessionT
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinegetSessionPid(request *IMachinegetSessionPid) (*IMachinegetSessionPidResponse, error) {
-	response := new(IMachinegetSessionPidResponse)
+func (service *VboxPortType) IMachinegetSessionPID(request *IMachinegetSessionPID) (*IMachinegetSessionPIDResponse, error) {
+	response := new(IMachinegetSessionPIDResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11223,8 +20978,8 @@ func (service *VboxPortType) IMachinesetClipboardMode(request *IMachinesetClipbo
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinegetGuestPropertyNotificationPatterns(request *IMachinegetGuestPropertyNotificationPatterns) (*IMachinegetGuestPropertyNotificationPatternsResponse, error) {
-	response := new(IMachinegetGuestPropertyNotificationPatternsResponse)
+func (service *VboxPortType) IMachinegetDnDMode(request *IMachinegetDnDMode) (*IMachinegetDnDModeResponse, error) {
+	response := new(IMachinegetDnDModeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11238,8 +20993,8 @@ func (service *VboxPortType) IMachinegetGuestPropertyNotificationPatterns(reques
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinesetGuestPropertyNotificationPatterns(request *IMachinesetGuestPropertyNotificationPatterns) (*IMachinesetGuestPropertyNotificationPatternsResponse, error) {
-	response := new(IMachinesetGuestPropertyNotificationPatternsResponse)
+func (service *VboxPortType) IMachinesetDnDMode(request *IMachinesetDnDMode) (*IMachinesetDnDModeResponse, error) {
+	response := new(IMachinesetDnDModeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11373,6 +21128,186 @@ func (service *VboxPortType) IMachinesetTeleporterPassword(request *IMachinesetT
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMachinegetParavirtProvider(request *IMachinegetParavirtProvider) (*IMachinegetParavirtProviderResponse, error) {
+	response := new(IMachinegetParavirtProviderResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetParavirtProvider(request *IMachinesetParavirtProvider) (*IMachinesetParavirtProviderResponse, error) {
+	response := new(IMachinesetParavirtProviderResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetFaultToleranceState(request *IMachinegetFaultToleranceState) (*IMachinegetFaultToleranceStateResponse, error) {
+	response := new(IMachinegetFaultToleranceStateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetFaultToleranceState(request *IMachinesetFaultToleranceState) (*IMachinesetFaultToleranceStateResponse, error) {
+	response := new(IMachinesetFaultToleranceStateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetFaultTolerancePort(request *IMachinegetFaultTolerancePort) (*IMachinegetFaultTolerancePortResponse, error) {
+	response := new(IMachinegetFaultTolerancePortResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetFaultTolerancePort(request *IMachinesetFaultTolerancePort) (*IMachinesetFaultTolerancePortResponse, error) {
+	response := new(IMachinesetFaultTolerancePortResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetFaultToleranceAddress(request *IMachinegetFaultToleranceAddress) (*IMachinegetFaultToleranceAddressResponse, error) {
+	response := new(IMachinegetFaultToleranceAddressResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetFaultToleranceAddress(request *IMachinesetFaultToleranceAddress) (*IMachinesetFaultToleranceAddressResponse, error) {
+	response := new(IMachinesetFaultToleranceAddressResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetFaultTolerancePassword(request *IMachinegetFaultTolerancePassword) (*IMachinegetFaultTolerancePasswordResponse, error) {
+	response := new(IMachinegetFaultTolerancePasswordResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetFaultTolerancePassword(request *IMachinesetFaultTolerancePassword) (*IMachinesetFaultTolerancePasswordResponse, error) {
+	response := new(IMachinesetFaultTolerancePasswordResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetFaultToleranceSyncInterval(request *IMachinegetFaultToleranceSyncInterval) (*IMachinegetFaultToleranceSyncIntervalResponse, error) {
+	response := new(IMachinegetFaultToleranceSyncIntervalResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetFaultToleranceSyncInterval(request *IMachinesetFaultToleranceSyncInterval) (*IMachinesetFaultToleranceSyncIntervalResponse, error) {
+	response := new(IMachinesetFaultToleranceSyncIntervalResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMachinegetRTCUseUTC(request *IMachinegetRTCUseUTC) (*IMachinegetRTCUseUTCResponse, error) {
 	response := new(IMachinegetRTCUseUTCResponse)
 	err := service.client.Call("", request, response)
@@ -11403,8 +21338,8 @@ func (service *VboxPortType) IMachinesetRTCUseUTC(request *IMachinesetRTCUseUTC)
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinegetIoCacheEnabled(request *IMachinegetIoCacheEnabled) (*IMachinegetIoCacheEnabledResponse, error) {
-	response := new(IMachinegetIoCacheEnabledResponse)
+func (service *VboxPortType) IMachinegetIOCacheEnabled(request *IMachinegetIOCacheEnabled) (*IMachinegetIOCacheEnabledResponse, error) {
+	response := new(IMachinegetIOCacheEnabledResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11418,8 +21353,8 @@ func (service *VboxPortType) IMachinegetIoCacheEnabled(request *IMachinegetIoCac
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinesetIoCacheEnabled(request *IMachinesetIoCacheEnabled) (*IMachinesetIoCacheEnabledResponse, error) {
-	response := new(IMachinesetIoCacheEnabledResponse)
+func (service *VboxPortType) IMachinesetIOCacheEnabled(request *IMachinesetIOCacheEnabled) (*IMachinesetIOCacheEnabledResponse, error) {
+	response := new(IMachinesetIOCacheEnabledResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11433,8 +21368,8 @@ func (service *VboxPortType) IMachinesetIoCacheEnabled(request *IMachinesetIoCac
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinegetIoCacheSize(request *IMachinegetIoCacheSize) (*IMachinegetIoCacheSizeResponse, error) {
-	response := new(IMachinegetIoCacheSizeResponse)
+func (service *VboxPortType) IMachinegetIOCacheSize(request *IMachinegetIOCacheSize) (*IMachinegetIOCacheSizeResponse, error) {
+	response := new(IMachinegetIOCacheSizeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11448,8 +21383,8 @@ func (service *VboxPortType) IMachinegetIoCacheSize(request *IMachinegetIoCacheS
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinesetIoCacheSize(request *IMachinesetIoCacheSize) (*IMachinesetIoCacheSizeResponse, error) {
-	response := new(IMachinesetIoCacheSizeResponse)
+func (service *VboxPortType) IMachinesetIOCacheSize(request *IMachinesetIOCacheSize) (*IMachinesetIOCacheSizeResponse, error) {
+	response := new(IMachinesetIOCacheSizeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11463,8 +21398,8 @@ func (service *VboxPortType) IMachinesetIoCacheSize(request *IMachinesetIoCacheS
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinegetIoBandwidthMax(request *IMachinegetIoBandwidthMax) (*IMachinegetIoBandwidthMaxResponse, error) {
-	response := new(IMachinegetIoBandwidthMaxResponse)
+func (service *VboxPortType) IMachinegetPCIDeviceAssignments(request *IMachinegetPCIDeviceAssignments) (*IMachinegetPCIDeviceAssignmentsResponse, error) {
+	response := new(IMachinegetPCIDeviceAssignmentsResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11478,8 +21413,293 @@ func (service *VboxPortType) IMachinegetIoBandwidthMax(request *IMachinegetIoBan
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinesetIoBandwidthMax(request *IMachinesetIoBandwidthMax) (*IMachinesetIoBandwidthMaxResponse, error) {
-	response := new(IMachinesetIoBandwidthMaxResponse)
+func (service *VboxPortType) IMachinegetBandwidthControl(request *IMachinegetBandwidthControl) (*IMachinegetBandwidthControlResponse, error) {
+	response := new(IMachinegetBandwidthControlResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetTracingEnabled(request *IMachinegetTracingEnabled) (*IMachinegetTracingEnabledResponse, error) {
+	response := new(IMachinegetTracingEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetTracingEnabled(request *IMachinesetTracingEnabled) (*IMachinesetTracingEnabledResponse, error) {
+	response := new(IMachinesetTracingEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetTracingConfig(request *IMachinegetTracingConfig) (*IMachinegetTracingConfigResponse, error) {
+	response := new(IMachinegetTracingConfigResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetTracingConfig(request *IMachinesetTracingConfig) (*IMachinesetTracingConfigResponse, error) {
+	response := new(IMachinesetTracingConfigResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetAllowTracingToAccessVM(request *IMachinegetAllowTracingToAccessVM) (*IMachinegetAllowTracingToAccessVMResponse, error) {
+	response := new(IMachinegetAllowTracingToAccessVMResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetAllowTracingToAccessVM(request *IMachinesetAllowTracingToAccessVM) (*IMachinesetAllowTracingToAccessVMResponse, error) {
+	response := new(IMachinesetAllowTracingToAccessVMResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetAutostartEnabled(request *IMachinegetAutostartEnabled) (*IMachinegetAutostartEnabledResponse, error) {
+	response := new(IMachinegetAutostartEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetAutostartEnabled(request *IMachinesetAutostartEnabled) (*IMachinesetAutostartEnabledResponse, error) {
+	response := new(IMachinesetAutostartEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetAutostartDelay(request *IMachinegetAutostartDelay) (*IMachinegetAutostartDelayResponse, error) {
+	response := new(IMachinegetAutostartDelayResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetAutostartDelay(request *IMachinesetAutostartDelay) (*IMachinesetAutostartDelayResponse, error) {
+	response := new(IMachinesetAutostartDelayResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetAutostopType(request *IMachinegetAutostopType) (*IMachinegetAutostopTypeResponse, error) {
+	response := new(IMachinegetAutostopTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetAutostopType(request *IMachinesetAutostopType) (*IMachinesetAutostopTypeResponse, error) {
+	response := new(IMachinesetAutostopTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetDefaultFrontend(request *IMachinegetDefaultFrontend) (*IMachinegetDefaultFrontendResponse, error) {
+	response := new(IMachinegetDefaultFrontendResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetDefaultFrontend(request *IMachinesetDefaultFrontend) (*IMachinesetDefaultFrontendResponse, error) {
+	response := new(IMachinesetDefaultFrontendResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetUSBProxyAvailable(request *IMachinegetUSBProxyAvailable) (*IMachinegetUSBProxyAvailableResponse, error) {
+	response := new(IMachinegetUSBProxyAvailableResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetVMProcessPriority(request *IMachinegetVMProcessPriority) (*IMachinegetVMProcessPriorityResponse, error) {
+	response := new(IMachinegetVMProcessPriorityResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetVMProcessPriority(request *IMachinesetVMProcessPriority) (*IMachinesetVMProcessPriorityResponse, error) {
+	response := new(IMachinesetVMProcessPriorityResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinelockMachine(request *IMachinelockMachine) (*IMachinelockMachineResponse, error) {
+	response := new(IMachinelockMachineResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinelaunchVMProcess(request *IMachinelaunchVMProcess) (*IMachinelaunchVMProcessResponse, error) {
+	response := new(IMachinelaunchVMProcessResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11538,6 +21758,21 @@ func (service *VboxPortType) IMachineattachDevice(request *IMachineattachDevice)
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMachineattachDeviceWithoutMedium(request *IMachineattachDeviceWithoutMedium) (*IMachineattachDeviceWithoutMediumResponse, error) {
+	response := new(IMachineattachDeviceWithoutMediumResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMachinedetachDevice(request *IMachinedetachDevice) (*IMachinedetachDeviceResponse, error) {
 	response := new(IMachinedetachDeviceResponse)
 	err := service.client.Call("", request, response)
@@ -11555,6 +21790,111 @@ func (service *VboxPortType) IMachinedetachDevice(request *IMachinedetachDevice)
 
 func (service *VboxPortType) IMachinepassthroughDevice(request *IMachinepassthroughDevice) (*IMachinepassthroughDeviceResponse, error) {
 	response := new(IMachinepassthroughDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinetemporaryEjectDevice(request *IMachinetemporaryEjectDevice) (*IMachinetemporaryEjectDeviceResponse, error) {
+	response := new(IMachinetemporaryEjectDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinenonRotationalDevice(request *IMachinenonRotationalDevice) (*IMachinenonRotationalDeviceResponse, error) {
+	response := new(IMachinenonRotationalDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetAutoDiscardForDevice(request *IMachinesetAutoDiscardForDevice) (*IMachinesetAutoDiscardForDeviceResponse, error) {
+	response := new(IMachinesetAutoDiscardForDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetHotPluggableForDevice(request *IMachinesetHotPluggableForDevice) (*IMachinesetHotPluggableForDeviceResponse, error) {
+	response := new(IMachinesetHotPluggableForDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetBandwidthGroupForDevice(request *IMachinesetBandwidthGroupForDevice) (*IMachinesetBandwidthGroupForDeviceResponse, error) {
+	response := new(IMachinesetBandwidthGroupForDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetNoBandwidthGroupForDevice(request *IMachinesetNoBandwidthGroupForDevice) (*IMachinesetNoBandwidthGroupForDeviceResponse, error) {
+	response := new(IMachinesetNoBandwidthGroupForDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineunmountMedium(request *IMachineunmountMedium) (*IMachineunmountMediumResponse, error) {
+	response := new(IMachineunmountMediumResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11615,6 +21955,36 @@ func (service *VboxPortType) IMachinegetMediumAttachmentsOfController(request *I
 
 func (service *VboxPortType) IMachinegetMediumAttachment(request *IMachinegetMediumAttachment) (*IMachinegetMediumAttachmentResponse, error) {
 	response := new(IMachinegetMediumAttachmentResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineattachHostPCIDevice(request *IMachineattachHostPCIDevice) (*IMachineattachHostPCIDeviceResponse, error) {
+	response := new(IMachineattachHostPCIDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinedetachHostPCIDevice(request *IMachinedetachHostPCIDevice) (*IMachinedetachHostPCIDeviceResponse, error) {
+	response := new(IMachinedetachHostPCIDeviceResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11690,6 +22060,81 @@ func (service *VboxPortType) IMachinegetStorageControllerByInstance(request *IMa
 
 func (service *VboxPortType) IMachineremoveStorageController(request *IMachineremoveStorageController) (*IMachineremoveStorageControllerResponse, error) {
 	response := new(IMachineremoveStorageControllerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesetStorageControllerBootable(request *IMachinesetStorageControllerBootable) (*IMachinesetStorageControllerBootableResponse, error) {
+	response := new(IMachinesetStorageControllerBootableResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineaddUSBController(request *IMachineaddUSBController) (*IMachineaddUSBControllerResponse, error) {
+	response := new(IMachineaddUSBControllerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineremoveUSBController(request *IMachineremoveUSBController) (*IMachineremoveUSBControllerResponse, error) {
+	response := new(IMachineremoveUSBControllerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetUSBControllerByName(request *IMachinegetUSBControllerByName) (*IMachinegetUSBControllerByNameResponse, error) {
+	response := new(IMachinegetUSBControllerByNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinegetUSBControllerCountByType(request *IMachinegetUSBControllerCountByType) (*IMachinegetUSBControllerCountByTypeResponse, error) {
+	response := new(IMachinegetUSBControllerCountByTypeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11898,6 +22343,21 @@ func (service *VboxPortType) IMachinesetHWVirtExProperty(request *IMachinesetHWV
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMachinesetSettingsFilePath(request *IMachinesetSettingsFilePath) (*IMachinesetSettingsFilePathResponse, error) {
+	response := new(IMachinesetSettingsFilePathResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMachinesaveSettings(request *IMachinesaveSettings) (*IMachinesaveSettingsResponse, error) {
 	response := new(IMachinesaveSettingsResponse)
 	err := service.client.Call("", request, response)
@@ -11928,8 +22388,8 @@ func (service *VboxPortType) IMachinediscardSettings(request *IMachinediscardSet
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinedeleteSettings(request *IMachinedeleteSettings) (*IMachinedeleteSettingsResponse, error) {
-	response := new(IMachinedeleteSettingsResponse)
+func (service *VboxPortType) IMachineunregister(request *IMachineunregister) (*IMachineunregisterResponse, error) {
+	response := new(IMachineunregisterResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11943,8 +22403,8 @@ func (service *VboxPortType) IMachinedeleteSettings(request *IMachinedeleteSetti
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachineexport(request *IMachineexport) (*IMachineexportResponse, error) {
-	response := new(IMachineexportResponse)
+func (service *VboxPortType) IMachinedeleteConfig(request *IMachinedeleteConfig) (*IMachinedeleteConfigResponse, error) {
+	response := new(IMachinedeleteConfigResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11958,8 +22418,8 @@ func (service *VboxPortType) IMachineexport(request *IMachineexport) (*IMachinee
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinegetSnapshot(request *IMachinegetSnapshot) (*IMachinegetSnapshotResponse, error) {
-	response := new(IMachinegetSnapshotResponse)
+func (service *VboxPortType) IMachineexportTo(request *IMachineexportTo) (*IMachineexportToResponse, error) {
+	response := new(IMachineexportToResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -11975,21 +22435,6 @@ func (service *VboxPortType) IMachinegetSnapshot(request *IMachinegetSnapshot) (
 
 func (service *VboxPortType) IMachinefindSnapshot(request *IMachinefindSnapshot) (*IMachinefindSnapshotResponse, error) {
 	response := new(IMachinefindSnapshotResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IMachinesetCurrentSnapshot(request *IMachinesetCurrentSnapshot) (*IMachinesetCurrentSnapshotResponse, error) {
-	response := new(IMachinesetCurrentSnapshotResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -12138,6 +22583,21 @@ func (service *VboxPortType) IMachinesetGuestPropertyValue(request *IMachinesetG
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMachinedeleteGuestProperty(request *IMachinedeleteGuestProperty) (*IMachinedeleteGuestPropertyResponse, error) {
+	response := new(IMachinedeleteGuestPropertyResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMachineenumerateGuestProperties(request *IMachineenumerateGuestProperties) (*IMachineenumerateGuestPropertiesResponse, error) {
 	response := new(IMachineenumerateGuestPropertiesResponse)
 	err := service.client.Call("", request, response)
@@ -12153,8 +22613,8 @@ func (service *VboxPortType) IMachineenumerateGuestProperties(request *IMachinee
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinequerySavedThumbnailSize(request *IMachinequerySavedThumbnailSize) (*IMachinequerySavedThumbnailSizeResponse, error) {
-	response := new(IMachinequerySavedThumbnailSizeResponse)
+func (service *VboxPortType) IMachinequerySavedGuestScreenInfo(request *IMachinequerySavedGuestScreenInfo) (*IMachinequerySavedGuestScreenInfoResponse, error) {
+	response := new(IMachinequerySavedGuestScreenInfoResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -12183,8 +22643,8 @@ func (service *VboxPortType) IMachinereadSavedThumbnailToArray(request *IMachine
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinequerySavedScreenshotPNGSize(request *IMachinequerySavedScreenshotPNGSize) (*IMachinequerySavedScreenshotPNGSizeResponse, error) {
-	response := new(IMachinequerySavedScreenshotPNGSizeResponse)
+func (service *VboxPortType) IMachinequerySavedScreenshotInfo(request *IMachinequerySavedScreenshotInfo) (*IMachinequerySavedScreenshotInfoResponse, error) {
+	response := new(IMachinequerySavedScreenshotInfoResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -12198,8 +22658,8 @@ func (service *VboxPortType) IMachinequerySavedScreenshotPNGSize(request *IMachi
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMachinereadSavedScreenshotPNGToArray(request *IMachinereadSavedScreenshotPNGToArray) (*IMachinereadSavedScreenshotPNGToArrayResponse, error) {
-	response := new(IMachinereadSavedScreenshotPNGToArrayResponse)
+func (service *VboxPortType) IMachinereadSavedScreenshotToArray(request *IMachinereadSavedScreenshotToArray) (*IMachinereadSavedScreenshotToArrayResponse, error) {
+	response := new(IMachinereadSavedScreenshotToArrayResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -12258,6 +22718,21 @@ func (service *VboxPortType) IMachinegetCPUStatus(request *IMachinegetCPUStatus)
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMachinegetEffectiveParavirtProvider(request *IMachinegetEffectiveParavirtProvider) (*IMachinegetEffectiveParavirtProviderResponse, error) {
+	response := new(IMachinegetEffectiveParavirtProviderResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMachinequeryLogFilename(request *IMachinequeryLogFilename) (*IMachinequeryLogFilenameResponse, error) {
 	response := new(IMachinequeryLogFilenameResponse)
 	err := service.client.Call("", request, response)
@@ -12275,6 +22750,201 @@ func (service *VboxPortType) IMachinequeryLogFilename(request *IMachinequeryLogF
 
 func (service *VboxPortType) IMachinereadLog(request *IMachinereadLog) (*IMachinereadLogResponse, error) {
 	response := new(IMachinereadLogResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinecloneTo(request *IMachinecloneTo) (*IMachinecloneToResponse, error) {
+	response := new(IMachinecloneToResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinesaveState(request *IMachinesaveState) (*IMachinesaveStateResponse, error) {
+	response := new(IMachinesaveStateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineadoptSavedState(request *IMachineadoptSavedState) (*IMachineadoptSavedStateResponse, error) {
+	response := new(IMachineadoptSavedStateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinediscardSavedState(request *IMachinediscardSavedState) (*IMachinediscardSavedStateResponse, error) {
+	response := new(IMachinediscardSavedStateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinetakeSnapshot(request *IMachinetakeSnapshot) (*IMachinetakeSnapshotResponse, error) {
+	response := new(IMachinetakeSnapshotResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinedeleteSnapshot(request *IMachinedeleteSnapshot) (*IMachinedeleteSnapshotResponse, error) {
+	response := new(IMachinedeleteSnapshotResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinedeleteSnapshotAndAllChildren(request *IMachinedeleteSnapshotAndAllChildren) (*IMachinedeleteSnapshotAndAllChildrenResponse, error) {
+	response := new(IMachinedeleteSnapshotAndAllChildrenResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinedeleteSnapshotRange(request *IMachinedeleteSnapshotRange) (*IMachinedeleteSnapshotRangeResponse, error) {
+	response := new(IMachinedeleteSnapshotRangeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachinerestoreSnapshot(request *IMachinerestoreSnapshot) (*IMachinerestoreSnapshotResponse, error) {
+	response := new(IMachinerestoreSnapshotResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineapplyDefaults(request *IMachineapplyDefaults) (*IMachineapplyDefaultsResponse, error) {
+	response := new(IMachineapplyDefaultsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEmulatedUSBgetWebcams(request *IEmulatedUSBgetWebcams) (*IEmulatedUSBgetWebcamsResponse, error) {
+	response := new(IEmulatedUSBgetWebcamsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEmulatedUSBwebcamAttach(request *IEmulatedUSBwebcamAttach) (*IEmulatedUSBwebcamAttachResponse, error) {
+	response := new(IEmulatedUSBwebcamAttachResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEmulatedUSBwebcamDetach(request *IEmulatedUSBwebcamDetach) (*IEmulatedUSBwebcamDetachResponse, error) {
+	response := new(IEmulatedUSBwebcamDetachResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -12378,6 +23048,21 @@ func (service *VboxPortType) IConsolegetDisplay(request *IConsolegetDisplay) (*I
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IConsolegetDebugger(request *IConsolegetDebugger) (*IConsolegetDebuggerResponse, error) {
+	response := new(IConsolegetDebuggerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IConsolegetUSBDevices(request *IConsolegetUSBDevices) (*IConsolegetUSBDevicesResponse, error) {
 	response := new(IConsolegetUSBDevicesResponse)
 	err := service.client.Call("", request, response)
@@ -12423,8 +23108,83 @@ func (service *VboxPortType) IConsolegetSharedFolders(request *IConsolegetShared
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IConsolegetRemoteDisplayInfo(request *IConsolegetRemoteDisplayInfo) (*IConsolegetRemoteDisplayInfoResponse, error) {
-	response := new(IConsolegetRemoteDisplayInfoResponse)
+func (service *VboxPortType) IConsolegetVRDEServerInfo(request *IConsolegetVRDEServerInfo) (*IConsolegetVRDEServerInfoResponse, error) {
+	response := new(IConsolegetVRDEServerInfoResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IConsolegetEventSource(request *IConsolegetEventSource) (*IConsolegetEventSourceResponse, error) {
+	response := new(IConsolegetEventSourceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IConsolegetAttachedPCIDevices(request *IConsolegetAttachedPCIDevices) (*IConsolegetAttachedPCIDevicesResponse, error) {
+	response := new(IConsolegetAttachedPCIDevicesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IConsolegetUseHostClipboard(request *IConsolegetUseHostClipboard) (*IConsolegetUseHostClipboardResponse, error) {
+	response := new(IConsolegetUseHostClipboardResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IConsolesetUseHostClipboard(request *IConsolesetUseHostClipboard) (*IConsolesetUseHostClipboardResponse, error) {
+	response := new(IConsolesetUseHostClipboardResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IConsolegetEmulatedUSB(request *IConsolegetEmulatedUSB) (*IConsolegetEmulatedUSBResponse, error) {
+	response := new(IConsolegetEmulatedUSBResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -12588,51 +23348,6 @@ func (service *VboxPortType) IConsolegetGuestEnteredACPIMode(request *IConsolege
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IConsolesaveState(request *IConsolesaveState) (*IConsolesaveStateResponse, error) {
-	response := new(IConsolesaveStateResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IConsoleadoptSavedState(request *IConsoleadoptSavedState) (*IConsoleadoptSavedStateResponse, error) {
-	response := new(IConsoleadoptSavedStateResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IConsoleforgetSavedState(request *IConsoleforgetSavedState) (*IConsoleforgetSavedStateResponse, error) {
-	response := new(IConsoleforgetSavedStateResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
 func (service *VboxPortType) IConsolegetDeviceActivity(request *IConsolegetDeviceActivity) (*IConsolegetDeviceActivityResponse, error) {
 	response := new(IConsolegetDeviceActivityResponse)
 	err := service.client.Call("", request, response)
@@ -12738,51 +23453,6 @@ func (service *VboxPortType) IConsoleremoveSharedFolder(request *IConsoleremoveS
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IConsoletakeSnapshot(request *IConsoletakeSnapshot) (*IConsoletakeSnapshotResponse, error) {
-	response := new(IConsoletakeSnapshotResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IConsoledeleteSnapshot(request *IConsoledeleteSnapshot) (*IConsoledeleteSnapshotResponse, error) {
-	response := new(IConsoledeleteSnapshotResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IConsolerestoreSnapshot(request *IConsolerestoreSnapshot) (*IConsolerestoreSnapshotResponse, error) {
-	response := new(IConsolerestoreSnapshotResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
 func (service *VboxPortType) IConsoleteleport(request *IConsoleteleport) (*IConsoleteleportResponse, error) {
 	response := new(IConsoleteleportResponse)
 	err := service.client.Call("", request, response)
@@ -12798,8 +23468,83 @@ func (service *VboxPortType) IConsoleteleport(request *IConsoleteleport) (*ICons
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IConsoleaddDiskEncryptionPassword(request *IConsoleaddDiskEncryptionPassword) (*IConsoleaddDiskEncryptionPasswordResponse, error) {
+	response := new(IConsoleaddDiskEncryptionPasswordResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IConsoleaddDiskEncryptionPasswords(request *IConsoleaddDiskEncryptionPasswords) (*IConsoleaddDiskEncryptionPasswordsResponse, error) {
+	response := new(IConsoleaddDiskEncryptionPasswordsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IConsoleremoveDiskEncryptionPassword(request *IConsoleremoveDiskEncryptionPassword) (*IConsoleremoveDiskEncryptionPasswordResponse, error) {
+	response := new(IConsoleremoveDiskEncryptionPasswordResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IConsoleclearAllDiskEncryptionPasswords(request *IConsoleclearAllDiskEncryptionPasswords) (*IConsoleclearAllDiskEncryptionPasswordsResponse, error) {
+	response := new(IConsoleclearAllDiskEncryptionPasswordsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IHostNetworkInterfacegetName(request *IHostNetworkInterfacegetName) (*IHostNetworkInterfacegetNameResponse, error) {
 	response := new(IHostNetworkInterfacegetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostNetworkInterfacegetShortName(request *IHostNetworkInterfacegetShortName) (*IHostNetworkInterfacegetShortNameResponse, error) {
+	response := new(IHostNetworkInterfacegetShortNameResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -12843,8 +23588,8 @@ func (service *VboxPortType) IHostNetworkInterfacegetNetworkName(request *IHostN
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IHostNetworkInterfacegetDhcpEnabled(request *IHostNetworkInterfacegetDhcpEnabled) (*IHostNetworkInterfacegetDhcpEnabledResponse, error) {
-	response := new(IHostNetworkInterfacegetDhcpEnabledResponse)
+func (service *VboxPortType) IHostNetworkInterfacegetDHCPEnabled(request *IHostNetworkInterfacegetDHCPEnabled) (*IHostNetworkInterfacegetDHCPEnabledResponse, error) {
+	response := new(IHostNetworkInterfacegetDHCPEnabledResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -12993,8 +23738,8 @@ func (service *VboxPortType) IHostNetworkInterfacegetInterfaceType(request *IHos
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IHostNetworkInterfaceenableStaticIpConfig(request *IHostNetworkInterfaceenableStaticIpConfig) (*IHostNetworkInterfaceenableStaticIpConfigResponse, error) {
-	response := new(IHostNetworkInterfaceenableStaticIpConfigResponse)
+func (service *VboxPortType) IHostNetworkInterfaceenableStaticIPConfig(request *IHostNetworkInterfaceenableStaticIPConfig) (*IHostNetworkInterfaceenableStaticIPConfigResponse, error) {
+	response := new(IHostNetworkInterfaceenableStaticIPConfigResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -13008,8 +23753,8 @@ func (service *VboxPortType) IHostNetworkInterfaceenableStaticIpConfig(request *
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IHostNetworkInterfaceenableStaticIpConfigV6(request *IHostNetworkInterfaceenableStaticIpConfigV6) (*IHostNetworkInterfaceenableStaticIpConfigV6Response, error) {
-	response := new(IHostNetworkInterfaceenableStaticIpConfigV6Response)
+func (service *VboxPortType) IHostNetworkInterfaceenableStaticIPConfigV6(request *IHostNetworkInterfaceenableStaticIPConfigV6) (*IHostNetworkInterfaceenableStaticIPConfigV6Response, error) {
+	response := new(IHostNetworkInterfaceenableStaticIPConfigV6Response)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -13023,8 +23768,8 @@ func (service *VboxPortType) IHostNetworkInterfaceenableStaticIpConfigV6(request
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IHostNetworkInterfaceenableDynamicIpConfig(request *IHostNetworkInterfaceenableDynamicIpConfig) (*IHostNetworkInterfaceenableDynamicIpConfigResponse, error) {
-	response := new(IHostNetworkInterfaceenableDynamicIpConfigResponse)
+func (service *VboxPortType) IHostNetworkInterfaceenableDynamicIPConfig(request *IHostNetworkInterfaceenableDynamicIPConfig) (*IHostNetworkInterfaceenableDynamicIPConfigResponse, error) {
+	response := new(IHostNetworkInterfaceenableDynamicIPConfigResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -13038,8 +23783,53 @@ func (service *VboxPortType) IHostNetworkInterfaceenableDynamicIpConfig(request 
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IHostNetworkInterfacedhcpRediscover(request *IHostNetworkInterfacedhcpRediscover) (*IHostNetworkInterfacedhcpRediscoverResponse, error) {
-	response := new(IHostNetworkInterfacedhcpRediscoverResponse)
+func (service *VboxPortType) IHostNetworkInterfaceDHCPRediscover(request *IHostNetworkInterfaceDHCPRediscover) (*IHostNetworkInterfaceDHCPRediscoverResponse, error) {
+	response := new(IHostNetworkInterfaceDHCPRediscoverResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostVideoInputDevicegetName(request *IHostVideoInputDevicegetName) (*IHostVideoInputDevicegetNameResponse, error) {
+	response := new(IHostVideoInputDevicegetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostVideoInputDevicegetPath(request *IHostVideoInputDevicegetPath) (*IHostVideoInputDevicegetPathResponse, error) {
+	response := new(IHostVideoInputDevicegetPathResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostVideoInputDevicegetAlias(request *IHostVideoInputDevicegetAlias) (*IHostVideoInputDevicegetAliasResponse, error) {
+	response := new(IHostVideoInputDevicegetAliasResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -13128,6 +23918,51 @@ func (service *VboxPortType) IHostgetNetworkInterfaces(request *IHostgetNetworkI
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IHostgetNameServers(request *IHostgetNameServers) (*IHostgetNameServersResponse, error) {
+	response := new(IHostgetNameServersResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostgetDomainName(request *IHostgetDomainName) (*IHostgetDomainNameResponse, error) {
+	response := new(IHostgetDomainNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostgetSearchStrings(request *IHostgetSearchStrings) (*IHostgetSearchStringsResponse, error) {
+	response := new(IHostgetSearchStringsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IHostgetProcessorCount(request *IHostgetProcessorCount) (*IHostgetProcessorCountResponse, error) {
 	response := new(IHostgetProcessorCountResponse)
 	err := service.client.Call("", request, response)
@@ -13160,6 +23995,21 @@ func (service *VboxPortType) IHostgetProcessorOnlineCount(request *IHostgetProce
 
 func (service *VboxPortType) IHostgetProcessorCoreCount(request *IHostgetProcessorCoreCount) (*IHostgetProcessorCoreCountResponse, error) {
 	response := new(IHostgetProcessorCoreCountResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostgetProcessorOnlineCoreCount(request *IHostgetProcessorOnlineCoreCount) (*IHostgetProcessorOnlineCoreCountResponse, error) {
+	response := new(IHostgetProcessorOnlineCoreCountResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -13250,6 +24100,21 @@ func (service *VboxPortType) IHostgetUTCTime(request *IHostgetUTCTime) (*IHostge
 
 func (service *VboxPortType) IHostgetAcceleration3DAvailable(request *IHostgetAcceleration3DAvailable) (*IHostgetAcceleration3DAvailableResponse, error) {
 	response := new(IHostgetAcceleration3DAvailableResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostgetVideoInputDevices(request *IHostgetVideoInputDevices) (*IHostgetVideoInputDevicesResponse, error) {
+	response := new(IHostgetVideoInputDevicesResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -13503,6 +24368,21 @@ func (service *VboxPortType) IHostfindUSBDeviceByAddress(request *IHostfindUSBDe
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IHostgenerateMACAddress(request *IHostgenerateMACAddress) (*IHostgenerateMACAddressResponse, error) {
+	response := new(IHostgenerateMACAddressResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) ISystemPropertiesgetMinGuestRAM(request *ISystemPropertiesgetMinGuestRAM) (*ISystemPropertiesgetMinGuestRAMResponse, error) {
 	response := new(ISystemPropertiesgetMinGuestRAMResponse)
 	err := service.client.Call("", request, response)
@@ -13608,23 +24488,8 @@ func (service *VboxPortType) ISystemPropertiesgetMaxGuestMonitors(request *ISyst
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) ISystemPropertiesgetMaxVDISize(request *ISystemPropertiesgetMaxVDISize) (*ISystemPropertiesgetMaxVDISizeResponse, error) {
-	response := new(ISystemPropertiesgetMaxVDISizeResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) ISystemPropertiesgetNetworkAdapterCount(request *ISystemPropertiesgetNetworkAdapterCount) (*ISystemPropertiesgetNetworkAdapterCountResponse, error) {
-	response := new(ISystemPropertiesgetNetworkAdapterCountResponse)
+func (service *VboxPortType) ISystemPropertiesgetInfoVDSize(request *ISystemPropertiesgetInfoVDSize) (*ISystemPropertiesgetInfoVDSizeResponse, error) {
+	response := new(ISystemPropertiesgetInfoVDSizeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -13683,6 +24548,51 @@ func (service *VboxPortType) ISystemPropertiesgetMaxBootPosition(request *ISyste
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) ISystemPropertiesgetRawModeSupported(request *ISystemPropertiesgetRawModeSupported) (*ISystemPropertiesgetRawModeSupportedResponse, error) {
+	response := new(ISystemPropertiesgetRawModeSupportedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiesgetExclusiveHwVirt(request *ISystemPropertiesgetExclusiveHwVirt) (*ISystemPropertiesgetExclusiveHwVirtResponse, error) {
+	response := new(ISystemPropertiesgetExclusiveHwVirtResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiessetExclusiveHwVirt(request *ISystemPropertiessetExclusiveHwVirt) (*ISystemPropertiessetExclusiveHwVirtResponse, error) {
+	response := new(ISystemPropertiessetExclusiveHwVirtResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) ISystemPropertiesgetDefaultMachineFolder(request *ISystemPropertiesgetDefaultMachineFolder) (*ISystemPropertiesgetDefaultMachineFolderResponse, error) {
 	response := new(ISystemPropertiesgetDefaultMachineFolderResponse)
 	err := service.client.Call("", request, response)
@@ -13713,8 +24623,8 @@ func (service *VboxPortType) ISystemPropertiessetDefaultMachineFolder(request *I
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) ISystemPropertiesgetDefaultHardDiskFolder(request *ISystemPropertiesgetDefaultHardDiskFolder) (*ISystemPropertiesgetDefaultHardDiskFolderResponse, error) {
-	response := new(ISystemPropertiesgetDefaultHardDiskFolderResponse)
+func (service *VboxPortType) ISystemPropertiesgetLoggingLevel(request *ISystemPropertiesgetLoggingLevel) (*ISystemPropertiesgetLoggingLevelResponse, error) {
+	response := new(ISystemPropertiesgetLoggingLevelResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -13728,8 +24638,8 @@ func (service *VboxPortType) ISystemPropertiesgetDefaultHardDiskFolder(request *
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) ISystemPropertiessetDefaultHardDiskFolder(request *ISystemPropertiessetDefaultHardDiskFolder) (*ISystemPropertiessetDefaultHardDiskFolderResponse, error) {
-	response := new(ISystemPropertiessetDefaultHardDiskFolderResponse)
+func (service *VboxPortType) ISystemPropertiessetLoggingLevel(request *ISystemPropertiessetLoggingLevel) (*ISystemPropertiessetLoggingLevelResponse, error) {
+	response := new(ISystemPropertiessetLoggingLevelResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -13908,8 +24818,8 @@ func (service *VboxPortType) ISystemPropertiessetFreeDiskSpacePercentError(reque
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) ISystemPropertiesgetRemoteDisplayAuthLibrary(request *ISystemPropertiesgetRemoteDisplayAuthLibrary) (*ISystemPropertiesgetRemoteDisplayAuthLibraryResponse, error) {
-	response := new(ISystemPropertiesgetRemoteDisplayAuthLibraryResponse)
+func (service *VboxPortType) ISystemPropertiesgetVRDEAuthLibrary(request *ISystemPropertiesgetVRDEAuthLibrary) (*ISystemPropertiesgetVRDEAuthLibraryResponse, error) {
+	response := new(ISystemPropertiesgetVRDEAuthLibraryResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -13923,8 +24833,8 @@ func (service *VboxPortType) ISystemPropertiesgetRemoteDisplayAuthLibrary(reques
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) ISystemPropertiessetRemoteDisplayAuthLibrary(request *ISystemPropertiessetRemoteDisplayAuthLibrary) (*ISystemPropertiessetRemoteDisplayAuthLibraryResponse, error) {
-	response := new(ISystemPropertiessetRemoteDisplayAuthLibraryResponse)
+func (service *VboxPortType) ISystemPropertiessetVRDEAuthLibrary(request *ISystemPropertiessetVRDEAuthLibrary) (*ISystemPropertiessetVRDEAuthLibraryResponse, error) {
+	response := new(ISystemPropertiessetVRDEAuthLibraryResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -13955,6 +24865,36 @@ func (service *VboxPortType) ISystemPropertiesgetWebServiceAuthLibrary(request *
 
 func (service *VboxPortType) ISystemPropertiessetWebServiceAuthLibrary(request *ISystemPropertiessetWebServiceAuthLibrary) (*ISystemPropertiessetWebServiceAuthLibraryResponse, error) {
 	response := new(ISystemPropertiessetWebServiceAuthLibraryResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiesgetDefaultVRDEExtPack(request *ISystemPropertiesgetDefaultVRDEExtPack) (*ISystemPropertiesgetDefaultVRDEExtPackResponse, error) {
+	response := new(ISystemPropertiesgetDefaultVRDEExtPackResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiessetDefaultVRDEExtPack(request *ISystemPropertiessetDefaultVRDEExtPack) (*ISystemPropertiessetDefaultVRDEExtPackResponse, error) {
+	response := new(ISystemPropertiessetDefaultVRDEExtPackResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -14000,6 +24940,141 @@ func (service *VboxPortType) ISystemPropertiessetLogHistoryCount(request *ISyste
 
 func (service *VboxPortType) ISystemPropertiesgetDefaultAudioDriver(request *ISystemPropertiesgetDefaultAudioDriver) (*ISystemPropertiesgetDefaultAudioDriverResponse, error) {
 	response := new(ISystemPropertiesgetDefaultAudioDriverResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiesgetAutostartDatabasePath(request *ISystemPropertiesgetAutostartDatabasePath) (*ISystemPropertiesgetAutostartDatabasePathResponse, error) {
+	response := new(ISystemPropertiesgetAutostartDatabasePathResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiessetAutostartDatabasePath(request *ISystemPropertiessetAutostartDatabasePath) (*ISystemPropertiessetAutostartDatabasePathResponse, error) {
+	response := new(ISystemPropertiessetAutostartDatabasePathResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiesgetDefaultAdditionsISO(request *ISystemPropertiesgetDefaultAdditionsISO) (*ISystemPropertiesgetDefaultAdditionsISOResponse, error) {
+	response := new(ISystemPropertiesgetDefaultAdditionsISOResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiessetDefaultAdditionsISO(request *ISystemPropertiessetDefaultAdditionsISO) (*ISystemPropertiessetDefaultAdditionsISOResponse, error) {
+	response := new(ISystemPropertiessetDefaultAdditionsISOResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiesgetDefaultFrontend(request *ISystemPropertiesgetDefaultFrontend) (*ISystemPropertiesgetDefaultFrontendResponse, error) {
+	response := new(ISystemPropertiesgetDefaultFrontendResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiessetDefaultFrontend(request *ISystemPropertiessetDefaultFrontend) (*ISystemPropertiessetDefaultFrontendResponse, error) {
+	response := new(ISystemPropertiessetDefaultFrontendResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiesgetScreenShotFormats(request *ISystemPropertiesgetScreenShotFormats) (*ISystemPropertiesgetScreenShotFormatsResponse, error) {
+	response := new(ISystemPropertiesgetScreenShotFormatsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiesgetMaxNetworkAdapters(request *ISystemPropertiesgetMaxNetworkAdapters) (*ISystemPropertiesgetMaxNetworkAdaptersResponse, error) {
+	response := new(ISystemPropertiesgetMaxNetworkAdaptersResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiesgetMaxNetworkAdaptersOfType(request *ISystemPropertiesgetMaxNetworkAdaptersOfType) (*ISystemPropertiesgetMaxNetworkAdaptersOfTypeResponse, error) {
+	response := new(ISystemPropertiesgetMaxNetworkAdaptersOfTypeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -14088,6 +25163,2001 @@ func (service *VboxPortType) ISystemPropertiesgetDeviceTypesForStorageBus(reques
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) ISystemPropertiesgetDefaultIoCacheSettingForStorageController(request *ISystemPropertiesgetDefaultIoCacheSettingForStorageController) (*ISystemPropertiesgetDefaultIoCacheSettingForStorageControllerResponse, error) {
+	response := new(ISystemPropertiesgetDefaultIoCacheSettingForStorageControllerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiesgetStorageControllerHotplugCapable(request *ISystemPropertiesgetStorageControllerHotplugCapable) (*ISystemPropertiesgetStorageControllerHotplugCapableResponse, error) {
+	response := new(ISystemPropertiesgetStorageControllerHotplugCapableResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISystemPropertiesgetMaxInstancesOfUSBControllerType(request *ISystemPropertiesgetMaxInstancesOfUSBControllerType) (*ISystemPropertiesgetMaxInstancesOfUSBControllerTypeResponse, error) {
+	response := new(ISystemPropertiesgetMaxInstancesOfUSBControllerTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDBasegetFormats(request *IDnDBasegetFormats) (*IDnDBasegetFormatsResponse, error) {
+	response := new(IDnDBasegetFormatsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDBasegetProtocolVersion(request *IDnDBasegetProtocolVersion) (*IDnDBasegetProtocolVersionResponse, error) {
+	response := new(IDnDBasegetProtocolVersionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDBaseisFormatSupported(request *IDnDBaseisFormatSupported) (*IDnDBaseisFormatSupportedResponse, error) {
+	response := new(IDnDBaseisFormatSupportedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDBaseaddFormats(request *IDnDBaseaddFormats) (*IDnDBaseaddFormatsResponse, error) {
+	response := new(IDnDBaseaddFormatsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDBaseremoveFormats(request *IDnDBaseremoveFormats) (*IDnDBaseremoveFormatsResponse, error) {
+	response := new(IDnDBaseremoveFormatsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDSourcedragIsPending(request *IDnDSourcedragIsPending) (*IDnDSourcedragIsPendingResponse, error) {
+	response := new(IDnDSourcedragIsPendingResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDSourcedrop(request *IDnDSourcedrop) (*IDnDSourcedropResponse, error) {
+	response := new(IDnDSourcedropResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDSourcereceiveData(request *IDnDSourcereceiveData) (*IDnDSourcereceiveDataResponse, error) {
+	response := new(IDnDSourcereceiveDataResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestDnDSourcegetMidlDoesNotLikeEmptyInterfaces(request *IGuestDnDSourcegetMidlDoesNotLikeEmptyInterfaces) (*IGuestDnDSourcegetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IGuestDnDSourcegetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDTargetenter(request *IDnDTargetenter) (*IDnDTargetenterResponse, error) {
+	response := new(IDnDTargetenterResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDTargetmove(request *IDnDTargetmove) (*IDnDTargetmoveResponse, error) {
+	response := new(IDnDTargetmoveResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDTargetleave(request *IDnDTargetleave) (*IDnDTargetleaveResponse, error) {
+	response := new(IDnDTargetleaveResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDTargetdrop(request *IDnDTargetdrop) (*IDnDTargetdropResponse, error) {
+	response := new(IDnDTargetdropResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDTargetsendData(request *IDnDTargetsendData) (*IDnDTargetsendDataResponse, error) {
+	response := new(IDnDTargetsendDataResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDTargetcancel(request *IDnDTargetcancel) (*IDnDTargetcancelResponse, error) {
+	response := new(IDnDTargetcancelResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestDnDTargetgetMidlDoesNotLikeEmptyInterfaces(request *IGuestDnDTargetgetMidlDoesNotLikeEmptyInterfaces) (*IGuestDnDTargetgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IGuestDnDTargetgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetUser(request *IGuestSessiongetUser) (*IGuestSessiongetUserResponse, error) {
+	response := new(IGuestSessiongetUserResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetDomain(request *IGuestSessiongetDomain) (*IGuestSessiongetDomainResponse, error) {
+	response := new(IGuestSessiongetDomainResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetName(request *IGuestSessiongetName) (*IGuestSessiongetNameResponse, error) {
+	response := new(IGuestSessiongetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetId(request *IGuestSessiongetId) (*IGuestSessiongetIdResponse, error) {
+	response := new(IGuestSessiongetIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetTimeout(request *IGuestSessiongetTimeout) (*IGuestSessiongetTimeoutResponse, error) {
+	response := new(IGuestSessiongetTimeoutResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionsetTimeout(request *IGuestSessionsetTimeout) (*IGuestSessionsetTimeoutResponse, error) {
+	response := new(IGuestSessionsetTimeoutResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetProtocolVersion(request *IGuestSessiongetProtocolVersion) (*IGuestSessiongetProtocolVersionResponse, error) {
+	response := new(IGuestSessiongetProtocolVersionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetStatus(request *IGuestSessiongetStatus) (*IGuestSessiongetStatusResponse, error) {
+	response := new(IGuestSessiongetStatusResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetEnvironmentChanges(request *IGuestSessiongetEnvironmentChanges) (*IGuestSessiongetEnvironmentChangesResponse, error) {
+	response := new(IGuestSessiongetEnvironmentChangesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionsetEnvironmentChanges(request *IGuestSessionsetEnvironmentChanges) (*IGuestSessionsetEnvironmentChangesResponse, error) {
+	response := new(IGuestSessionsetEnvironmentChangesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetEnvironmentBase(request *IGuestSessiongetEnvironmentBase) (*IGuestSessiongetEnvironmentBaseResponse, error) {
+	response := new(IGuestSessiongetEnvironmentBaseResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetProcesses(request *IGuestSessiongetProcesses) (*IGuestSessiongetProcessesResponse, error) {
+	response := new(IGuestSessiongetProcessesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetPathStyle(request *IGuestSessiongetPathStyle) (*IGuestSessiongetPathStyleResponse, error) {
+	response := new(IGuestSessiongetPathStyleResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetCurrentDirectory(request *IGuestSessiongetCurrentDirectory) (*IGuestSessiongetCurrentDirectoryResponse, error) {
+	response := new(IGuestSessiongetCurrentDirectoryResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionsetCurrentDirectory(request *IGuestSessionsetCurrentDirectory) (*IGuestSessionsetCurrentDirectoryResponse, error) {
+	response := new(IGuestSessionsetCurrentDirectoryResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetDirectories(request *IGuestSessiongetDirectories) (*IGuestSessiongetDirectoriesResponse, error) {
+	response := new(IGuestSessiongetDirectoriesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetFiles(request *IGuestSessiongetFiles) (*IGuestSessiongetFilesResponse, error) {
+	response := new(IGuestSessiongetFilesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiongetEventSource(request *IGuestSessiongetEventSource) (*IGuestSessiongetEventSourceResponse, error) {
+	response := new(IGuestSessiongetEventSourceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionclose(request *IGuestSessionclose) (*IGuestSessioncloseResponse, error) {
+	response := new(IGuestSessioncloseResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiondirectoryCopy(request *IGuestSessiondirectoryCopy) (*IGuestSessiondirectoryCopyResponse, error) {
+	response := new(IGuestSessiondirectoryCopyResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiondirectoryCopyFromGuest(request *IGuestSessiondirectoryCopyFromGuest) (*IGuestSessiondirectoryCopyFromGuestResponse, error) {
+	response := new(IGuestSessiondirectoryCopyFromGuestResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiondirectoryCopyToGuest(request *IGuestSessiondirectoryCopyToGuest) (*IGuestSessiondirectoryCopyToGuestResponse, error) {
+	response := new(IGuestSessiondirectoryCopyToGuestResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiondirectoryCreate(request *IGuestSessiondirectoryCreate) (*IGuestSessiondirectoryCreateResponse, error) {
+	response := new(IGuestSessiondirectoryCreateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiondirectoryCreateTemp(request *IGuestSessiondirectoryCreateTemp) (*IGuestSessiondirectoryCreateTempResponse, error) {
+	response := new(IGuestSessiondirectoryCreateTempResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiondirectoryExists(request *IGuestSessiondirectoryExists) (*IGuestSessiondirectoryExistsResponse, error) {
+	response := new(IGuestSessiondirectoryExistsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiondirectoryOpen(request *IGuestSessiondirectoryOpen) (*IGuestSessiondirectoryOpenResponse, error) {
+	response := new(IGuestSessiondirectoryOpenResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiondirectoryRemove(request *IGuestSessiondirectoryRemove) (*IGuestSessiondirectoryRemoveResponse, error) {
+	response := new(IGuestSessiondirectoryRemoveResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessiondirectoryRemoveRecursive(request *IGuestSessiondirectoryRemoveRecursive) (*IGuestSessiondirectoryRemoveRecursiveResponse, error) {
+	response := new(IGuestSessiondirectoryRemoveRecursiveResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionenvironmentScheduleSet(request *IGuestSessionenvironmentScheduleSet) (*IGuestSessionenvironmentScheduleSetResponse, error) {
+	response := new(IGuestSessionenvironmentScheduleSetResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionenvironmentScheduleUnset(request *IGuestSessionenvironmentScheduleUnset) (*IGuestSessionenvironmentScheduleUnsetResponse, error) {
+	response := new(IGuestSessionenvironmentScheduleUnsetResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionenvironmentGetBaseVariable(request *IGuestSessionenvironmentGetBaseVariable) (*IGuestSessionenvironmentGetBaseVariableResponse, error) {
+	response := new(IGuestSessionenvironmentGetBaseVariableResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionenvironmentDoesBaseVariableExist(request *IGuestSessionenvironmentDoesBaseVariableExist) (*IGuestSessionenvironmentDoesBaseVariableExistResponse, error) {
+	response := new(IGuestSessionenvironmentDoesBaseVariableExistResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfileCopy(request *IGuestSessionfileCopy) (*IGuestSessionfileCopyResponse, error) {
+	response := new(IGuestSessionfileCopyResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfileCopyFromGuest(request *IGuestSessionfileCopyFromGuest) (*IGuestSessionfileCopyFromGuestResponse, error) {
+	response := new(IGuestSessionfileCopyFromGuestResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfileCopyToGuest(request *IGuestSessionfileCopyToGuest) (*IGuestSessionfileCopyToGuestResponse, error) {
+	response := new(IGuestSessionfileCopyToGuestResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfileCreateTemp(request *IGuestSessionfileCreateTemp) (*IGuestSessionfileCreateTempResponse, error) {
+	response := new(IGuestSessionfileCreateTempResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfileExists(request *IGuestSessionfileExists) (*IGuestSessionfileExistsResponse, error) {
+	response := new(IGuestSessionfileExistsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfileOpen(request *IGuestSessionfileOpen) (*IGuestSessionfileOpenResponse, error) {
+	response := new(IGuestSessionfileOpenResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfileOpenEx(request *IGuestSessionfileOpenEx) (*IGuestSessionfileOpenExResponse, error) {
+	response := new(IGuestSessionfileOpenExResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfileQuerySize(request *IGuestSessionfileQuerySize) (*IGuestSessionfileQuerySizeResponse, error) {
+	response := new(IGuestSessionfileQuerySizeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfsObjExists(request *IGuestSessionfsObjExists) (*IGuestSessionfsObjExistsResponse, error) {
+	response := new(IGuestSessionfsObjExistsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfsObjQueryInfo(request *IGuestSessionfsObjQueryInfo) (*IGuestSessionfsObjQueryInfoResponse, error) {
+	response := new(IGuestSessionfsObjQueryInfoResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfsObjRemove(request *IGuestSessionfsObjRemove) (*IGuestSessionfsObjRemoveResponse, error) {
+	response := new(IGuestSessionfsObjRemoveResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfsObjRename(request *IGuestSessionfsObjRename) (*IGuestSessionfsObjRenameResponse, error) {
+	response := new(IGuestSessionfsObjRenameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfsObjMove(request *IGuestSessionfsObjMove) (*IGuestSessionfsObjMoveResponse, error) {
+	response := new(IGuestSessionfsObjMoveResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionfsObjSetACL(request *IGuestSessionfsObjSetACL) (*IGuestSessionfsObjSetACLResponse, error) {
+	response := new(IGuestSessionfsObjSetACLResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionprocessCreate(request *IGuestSessionprocessCreate) (*IGuestSessionprocessCreateResponse, error) {
+	response := new(IGuestSessionprocessCreateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionprocessCreateEx(request *IGuestSessionprocessCreateEx) (*IGuestSessionprocessCreateExResponse, error) {
+	response := new(IGuestSessionprocessCreateExResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionprocessGet(request *IGuestSessionprocessGet) (*IGuestSessionprocessGetResponse, error) {
+	response := new(IGuestSessionprocessGetResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionsymlinkCreate(request *IGuestSessionsymlinkCreate) (*IGuestSessionsymlinkCreateResponse, error) {
+	response := new(IGuestSessionsymlinkCreateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionsymlinkExists(request *IGuestSessionsymlinkExists) (*IGuestSessionsymlinkExistsResponse, error) {
+	response := new(IGuestSessionsymlinkExistsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionsymlinkRead(request *IGuestSessionsymlinkRead) (*IGuestSessionsymlinkReadResponse, error) {
+	response := new(IGuestSessionsymlinkReadResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionwaitFor(request *IGuestSessionwaitFor) (*IGuestSessionwaitForResponse, error) {
+	response := new(IGuestSessionwaitForResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionwaitForArray(request *IGuestSessionwaitForArray) (*IGuestSessionwaitForArrayResponse, error) {
+	response := new(IGuestSessionwaitForArrayResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcessgetArguments(request *IProcessgetArguments) (*IProcessgetArgumentsResponse, error) {
+	response := new(IProcessgetArgumentsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcessgetEnvironment(request *IProcessgetEnvironment) (*IProcessgetEnvironmentResponse, error) {
+	response := new(IProcessgetEnvironmentResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcessgetEventSource(request *IProcessgetEventSource) (*IProcessgetEventSourceResponse, error) {
+	response := new(IProcessgetEventSourceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcessgetExecutablePath(request *IProcessgetExecutablePath) (*IProcessgetExecutablePathResponse, error) {
+	response := new(IProcessgetExecutablePathResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcessgetExitCode(request *IProcessgetExitCode) (*IProcessgetExitCodeResponse, error) {
+	response := new(IProcessgetExitCodeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcessgetName(request *IProcessgetName) (*IProcessgetNameResponse, error) {
+	response := new(IProcessgetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcessgetPID(request *IProcessgetPID) (*IProcessgetPIDResponse, error) {
+	response := new(IProcessgetPIDResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcessgetStatus(request *IProcessgetStatus) (*IProcessgetStatusResponse, error) {
+	response := new(IProcessgetStatusResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcesswaitFor(request *IProcesswaitFor) (*IProcesswaitForResponse, error) {
+	response := new(IProcesswaitForResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcesswaitForArray(request *IProcesswaitForArray) (*IProcesswaitForArrayResponse, error) {
+	response := new(IProcesswaitForArrayResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcessread(request *IProcessread) (*IProcessreadResponse, error) {
+	response := new(IProcessreadResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcesswrite(request *IProcesswrite) (*IProcesswriteResponse, error) {
+	response := new(IProcesswriteResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcesswriteArray(request *IProcesswriteArray) (*IProcesswriteArrayResponse, error) {
+	response := new(IProcesswriteArrayResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProcessterminate(request *IProcessterminate) (*IProcessterminateResponse, error) {
+	response := new(IProcessterminateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestProcessgetMidlDoesNotLikeEmptyInterfaces(request *IGuestProcessgetMidlDoesNotLikeEmptyInterfaces) (*IGuestProcessgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IGuestProcessgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDirectorygetDirectoryName(request *IDirectorygetDirectoryName) (*IDirectorygetDirectoryNameResponse, error) {
+	response := new(IDirectorygetDirectoryNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDirectorygetFilter(request *IDirectorygetFilter) (*IDirectorygetFilterResponse, error) {
+	response := new(IDirectorygetFilterResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDirectoryclose(request *IDirectoryclose) (*IDirectorycloseResponse, error) {
+	response := new(IDirectorycloseResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDirectoryread(request *IDirectoryread) (*IDirectoryreadResponse, error) {
+	response := new(IDirectoryreadResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestDirectorygetMidlDoesNotLikeEmptyInterfaces(request *IGuestDirectorygetMidlDoesNotLikeEmptyInterfaces) (*IGuestDirectorygetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IGuestDirectorygetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilegetEventSource(request *IFilegetEventSource) (*IFilegetEventSourceResponse, error) {
+	response := new(IFilegetEventSourceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilegetId(request *IFilegetId) (*IFilegetIdResponse, error) {
+	response := new(IFilegetIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilegetInitialSize(request *IFilegetInitialSize) (*IFilegetInitialSizeResponse, error) {
+	response := new(IFilegetInitialSizeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilegetOffset(request *IFilegetOffset) (*IFilegetOffsetResponse, error) {
+	response := new(IFilegetOffsetResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilegetStatus(request *IFilegetStatus) (*IFilegetStatusResponse, error) {
+	response := new(IFilegetStatusResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilegetFileName(request *IFilegetFileName) (*IFilegetFileNameResponse, error) {
+	response := new(IFilegetFileNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilegetCreationMode(request *IFilegetCreationMode) (*IFilegetCreationModeResponse, error) {
+	response := new(IFilegetCreationModeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilegetOpenAction(request *IFilegetOpenAction) (*IFilegetOpenActionResponse, error) {
+	response := new(IFilegetOpenActionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilegetAccessMode(request *IFilegetAccessMode) (*IFilegetAccessModeResponse, error) {
+	response := new(IFilegetAccessModeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFileclose(request *IFileclose) (*IFilecloseResponse, error) {
+	response := new(IFilecloseResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilequeryInfo(request *IFilequeryInfo) (*IFilequeryInfoResponse, error) {
+	response := new(IFilequeryInfoResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilequerySize(request *IFilequerySize) (*IFilequerySizeResponse, error) {
+	response := new(IFilequerySizeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFileread(request *IFileread) (*IFilereadResponse, error) {
+	response := new(IFilereadResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilereadAt(request *IFilereadAt) (*IFilereadAtResponse, error) {
+	response := new(IFilereadAtResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFileseek(request *IFileseek) (*IFileseekResponse, error) {
+	response := new(IFileseekResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilesetACL(request *IFilesetACL) (*IFilesetACLResponse, error) {
+	response := new(IFilesetACLResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilesetSize(request *IFilesetSize) (*IFilesetSizeResponse, error) {
+	response := new(IFilesetSizeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilewrite(request *IFilewrite) (*IFilewriteResponse, error) {
+	response := new(IFilewriteResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFilewriteAt(request *IFilewriteAt) (*IFilewriteAtResponse, error) {
+	response := new(IFilewriteAtResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestFilegetMidlDoesNotLikeEmptyInterfaces(request *IGuestFilegetMidlDoesNotLikeEmptyInterfaces) (*IGuestFilegetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IGuestFilegetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetAccessTime(request *IFsObjInfogetAccessTime) (*IFsObjInfogetAccessTimeResponse, error) {
+	response := new(IFsObjInfogetAccessTimeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetAllocatedSize(request *IFsObjInfogetAllocatedSize) (*IFsObjInfogetAllocatedSizeResponse, error) {
+	response := new(IFsObjInfogetAllocatedSizeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetBirthTime(request *IFsObjInfogetBirthTime) (*IFsObjInfogetBirthTimeResponse, error) {
+	response := new(IFsObjInfogetBirthTimeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetChangeTime(request *IFsObjInfogetChangeTime) (*IFsObjInfogetChangeTimeResponse, error) {
+	response := new(IFsObjInfogetChangeTimeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetDeviceNumber(request *IFsObjInfogetDeviceNumber) (*IFsObjInfogetDeviceNumberResponse, error) {
+	response := new(IFsObjInfogetDeviceNumberResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetFileAttributes(request *IFsObjInfogetFileAttributes) (*IFsObjInfogetFileAttributesResponse, error) {
+	response := new(IFsObjInfogetFileAttributesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetGenerationId(request *IFsObjInfogetGenerationId) (*IFsObjInfogetGenerationIdResponse, error) {
+	response := new(IFsObjInfogetGenerationIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetGID(request *IFsObjInfogetGID) (*IFsObjInfogetGIDResponse, error) {
+	response := new(IFsObjInfogetGIDResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetGroupName(request *IFsObjInfogetGroupName) (*IFsObjInfogetGroupNameResponse, error) {
+	response := new(IFsObjInfogetGroupNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetHardLinks(request *IFsObjInfogetHardLinks) (*IFsObjInfogetHardLinksResponse, error) {
+	response := new(IFsObjInfogetHardLinksResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetModificationTime(request *IFsObjInfogetModificationTime) (*IFsObjInfogetModificationTimeResponse, error) {
+	response := new(IFsObjInfogetModificationTimeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetName(request *IFsObjInfogetName) (*IFsObjInfogetNameResponse, error) {
+	response := new(IFsObjInfogetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetNodeId(request *IFsObjInfogetNodeId) (*IFsObjInfogetNodeIdResponse, error) {
+	response := new(IFsObjInfogetNodeIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetNodeIdDevice(request *IFsObjInfogetNodeIdDevice) (*IFsObjInfogetNodeIdDeviceResponse, error) {
+	response := new(IFsObjInfogetNodeIdDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetObjectSize(request *IFsObjInfogetObjectSize) (*IFsObjInfogetObjectSizeResponse, error) {
+	response := new(IFsObjInfogetObjectSizeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetType(request *IFsObjInfogetType) (*IFsObjInfogetTypeResponse, error) {
+	response := new(IFsObjInfogetTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetUID(request *IFsObjInfogetUID) (*IFsObjInfogetUIDResponse, error) {
+	response := new(IFsObjInfogetUIDResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetUserFlags(request *IFsObjInfogetUserFlags) (*IFsObjInfogetUserFlagsResponse, error) {
+	response := new(IFsObjInfogetUserFlagsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFsObjInfogetUserName(request *IFsObjInfogetUserName) (*IFsObjInfogetUserNameResponse, error) {
+	response := new(IFsObjInfogetUserNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestFsObjInfogetMidlDoesNotLikeEmptyInterfaces(request *IGuestFsObjInfogetMidlDoesNotLikeEmptyInterfaces) (*IGuestFsObjInfogetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IGuestFsObjInfogetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IGuestgetOSTypeId(request *IGuestgetOSTypeId) (*IGuestgetOSTypeIdResponse, error) {
 	response := new(IGuestgetOSTypeIdResponse)
 	err := service.client.Call("", request, response)
@@ -14103,8 +27173,8 @@ func (service *VboxPortType) IGuestgetOSTypeId(request *IGuestgetOSTypeId) (*IGu
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IGuestgetAdditionsActive(request *IGuestgetAdditionsActive) (*IGuestgetAdditionsActiveResponse, error) {
-	response := new(IGuestgetAdditionsActiveResponse)
+func (service *VboxPortType) IGuestgetAdditionsRunLevel(request *IGuestgetAdditionsRunLevel) (*IGuestgetAdditionsRunLevelResponse, error) {
+	response := new(IGuestgetAdditionsRunLevelResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -14133,8 +27203,8 @@ func (service *VboxPortType) IGuestgetAdditionsVersion(request *IGuestgetAdditio
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IGuestgetSupportsSeamless(request *IGuestgetSupportsSeamless) (*IGuestgetSupportsSeamlessResponse, error) {
-	response := new(IGuestgetSupportsSeamlessResponse)
+func (service *VboxPortType) IGuestgetAdditionsRevision(request *IGuestgetAdditionsRevision) (*IGuestgetAdditionsRevisionResponse, error) {
+	response := new(IGuestgetAdditionsRevisionResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -14148,8 +27218,68 @@ func (service *VboxPortType) IGuestgetSupportsSeamless(request *IGuestgetSupport
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IGuestgetSupportsGraphics(request *IGuestgetSupportsGraphics) (*IGuestgetSupportsGraphicsResponse, error) {
-	response := new(IGuestgetSupportsGraphicsResponse)
+func (service *VboxPortType) IGuestgetDnDSource(request *IGuestgetDnDSource) (*IGuestgetDnDSourceResponse, error) {
+	response := new(IGuestgetDnDSourceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestgetDnDTarget(request *IGuestgetDnDTarget) (*IGuestgetDnDTargetResponse, error) {
+	response := new(IGuestgetDnDTargetResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestgetEventSource(request *IGuestgetEventSource) (*IGuestgetEventSourceResponse, error) {
+	response := new(IGuestgetEventSourceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestgetFacilities(request *IGuestgetFacilities) (*IGuestgetFacilitiesResponse, error) {
+	response := new(IGuestgetFacilitiesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestgetSessions(request *IGuestgetSessions) (*IGuestgetSessionsResponse, error) {
+	response := new(IGuestgetSessionsResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -14180,36 +27310,6 @@ func (service *VboxPortType) IGuestgetMemoryBalloonSize(request *IGuestgetMemory
 
 func (service *VboxPortType) IGuestsetMemoryBalloonSize(request *IGuestsetMemoryBalloonSize) (*IGuestsetMemoryBalloonSizeResponse, error) {
 	response := new(IGuestsetMemoryBalloonSizeResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IGuestgetPageFusionEnabled(request *IGuestgetPageFusionEnabled) (*IGuestgetPageFusionEnabledResponse, error) {
-	response := new(IGuestgetPageFusionEnabledResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IGuestsetPageFusionEnabled(request *IGuestsetPageFusionEnabled) (*IGuestsetPageFusionEnabledResponse, error) {
-	response := new(IGuestsetPageFusionEnabledResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -14268,6 +27368,36 @@ func (service *VboxPortType) IGuestinternalGetStatistics(request *IGuestinternal
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IGuestgetFacilityStatus(request *IGuestgetFacilityStatus) (*IGuestgetFacilityStatusResponse, error) {
+	response := new(IGuestgetFacilityStatusResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestgetAdditionsStatus(request *IGuestgetAdditionsStatus) (*IGuestgetAdditionsStatusResponse, error) {
+	response := new(IGuestgetAdditionsStatusResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IGuestsetCredentials(request *IGuestsetCredentials) (*IGuestsetCredentialsResponse, error) {
 	response := new(IGuestsetCredentialsResponse)
 	err := service.client.Call("", request, response)
@@ -14283,8 +27413,8 @@ func (service *VboxPortType) IGuestsetCredentials(request *IGuestsetCredentials)
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IGuestexecuteProcess(request *IGuestexecuteProcess) (*IGuestexecuteProcessResponse, error) {
-	response := new(IGuestexecuteProcessResponse)
+func (service *VboxPortType) IGuestcreateSession(request *IGuestcreateSession) (*IGuestcreateSessionResponse, error) {
+	response := new(IGuestcreateSessionResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -14298,8 +27428,8 @@ func (service *VboxPortType) IGuestexecuteProcess(request *IGuestexecuteProcess)
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IGuestgetProcessOutput(request *IGuestgetProcessOutput) (*IGuestgetProcessOutputResponse, error) {
-	response := new(IGuestgetProcessOutputResponse)
+func (service *VboxPortType) IGuestfindSession(request *IGuestfindSession) (*IGuestfindSessionResponse, error) {
+	response := new(IGuestfindSessionResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -14313,8 +27443,8 @@ func (service *VboxPortType) IGuestgetProcessOutput(request *IGuestgetProcessOut
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IGuestgetProcessStatus(request *IGuestgetProcessStatus) (*IGuestgetProcessStatusResponse, error) {
-	response := new(IGuestgetProcessStatusResponse)
+func (service *VboxPortType) IGuestupdateGuestAdditions(request *IGuestupdateGuestAdditions) (*IGuestupdateGuestAdditionsResponse, error) {
+	response := new(IGuestupdateGuestAdditionsResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -14538,6 +27668,21 @@ func (service *VboxPortType) IProgressgetOperationPercent(request *IProgressgetO
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IProgressgetOperationWeight(request *IProgressgetOperationWeight) (*IProgressgetOperationWeightResponse, error) {
+	response := new(IProgressgetOperationWeightResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IProgressgetTimeout(request *IProgressgetTimeout) (*IProgressgetTimeoutResponse, error) {
 	response := new(IProgressgetTimeoutResponse)
 	err := service.client.Call("", request, response)
@@ -14615,6 +27760,21 @@ func (service *VboxPortType) IProgresswaitForCompletion(request *IProgresswaitFo
 
 func (service *VboxPortType) IProgresswaitForOperationCompletion(request *IProgresswaitForOperationCompletion) (*IProgresswaitForOperationCompletionResponse, error) {
 	response := new(IProgresswaitForOperationCompletionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IProgresswaitForAsyncProgressCompletion(request *IProgresswaitForAsyncProgressCompletion) (*IProgresswaitForAsyncProgressCompletionResponse, error) {
+	response := new(IProgresswaitForAsyncProgressCompletionResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -14793,6 +27953,21 @@ func (service *VboxPortType) ISnapshotgetChildren(request *ISnapshotgetChildren)
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) ISnapshotgetChildrenCount(request *ISnapshotgetChildrenCount) (*ISnapshotgetChildrenCountResponse, error) {
+	response := new(ISnapshotgetChildrenCountResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMediumgetId(request *IMediumgetId) (*IMediumgetIdResponse, error) {
 	response := new(IMediumgetIdResponse)
 	err := service.client.Call("", request, response)
@@ -14853,8 +28028,8 @@ func (service *VboxPortType) IMediumgetState(request *IMediumgetState) (*IMedium
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMediumgetLocation(request *IMediumgetLocation) (*IMediumgetLocationResponse, error) {
-	response := new(IMediumgetLocationResponse)
+func (service *VboxPortType) IMediumgetVariant(request *IMediumgetVariant) (*IMediumgetVariantResponse, error) {
+	response := new(IMediumgetVariantResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -14868,8 +28043,8 @@ func (service *VboxPortType) IMediumgetLocation(request *IMediumgetLocation) (*I
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMediumsetLocation(request *IMediumsetLocation) (*IMediumsetLocationResponse, error) {
-	response := new(IMediumsetLocationResponse)
+func (service *VboxPortType) IMediumgetLocation(request *IMediumgetLocation) (*IMediumgetLocationResponse, error) {
+	response := new(IMediumgetLocationResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -14990,6 +28165,21 @@ func (service *VboxPortType) IMediumgetType(request *IMediumgetType) (*IMediumge
 
 func (service *VboxPortType) IMediumsetType(request *IMediumsetType) (*IMediumsetTypeResponse, error) {
 	response := new(IMediumsetTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMediumgetAllowedTypes(request *IMediumgetAllowedTypes) (*IMediumgetAllowedTypesResponse, error) {
+	response := new(IMediumgetAllowedTypesResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -15138,6 +28328,21 @@ func (service *VboxPortType) IMediumgetMachineIds(request *IMediumgetMachineIds)
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMediumsetIds(request *IMediumsetIds) (*IMediumsetIdsResponse, error) {
+	response := new(IMediumsetIdsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMediumrefreshState(request *IMediumrefreshState) (*IMediumrefreshStateResponse, error) {
 	response := new(IMediumrefreshStateResponse)
 	err := service.client.Call("", request, response)
@@ -15183,38 +28388,8 @@ func (service *VboxPortType) IMediumlockRead(request *IMediumlockRead) (*IMedium
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMediumunlockRead(request *IMediumunlockRead) (*IMediumunlockReadResponse, error) {
-	response := new(IMediumunlockReadResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
 func (service *VboxPortType) IMediumlockWrite(request *IMediumlockWrite) (*IMediumlockWriteResponse, error) {
 	response := new(IMediumlockWriteResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IMediumunlockWrite(request *IMediumunlockWrite) (*IMediumunlockWriteResponse, error) {
-	response := new(IMediumunlockWriteResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -15378,6 +28553,36 @@ func (service *VboxPortType) IMediumcloneTo(request *IMediumcloneTo) (*IMediumcl
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMediumcloneToBase(request *IMediumcloneToBase) (*IMediumcloneToBaseResponse, error) {
+	response := new(IMediumcloneToBaseResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMediumsetLocation(request *IMediumsetLocation) (*IMediumsetLocationResponse, error) {
+	response := new(IMediumsetLocationResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMediumcompact(request *IMediumcompact) (*IMediumcompactResponse, error) {
 	response := new(IMediumcompactResponse)
 	err := service.client.Call("", request, response)
@@ -15423,6 +28628,51 @@ func (service *VboxPortType) IMediumreset(request *IMediumreset) (*IMediumresetR
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMediumchangeEncryption(request *IMediumchangeEncryption) (*IMediumchangeEncryptionResponse, error) {
+	response := new(IMediumchangeEncryptionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMediumgetEncryptionSettings(request *IMediumgetEncryptionSettings) (*IMediumgetEncryptionSettingsResponse, error) {
+	response := new(IMediumgetEncryptionSettingsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMediumcheckEncryptionPassword(request *IMediumcheckEncryptionPassword) (*IMediumcheckEncryptionPasswordResponse, error) {
+	response := new(IMediumcheckEncryptionPasswordResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMediumFormatgetId(request *IMediumFormatgetId) (*IMediumFormatgetIdResponse, error) {
 	response := new(IMediumFormatgetIdResponse)
 	err := service.client.Call("", request, response)
@@ -15453,21 +28703,6 @@ func (service *VboxPortType) IMediumFormatgetName(request *IMediumFormatgetName)
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IMediumFormatgetFileExtensions(request *IMediumFormatgetFileExtensions) (*IMediumFormatgetFileExtensionsResponse, error) {
-	response := new(IMediumFormatgetFileExtensionsResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
 func (service *VboxPortType) IMediumFormatgetCapabilities(request *IMediumFormatgetCapabilities) (*IMediumFormatgetCapabilitiesResponse, error) {
 	response := new(IMediumFormatgetCapabilitiesResponse)
 	err := service.client.Call("", request, response)
@@ -15483,8 +28718,83 @@ func (service *VboxPortType) IMediumFormatgetCapabilities(request *IMediumFormat
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMediumFormatdescribeFileExtensions(request *IMediumFormatdescribeFileExtensions) (*IMediumFormatdescribeFileExtensionsResponse, error) {
+	response := new(IMediumFormatdescribeFileExtensionsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMediumFormatdescribeProperties(request *IMediumFormatdescribeProperties) (*IMediumFormatdescribePropertiesResponse, error) {
 	response := new(IMediumFormatdescribePropertiesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ITokenabandon(request *ITokenabandon) (*ITokenabandonResponse, error) {
+	response := new(ITokenabandonResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ITokendummy(request *ITokendummy) (*ITokendummyResponse, error) {
+	response := new(ITokendummyResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IKeyboardgetKeyboardLEDs(request *IKeyboardgetKeyboardLEDs) (*IKeyboardgetKeyboardLEDsResponse, error) {
+	response := new(IKeyboardgetKeyboardLEDsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IKeyboardgetEventSource(request *IKeyboardgetEventSource) (*IKeyboardgetEventSourceResponse, error) {
+	response := new(IKeyboardgetEventSourceResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -15543,6 +28853,126 @@ func (service *VboxPortType) IKeyboardputCAD(request *IKeyboardputCAD) (*IKeyboa
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IKeyboardreleaseKeys(request *IKeyboardreleaseKeys) (*IKeyboardreleaseKeysResponse, error) {
+	response := new(IKeyboardreleaseKeysResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapegetVisible(request *IMousePointerShapegetVisible) (*IMousePointerShapegetVisibleResponse, error) {
+	response := new(IMousePointerShapegetVisibleResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapegetAlpha(request *IMousePointerShapegetAlpha) (*IMousePointerShapegetAlphaResponse, error) {
+	response := new(IMousePointerShapegetAlphaResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapegetHotX(request *IMousePointerShapegetHotX) (*IMousePointerShapegetHotXResponse, error) {
+	response := new(IMousePointerShapegetHotXResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapegetHotY(request *IMousePointerShapegetHotY) (*IMousePointerShapegetHotYResponse, error) {
+	response := new(IMousePointerShapegetHotYResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapegetWidth(request *IMousePointerShapegetWidth) (*IMousePointerShapegetWidthResponse, error) {
+	response := new(IMousePointerShapegetWidthResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapegetHeight(request *IMousePointerShapegetHeight) (*IMousePointerShapegetHeightResponse, error) {
+	response := new(IMousePointerShapegetHeightResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapegetShape(request *IMousePointerShapegetShape) (*IMousePointerShapegetShapeResponse, error) {
+	response := new(IMousePointerShapegetShapeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMousegetAbsoluteSupported(request *IMousegetAbsoluteSupported) (*IMousegetAbsoluteSupportedResponse, error) {
 	response := new(IMousegetAbsoluteSupportedResponse)
 	err := service.client.Call("", request, response)
@@ -15573,8 +29003,53 @@ func (service *VboxPortType) IMousegetRelativeSupported(request *IMousegetRelati
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMousegetMultiTouchSupported(request *IMousegetMultiTouchSupported) (*IMousegetMultiTouchSupportedResponse, error) {
+	response := new(IMousegetMultiTouchSupportedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IMousegetNeedsHostCursor(request *IMousegetNeedsHostCursor) (*IMousegetNeedsHostCursorResponse, error) {
 	response := new(IMousegetNeedsHostCursorResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousegetPointerShape(request *IMousegetPointerShape) (*IMousegetPointerShapeResponse, error) {
+	response := new(IMousegetPointerShapeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousegetEventSource(request *IMousegetEventSource) (*IMousegetEventSourceResponse, error) {
+	response := new(IMousegetEventSourceResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -15618,8 +29093,383 @@ func (service *VboxPortType) IMouseputMouseEventAbsolute(request *IMouseputMouse
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IMouseputEventMultiTouch(request *IMouseputEventMultiTouch) (*IMouseputEventMultiTouchResponse, error) {
+	response := new(IMouseputEventMultiTouchResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMouseputEventMultiTouchString(request *IMouseputEventMultiTouchString) (*IMouseputEventMultiTouchStringResponse, error) {
+	response := new(IMouseputEventMultiTouchStringResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffergetWidth(request *IFramebuffergetWidth) (*IFramebuffergetWidthResponse, error) {
+	response := new(IFramebuffergetWidthResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffergetHeight(request *IFramebuffergetHeight) (*IFramebuffergetHeightResponse, error) {
+	response := new(IFramebuffergetHeightResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffergetBitsPerPixel(request *IFramebuffergetBitsPerPixel) (*IFramebuffergetBitsPerPixelResponse, error) {
+	response := new(IFramebuffergetBitsPerPixelResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffergetBytesPerLine(request *IFramebuffergetBytesPerLine) (*IFramebuffergetBytesPerLineResponse, error) {
+	response := new(IFramebuffergetBytesPerLineResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffergetPixelFormat(request *IFramebuffergetPixelFormat) (*IFramebuffergetPixelFormatResponse, error) {
+	response := new(IFramebuffergetPixelFormatResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffergetHeightReduction(request *IFramebuffergetHeightReduction) (*IFramebuffergetHeightReductionResponse, error) {
+	response := new(IFramebuffergetHeightReductionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffergetOverlay(request *IFramebuffergetOverlay) (*IFramebuffergetOverlayResponse, error) {
+	response := new(IFramebuffergetOverlayResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffergetCapabilities(request *IFramebuffergetCapabilities) (*IFramebuffergetCapabilitiesResponse, error) {
+	response := new(IFramebuffergetCapabilitiesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffernotifyUpdate(request *IFramebuffernotifyUpdate) (*IFramebuffernotifyUpdateResponse, error) {
+	response := new(IFramebuffernotifyUpdateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffernotifyUpdateImage(request *IFramebuffernotifyUpdateImage) (*IFramebuffernotifyUpdateImageResponse, error) {
+	response := new(IFramebuffernotifyUpdateImageResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffernotifyChange(request *IFramebuffernotifyChange) (*IFramebuffernotifyChangeResponse, error) {
+	response := new(IFramebuffernotifyChangeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffervideoModeSupported(request *IFramebuffervideoModeSupported) (*IFramebuffervideoModeSupportedResponse, error) {
+	response := new(IFramebuffervideoModeSupportedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebuffernotify3DEvent(request *IFramebuffernotify3DEvent) (*IFramebuffernotify3DEventResponse, error) {
+	response := new(IFramebuffernotify3DEventResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebufferOverlaygetX(request *IFramebufferOverlaygetX) (*IFramebufferOverlaygetXResponse, error) {
+	response := new(IFramebufferOverlaygetXResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebufferOverlaygetY(request *IFramebufferOverlaygetY) (*IFramebufferOverlaygetYResponse, error) {
+	response := new(IFramebufferOverlaygetYResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebufferOverlaygetVisible(request *IFramebufferOverlaygetVisible) (*IFramebufferOverlaygetVisibleResponse, error) {
+	response := new(IFramebufferOverlaygetVisibleResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebufferOverlaysetVisible(request *IFramebufferOverlaysetVisible) (*IFramebufferOverlaysetVisibleResponse, error) {
+	response := new(IFramebufferOverlaysetVisibleResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebufferOverlaygetAlpha(request *IFramebufferOverlaygetAlpha) (*IFramebufferOverlaygetAlphaResponse, error) {
+	response := new(IFramebufferOverlaygetAlphaResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebufferOverlaysetAlpha(request *IFramebufferOverlaysetAlpha) (*IFramebufferOverlaysetAlphaResponse, error) {
+	response := new(IFramebufferOverlaysetAlphaResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IFramebufferOverlaymove(request *IFramebufferOverlaymove) (*IFramebufferOverlaymoveResponse, error) {
+	response := new(IFramebufferOverlaymoveResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IDisplaygetScreenResolution(request *IDisplaygetScreenResolution) (*IDisplaygetScreenResolutionResponse, error) {
 	response := new(IDisplaygetScreenResolutionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDisplayattachFramebuffer(request *IDisplayattachFramebuffer) (*IDisplayattachFramebufferResponse, error) {
+	response := new(IDisplayattachFramebufferResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDisplaydetachFramebuffer(request *IDisplaydetachFramebuffer) (*IDisplaydetachFramebufferResponse, error) {
+	response := new(IDisplaydetachFramebufferResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDisplayqueryFramebuffer(request *IDisplayqueryFramebuffer) (*IDisplayqueryFramebufferResponse, error) {
+	response := new(IDisplayqueryFramebufferResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -15693,8 +29543,53 @@ func (service *VboxPortType) IDisplayinvalidateAndUpdate(request *IDisplayinvali
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IDisplayresizeCompleted(request *IDisplayresizeCompleted) (*IDisplayresizeCompletedResponse, error) {
-	response := new(IDisplayresizeCompletedResponse)
+func (service *VboxPortType) IDisplayinvalidateAndUpdateScreen(request *IDisplayinvalidateAndUpdateScreen) (*IDisplayinvalidateAndUpdateScreenResponse, error) {
+	response := new(IDisplayinvalidateAndUpdateScreenResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDisplayviewportChanged(request *IDisplayviewportChanged) (*IDisplayviewportChangedResponse, error) {
+	response := new(IDisplayviewportChangedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDisplaynotifyScaleFactorChange(request *IDisplaynotifyScaleFactorChange) (*IDisplaynotifyScaleFactorChangeResponse, error) {
+	response := new(IDisplaynotifyScaleFactorChangeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDisplaynotifyHiDPIOutputPolicyChange(request *IDisplaynotifyHiDPIOutputPolicyChange) (*IDisplaynotifyHiDPIOutputPolicyChangeResponse, error) {
+	response := new(IDisplaynotifyHiDPIOutputPolicyChangeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -15828,8 +29723,8 @@ func (service *VboxPortType) INetworkAdaptergetAttachmentType(request *INetworkA
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INetworkAdaptergetHostInterface(request *INetworkAdaptergetHostInterface) (*INetworkAdaptergetHostInterfaceResponse, error) {
-	response := new(INetworkAdaptergetHostInterfaceResponse)
+func (service *VboxPortType) INetworkAdaptersetAttachmentType(request *INetworkAdaptersetAttachmentType) (*INetworkAdaptersetAttachmentTypeResponse, error) {
+	response := new(INetworkAdaptersetAttachmentTypeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -15843,8 +29738,53 @@ func (service *VboxPortType) INetworkAdaptergetHostInterface(request *INetworkAd
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INetworkAdaptersetHostInterface(request *INetworkAdaptersetHostInterface) (*INetworkAdaptersetHostInterfaceResponse, error) {
-	response := new(INetworkAdaptersetHostInterfaceResponse)
+func (service *VboxPortType) INetworkAdaptergetBridgedInterface(request *INetworkAdaptergetBridgedInterface) (*INetworkAdaptergetBridgedInterfaceResponse, error) {
+	response := new(INetworkAdaptergetBridgedInterfaceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INetworkAdaptersetBridgedInterface(request *INetworkAdaptersetBridgedInterface) (*INetworkAdaptersetBridgedInterfaceResponse, error) {
+	response := new(INetworkAdaptersetBridgedInterfaceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INetworkAdaptergetHostOnlyInterface(request *INetworkAdaptergetHostOnlyInterface) (*INetworkAdaptergetHostOnlyInterfaceResponse, error) {
+	response := new(INetworkAdaptergetHostOnlyInterfaceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INetworkAdaptersetHostOnlyInterface(request *INetworkAdaptersetHostOnlyInterface) (*INetworkAdaptersetHostOnlyInterfaceResponse, error) {
+	response := new(INetworkAdaptersetHostOnlyInterfaceResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -15918,8 +29858,8 @@ func (service *VboxPortType) INetworkAdaptersetNATNetwork(request *INetworkAdapt
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INetworkAdaptergetVDENetwork(request *INetworkAdaptergetVDENetwork) (*INetworkAdaptergetVDENetworkResponse, error) {
-	response := new(INetworkAdaptergetVDENetworkResponse)
+func (service *VboxPortType) INetworkAdaptergetGenericDriver(request *INetworkAdaptergetGenericDriver) (*INetworkAdaptergetGenericDriverResponse, error) {
+	response := new(INetworkAdaptergetGenericDriverResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -15933,8 +29873,8 @@ func (service *VboxPortType) INetworkAdaptergetVDENetwork(request *INetworkAdapt
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INetworkAdaptersetVDENetwork(request *INetworkAdaptersetVDENetwork) (*INetworkAdaptersetVDENetworkResponse, error) {
-	response := new(INetworkAdaptersetVDENetworkResponse)
+func (service *VboxPortType) INetworkAdaptersetGenericDriver(request *INetworkAdaptersetGenericDriver) (*INetworkAdaptersetGenericDriverResponse, error) {
+	response := new(INetworkAdaptersetGenericDriverResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16008,6 +29948,36 @@ func (service *VboxPortType) INetworkAdaptersetLineSpeed(request *INetworkAdapte
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) INetworkAdaptergetPromiscModePolicy(request *INetworkAdaptergetPromiscModePolicy) (*INetworkAdaptergetPromiscModePolicyResponse, error) {
+	response := new(INetworkAdaptergetPromiscModePolicyResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INetworkAdaptersetPromiscModePolicy(request *INetworkAdaptersetPromiscModePolicy) (*INetworkAdaptersetPromiscModePolicyResponse, error) {
+	response := new(INetworkAdaptersetPromiscModePolicyResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) INetworkAdaptergetTraceEnabled(request *INetworkAdaptergetTraceEnabled) (*INetworkAdaptergetTraceEnabledResponse, error) {
 	response := new(INetworkAdaptergetTraceEnabledResponse)
 	err := service.client.Call("", request, response)
@@ -16068,8 +30038,8 @@ func (service *VboxPortType) INetworkAdaptersetTraceFile(request *INetworkAdapte
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INetworkAdaptergetNatDriver(request *INetworkAdaptergetNatDriver) (*INetworkAdaptergetNatDriverResponse, error) {
-	response := new(INetworkAdaptergetNatDriverResponse)
+func (service *VboxPortType) INetworkAdaptergetNATEngine(request *INetworkAdaptergetNATEngine) (*INetworkAdaptergetNATEngineResponse, error) {
+	response := new(INetworkAdaptergetNATEngineResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16113,8 +30083,8 @@ func (service *VboxPortType) INetworkAdaptersetBootPriority(request *INetworkAda
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INetworkAdapterattachToNAT(request *INetworkAdapterattachToNAT) (*INetworkAdapterattachToNATResponse, error) {
-	response := new(INetworkAdapterattachToNATResponse)
+func (service *VboxPortType) INetworkAdaptergetBandwidthGroup(request *INetworkAdaptergetBandwidthGroup) (*INetworkAdaptergetBandwidthGroupResponse, error) {
+	response := new(INetworkAdaptergetBandwidthGroupResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16128,8 +30098,8 @@ func (service *VboxPortType) INetworkAdapterattachToNAT(request *INetworkAdapter
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INetworkAdapterattachToBridgedInterface(request *INetworkAdapterattachToBridgedInterface) (*INetworkAdapterattachToBridgedInterfaceResponse, error) {
-	response := new(INetworkAdapterattachToBridgedInterfaceResponse)
+func (service *VboxPortType) INetworkAdaptersetBandwidthGroup(request *INetworkAdaptersetBandwidthGroup) (*INetworkAdaptersetBandwidthGroupResponse, error) {
+	response := new(INetworkAdaptersetBandwidthGroupResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16143,8 +30113,8 @@ func (service *VboxPortType) INetworkAdapterattachToBridgedInterface(request *IN
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INetworkAdapterattachToInternalNetwork(request *INetworkAdapterattachToInternalNetwork) (*INetworkAdapterattachToInternalNetworkResponse, error) {
-	response := new(INetworkAdapterattachToInternalNetworkResponse)
+func (service *VboxPortType) INetworkAdaptergetProperty(request *INetworkAdaptergetProperty) (*INetworkAdaptergetPropertyResponse, error) {
+	response := new(INetworkAdaptergetPropertyResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16158,8 +30128,8 @@ func (service *VboxPortType) INetworkAdapterattachToInternalNetwork(request *INe
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INetworkAdapterattachToHostOnlyInterface(request *INetworkAdapterattachToHostOnlyInterface) (*INetworkAdapterattachToHostOnlyInterfaceResponse, error) {
-	response := new(INetworkAdapterattachToHostOnlyInterfaceResponse)
+func (service *VboxPortType) INetworkAdaptersetProperty(request *INetworkAdaptersetProperty) (*INetworkAdaptersetPropertyResponse, error) {
+	response := new(INetworkAdaptersetPropertyResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16173,23 +30143,8 @@ func (service *VboxPortType) INetworkAdapterattachToHostOnlyInterface(request *I
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INetworkAdapterattachToVDE(request *INetworkAdapterattachToVDE) (*INetworkAdapterattachToVDEResponse, error) {
-	response := new(INetworkAdapterattachToVDEResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) INetworkAdapterdetach(request *INetworkAdapterdetach) (*INetworkAdapterdetachResponse, error) {
-	response := new(INetworkAdapterdetachResponse)
+func (service *VboxPortType) INetworkAdaptergetProperties(request *INetworkAdaptergetProperties) (*INetworkAdaptergetPropertiesResponse, error) {
+	response := new(INetworkAdaptergetPropertiesResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16533,8 +30488,8 @@ func (service *VboxPortType) IParallelPortsetPath(request *IParallelPortsetPath)
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IUSBControllergetEnabled(request *IUSBControllergetEnabled) (*IUSBControllergetEnabledResponse, error) {
-	response := new(IUSBControllergetEnabledResponse)
+func (service *VboxPortType) IMachineDebuggergetSingleStep(request *IMachineDebuggergetSingleStep) (*IMachineDebuggergetSingleStepResponse, error) {
+	response := new(IMachineDebuggergetSingleStepResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16548,8 +30503,8 @@ func (service *VboxPortType) IUSBControllergetEnabled(request *IUSBControllerget
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IUSBControllersetEnabled(request *IUSBControllersetEnabled) (*IUSBControllersetEnabledResponse, error) {
-	response := new(IUSBControllersetEnabledResponse)
+func (service *VboxPortType) IMachineDebuggersetSingleStep(request *IMachineDebuggersetSingleStep) (*IMachineDebuggersetSingleStepResponse, error) {
+	response := new(IMachineDebuggersetSingleStepResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16563,8 +30518,8 @@ func (service *VboxPortType) IUSBControllersetEnabled(request *IUSBControllerset
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IUSBControllergetEnabledEhci(request *IUSBControllergetEnabledEhci) (*IUSBControllergetEnabledEhciResponse, error) {
-	response := new(IUSBControllergetEnabledEhciResponse)
+func (service *VboxPortType) IMachineDebuggergetRecompileUser(request *IMachineDebuggergetRecompileUser) (*IMachineDebuggergetRecompileUserResponse, error) {
+	response := new(IMachineDebuggergetRecompileUserResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16578,8 +30533,8 @@ func (service *VboxPortType) IUSBControllergetEnabledEhci(request *IUSBControlle
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IUSBControllersetEnabledEhci(request *IUSBControllersetEnabledEhci) (*IUSBControllersetEnabledEhciResponse, error) {
-	response := new(IUSBControllersetEnabledEhciResponse)
+func (service *VboxPortType) IMachineDebuggersetRecompileUser(request *IMachineDebuggersetRecompileUser) (*IMachineDebuggersetRecompileUserResponse, error) {
+	response := new(IMachineDebuggersetRecompileUserResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16593,8 +30548,833 @@ func (service *VboxPortType) IUSBControllersetEnabledEhci(request *IUSBControlle
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IUSBControllergetProxyAvailable(request *IUSBControllergetProxyAvailable) (*IUSBControllergetProxyAvailableResponse, error) {
-	response := new(IUSBControllergetProxyAvailableResponse)
+func (service *VboxPortType) IMachineDebuggergetRecompileSupervisor(request *IMachineDebuggergetRecompileSupervisor) (*IMachineDebuggergetRecompileSupervisorResponse, error) {
+	response := new(IMachineDebuggergetRecompileSupervisorResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggersetRecompileSupervisor(request *IMachineDebuggersetRecompileSupervisor) (*IMachineDebuggersetRecompileSupervisorResponse, error) {
+	response := new(IMachineDebuggersetRecompileSupervisorResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetExecuteAllInIEM(request *IMachineDebuggergetExecuteAllInIEM) (*IMachineDebuggergetExecuteAllInIEMResponse, error) {
+	response := new(IMachineDebuggergetExecuteAllInIEMResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggersetExecuteAllInIEM(request *IMachineDebuggersetExecuteAllInIEM) (*IMachineDebuggersetExecuteAllInIEMResponse, error) {
+	response := new(IMachineDebuggersetExecuteAllInIEMResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetPATMEnabled(request *IMachineDebuggergetPATMEnabled) (*IMachineDebuggergetPATMEnabledResponse, error) {
+	response := new(IMachineDebuggergetPATMEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggersetPATMEnabled(request *IMachineDebuggersetPATMEnabled) (*IMachineDebuggersetPATMEnabledResponse, error) {
+	response := new(IMachineDebuggersetPATMEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetCSAMEnabled(request *IMachineDebuggergetCSAMEnabled) (*IMachineDebuggergetCSAMEnabledResponse, error) {
+	response := new(IMachineDebuggergetCSAMEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggersetCSAMEnabled(request *IMachineDebuggersetCSAMEnabled) (*IMachineDebuggersetCSAMEnabledResponse, error) {
+	response := new(IMachineDebuggersetCSAMEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetLogEnabled(request *IMachineDebuggergetLogEnabled) (*IMachineDebuggergetLogEnabledResponse, error) {
+	response := new(IMachineDebuggergetLogEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggersetLogEnabled(request *IMachineDebuggersetLogEnabled) (*IMachineDebuggersetLogEnabledResponse, error) {
+	response := new(IMachineDebuggersetLogEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetLogDbgFlags(request *IMachineDebuggergetLogDbgFlags) (*IMachineDebuggergetLogDbgFlagsResponse, error) {
+	response := new(IMachineDebuggergetLogDbgFlagsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetLogDbgGroups(request *IMachineDebuggergetLogDbgGroups) (*IMachineDebuggergetLogDbgGroupsResponse, error) {
+	response := new(IMachineDebuggergetLogDbgGroupsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetLogDbgDestinations(request *IMachineDebuggergetLogDbgDestinations) (*IMachineDebuggergetLogDbgDestinationsResponse, error) {
+	response := new(IMachineDebuggergetLogDbgDestinationsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetLogRelFlags(request *IMachineDebuggergetLogRelFlags) (*IMachineDebuggergetLogRelFlagsResponse, error) {
+	response := new(IMachineDebuggergetLogRelFlagsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetLogRelGroups(request *IMachineDebuggergetLogRelGroups) (*IMachineDebuggergetLogRelGroupsResponse, error) {
+	response := new(IMachineDebuggergetLogRelGroupsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetLogRelDestinations(request *IMachineDebuggergetLogRelDestinations) (*IMachineDebuggergetLogRelDestinationsResponse, error) {
+	response := new(IMachineDebuggergetLogRelDestinationsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetHWVirtExEnabled(request *IMachineDebuggergetHWVirtExEnabled) (*IMachineDebuggergetHWVirtExEnabledResponse, error) {
+	response := new(IMachineDebuggergetHWVirtExEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetHWVirtExNestedPagingEnabled(request *IMachineDebuggergetHWVirtExNestedPagingEnabled) (*IMachineDebuggergetHWVirtExNestedPagingEnabledResponse, error) {
+	response := new(IMachineDebuggergetHWVirtExNestedPagingEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetHWVirtExVPIDEnabled(request *IMachineDebuggergetHWVirtExVPIDEnabled) (*IMachineDebuggergetHWVirtExVPIDEnabledResponse, error) {
+	response := new(IMachineDebuggergetHWVirtExVPIDEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetHWVirtExUXEnabled(request *IMachineDebuggergetHWVirtExUXEnabled) (*IMachineDebuggergetHWVirtExUXEnabledResponse, error) {
+	response := new(IMachineDebuggergetHWVirtExUXEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetOSName(request *IMachineDebuggergetOSName) (*IMachineDebuggergetOSNameResponse, error) {
+	response := new(IMachineDebuggergetOSNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetOSVersion(request *IMachineDebuggergetOSVersion) (*IMachineDebuggergetOSVersionResponse, error) {
+	response := new(IMachineDebuggergetOSVersionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetPAEEnabled(request *IMachineDebuggergetPAEEnabled) (*IMachineDebuggergetPAEEnabledResponse, error) {
+	response := new(IMachineDebuggergetPAEEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetVirtualTimeRate(request *IMachineDebuggergetVirtualTimeRate) (*IMachineDebuggergetVirtualTimeRateResponse, error) {
+	response := new(IMachineDebuggergetVirtualTimeRateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggersetVirtualTimeRate(request *IMachineDebuggersetVirtualTimeRate) (*IMachineDebuggersetVirtualTimeRateResponse, error) {
+	response := new(IMachineDebuggersetVirtualTimeRateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerdumpGuestCore(request *IMachineDebuggerdumpGuestCore) (*IMachineDebuggerdumpGuestCoreResponse, error) {
+	response := new(IMachineDebuggerdumpGuestCoreResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerdumpHostProcessCore(request *IMachineDebuggerdumpHostProcessCore) (*IMachineDebuggerdumpHostProcessCoreResponse, error) {
+	response := new(IMachineDebuggerdumpHostProcessCoreResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerinfo(request *IMachineDebuggerinfo) (*IMachineDebuggerinfoResponse, error) {
+	response := new(IMachineDebuggerinfoResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerinjectNMI(request *IMachineDebuggerinjectNMI) (*IMachineDebuggerinjectNMIResponse, error) {
+	response := new(IMachineDebuggerinjectNMIResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggermodifyLogGroups(request *IMachineDebuggermodifyLogGroups) (*IMachineDebuggermodifyLogGroupsResponse, error) {
+	response := new(IMachineDebuggermodifyLogGroupsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggermodifyLogFlags(request *IMachineDebuggermodifyLogFlags) (*IMachineDebuggermodifyLogFlagsResponse, error) {
+	response := new(IMachineDebuggermodifyLogFlagsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggermodifyLogDestinations(request *IMachineDebuggermodifyLogDestinations) (*IMachineDebuggermodifyLogDestinationsResponse, error) {
+	response := new(IMachineDebuggermodifyLogDestinationsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerreadPhysicalMemory(request *IMachineDebuggerreadPhysicalMemory) (*IMachineDebuggerreadPhysicalMemoryResponse, error) {
+	response := new(IMachineDebuggerreadPhysicalMemoryResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerwritePhysicalMemory(request *IMachineDebuggerwritePhysicalMemory) (*IMachineDebuggerwritePhysicalMemoryResponse, error) {
+	response := new(IMachineDebuggerwritePhysicalMemoryResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerreadVirtualMemory(request *IMachineDebuggerreadVirtualMemory) (*IMachineDebuggerreadVirtualMemoryResponse, error) {
+	response := new(IMachineDebuggerreadVirtualMemoryResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerwriteVirtualMemory(request *IMachineDebuggerwriteVirtualMemory) (*IMachineDebuggerwriteVirtualMemoryResponse, error) {
+	response := new(IMachineDebuggerwriteVirtualMemoryResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerloadPlugIn(request *IMachineDebuggerloadPlugIn) (*IMachineDebuggerloadPlugInResponse, error) {
+	response := new(IMachineDebuggerloadPlugInResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerunloadPlugIn(request *IMachineDebuggerunloadPlugIn) (*IMachineDebuggerunloadPlugInResponse, error) {
+	response := new(IMachineDebuggerunloadPlugInResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerdetectOS(request *IMachineDebuggerdetectOS) (*IMachineDebuggerdetectOSResponse, error) {
+	response := new(IMachineDebuggerdetectOSResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerqueryOSKernelLog(request *IMachineDebuggerqueryOSKernelLog) (*IMachineDebuggerqueryOSKernelLogResponse, error) {
+	response := new(IMachineDebuggerqueryOSKernelLogResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetRegister(request *IMachineDebuggergetRegister) (*IMachineDebuggergetRegisterResponse, error) {
+	response := new(IMachineDebuggergetRegisterResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetRegisters(request *IMachineDebuggergetRegisters) (*IMachineDebuggergetRegistersResponse, error) {
+	response := new(IMachineDebuggergetRegistersResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggersetRegister(request *IMachineDebuggersetRegister) (*IMachineDebuggersetRegisterResponse, error) {
+	response := new(IMachineDebuggersetRegisterResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggersetRegisters(request *IMachineDebuggersetRegisters) (*IMachineDebuggersetRegistersResponse, error) {
+	response := new(IMachineDebuggersetRegistersResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerdumpGuestStack(request *IMachineDebuggerdumpGuestStack) (*IMachineDebuggerdumpGuestStackResponse, error) {
+	response := new(IMachineDebuggerdumpGuestStackResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerresetStats(request *IMachineDebuggerresetStats) (*IMachineDebuggerresetStatsResponse, error) {
+	response := new(IMachineDebuggerresetStatsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggerdumpStats(request *IMachineDebuggerdumpStats) (*IMachineDebuggerdumpStatsResponse, error) {
+	response := new(IMachineDebuggerdumpStatsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDebuggergetStats(request *IMachineDebuggergetStats) (*IMachineDebuggergetStatsResponse, error) {
+	response := new(IMachineDebuggergetStatsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBDeviceFiltersgetDeviceFilters(request *IUSBDeviceFiltersgetDeviceFilters) (*IUSBDeviceFiltersgetDeviceFiltersResponse, error) {
+	response := new(IUSBDeviceFiltersgetDeviceFiltersResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBDeviceFilterscreateDeviceFilter(request *IUSBDeviceFilterscreateDeviceFilter) (*IUSBDeviceFilterscreateDeviceFilterResponse, error) {
+	response := new(IUSBDeviceFilterscreateDeviceFilterResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBDeviceFiltersinsertDeviceFilter(request *IUSBDeviceFiltersinsertDeviceFilter) (*IUSBDeviceFiltersinsertDeviceFilterResponse, error) {
+	response := new(IUSBDeviceFiltersinsertDeviceFilterResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBDeviceFiltersremoveDeviceFilter(request *IUSBDeviceFiltersremoveDeviceFilter) (*IUSBDeviceFiltersremoveDeviceFilterResponse, error) {
+	response := new(IUSBDeviceFiltersremoveDeviceFilterResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBControllergetName(request *IUSBControllergetName) (*IUSBControllergetNameResponse, error) {
+	response := new(IUSBControllergetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBControllersetName(request *IUSBControllersetName) (*IUSBControllersetNameResponse, error) {
+	response := new(IUSBControllersetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBControllergetType(request *IUSBControllergetType) (*IUSBControllergetTypeResponse, error) {
+	response := new(IUSBControllergetTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBControllersetType(request *IUSBControllersetType) (*IUSBControllersetTypeResponse, error) {
+	response := new(IUSBControllersetTypeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16610,66 +31390,6 @@ func (service *VboxPortType) IUSBControllergetProxyAvailable(request *IUSBContro
 
 func (service *VboxPortType) IUSBControllergetUSBStandard(request *IUSBControllergetUSBStandard) (*IUSBControllergetUSBStandardResponse, error) {
 	response := new(IUSBControllergetUSBStandardResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IUSBControllergetDeviceFilters(request *IUSBControllergetDeviceFilters) (*IUSBControllergetDeviceFiltersResponse, error) {
-	response := new(IUSBControllergetDeviceFiltersResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IUSBControllercreateDeviceFilter(request *IUSBControllercreateDeviceFilter) (*IUSBControllercreateDeviceFilterResponse, error) {
-	response := new(IUSBControllercreateDeviceFilterResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IUSBControllerinsertDeviceFilter(request *IUSBControllerinsertDeviceFilter) (*IUSBControllerinsertDeviceFilterResponse, error) {
-	response := new(IUSBControllerinsertDeviceFilterResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IUSBControllerremoveDeviceFilter(request *IUSBControllerremoveDeviceFilter) (*IUSBControllerremoveDeviceFilterResponse, error) {
-	response := new(IUSBControllerremoveDeviceFilterResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -16835,6 +31555,21 @@ func (service *VboxPortType) IUSBDevicegetVersion(request *IUSBDevicegetVersion)
 
 func (service *VboxPortType) IUSBDevicegetPortVersion(request *IUSBDevicegetPortVersion) (*IUSBDevicegetPortVersionResponse, error) {
 	response := new(IUSBDevicegetPortVersionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBDevicegetSpeed(request *IUSBDevicegetSpeed) (*IUSBDevicegetSpeedResponse, error) {
+	response := new(IUSBDevicegetSpeedResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17268,6 +32003,66 @@ func (service *VboxPortType) IAudioAdaptersetEnabled(request *IAudioAdaptersetEn
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) IAudioAdaptergetEnabledIn(request *IAudioAdaptergetEnabledIn) (*IAudioAdaptergetEnabledInResponse, error) {
+	response := new(IAudioAdaptergetEnabledInResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IAudioAdaptersetEnabledIn(request *IAudioAdaptersetEnabledIn) (*IAudioAdaptersetEnabledInResponse, error) {
+	response := new(IAudioAdaptersetEnabledInResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IAudioAdaptergetEnabledOut(request *IAudioAdaptergetEnabledOut) (*IAudioAdaptergetEnabledOutResponse, error) {
+	response := new(IAudioAdaptergetEnabledOutResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IAudioAdaptersetEnabledOut(request *IAudioAdaptersetEnabledOut) (*IAudioAdaptersetEnabledOutResponse, error) {
+	response := new(IAudioAdaptersetEnabledOutResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) IAudioAdaptergetAudioController(request *IAudioAdaptergetAudioController) (*IAudioAdaptergetAudioControllerResponse, error) {
 	response := new(IAudioAdaptergetAudioControllerResponse)
 	err := service.client.Call("", request, response)
@@ -17285,6 +32080,36 @@ func (service *VboxPortType) IAudioAdaptergetAudioController(request *IAudioAdap
 
 func (service *VboxPortType) IAudioAdaptersetAudioController(request *IAudioAdaptersetAudioController) (*IAudioAdaptersetAudioControllerResponse, error) {
 	response := new(IAudioAdaptersetAudioControllerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IAudioAdaptergetAudioCodec(request *IAudioAdaptergetAudioCodec) (*IAudioAdaptergetAudioCodecResponse, error) {
+	response := new(IAudioAdaptergetAudioCodecResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IAudioAdaptersetAudioCodec(request *IAudioAdaptersetAudioCodec) (*IAudioAdaptersetAudioCodecResponse, error) {
+	response := new(IAudioAdaptersetAudioCodecResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17328,8 +32153,8 @@ func (service *VboxPortType) IAudioAdaptersetAudioDriver(request *IAudioAdapters
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServergetEnabled(request *IVRDPServergetEnabled) (*IVRDPServergetEnabledResponse, error) {
-	response := new(IVRDPServergetEnabledResponse)
+func (service *VboxPortType) IAudioAdaptergetPropertiesList(request *IAudioAdaptergetPropertiesList) (*IAudioAdaptergetPropertiesListResponse, error) {
+	response := new(IAudioAdaptergetPropertiesListResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17343,8 +32168,8 @@ func (service *VboxPortType) IVRDPServergetEnabled(request *IVRDPServergetEnable
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServersetEnabled(request *IVRDPServersetEnabled) (*IVRDPServersetEnabledResponse, error) {
-	response := new(IVRDPServersetEnabledResponse)
+func (service *VboxPortType) IAudioAdaptersetProperty(request *IAudioAdaptersetProperty) (*IAudioAdaptersetPropertyResponse, error) {
+	response := new(IAudioAdaptersetPropertyResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17358,8 +32183,8 @@ func (service *VboxPortType) IVRDPServersetEnabled(request *IVRDPServersetEnable
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServergetPorts(request *IVRDPServergetPorts) (*IVRDPServergetPortsResponse, error) {
-	response := new(IVRDPServergetPortsResponse)
+func (service *VboxPortType) IAudioAdaptergetProperty(request *IAudioAdaptergetProperty) (*IAudioAdaptergetPropertyResponse, error) {
+	response := new(IAudioAdaptergetPropertyResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17373,8 +32198,8 @@ func (service *VboxPortType) IVRDPServergetPorts(request *IVRDPServergetPorts) (
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServersetPorts(request *IVRDPServersetPorts) (*IVRDPServersetPortsResponse, error) {
-	response := new(IVRDPServersetPortsResponse)
+func (service *VboxPortType) IVRDEServergetEnabled(request *IVRDEServergetEnabled) (*IVRDEServergetEnabledResponse, error) {
+	response := new(IVRDEServergetEnabledResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17388,8 +32213,8 @@ func (service *VboxPortType) IVRDPServersetPorts(request *IVRDPServersetPorts) (
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServergetNetAddress(request *IVRDPServergetNetAddress) (*IVRDPServergetNetAddressResponse, error) {
-	response := new(IVRDPServergetNetAddressResponse)
+func (service *VboxPortType) IVRDEServersetEnabled(request *IVRDEServersetEnabled) (*IVRDEServersetEnabledResponse, error) {
+	response := new(IVRDEServersetEnabledResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17403,8 +32228,8 @@ func (service *VboxPortType) IVRDPServergetNetAddress(request *IVRDPServergetNet
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServersetNetAddress(request *IVRDPServersetNetAddress) (*IVRDPServersetNetAddressResponse, error) {
-	response := new(IVRDPServersetNetAddressResponse)
+func (service *VboxPortType) IVRDEServergetAuthType(request *IVRDEServergetAuthType) (*IVRDEServergetAuthTypeResponse, error) {
+	response := new(IVRDEServergetAuthTypeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17418,8 +32243,8 @@ func (service *VboxPortType) IVRDPServersetNetAddress(request *IVRDPServersetNet
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServergetAuthType(request *IVRDPServergetAuthType) (*IVRDPServergetAuthTypeResponse, error) {
-	response := new(IVRDPServergetAuthTypeResponse)
+func (service *VboxPortType) IVRDEServersetAuthType(request *IVRDEServersetAuthType) (*IVRDEServersetAuthTypeResponse, error) {
+	response := new(IVRDEServersetAuthTypeResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17433,8 +32258,8 @@ func (service *VboxPortType) IVRDPServergetAuthType(request *IVRDPServergetAuthT
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServersetAuthType(request *IVRDPServersetAuthType) (*IVRDPServersetAuthTypeResponse, error) {
-	response := new(IVRDPServersetAuthTypeResponse)
+func (service *VboxPortType) IVRDEServergetAuthTimeout(request *IVRDEServergetAuthTimeout) (*IVRDEServergetAuthTimeoutResponse, error) {
+	response := new(IVRDEServergetAuthTimeoutResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17448,8 +32273,8 @@ func (service *VboxPortType) IVRDPServersetAuthType(request *IVRDPServersetAuthT
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServergetAuthTimeout(request *IVRDPServergetAuthTimeout) (*IVRDPServergetAuthTimeoutResponse, error) {
-	response := new(IVRDPServergetAuthTimeoutResponse)
+func (service *VboxPortType) IVRDEServersetAuthTimeout(request *IVRDEServersetAuthTimeout) (*IVRDEServersetAuthTimeoutResponse, error) {
+	response := new(IVRDEServersetAuthTimeoutResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17463,8 +32288,8 @@ func (service *VboxPortType) IVRDPServergetAuthTimeout(request *IVRDPServergetAu
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServersetAuthTimeout(request *IVRDPServersetAuthTimeout) (*IVRDPServersetAuthTimeoutResponse, error) {
-	response := new(IVRDPServersetAuthTimeoutResponse)
+func (service *VboxPortType) IVRDEServergetAllowMultiConnection(request *IVRDEServergetAllowMultiConnection) (*IVRDEServergetAllowMultiConnectionResponse, error) {
+	response := new(IVRDEServergetAllowMultiConnectionResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17478,8 +32303,8 @@ func (service *VboxPortType) IVRDPServersetAuthTimeout(request *IVRDPServersetAu
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServergetAllowMultiConnection(request *IVRDPServergetAllowMultiConnection) (*IVRDPServergetAllowMultiConnectionResponse, error) {
-	response := new(IVRDPServergetAllowMultiConnectionResponse)
+func (service *VboxPortType) IVRDEServersetAllowMultiConnection(request *IVRDEServersetAllowMultiConnection) (*IVRDEServersetAllowMultiConnectionResponse, error) {
+	response := new(IVRDEServersetAllowMultiConnectionResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17493,8 +32318,8 @@ func (service *VboxPortType) IVRDPServergetAllowMultiConnection(request *IVRDPSe
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServersetAllowMultiConnection(request *IVRDPServersetAllowMultiConnection) (*IVRDPServersetAllowMultiConnectionResponse, error) {
-	response := new(IVRDPServersetAllowMultiConnectionResponse)
+func (service *VboxPortType) IVRDEServergetReuseSingleConnection(request *IVRDEServergetReuseSingleConnection) (*IVRDEServergetReuseSingleConnectionResponse, error) {
+	response := new(IVRDEServergetReuseSingleConnectionResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17508,8 +32333,8 @@ func (service *VboxPortType) IVRDPServersetAllowMultiConnection(request *IVRDPSe
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServergetReuseSingleConnection(request *IVRDPServergetReuseSingleConnection) (*IVRDPServergetReuseSingleConnectionResponse, error) {
-	response := new(IVRDPServergetReuseSingleConnectionResponse)
+func (service *VboxPortType) IVRDEServersetReuseSingleConnection(request *IVRDEServersetReuseSingleConnection) (*IVRDEServersetReuseSingleConnectionResponse, error) {
+	response := new(IVRDEServersetReuseSingleConnectionResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17523,8 +32348,8 @@ func (service *VboxPortType) IVRDPServergetReuseSingleConnection(request *IVRDPS
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServersetReuseSingleConnection(request *IVRDPServersetReuseSingleConnection) (*IVRDPServersetReuseSingleConnectionResponse, error) {
-	response := new(IVRDPServersetReuseSingleConnectionResponse)
+func (service *VboxPortType) IVRDEServergetVRDEExtPack(request *IVRDEServergetVRDEExtPack) (*IVRDEServergetVRDEExtPackResponse, error) {
+	response := new(IVRDEServergetVRDEExtPackResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17538,8 +32363,8 @@ func (service *VboxPortType) IVRDPServersetReuseSingleConnection(request *IVRDPS
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServergetVideoChannel(request *IVRDPServergetVideoChannel) (*IVRDPServergetVideoChannelResponse, error) {
-	response := new(IVRDPServergetVideoChannelResponse)
+func (service *VboxPortType) IVRDEServersetVRDEExtPack(request *IVRDEServersetVRDEExtPack) (*IVRDEServersetVRDEExtPackResponse, error) {
+	response := new(IVRDEServersetVRDEExtPackResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17553,8 +32378,8 @@ func (service *VboxPortType) IVRDPServergetVideoChannel(request *IVRDPServergetV
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServersetVideoChannel(request *IVRDPServersetVideoChannel) (*IVRDPServersetVideoChannelResponse, error) {
-	response := new(IVRDPServersetVideoChannelResponse)
+func (service *VboxPortType) IVRDEServergetAuthLibrary(request *IVRDEServergetAuthLibrary) (*IVRDEServergetAuthLibraryResponse, error) {
+	response := new(IVRDEServergetAuthLibraryResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17568,8 +32393,8 @@ func (service *VboxPortType) IVRDPServersetVideoChannel(request *IVRDPServersetV
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServergetVideoChannelQuality(request *IVRDPServergetVideoChannelQuality) (*IVRDPServergetVideoChannelQualityResponse, error) {
-	response := new(IVRDPServergetVideoChannelQualityResponse)
+func (service *VboxPortType) IVRDEServersetAuthLibrary(request *IVRDEServersetAuthLibrary) (*IVRDEServersetAuthLibraryResponse, error) {
+	response := new(IVRDEServersetAuthLibraryResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17583,8 +32408,38 @@ func (service *VboxPortType) IVRDPServergetVideoChannelQuality(request *IVRDPSer
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IVRDPServersetVideoChannelQuality(request *IVRDPServersetVideoChannelQuality) (*IVRDPServersetVideoChannelQualityResponse, error) {
-	response := new(IVRDPServersetVideoChannelQualityResponse)
+func (service *VboxPortType) IVRDEServergetVRDEProperties(request *IVRDEServergetVRDEProperties) (*IVRDEServergetVRDEPropertiesResponse, error) {
+	response := new(IVRDEServergetVRDEPropertiesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVRDEServersetVRDEProperty(request *IVRDEServersetVRDEProperty) (*IVRDEServersetVRDEPropertyResponse, error) {
+	response := new(IVRDEServersetVRDEPropertyResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVRDEServergetVRDEProperty(request *IVRDEServergetVRDEProperty) (*IVRDEServergetVRDEPropertyResponse, error) {
+	response := new(IVRDEServergetVRDEPropertyResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17628,6 +32483,36 @@ func (service *VboxPortType) ISessiongetType(request *ISessiongetType) (*ISessio
 //   - InvalidObjectFault
 //   - RuntimeFault
 
+func (service *VboxPortType) ISessiongetName(request *ISessiongetName) (*ISessiongetNameResponse, error) {
+	response := new(ISessiongetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISessionsetName(request *ISessionsetName) (*ISessionsetNameResponse, error) {
+	response := new(ISessionsetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
 func (service *VboxPortType) ISessiongetMachine(request *ISessiongetMachine) (*ISessiongetMachineResponse, error) {
 	response := new(ISessiongetMachineResponse)
 	err := service.client.Call("", request, response)
@@ -17658,8 +32543,8 @@ func (service *VboxPortType) ISessiongetConsole(request *ISessiongetConsole) (*I
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) ISessionclose(request *ISessionclose) (*ISessioncloseResponse, error) {
-	response := new(ISessioncloseResponse)
+func (service *VboxPortType) ISessionunlockMachine(request *ISessionunlockMachine) (*ISessionunlockMachineResponse, error) {
+	response := new(ISessionunlockMachineResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17675,6 +32560,21 @@ func (service *VboxPortType) ISessionclose(request *ISessionclose) (*ISessionclo
 
 func (service *VboxPortType) IStorageControllergetName(request *IStorageControllergetName) (*IStorageControllergetNameResponse, error) {
 	response := new(IStorageControllergetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IStorageControllersetName(request *IStorageControllersetName) (*IStorageControllersetNameResponse, error) {
+	response := new(IStorageControllersetNameResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -17868,23 +32768,8 @@ func (service *VboxPortType) IStorageControllersetUseHostIOCache(request *IStora
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) IStorageControllergetIDEEmulationPort(request *IStorageControllergetIDEEmulationPort) (*IStorageControllergetIDEEmulationPortResponse, error) {
-	response := new(IStorageControllergetIDEEmulationPortResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-// Error can be either of the following types:
-//
-//   - InvalidObjectFault
-//   - RuntimeFault
-
-func (service *VboxPortType) IStorageControllersetIDEEmulationPort(request *IStorageControllersetIDEEmulationPort) (*IStorageControllersetIDEEmulationPortResponse, error) {
-	response := new(IStorageControllersetIDEEmulationPortResponse)
+func (service *VboxPortType) IStorageControllergetBootable(request *IStorageControllergetBootable) (*IStorageControllergetBootableResponse, error) {
+	response := new(IStorageControllergetBootableResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18243,8 +33128,8 @@ func (service *VboxPortType) INATEnginesetHostIP(request *INATEnginesetHostIP) (
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INATEnginegetTftpPrefix(request *INATEnginegetTftpPrefix) (*INATEnginegetTftpPrefixResponse, error) {
-	response := new(INATEnginegetTftpPrefixResponse)
+func (service *VboxPortType) INATEnginegetTFTPPrefix(request *INATEnginegetTFTPPrefix) (*INATEnginegetTFTPPrefixResponse, error) {
+	response := new(INATEnginegetTFTPPrefixResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18258,8 +33143,8 @@ func (service *VboxPortType) INATEnginegetTftpPrefix(request *INATEnginegetTftpP
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INATEnginesetTftpPrefix(request *INATEnginesetTftpPrefix) (*INATEnginesetTftpPrefixResponse, error) {
-	response := new(INATEnginesetTftpPrefixResponse)
+func (service *VboxPortType) INATEnginesetTFTPPrefix(request *INATEnginesetTFTPPrefix) (*INATEnginesetTFTPPrefixResponse, error) {
+	response := new(INATEnginesetTFTPPrefixResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18273,8 +33158,8 @@ func (service *VboxPortType) INATEnginesetTftpPrefix(request *INATEnginesetTftpP
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INATEnginegetTftpBootFile(request *INATEnginegetTftpBootFile) (*INATEnginegetTftpBootFileResponse, error) {
-	response := new(INATEnginegetTftpBootFileResponse)
+func (service *VboxPortType) INATEnginegetTFTPBootFile(request *INATEnginegetTFTPBootFile) (*INATEnginegetTFTPBootFileResponse, error) {
+	response := new(INATEnginegetTFTPBootFileResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18288,8 +33173,8 @@ func (service *VboxPortType) INATEnginegetTftpBootFile(request *INATEnginegetTft
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INATEnginesetTftpBootFile(request *INATEnginesetTftpBootFile) (*INATEnginesetTftpBootFileResponse, error) {
-	response := new(INATEnginesetTftpBootFileResponse)
+func (service *VboxPortType) INATEnginesetTFTPBootFile(request *INATEnginesetTFTPBootFile) (*INATEnginesetTFTPBootFileResponse, error) {
+	response := new(INATEnginesetTFTPBootFileResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18303,8 +33188,8 @@ func (service *VboxPortType) INATEnginesetTftpBootFile(request *INATEnginesetTft
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INATEnginegetTftpNextServer(request *INATEnginegetTftpNextServer) (*INATEnginegetTftpNextServerResponse, error) {
-	response := new(INATEnginegetTftpNextServerResponse)
+func (service *VboxPortType) INATEnginegetTFTPNextServer(request *INATEnginegetTFTPNextServer) (*INATEnginegetTFTPNextServerResponse, error) {
+	response := new(INATEnginegetTFTPNextServerResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18318,8 +33203,8 @@ func (service *VboxPortType) INATEnginegetTftpNextServer(request *INATEnginegetT
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INATEnginesetTftpNextServer(request *INATEnginesetTftpNextServer) (*INATEnginesetTftpNextServerResponse, error) {
-	response := new(INATEnginesetTftpNextServerResponse)
+func (service *VboxPortType) INATEnginesetTFTPNextServer(request *INATEnginesetTFTPNextServer) (*INATEnginesetTFTPNextServerResponse, error) {
+	response := new(INATEnginesetTFTPNextServerResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18363,8 +33248,8 @@ func (service *VboxPortType) INATEnginesetAliasMode(request *INATEnginesetAliasM
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INATEnginegetDnsPassDomain(request *INATEnginegetDnsPassDomain) (*INATEnginegetDnsPassDomainResponse, error) {
-	response := new(INATEnginegetDnsPassDomainResponse)
+func (service *VboxPortType) INATEnginegetDNSPassDomain(request *INATEnginegetDNSPassDomain) (*INATEnginegetDNSPassDomainResponse, error) {
+	response := new(INATEnginegetDNSPassDomainResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18378,8 +33263,8 @@ func (service *VboxPortType) INATEnginegetDnsPassDomain(request *INATEnginegetDn
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INATEnginesetDnsPassDomain(request *INATEnginesetDnsPassDomain) (*INATEnginesetDnsPassDomainResponse, error) {
-	response := new(INATEnginesetDnsPassDomainResponse)
+func (service *VboxPortType) INATEnginesetDNSPassDomain(request *INATEnginesetDNSPassDomain) (*INATEnginesetDNSPassDomainResponse, error) {
+	response := new(INATEnginesetDNSPassDomainResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18393,8 +33278,8 @@ func (service *VboxPortType) INATEnginesetDnsPassDomain(request *INATEnginesetDn
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INATEnginegetDnsProxy(request *INATEnginegetDnsProxy) (*INATEnginegetDnsProxyResponse, error) {
-	response := new(INATEnginegetDnsProxyResponse)
+func (service *VboxPortType) INATEnginegetDNSProxy(request *INATEnginegetDNSProxy) (*INATEnginegetDNSProxyResponse, error) {
+	response := new(INATEnginegetDNSProxyResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18408,8 +33293,8 @@ func (service *VboxPortType) INATEnginegetDnsProxy(request *INATEnginegetDnsProx
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INATEnginesetDnsProxy(request *INATEnginesetDnsProxy) (*INATEnginesetDnsProxyResponse, error) {
-	response := new(INATEnginesetDnsProxyResponse)
+func (service *VboxPortType) INATEnginesetDNSProxy(request *INATEnginesetDNSProxy) (*INATEnginesetDNSProxyResponse, error) {
+	response := new(INATEnginesetDNSProxyResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18423,8 +33308,8 @@ func (service *VboxPortType) INATEnginesetDnsProxy(request *INATEnginesetDnsProx
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INATEnginegetDnsUseHostResolver(request *INATEnginegetDnsUseHostResolver) (*INATEnginegetDnsUseHostResolverResponse, error) {
-	response := new(INATEnginegetDnsUseHostResolverResponse)
+func (service *VboxPortType) INATEnginegetDNSUseHostResolver(request *INATEnginegetDNSUseHostResolver) (*INATEnginegetDNSUseHostResolverResponse, error) {
+	response := new(INATEnginegetDNSUseHostResolverResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18438,8 +33323,8 @@ func (service *VboxPortType) INATEnginegetDnsUseHostResolver(request *INATEngine
 //   - InvalidObjectFault
 //   - RuntimeFault
 
-func (service *VboxPortType) INATEnginesetDnsUseHostResolver(request *INATEnginesetDnsUseHostResolver) (*INATEnginesetDnsUseHostResolverResponse, error) {
-	response := new(INATEnginesetDnsUseHostResolverResponse)
+func (service *VboxPortType) INATEnginesetDNSUseHostResolver(request *INATEnginesetDNSUseHostResolver) (*INATEnginesetDNSUseHostResolverResponse, error) {
+	response := new(INATEnginesetDNSUseHostResolverResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18515,6 +33400,2661 @@ func (service *VboxPortType) INATEngineaddRedirect(request *INATEngineaddRedirec
 
 func (service *VboxPortType) INATEngineremoveRedirect(request *INATEngineremoveRedirect) (*INATEngineremoveRedirectResponse, error) {
 	response := new(INATEngineremoveRedirectResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IBandwidthGroupgetName(request *IBandwidthGroupgetName) (*IBandwidthGroupgetNameResponse, error) {
+	response := new(IBandwidthGroupgetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IBandwidthGroupgetType(request *IBandwidthGroupgetType) (*IBandwidthGroupgetTypeResponse, error) {
+	response := new(IBandwidthGroupgetTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IBandwidthGroupgetReference(request *IBandwidthGroupgetReference) (*IBandwidthGroupgetReferenceResponse, error) {
+	response := new(IBandwidthGroupgetReferenceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IBandwidthGroupgetMaxBytesPerSec(request *IBandwidthGroupgetMaxBytesPerSec) (*IBandwidthGroupgetMaxBytesPerSecResponse, error) {
+	response := new(IBandwidthGroupgetMaxBytesPerSecResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IBandwidthGroupsetMaxBytesPerSec(request *IBandwidthGroupsetMaxBytesPerSec) (*IBandwidthGroupsetMaxBytesPerSecResponse, error) {
+	response := new(IBandwidthGroupsetMaxBytesPerSecResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IBandwidthControlgetNumGroups(request *IBandwidthControlgetNumGroups) (*IBandwidthControlgetNumGroupsResponse, error) {
+	response := new(IBandwidthControlgetNumGroupsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IBandwidthControlcreateBandwidthGroup(request *IBandwidthControlcreateBandwidthGroup) (*IBandwidthControlcreateBandwidthGroupResponse, error) {
+	response := new(IBandwidthControlcreateBandwidthGroupResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IBandwidthControldeleteBandwidthGroup(request *IBandwidthControldeleteBandwidthGroup) (*IBandwidthControldeleteBandwidthGroupResponse, error) {
+	response := new(IBandwidthControldeleteBandwidthGroupResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IBandwidthControlgetBandwidthGroup(request *IBandwidthControlgetBandwidthGroup) (*IBandwidthControlgetBandwidthGroupResponse, error) {
+	response := new(IBandwidthControlgetBandwidthGroupResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IBandwidthControlgetAllBandwidthGroups(request *IBandwidthControlgetAllBandwidthGroups) (*IBandwidthControlgetAllBandwidthGroupsResponse, error) {
+	response := new(IBandwidthControlgetAllBandwidthGroupsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventSourcecreateListener(request *IEventSourcecreateListener) (*IEventSourcecreateListenerResponse, error) {
+	response := new(IEventSourcecreateListenerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventSourcecreateAggregator(request *IEventSourcecreateAggregator) (*IEventSourcecreateAggregatorResponse, error) {
+	response := new(IEventSourcecreateAggregatorResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventSourceregisterListener(request *IEventSourceregisterListener) (*IEventSourceregisterListenerResponse, error) {
+	response := new(IEventSourceregisterListenerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventSourceunregisterListener(request *IEventSourceunregisterListener) (*IEventSourceunregisterListenerResponse, error) {
+	response := new(IEventSourceunregisterListenerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventSourcefireEvent(request *IEventSourcefireEvent) (*IEventSourcefireEventResponse, error) {
+	response := new(IEventSourcefireEventResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventSourcegetEvent(request *IEventSourcegetEvent) (*IEventSourcegetEventResponse, error) {
+	response := new(IEventSourcegetEventResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventSourceeventProcessed(request *IEventSourceeventProcessed) (*IEventSourceeventProcessedResponse, error) {
+	response := new(IEventSourceeventProcessedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventListenerhandleEvent(request *IEventListenerhandleEvent) (*IEventListenerhandleEventResponse, error) {
+	response := new(IEventListenerhandleEventResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventgetType(request *IEventgetType) (*IEventgetTypeResponse, error) {
+	response := new(IEventgetTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventgetSource(request *IEventgetSource) (*IEventgetSourceResponse, error) {
+	response := new(IEventgetSourceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventgetWaitable(request *IEventgetWaitable) (*IEventgetWaitableResponse, error) {
+	response := new(IEventgetWaitableResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventsetProcessed(request *IEventsetProcessed) (*IEventsetProcessedResponse, error) {
+	response := new(IEventsetProcessedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventwaitProcessed(request *IEventwaitProcessed) (*IEventwaitProcessedResponse, error) {
+	response := new(IEventwaitProcessedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IReusableEventgetGeneration(request *IReusableEventgetGeneration) (*IReusableEventgetGenerationResponse, error) {
+	response := new(IReusableEventgetGenerationResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IReusableEventreuse(request *IReusableEventreuse) (*IReusableEventreuseResponse, error) {
+	response := new(IReusableEventreuseResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineEventgetMachineId(request *IMachineEventgetMachineId) (*IMachineEventgetMachineIdResponse, error) {
+	response := new(IMachineEventgetMachineIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineStateChangedEventgetState(request *IMachineStateChangedEventgetState) (*IMachineStateChangedEventgetStateResponse, error) {
+	response := new(IMachineStateChangedEventgetStateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineDataChangedEventgetTemporary(request *IMachineDataChangedEventgetTemporary) (*IMachineDataChangedEventgetTemporaryResponse, error) {
+	response := new(IMachineDataChangedEventgetTemporaryResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMediumRegisteredEventgetMediumId(request *IMediumRegisteredEventgetMediumId) (*IMediumRegisteredEventgetMediumIdResponse, error) {
+	response := new(IMediumRegisteredEventgetMediumIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMediumRegisteredEventgetMediumType(request *IMediumRegisteredEventgetMediumType) (*IMediumRegisteredEventgetMediumTypeResponse, error) {
+	response := new(IMediumRegisteredEventgetMediumTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMediumRegisteredEventgetRegistered(request *IMediumRegisteredEventgetRegistered) (*IMediumRegisteredEventgetRegisteredResponse, error) {
+	response := new(IMediumRegisteredEventgetRegisteredResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMediumConfigChangedEventgetMedium(request *IMediumConfigChangedEventgetMedium) (*IMediumConfigChangedEventgetMediumResponse, error) {
+	response := new(IMediumConfigChangedEventgetMediumResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMachineRegisteredEventgetRegistered(request *IMachineRegisteredEventgetRegistered) (*IMachineRegisteredEventgetRegisteredResponse, error) {
+	response := new(IMachineRegisteredEventgetRegisteredResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISessionStateChangedEventgetState(request *ISessionStateChangedEventgetState) (*ISessionStateChangedEventgetStateResponse, error) {
+	response := new(ISessionStateChangedEventgetStateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestPropertyChangedEventgetName(request *IGuestPropertyChangedEventgetName) (*IGuestPropertyChangedEventgetNameResponse, error) {
+	response := new(IGuestPropertyChangedEventgetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestPropertyChangedEventgetValue(request *IGuestPropertyChangedEventgetValue) (*IGuestPropertyChangedEventgetValueResponse, error) {
+	response := new(IGuestPropertyChangedEventgetValueResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestPropertyChangedEventgetFlags(request *IGuestPropertyChangedEventgetFlags) (*IGuestPropertyChangedEventgetFlagsResponse, error) {
+	response := new(IGuestPropertyChangedEventgetFlagsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISnapshotEventgetSnapshotId(request *ISnapshotEventgetSnapshotId) (*ISnapshotEventgetSnapshotIdResponse, error) {
+	response := new(ISnapshotEventgetSnapshotIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISnapshotTakenEventgetMidlDoesNotLikeEmptyInterfaces(request *ISnapshotTakenEventgetMidlDoesNotLikeEmptyInterfaces) (*ISnapshotTakenEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(ISnapshotTakenEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISnapshotDeletedEventgetMidlDoesNotLikeEmptyInterfaces(request *ISnapshotDeletedEventgetMidlDoesNotLikeEmptyInterfaces) (*ISnapshotDeletedEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(ISnapshotDeletedEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISnapshotRestoredEventgetMidlDoesNotLikeEmptyInterfaces(request *ISnapshotRestoredEventgetMidlDoesNotLikeEmptyInterfaces) (*ISnapshotRestoredEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(ISnapshotRestoredEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISnapshotChangedEventgetMidlDoesNotLikeEmptyInterfaces(request *ISnapshotChangedEventgetMidlDoesNotLikeEmptyInterfaces) (*ISnapshotChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(ISnapshotChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapeChangedEventgetVisible(request *IMousePointerShapeChangedEventgetVisible) (*IMousePointerShapeChangedEventgetVisibleResponse, error) {
+	response := new(IMousePointerShapeChangedEventgetVisibleResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapeChangedEventgetAlpha(request *IMousePointerShapeChangedEventgetAlpha) (*IMousePointerShapeChangedEventgetAlphaResponse, error) {
+	response := new(IMousePointerShapeChangedEventgetAlphaResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapeChangedEventgetXhot(request *IMousePointerShapeChangedEventgetXhot) (*IMousePointerShapeChangedEventgetXhotResponse, error) {
+	response := new(IMousePointerShapeChangedEventgetXhotResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapeChangedEventgetYhot(request *IMousePointerShapeChangedEventgetYhot) (*IMousePointerShapeChangedEventgetYhotResponse, error) {
+	response := new(IMousePointerShapeChangedEventgetYhotResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapeChangedEventgetWidth(request *IMousePointerShapeChangedEventgetWidth) (*IMousePointerShapeChangedEventgetWidthResponse, error) {
+	response := new(IMousePointerShapeChangedEventgetWidthResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapeChangedEventgetHeight(request *IMousePointerShapeChangedEventgetHeight) (*IMousePointerShapeChangedEventgetHeightResponse, error) {
+	response := new(IMousePointerShapeChangedEventgetHeightResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMousePointerShapeChangedEventgetShape(request *IMousePointerShapeChangedEventgetShape) (*IMousePointerShapeChangedEventgetShapeResponse, error) {
+	response := new(IMousePointerShapeChangedEventgetShapeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMouseCapabilityChangedEventgetSupportsAbsolute(request *IMouseCapabilityChangedEventgetSupportsAbsolute) (*IMouseCapabilityChangedEventgetSupportsAbsoluteResponse, error) {
+	response := new(IMouseCapabilityChangedEventgetSupportsAbsoluteResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMouseCapabilityChangedEventgetSupportsRelative(request *IMouseCapabilityChangedEventgetSupportsRelative) (*IMouseCapabilityChangedEventgetSupportsRelativeResponse, error) {
+	response := new(IMouseCapabilityChangedEventgetSupportsRelativeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMouseCapabilityChangedEventgetSupportsMultiTouch(request *IMouseCapabilityChangedEventgetSupportsMultiTouch) (*IMouseCapabilityChangedEventgetSupportsMultiTouchResponse, error) {
+	response := new(IMouseCapabilityChangedEventgetSupportsMultiTouchResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMouseCapabilityChangedEventgetNeedsHostCursor(request *IMouseCapabilityChangedEventgetNeedsHostCursor) (*IMouseCapabilityChangedEventgetNeedsHostCursorResponse, error) {
+	response := new(IMouseCapabilityChangedEventgetNeedsHostCursorResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IKeyboardLedsChangedEventgetNumLock(request *IKeyboardLedsChangedEventgetNumLock) (*IKeyboardLedsChangedEventgetNumLockResponse, error) {
+	response := new(IKeyboardLedsChangedEventgetNumLockResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IKeyboardLedsChangedEventgetCapsLock(request *IKeyboardLedsChangedEventgetCapsLock) (*IKeyboardLedsChangedEventgetCapsLockResponse, error) {
+	response := new(IKeyboardLedsChangedEventgetCapsLockResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IKeyboardLedsChangedEventgetScrollLock(request *IKeyboardLedsChangedEventgetScrollLock) (*IKeyboardLedsChangedEventgetScrollLockResponse, error) {
+	response := new(IKeyboardLedsChangedEventgetScrollLockResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IStateChangedEventgetState(request *IStateChangedEventgetState) (*IStateChangedEventgetStateResponse, error) {
+	response := new(IStateChangedEventgetStateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IAdditionsStateChangedEventgetMidlDoesNotLikeEmptyInterfaces(request *IAdditionsStateChangedEventgetMidlDoesNotLikeEmptyInterfaces) (*IAdditionsStateChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IAdditionsStateChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INetworkAdapterChangedEventgetNetworkAdapter(request *INetworkAdapterChangedEventgetNetworkAdapter) (*INetworkAdapterChangedEventgetNetworkAdapterResponse, error) {
+	response := new(INetworkAdapterChangedEventgetNetworkAdapterResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISerialPortChangedEventgetSerialPort(request *ISerialPortChangedEventgetSerialPort) (*ISerialPortChangedEventgetSerialPortResponse, error) {
+	response := new(ISerialPortChangedEventgetSerialPortResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IParallelPortChangedEventgetParallelPort(request *IParallelPortChangedEventgetParallelPort) (*IParallelPortChangedEventgetParallelPortResponse, error) {
+	response := new(IParallelPortChangedEventgetParallelPortResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IStorageControllerChangedEventgetMidlDoesNotLikeEmptyInterfaces(request *IStorageControllerChangedEventgetMidlDoesNotLikeEmptyInterfaces) (*IStorageControllerChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IStorageControllerChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IMediumChangedEventgetMediumAttachment(request *IMediumChangedEventgetMediumAttachment) (*IMediumChangedEventgetMediumAttachmentResponse, error) {
+	response := new(IMediumChangedEventgetMediumAttachmentResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IClipboardModeChangedEventgetClipboardMode(request *IClipboardModeChangedEventgetClipboardMode) (*IClipboardModeChangedEventgetClipboardModeResponse, error) {
+	response := new(IClipboardModeChangedEventgetClipboardModeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IDnDModeChangedEventgetDndMode(request *IDnDModeChangedEventgetDndMode) (*IDnDModeChangedEventgetDndModeResponse, error) {
+	response := new(IDnDModeChangedEventgetDndModeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ICPUChangedEventgetCPU(request *ICPUChangedEventgetCPU) (*ICPUChangedEventgetCPUResponse, error) {
+	response := new(ICPUChangedEventgetCPUResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ICPUChangedEventgetAdd(request *ICPUChangedEventgetAdd) (*ICPUChangedEventgetAddResponse, error) {
+	response := new(ICPUChangedEventgetAddResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ICPUExecutionCapChangedEventgetExecutionCap(request *ICPUExecutionCapChangedEventgetExecutionCap) (*ICPUExecutionCapChangedEventgetExecutionCapResponse, error) {
+	response := new(ICPUExecutionCapChangedEventgetExecutionCapResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestKeyboardEventgetScancodes(request *IGuestKeyboardEventgetScancodes) (*IGuestKeyboardEventgetScancodesResponse, error) {
+	response := new(IGuestKeyboardEventgetScancodesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMouseEventgetMode(request *IGuestMouseEventgetMode) (*IGuestMouseEventgetModeResponse, error) {
+	response := new(IGuestMouseEventgetModeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMouseEventgetX(request *IGuestMouseEventgetX) (*IGuestMouseEventgetXResponse, error) {
+	response := new(IGuestMouseEventgetXResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMouseEventgetY(request *IGuestMouseEventgetY) (*IGuestMouseEventgetYResponse, error) {
+	response := new(IGuestMouseEventgetYResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMouseEventgetZ(request *IGuestMouseEventgetZ) (*IGuestMouseEventgetZResponse, error) {
+	response := new(IGuestMouseEventgetZResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMouseEventgetW(request *IGuestMouseEventgetW) (*IGuestMouseEventgetWResponse, error) {
+	response := new(IGuestMouseEventgetWResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMouseEventgetButtons(request *IGuestMouseEventgetButtons) (*IGuestMouseEventgetButtonsResponse, error) {
+	response := new(IGuestMouseEventgetButtonsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMultiTouchEventgetContactCount(request *IGuestMultiTouchEventgetContactCount) (*IGuestMultiTouchEventgetContactCountResponse, error) {
+	response := new(IGuestMultiTouchEventgetContactCountResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMultiTouchEventgetXPositions(request *IGuestMultiTouchEventgetXPositions) (*IGuestMultiTouchEventgetXPositionsResponse, error) {
+	response := new(IGuestMultiTouchEventgetXPositionsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMultiTouchEventgetYPositions(request *IGuestMultiTouchEventgetYPositions) (*IGuestMultiTouchEventgetYPositionsResponse, error) {
+	response := new(IGuestMultiTouchEventgetYPositionsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMultiTouchEventgetContactIds(request *IGuestMultiTouchEventgetContactIds) (*IGuestMultiTouchEventgetContactIdsResponse, error) {
+	response := new(IGuestMultiTouchEventgetContactIdsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMultiTouchEventgetContactFlags(request *IGuestMultiTouchEventgetContactFlags) (*IGuestMultiTouchEventgetContactFlagsResponse, error) {
+	response := new(IGuestMultiTouchEventgetContactFlagsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMultiTouchEventgetScanTime(request *IGuestMultiTouchEventgetScanTime) (*IGuestMultiTouchEventgetScanTimeResponse, error) {
+	response := new(IGuestMultiTouchEventgetScanTimeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionEventgetSession(request *IGuestSessionEventgetSession) (*IGuestSessionEventgetSessionResponse, error) {
+	response := new(IGuestSessionEventgetSessionResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionStateChangedEventgetId(request *IGuestSessionStateChangedEventgetId) (*IGuestSessionStateChangedEventgetIdResponse, error) {
+	response := new(IGuestSessionStateChangedEventgetIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionStateChangedEventgetStatus(request *IGuestSessionStateChangedEventgetStatus) (*IGuestSessionStateChangedEventgetStatusResponse, error) {
+	response := new(IGuestSessionStateChangedEventgetStatusResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionStateChangedEventgetError(request *IGuestSessionStateChangedEventgetError) (*IGuestSessionStateChangedEventgetErrorResponse, error) {
+	response := new(IGuestSessionStateChangedEventgetErrorResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestSessionRegisteredEventgetRegistered(request *IGuestSessionRegisteredEventgetRegistered) (*IGuestSessionRegisteredEventgetRegisteredResponse, error) {
+	response := new(IGuestSessionRegisteredEventgetRegisteredResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestProcessEventgetProcess(request *IGuestProcessEventgetProcess) (*IGuestProcessEventgetProcessResponse, error) {
+	response := new(IGuestProcessEventgetProcessResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestProcessEventgetPid(request *IGuestProcessEventgetPid) (*IGuestProcessEventgetPidResponse, error) {
+	response := new(IGuestProcessEventgetPidResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestProcessRegisteredEventgetRegistered(request *IGuestProcessRegisteredEventgetRegistered) (*IGuestProcessRegisteredEventgetRegisteredResponse, error) {
+	response := new(IGuestProcessRegisteredEventgetRegisteredResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestProcessStateChangedEventgetStatus(request *IGuestProcessStateChangedEventgetStatus) (*IGuestProcessStateChangedEventgetStatusResponse, error) {
+	response := new(IGuestProcessStateChangedEventgetStatusResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestProcessStateChangedEventgetError(request *IGuestProcessStateChangedEventgetError) (*IGuestProcessStateChangedEventgetErrorResponse, error) {
+	response := new(IGuestProcessStateChangedEventgetErrorResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestProcessIOEventgetHandle(request *IGuestProcessIOEventgetHandle) (*IGuestProcessIOEventgetHandleResponse, error) {
+	response := new(IGuestProcessIOEventgetHandleResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestProcessIOEventgetProcessed(request *IGuestProcessIOEventgetProcessed) (*IGuestProcessIOEventgetProcessedResponse, error) {
+	response := new(IGuestProcessIOEventgetProcessedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestProcessInputNotifyEventgetStatus(request *IGuestProcessInputNotifyEventgetStatus) (*IGuestProcessInputNotifyEventgetStatusResponse, error) {
+	response := new(IGuestProcessInputNotifyEventgetStatusResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestProcessOutputEventgetData(request *IGuestProcessOutputEventgetData) (*IGuestProcessOutputEventgetDataResponse, error) {
+	response := new(IGuestProcessOutputEventgetDataResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestFileEventgetFile(request *IGuestFileEventgetFile) (*IGuestFileEventgetFileResponse, error) {
+	response := new(IGuestFileEventgetFileResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestFileRegisteredEventgetRegistered(request *IGuestFileRegisteredEventgetRegistered) (*IGuestFileRegisteredEventgetRegisteredResponse, error) {
+	response := new(IGuestFileRegisteredEventgetRegisteredResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestFileStateChangedEventgetStatus(request *IGuestFileStateChangedEventgetStatus) (*IGuestFileStateChangedEventgetStatusResponse, error) {
+	response := new(IGuestFileStateChangedEventgetStatusResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestFileStateChangedEventgetError(request *IGuestFileStateChangedEventgetError) (*IGuestFileStateChangedEventgetErrorResponse, error) {
+	response := new(IGuestFileStateChangedEventgetErrorResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestFileIOEventgetOffset(request *IGuestFileIOEventgetOffset) (*IGuestFileIOEventgetOffsetResponse, error) {
+	response := new(IGuestFileIOEventgetOffsetResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestFileIOEventgetProcessed(request *IGuestFileIOEventgetProcessed) (*IGuestFileIOEventgetProcessedResponse, error) {
+	response := new(IGuestFileIOEventgetProcessedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestFileOffsetChangedEventgetMidlDoesNotLikeEmptyInterfaces(request *IGuestFileOffsetChangedEventgetMidlDoesNotLikeEmptyInterfaces) (*IGuestFileOffsetChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IGuestFileOffsetChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestFileReadEventgetData(request *IGuestFileReadEventgetData) (*IGuestFileReadEventgetDataResponse, error) {
+	response := new(IGuestFileReadEventgetDataResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestFileWriteEventgetMidlDoesNotLikeEmptyInterfaces(request *IGuestFileWriteEventgetMidlDoesNotLikeEmptyInterfaces) (*IGuestFileWriteEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IGuestFileWriteEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVRDEServerChangedEventgetMidlDoesNotLikeEmptyInterfaces(request *IVRDEServerChangedEventgetMidlDoesNotLikeEmptyInterfaces) (*IVRDEServerChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IVRDEServerChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVRDEServerInfoChangedEventgetMidlDoesNotLikeEmptyInterfaces(request *IVRDEServerInfoChangedEventgetMidlDoesNotLikeEmptyInterfaces) (*IVRDEServerInfoChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IVRDEServerInfoChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVideoCaptureChangedEventgetMidlDoesNotLikeEmptyInterfaces(request *IVideoCaptureChangedEventgetMidlDoesNotLikeEmptyInterfaces) (*IVideoCaptureChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IVideoCaptureChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBControllerChangedEventgetMidlDoesNotLikeEmptyInterfaces(request *IUSBControllerChangedEventgetMidlDoesNotLikeEmptyInterfaces) (*IUSBControllerChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IUSBControllerChangedEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBDeviceStateChangedEventgetDevice(request *IUSBDeviceStateChangedEventgetDevice) (*IUSBDeviceStateChangedEventgetDeviceResponse, error) {
+	response := new(IUSBDeviceStateChangedEventgetDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBDeviceStateChangedEventgetAttached(request *IUSBDeviceStateChangedEventgetAttached) (*IUSBDeviceStateChangedEventgetAttachedResponse, error) {
+	response := new(IUSBDeviceStateChangedEventgetAttachedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IUSBDeviceStateChangedEventgetError(request *IUSBDeviceStateChangedEventgetError) (*IUSBDeviceStateChangedEventgetErrorResponse, error) {
+	response := new(IUSBDeviceStateChangedEventgetErrorResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ISharedFolderChangedEventgetScope(request *ISharedFolderChangedEventgetScope) (*ISharedFolderChangedEventgetScopeResponse, error) {
+	response := new(ISharedFolderChangedEventgetScopeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IRuntimeErrorEventgetFatal(request *IRuntimeErrorEventgetFatal) (*IRuntimeErrorEventgetFatalResponse, error) {
+	response := new(IRuntimeErrorEventgetFatalResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IRuntimeErrorEventgetId(request *IRuntimeErrorEventgetId) (*IRuntimeErrorEventgetIdResponse, error) {
+	response := new(IRuntimeErrorEventgetIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IRuntimeErrorEventgetMessage(request *IRuntimeErrorEventgetMessage) (*IRuntimeErrorEventgetMessageResponse, error) {
+	response := new(IRuntimeErrorEventgetMessageResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventSourceChangedEventgetListener(request *IEventSourceChangedEventgetListener) (*IEventSourceChangedEventgetListenerResponse, error) {
+	response := new(IEventSourceChangedEventgetListenerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IEventSourceChangedEventgetAdd(request *IEventSourceChangedEventgetAdd) (*IEventSourceChangedEventgetAddResponse, error) {
+	response := new(IEventSourceChangedEventgetAddResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IExtraDataChangedEventgetMachineId(request *IExtraDataChangedEventgetMachineId) (*IExtraDataChangedEventgetMachineIdResponse, error) {
+	response := new(IExtraDataChangedEventgetMachineIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IExtraDataChangedEventgetKey(request *IExtraDataChangedEventgetKey) (*IExtraDataChangedEventgetKeyResponse, error) {
+	response := new(IExtraDataChangedEventgetKeyResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IExtraDataChangedEventgetValue(request *IExtraDataChangedEventgetValue) (*IExtraDataChangedEventgetValueResponse, error) {
+	response := new(IExtraDataChangedEventgetValueResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVetoEventaddVeto(request *IVetoEventaddVeto) (*IVetoEventaddVetoResponse, error) {
+	response := new(IVetoEventaddVetoResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVetoEventisVetoed(request *IVetoEventisVetoed) (*IVetoEventisVetoedResponse, error) {
+	response := new(IVetoEventisVetoedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVetoEventgetVetos(request *IVetoEventgetVetos) (*IVetoEventgetVetosResponse, error) {
+	response := new(IVetoEventgetVetosResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVetoEventaddApproval(request *IVetoEventaddApproval) (*IVetoEventaddApprovalResponse, error) {
+	response := new(IVetoEventaddApprovalResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVetoEventisApproved(request *IVetoEventisApproved) (*IVetoEventisApprovedResponse, error) {
+	response := new(IVetoEventisApprovedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVetoEventgetApprovals(request *IVetoEventgetApprovals) (*IVetoEventgetApprovalsResponse, error) {
+	response := new(IVetoEventgetApprovalsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IExtraDataCanChangeEventgetMachineId(request *IExtraDataCanChangeEventgetMachineId) (*IExtraDataCanChangeEventgetMachineIdResponse, error) {
+	response := new(IExtraDataCanChangeEventgetMachineIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IExtraDataCanChangeEventgetKey(request *IExtraDataCanChangeEventgetKey) (*IExtraDataCanChangeEventgetKeyResponse, error) {
+	response := new(IExtraDataCanChangeEventgetKeyResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IExtraDataCanChangeEventgetValue(request *IExtraDataCanChangeEventgetValue) (*IExtraDataCanChangeEventgetValueResponse, error) {
+	response := new(IExtraDataCanChangeEventgetValueResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) ICanShowWindowEventgetMidlDoesNotLikeEmptyInterfaces(request *ICanShowWindowEventgetMidlDoesNotLikeEmptyInterfaces) (*ICanShowWindowEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(ICanShowWindowEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IShowWindowEventgetWinId(request *IShowWindowEventgetWinId) (*IShowWindowEventgetWinIdResponse, error) {
+	response := new(IShowWindowEventgetWinIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IShowWindowEventsetWinId(request *IShowWindowEventsetWinId) (*IShowWindowEventsetWinIdResponse, error) {
+	response := new(IShowWindowEventsetWinIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATRedirectEventgetSlot(request *INATRedirectEventgetSlot) (*INATRedirectEventgetSlotResponse, error) {
+	response := new(INATRedirectEventgetSlotResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATRedirectEventgetRemove(request *INATRedirectEventgetRemove) (*INATRedirectEventgetRemoveResponse, error) {
+	response := new(INATRedirectEventgetRemoveResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATRedirectEventgetName(request *INATRedirectEventgetName) (*INATRedirectEventgetNameResponse, error) {
+	response := new(INATRedirectEventgetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATRedirectEventgetProto(request *INATRedirectEventgetProto) (*INATRedirectEventgetProtoResponse, error) {
+	response := new(INATRedirectEventgetProtoResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATRedirectEventgetHostIP(request *INATRedirectEventgetHostIP) (*INATRedirectEventgetHostIPResponse, error) {
+	response := new(INATRedirectEventgetHostIPResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATRedirectEventgetHostPort(request *INATRedirectEventgetHostPort) (*INATRedirectEventgetHostPortResponse, error) {
+	response := new(INATRedirectEventgetHostPortResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATRedirectEventgetGuestIP(request *INATRedirectEventgetGuestIP) (*INATRedirectEventgetGuestIPResponse, error) {
+	response := new(INATRedirectEventgetGuestIPResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATRedirectEventgetGuestPort(request *INATRedirectEventgetGuestPort) (*INATRedirectEventgetGuestPortResponse, error) {
+	response := new(INATRedirectEventgetGuestPortResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostPCIDevicePlugEventgetPlugged(request *IHostPCIDevicePlugEventgetPlugged) (*IHostPCIDevicePlugEventgetPluggedResponse, error) {
+	response := new(IHostPCIDevicePlugEventgetPluggedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostPCIDevicePlugEventgetSuccess(request *IHostPCIDevicePlugEventgetSuccess) (*IHostPCIDevicePlugEventgetSuccessResponse, error) {
+	response := new(IHostPCIDevicePlugEventgetSuccessResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostPCIDevicePlugEventgetAttachment(request *IHostPCIDevicePlugEventgetAttachment) (*IHostPCIDevicePlugEventgetAttachmentResponse, error) {
+	response := new(IHostPCIDevicePlugEventgetAttachmentResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostPCIDevicePlugEventgetMessage(request *IHostPCIDevicePlugEventgetMessage) (*IHostPCIDevicePlugEventgetMessageResponse, error) {
+	response := new(IHostPCIDevicePlugEventgetMessageResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IVBoxSVCAvailabilityChangedEventgetAvailable(request *IVBoxSVCAvailabilityChangedEventgetAvailable) (*IVBoxSVCAvailabilityChangedEventgetAvailableResponse, error) {
+	response := new(IVBoxSVCAvailabilityChangedEventgetAvailableResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IBandwidthGroupChangedEventgetBandwidthGroup(request *IBandwidthGroupChangedEventgetBandwidthGroup) (*IBandwidthGroupChangedEventgetBandwidthGroupResponse, error) {
+	response := new(IBandwidthGroupChangedEventgetBandwidthGroupResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMonitorChangedEventgetChangeType(request *IGuestMonitorChangedEventgetChangeType) (*IGuestMonitorChangedEventgetChangeTypeResponse, error) {
+	response := new(IGuestMonitorChangedEventgetChangeTypeResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMonitorChangedEventgetScreenId(request *IGuestMonitorChangedEventgetScreenId) (*IGuestMonitorChangedEventgetScreenIdResponse, error) {
+	response := new(IGuestMonitorChangedEventgetScreenIdResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMonitorChangedEventgetOriginX(request *IGuestMonitorChangedEventgetOriginX) (*IGuestMonitorChangedEventgetOriginXResponse, error) {
+	response := new(IGuestMonitorChangedEventgetOriginXResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMonitorChangedEventgetOriginY(request *IGuestMonitorChangedEventgetOriginY) (*IGuestMonitorChangedEventgetOriginYResponse, error) {
+	response := new(IGuestMonitorChangedEventgetOriginYResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMonitorChangedEventgetWidth(request *IGuestMonitorChangedEventgetWidth) (*IGuestMonitorChangedEventgetWidthResponse, error) {
+	response := new(IGuestMonitorChangedEventgetWidthResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestMonitorChangedEventgetHeight(request *IGuestMonitorChangedEventgetHeight) (*IGuestMonitorChangedEventgetHeightResponse, error) {
+	response := new(IGuestMonitorChangedEventgetHeightResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestUserStateChangedEventgetName(request *IGuestUserStateChangedEventgetName) (*IGuestUserStateChangedEventgetNameResponse, error) {
+	response := new(IGuestUserStateChangedEventgetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestUserStateChangedEventgetDomain(request *IGuestUserStateChangedEventgetDomain) (*IGuestUserStateChangedEventgetDomainResponse, error) {
+	response := new(IGuestUserStateChangedEventgetDomainResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestUserStateChangedEventgetState(request *IGuestUserStateChangedEventgetState) (*IGuestUserStateChangedEventgetStateResponse, error) {
+	response := new(IGuestUserStateChangedEventgetStateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IGuestUserStateChangedEventgetStateDetails(request *IGuestUserStateChangedEventgetStateDetails) (*IGuestUserStateChangedEventgetStateDetailsResponse, error) {
+	response := new(IGuestUserStateChangedEventgetStateDetailsResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IStorageDeviceChangedEventgetStorageDevice(request *IStorageDeviceChangedEventgetStorageDevice) (*IStorageDeviceChangedEventgetStorageDeviceResponse, error) {
+	response := new(IStorageDeviceChangedEventgetStorageDeviceResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IStorageDeviceChangedEventgetRemoved(request *IStorageDeviceChangedEventgetRemoved) (*IStorageDeviceChangedEventgetRemovedResponse, error) {
+	response := new(IStorageDeviceChangedEventgetRemovedResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IStorageDeviceChangedEventgetSilent(request *IStorageDeviceChangedEventgetSilent) (*IStorageDeviceChangedEventgetSilentResponse, error) {
+	response := new(IStorageDeviceChangedEventgetSilentResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkChangedEventgetNetworkName(request *INATNetworkChangedEventgetNetworkName) (*INATNetworkChangedEventgetNetworkNameResponse, error) {
+	response := new(INATNetworkChangedEventgetNetworkNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkStartStopEventgetStartEvent(request *INATNetworkStartStopEventgetStartEvent) (*INATNetworkStartStopEventgetStartEventResponse, error) {
+	response := new(INATNetworkStartStopEventgetStartEventResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkAlterEventgetMidlDoesNotLikeEmptyInterfaces(request *INATNetworkAlterEventgetMidlDoesNotLikeEmptyInterfaces) (*INATNetworkAlterEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(INATNetworkAlterEventgetMidlDoesNotLikeEmptyInterfacesResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkCreationDeletionEventgetCreationEvent(request *INATNetworkCreationDeletionEventgetCreationEvent) (*INATNetworkCreationDeletionEventgetCreationEventResponse, error) {
+	response := new(INATNetworkCreationDeletionEventgetCreationEventResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkSettingEventgetEnabled(request *INATNetworkSettingEventgetEnabled) (*INATNetworkSettingEventgetEnabledResponse, error) {
+	response := new(INATNetworkSettingEventgetEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkSettingEventgetNetwork(request *INATNetworkSettingEventgetNetwork) (*INATNetworkSettingEventgetNetworkResponse, error) {
+	response := new(INATNetworkSettingEventgetNetworkResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkSettingEventgetGateway(request *INATNetworkSettingEventgetGateway) (*INATNetworkSettingEventgetGatewayResponse, error) {
+	response := new(INATNetworkSettingEventgetGatewayResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkSettingEventgetAdvertiseDefaultIPv6RouteEnabled(request *INATNetworkSettingEventgetAdvertiseDefaultIPv6RouteEnabled) (*INATNetworkSettingEventgetAdvertiseDefaultIPv6RouteEnabledResponse, error) {
+	response := new(INATNetworkSettingEventgetAdvertiseDefaultIPv6RouteEnabledResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkSettingEventgetNeedDhcpServer(request *INATNetworkSettingEventgetNeedDhcpServer) (*INATNetworkSettingEventgetNeedDhcpServerResponse, error) {
+	response := new(INATNetworkSettingEventgetNeedDhcpServerResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkPortForwardEventgetCreate(request *INATNetworkPortForwardEventgetCreate) (*INATNetworkPortForwardEventgetCreateResponse, error) {
+	response := new(INATNetworkPortForwardEventgetCreateResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkPortForwardEventgetIpv6(request *INATNetworkPortForwardEventgetIpv6) (*INATNetworkPortForwardEventgetIpv6Response, error) {
+	response := new(INATNetworkPortForwardEventgetIpv6Response)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkPortForwardEventgetName(request *INATNetworkPortForwardEventgetName) (*INATNetworkPortForwardEventgetNameResponse, error) {
+	response := new(INATNetworkPortForwardEventgetNameResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkPortForwardEventgetProto(request *INATNetworkPortForwardEventgetProto) (*INATNetworkPortForwardEventgetProtoResponse, error) {
+	response := new(INATNetworkPortForwardEventgetProtoResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkPortForwardEventgetHostIp(request *INATNetworkPortForwardEventgetHostIp) (*INATNetworkPortForwardEventgetHostIpResponse, error) {
+	response := new(INATNetworkPortForwardEventgetHostIpResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkPortForwardEventgetHostPort(request *INATNetworkPortForwardEventgetHostPort) (*INATNetworkPortForwardEventgetHostPortResponse, error) {
+	response := new(INATNetworkPortForwardEventgetHostPortResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkPortForwardEventgetGuestIp(request *INATNetworkPortForwardEventgetGuestIp) (*INATNetworkPortForwardEventgetGuestIpResponse, error) {
+	response := new(INATNetworkPortForwardEventgetGuestIpResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) INATNetworkPortForwardEventgetGuestPort(request *INATNetworkPortForwardEventgetGuestPort) (*INATNetworkPortForwardEventgetGuestPortResponse, error) {
+	response := new(INATNetworkPortForwardEventgetGuestPortResponse)
+	err := service.client.Call("", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// Error can be either of the following types:
+//
+//   - InvalidObjectFault
+//   - RuntimeFault
+
+func (service *VboxPortType) IHostNameResolutionConfigurationChangeEventgetMidlDoesNotLikeEmptyInterfaces(request *IHostNameResolutionConfigurationChangeEventgetMidlDoesNotLikeEmptyInterfaces) (*IHostNameResolutionConfigurationChangeEventgetMidlDoesNotLikeEmptyInterfacesResponse, error) {
+	response := new(IHostNameResolutionConfigurationChangeEventgetMidlDoesNotLikeEmptyInterfacesResponse)
 	err := service.client.Call("", request, response)
 	if err != nil {
 		return nil, err
@@ -18641,20 +36181,17 @@ func (s *SOAPClient) Call(soapAction string, request, response interface{}) erro
 	encoder := xml.NewEncoder(buffer)
 	//encoder.Indent("  ", "    ")
 
-	if err := encoder.Encode(envelope); err != nil {
-		return err
+	err := encoder.Encode(envelope)
+	if err == nil {
+		err = encoder.Flush()
 	}
 
-	if err := encoder.Flush(); err != nil {
-		return err
-	}
-
-	log.Println(buffer.String())
-
-	req, err := http.NewRequest("POST", s.url, buffer)
+	// log.Println(buffer.String())
 	if err != nil {
 		return err
 	}
+
+	req, err := http.NewRequest("POST", s.url, buffer)
 	if s.auth != nil {
 		req.SetBasicAuth(s.auth.Login, s.auth.Password)
 	}
@@ -18682,15 +36219,12 @@ func (s *SOAPClient) Call(soapAction string, request, response interface{}) erro
 	defer res.Body.Close()
 
 	rawbody, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return err
-	}
 	if len(rawbody) == 0 {
 		log.Println("empty response")
 		return nil
 	}
 
-	log.Println(string(rawbody))
+	// log.Println(string(rawbody))
 	respEnvelope := new(SOAPEnvelope)
 	respEnvelope.Body = SOAPBody{Content: response}
 	err = xml.Unmarshal(rawbody, respEnvelope)

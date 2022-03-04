@@ -1,6 +1,6 @@
 package vboxapi
 
-import "github.com/blacktop/go-vboxapi/vboxweb"
+import "github.com/9elements/go-vboxapi/vboxweb"
 
 // Console is a VirtualBox console object
 type Console struct {
